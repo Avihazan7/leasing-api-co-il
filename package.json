@@ -1,0 +1,11 @@
+{
+  "name": "factum-il-stage-a",
+  "version": "0.1.0",
+  "description": "שלב א' — הוכחת היתכנות רב-סוכנית (מנהל, עובד, זיכרון משותף) עבור Factum IL",
+  "private": true,
+  "scripts": {
+    "start": "node stage-a/run-stage-a.js",
+    "stage-a": "node stage-a/run-stage-a.js"
+  },
+  "license": "UNLICENSED"
+}
