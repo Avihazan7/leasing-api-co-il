@@ -1,40 +1,86 @@
 'use strict';
 
-// מריץ ההוכחה מקצה לקצה לשלב א'. מדפיס חמישה שלבים:
-// תכנון · ביצוע · הרכבת פלט סופי · היומן המלא · אימות מנגנוני הממשל.
+/**
+ * run-stage-a.js — מריץ את הוכחת ההיתכנות של שלב א'
+ *
+ * מחבר את שלושת הרכיבים מקצה-לקצה ומוכיח שלושה דברים:
+ *  1. מנהל מקבל מטרה, מתכנן, וכותב תוכנית לזיכרון המשותף.
+ *  2. עובד קורא מהזיכרון, מבצע, וכותב תוצר מעוגן-מקור חזרה.
+ *  3. כל זה תחת ממשל: תקרת צעדים, יומן append-only, ושדה evidence חובה.
+ *
+ * הרצה:  node run-stage-a.js
+ */
 
 const { SharedMemory } = require('./src/shared-memory');
 const { Manager } = require('./src/manager');
 const { SummarizerWorker } = require('./src/worker-summarizer');
 
-// מקור מקומי לדוגמה — חיסיון: אפס תלות חיצונית, הכול רץ במקום.
-const LEASING_CONTRACT = {
+// ── מסמך מקור לדוגמה (תיק משפטי קצר בעברית) ──
+// מקור מקומי בלבד: אפס תלות חיצונית, הכול רץ במקום. כל סעיף הוא שורת-מקור
+// מעוגנת (id) שאליה יפנה ה-evidence של העובד.
+const LEGAL_CASE = {
   clauses: [
-    { id: 'c1', text: 'תקופת ההתקשרות 36 חודשים מיום מסירת הרכב.', gist: 'תקופת הליסינג: 36 חודשים.' },
-    { id: 'c2', text: 'תשלום חודשי קבוע של 1,890 ש"ח כולל מע"מ.', gist: 'תשלום חודשי: 1,890 ש"ח כולל מע"מ.' },
-    { id: 'c3', text: "מגבלת קילומטראז' שנתית 20,000 ק\"מ; חריגה 0.45 ש\"ח לק\"מ.", gist: 'תקרת ק"מ שנתית 20,000; חריגה בתשלום נוסף.' },
-    { id: 'c4', text: 'בתום התקופה אופציית רכישה בשווי שייר של 28%.', gist: 'אופציית רכישה בתום התקופה (שייר 28%).' },
+    {
+      id: 'c1',
+      text: 'ביום 12 במרץ 2026 הוגשה בקשת צו הרחקה לבית המשפט לענייני משפחה.',
+      gist: 'הוגשה בקשת צו הרחקה (12.3.2026, ביהמ"ש לענייני משפחה).',
+    },
+    {
+      id: 'c2',
+      text: 'המבקש טען כי המשיב הפר את ההסכם שנחתם בין הצדדים ביום 1 בינואר 2026.',
+      gist: 'נטענה הפרת הסכם שנחתם ביום 1.1.2026.',
+    },
+    {
+      id: 'c3',
+      text: 'ההסכם קבע כי המשיב ישלם סך של 50,000 ש"ח בתוך תשעים יום.',
+      gist: 'ההסכם: תשלום 50,000 ש"ח בתוך 90 יום.',
+    },
+    {
+      id: 'c4',
+      text: 'המשיב לא שילם את הסכום במועד שנקבע בהסכם.',
+      gist: 'המשיב לא שילם את הסכום במועד.',
+    },
+    {
+      id: 'c5',
+      text: 'בית המשפט קבע דיון ליום 20 באפריל 2026.',
+      gist: 'נקבע דיון ליום 20.4.2026.',
+    },
+    {
+      id: 'c6',
+      text: 'הצדדים התבקשו להגיש תצהירים עד עשרה ימים לפני הדיון.',
+      gist: 'הצדדים יגישו תצהירים עד 10 ימים לפני הדיון.',
+    },
   ],
 };
 
-function hr(title) {
+function divider(title) {
   console.log('\n' + '─'.repeat(64));
-  console.log(title);
+  console.log('  ' + title);
   console.log('─'.repeat(64));
 }
 
 function main() {
+  divider("שלב א' · הוכחת היתכנות רב-סוכנית");
+
+  // 1) אתחול הזיכרון המשותף — single-source-of-truth, append-only
   const memory = new SharedMemory();
-  const manager = new Manager(memory, { maxSteps: 5 });
+  console.log('\n[init] shared memory created (append-only)');
+
+  // 2) רישום העובד (יחיד בשלב א'). העובד מקבל את הזיכרון + מאגר מקורות מקומי.
   const summarizer = new SummarizerWorker(memory, {
-    sources: { 'leasing-contract': LEASING_CONTRACT },
+    sources: { 'legal-case': LEGAL_CASE },
   });
   const workers = { summarizer };
+  console.log(`[init] registered workers: ${Object.keys(workers).join(', ')}`);
 
-  // ── שלב 1/5 · תכנון וניתוב (המנהל) ──
-  hr('שלב 1/5 · תכנון וניתוב (המנהל)');
-  const plan = manager.plan('סכם את תנאי הסכם הליסינג בסיכום מעוגן-מקור.', [
-    { worker: 'summarizer', inputRef: 'source:leasing-contract' },
+  // 3) אתחול המנהל עם תקרת ממשל
+  const manager = new Manager(memory, { maxSteps: 10 });
+  console.log(`[init] manager ready · step ceiling = ${manager.maxSteps}`);
+
+  // ── תכנון ──
+  divider('1 · תכנון (Manager → Shared Memory)');
+  const plan = manager.plan('סכם את מסמך התיק לקראת הדיון בסיכום מעוגן-מקור.', [
+    { worker: 'summarizer', inputRef: 'source:legal-case' },
   ]);
   console.log(`taskId : ${plan.taskId}`);
   console.log(`goal   : ${plan.goal}`);
@@ -43,8 +89,9 @@ function main() {
     console.log(`  • ${s.stepId} → worker=${s.worker} input=${s.inputRef} dependsOn=[${s.dependsOn}]`),
   );
 
-  // ── שלב 2/5 · ביצוע דרך הזיכרון (העובד) ──
-  hr('שלב 2/5 · ביצוע דרך הזיכרון (העובד)');
+  // ── ביצוע ──
+  // המנהל מנתב; העובד מבצע. המנהל אינו מבצע תת-משימות בעצמו.
+  divider('2 · ביצוע (Worker ← Shared Memory → Worker)');
   let guard = 0;
   let pending = manager.nextSteps(plan);
   while (pending.length > 0) {
@@ -59,49 +106,68 @@ function main() {
     pending = manager.nextSteps(plan);
   }
 
-  // ── שלב 3/5 · הרכבת פלט סופי ──
-  hr('שלב 3/5 · הרכבת פלט סופי (סיכום מעוגן-מקור)');
-  const result = memory.byStep('s1', plan.taskId).payload;
-  result.summary.forEach((p, i) => {
+  // ── הרכבה ──
+  // הרכבת הפלט הסופי מתוצרי העובדים שבזיכרון. כל נקודה נושאת עוגן-מקור,
+  // והשרשרת המאוחדת היא רצף העוגנים שמאחורי הסיכום כולו.
+  divider('3 · הרכבת פלט סופי (סיכום מעוגן-מקור)');
+  const points = memory
+    .find((e) => e.kind === 'worker-output' && e.taskId === plan.taskId)
+    .flatMap((e) => e.payload.summary);
+
+  points.forEach((p, i) => {
     console.log(`  ${i + 1}. ${p.point}`);
     console.log(`     ↳ עוגן [${p.evidence.ref}]: "${p.evidence.quote}"`);
   });
 
-  // ── שלב 4/5 · היומן המלא (שקיפות) ──
-  hr('שלב 4/5 · היומן המלא (append-only · שקיפות מלאה)');
-  memory.all().forEach((e) =>
+  const evidenceChain = points.map((p) => p.evidence.ref);
+  console.log('\nunified evidence chain:', JSON.stringify(evidenceChain));
+
+  // ── יומן מלא (שקיפות) ──
+  divider('4 · יומן מלא (append-only · שקיפות וממשל)');
+  const log = memory.all();
+  console.log(`total memory entries (append-only): ${log.length}`);
+  log.forEach((e) =>
     console.log(
-      `  [${e.entryId}] ${e.ts} author=${e.author} kind=${e.kind} step=${e.stepId} evidence=${e.evidence.length}`,
+      `  [${e.entryId}] ${e.ts} author=${e.author.padEnd(11)} kind=${e.kind.padEnd(14)} step=${e.stepId} evidence=${e.evidence.length}`,
     ),
   );
 
-  // ── שלב 5/5 · אימות מנגנוני הממשל ──
-  hr('שלב 5/5 · אימות מנגנוני הממשל');
+  // ── אימות הממשל ──
+  divider('5 · אימות מנגנוני הממשל');
   verifyGovernance(memory);
+
+  divider('הוכחת ההיתכנות הושלמה ✓');
 }
 
-// כל בדיקה מַפעילה את המנגנון בפועל — אכיפה בקוד, לא רק תיעוד.
+/**
+ * כל בדיקה מַפעילה את המנגנון בפועל — אכיפה בקוד, לא רק תיעוד.
+ */
 function verifyGovernance(memory) {
   const checks = [
+    // בדיקה א': כתיבת תוצר עובד ללא evidence נדחית
     ['evidence[] mandatory on worker output', () => {
       let threw = false;
       try {
-        memory.append({ taskId: 't', author: 'summarizer', stepId: 'x', kind: 'worker-output', payload: {}, evidence: [] });
-      } catch {
-        threw = true;
+        memory.append({ taskId: 't', author: 'rogue', stepId: 'x', kind: 'worker-output', payload: {}, evidence: [] });
+      } catch (err) {
+        threw = /evidence/.test(err.message);
       }
       if (!threw) throw new Error('worker output without evidence was accepted');
     }],
+
+    // בדיקה ב': תוכנית החורגת מתקרת הצעדים נדחית
     ['step ceiling halts runaway loops', () => {
       const m = new Manager(new SharedMemory(), { maxSteps: 2 });
       let threw = false;
       try {
         m.plan('g', [{ worker: 'w' }, { worker: 'w' }, { worker: 'w' }]);
-      } catch {
-        threw = true;
+      } catch (err) {
+        threw = /step ceiling/.test(err.message);
       }
       if (!threw) throw new Error('plan exceeding ceiling was accepted');
     }],
+
+    // בדיקה ג': עצירה בטוחה על קלט חסר — תוצר partial לסקירת אדם
     ['worker safe-stops on missing input', () => {
       const mem = new SharedMemory();
       const w = new SummarizerWorker(mem, { sources: {} });
@@ -110,12 +176,19 @@ function verifyGovernance(memory) {
         throw new Error('worker did not safe-stop on missing input');
       }
     }],
+
+    // בדיקה ד': append-only — היומן רק גדל, רשומות קפואות, אין מוטציה
     ['memory is append-only (full audit)', () => {
       const mem = new SharedMemory();
-      const e = mem.append({ taskId: 't', author: 'manager', kind: 'note', payload: { v: 1 } });
-      if (!Object.isFrozen(e)) throw new Error('entry is not frozen');
+      const e1 = mem.append({ taskId: 't', author: 'a', kind: 'note', payload: { message: 'one' } });
+      const len1 = mem.size;
+      mem.append({ taskId: 't', author: 'a', kind: 'note', payload: { message: 'two' } });
+      if (mem.size !== len1 + 1) throw new Error('log did not grow by exactly one');
+      if (!Object.isFrozen(e1)) throw new Error('entry is not frozen');
       if ('delete' in mem || 'update' in mem) throw new Error('memory exposes mutation');
     }],
+
+    // בדיקה ה': תוצר חלקי מסומן לסקירת אדם
     ['partial output flagged for human review', () => {
       const mem = new SharedMemory();
       const w = new SummarizerWorker(mem, { sources: {} });
@@ -147,4 +220,9 @@ function verifyGovernance(memory) {
   if (!allPass) process.exitCode = 1;
 }
 
-main();
+try {
+  main();
+} catch (err) {
+  console.error('\n[FATAL]', err.message);
+  process.exit(1);
+}
