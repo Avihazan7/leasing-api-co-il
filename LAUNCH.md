@@ -152,9 +152,11 @@
 □ Tech Lead זמין בכוננות 48 שעות אחרי Day 0
 □ אין רכישות AI חיצוניות מקבילות מחוץ ל-Anthropic stack ללא אישור Tech Lead
    (לקח מ-CASES/ROX_KEY.md § 5.1 — "השקעות לא מקוטעות")
+□ Claude Code Skills זמינים ומתועדים — `/plan`, `/agents`, `/compact`, `/review`,
+   `/security-review`, `/todos`, `/output-style` (ראה COMMAND_API.md § קטגוריה 12)
 ```
 
-13 ירוקים = אש ירוקה. אם אחד אדום — דוחים את Day 0 בשבוע.
+14 ירוקים = אש ירוקה. אם אחד אדום — דוחים את Day 0 בשבוע.
 
 ---
 

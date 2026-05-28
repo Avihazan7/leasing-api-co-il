@@ -1,7 +1,7 @@
 # CLAUDE COMMAND API — Master Reference & Router
 
 **Module:** `COMMAND_API.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Drop-in. Add to OS context to activate.
 **Integrates with:** `CLAUDE.md`, `MEMORY.md`, `OPERATING_SYSTEM.md`, `AGENT_PIPELINE.md`, `DECISION_LOG.md`, `AGENTIC_SYSTEM.md`
@@ -26,8 +26,8 @@
 
 1. [ארכיטקטורה ועקרונות](#1-ארכיטקטורה-ועקרונות)
 2. [תחביר פקודות (Grammar)](#2-תחביר-פקודות-grammar)
-3. [טבלת ייחוס מהירה — כל 89 הפקודות](#3-טבלת-ייחוס-מהירה)
-4. [קטלוג פקודות מפורט (11 קטגוריות)](#4-קטלוג-פקודות-מפורט)
+3. [טבלת ייחוס מהירה — כל 100 הפקודות](#3-טבלת-ייחוס-מהירה)
+4. [קטלוג פקודות מפורט (12 קטגוריות)](#4-קטלוג-פקודות-מפורט)
 5. [Composition — שילוב פקודות](#5-composition--שילוב-פקודות)
 6. [Power Shortcuts](#6-power-shortcuts)
 7. [System Prompt — Drop-in](#7-system-prompt--drop-in)
@@ -211,6 +211,19 @@ Default Claude  →  conversational, helpful, length-adaptive
 | 87 | `/email` | Collab | טיוטת מייל — נושא + גוף + חתימה |
 | 88 | `/publish` | Collab | הכן לפרסום — title, lead, body, meta |
 | 89 | `/feedback` | Collab | בקש משוב — שאלות מובנות |
+| 90 | `/plan` ⚙️ | Power | Plan Mode — הצג plan לפני ביצוע |
+| 91 | `/agents` ⚙️ | Power | הפעל subagent ייעודי לתת-משימה |
+| 92 | `/model` ⚙️ | Power | החלף מודל ל-task הנוכחי (opus/sonnet/haiku) |
+| 93 | `/rewind` 💬 | Power | חזור N הודעות אחורה — שחזור הקשר |
+| 94 | `/compact` ⚙️ | Power | דחוס את השיחה — שמור ליבה, השמט פרטים |
+| 95 | `/review` (Code) ⚙️ | Power | code-review על ה-diff הנוכחי |
+| 96 | `/security-review` ⚙️ | Power | סקירת אבטחה של השינויים בענף |
+| 97 | `/sandbox` 💬 | Power | הרץ במנותק — dry-run / mock / draft |
+| 98 | `/todos` ⚙️ | Power | ניהול רשימת משימות (TodoWrite) |
+| 99 | `/stats` ⚙️ | Power | usage stats של הסשן |
+| 100 | `/output-style` ⚙️ | Power | קבע סגנון פלט קבוע (terse/detailed/explanatory) |
+
+> **סימונים:** ⚙️ = Native Claude Code primitive (קיים בפועל ב-CLI/Skill/Tool) · 💬 = Behavioral prompt (התנהגות שמופעלת דרך הוראה, כמו 89 הקודמים).
 
 ---
 
@@ -617,6 +630,57 @@ Claude: 1. קהל היעד? 2. מספר שקפים? 3. שפה? 4. עברית א�
 
 ---
 
+### קטגוריה 12: Power Commands (Native + Behavioral)
+
+⚙️ = **Native** — קיים בפועל כפיצ'ר של Claude Code (CLI / Skill / Tool). הפעלה מהירה דרך ה-Skill tool או דרך פקודת CLI.
+💬 = **Behavioral** — התנהגות שמופעלת דרך הוראה, בדיוק כמו 89 הפקודות הקודמות. עובד בכל סביבה.
+
+#### `/plan` ⚙️
+**Trigger:** `/plan <task>`
+**Behavior:** נכנס ל-Plan Mode — Claude מציג plan לפני שמבצע. ב-Claude Code: יוצא דרך `ExitPlanMode` כשהמשתמש מאשר. בסביבות אחרות: הצג plan + המתן ל-approval לפני כתיבת קוד.
+
+#### `/agents` ⚙️
+**Trigger:** `/agents <task>` או `/agents list`
+**Behavior:** הפעלת subagent לתת-משימה ספציפית. ב-Claude Code: ה-`Agent` tool עם `subagent_type` מתאים (Explore / Plan / general-purpose). בסביבות אחרות: הצג איזה subagents יהיו מועילים והכן את ה-prompt.
+
+#### `/model` ⚙️
+**Trigger:** `/model <name>` — `opus` / `sonnet` / `haiku`
+**Behavior:** החלפת מודל ל-task הנוכחי. ב-Claude Code CLI: פקודה native. בסביבות אחרות: ציין שזו דרישה למעבר וצריך הפעלה ידנית בהגדרות.
+
+#### `/rewind` 💬
+**Trigger:** `/rewind <N>` (default N=1)
+**Behavior:** התעלם מ-N ההודעות האחרונות וחזור למצב לפניהן. אין undo אמיתי — Claude משחזר את ההקשר ידנית ומציג: "חוזר ל-state אחרי הודעה X."
+
+#### `/compact` ⚙️
+**Trigger:** `/compact`
+**Behavior:** דחיסת השיחה — שמירת הליבה, השמטת פרטים שלא נחוצים. ב-Claude Code: פקודת `/compact` native. בסביבות אחרות: סיכום עצמי של השיחה עד כה והמשך עם הסיכום בלבד.
+
+#### `/review` ⚙️ (Code)
+**Trigger:** `/review` בתוך ריפו, או `/code-review`
+**Behavior:** סקירת ה-diff הנוכחי לבאגים ו-cleanups ברמת effort נבחרת (low/medium/high/ultra). ב-Claude Code: skill פנימי `code-review`. בסביבות אחרות: בקש את ה-diff ידנית והרץ את ה-checklist באופן חיצוני.
+
+#### `/security-review` ⚙️
+**Trigger:** `/security-review`
+**Behavior:** סקירת אבטחה של השינויים בענף הנוכחי — OWASP top 10, secrets exposure, injection, authZ. ב-Claude Code: skill פנימי. בסביבות אחרות: רשימת תיוג מובנית של 12 נקודות.
+
+#### `/sandbox` 💬
+**Trigger:** `/sandbox <action>`
+**Behavior:** הרץ את הפעולה במנותק — בלי לגעת במצב אמיתי. בקוד: dry-run / mock / unit test. במסמכים: draft שלא נשמר אוטומטית. ב-DB: SELECT, לא UPDATE.
+
+#### `/todos` ⚙️
+**Trigger:** `/todos add <task>` / `/todos list` / `/todos done <id>`
+**Behavior:** ניהול רשימת משימות תוך-סשן. ב-Claude Code: `TodoWrite` tool עם state persistent. בסביבות אחרות: רשימה מסומנת שמעודכנת בתשובה הבאה.
+
+#### `/stats` ⚙️
+**Trigger:** `/stats`
+**Behavior:** הצגת usage stats של הסשן — tokens, פניות, זמן. ב-Claude Code: native command. בסביבות אחרות: דיווח עצמי מוערך — "X הודעות, Y משוערים, Z דקות."
+
+#### `/output-style` ⚙️
+**Trigger:** `/output-style <name>` — `terse` / `detailed` / `explanatory` / `executive`
+**Behavior:** קביעת סגנון פלט קבוע לסשן. ב-Claude Code: native setting ב-`/config`. בסביבות אחרות: התנהגות זמנית עד `/reset`.
+
+---
+
 ## 5. Composition — שילוב פקודות
 
 המקום שבו השיטה הופכת חזקה במיוחד.
@@ -832,20 +896,22 @@ Claude OS Root/
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | Initial 89 commands + composition + system prompt | 2026-05-19 |
+| 1.1.0 | +11 Power Commands (90-100) — קטגוריה 12, סימון native ⚙️ vs behavioral 💬, התאמה ל-Claude 2026 Edition | 2026-05-28 |
 
 ### 10.2 Backward Compatibility
 
 - שדרוגי minor (1.x) — לא ישברו פקודות קיימות; רק יוסיפו ויחדדו
 - שדרוגי major (2.0) — יחייבו עדכון system prompt; הודעת deprecation 30 יום מראש
+- גרסה 1.1 שמרה תאימות מלאה — כל 89 הפקודות הקודמות זהות בהתנהגות
 
 ### 10.3 Roadmap
 
 | גרסה | תוכן | יעד |
 |-------|--------|-----|
-| 1.1 | פקודות Avraham Personal (סעיף 9.2) | יוני 2026 |
-| 1.2 | Macros library מורחבת + פקודות multi-step | יולי 2026 |
+| 1.2 | פקודות Avraham Personal (סעיף 9.2) + Macros library מורחבת | יוני-יולי 2026 |
 | 1.3 | אינטגרציה רשמית עם council-of-sages ו-context-keeper | אוגוסט 2026 |
-| 2.0 | Agentic commands (`/agent <task>` שמפעיל skill chain אוטומטית) | Q4 2026 |
+| 1.4 | פקודות dev-specific (`/pr-description`, `/migration-check`, `/api-endpoint`) | ספטמבר 2026 |
+| 2.0 | Agentic commands — `/agent <task>` שמפעיל skill chain אוטומטית (חלקית הוטמע כבר ב-`/agents` ⚙️ מ-v1.1) | Q4 2026 |
 
 ---
 

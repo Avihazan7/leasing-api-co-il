@@ -3,7 +3,7 @@
 נקודת הכניסה הראשית של ה-Claude Operating System עבור הריפו.
 
 ## Active Modules
-- `COMMAND_API.md` v1.0.0 — 89 slash commands, composition operators, drop-in system prompt loaded.
+- `COMMAND_API.md` v1.1.0 — 100 slash commands (12 categories, native ⚙️ + behavioral 💬), composition operators, drop-in system prompt loaded.
 - `WINDOWS_DEPLOYMENT.md` v1.0.0 — End-to-end Windows rollout for Claude in Microsoft 365 (Word/Excel/PowerPoint + Skills).
 - `DEV_ENVIRONMENTS.md` v1.0.0 — End-to-end Claude dev environments: Desktop, VS Code, JetBrains, Cursor, Windsurf, Claude Code CLI + MCP + Computer Use.
 - `LAUNCH.md` v1.0.0 — Master ignition file. ULease go-live playbook: Day 0 → Week 1 → Month 1 → Quarter 1, RACI, kill-switch, master switch.
