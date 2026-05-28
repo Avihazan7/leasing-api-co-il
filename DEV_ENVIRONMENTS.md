@@ -566,6 +566,11 @@ claude mcp add ulease-db -- npx -y @modelcontextprotocol/server-postgres "$DATAB
 
 ### 10.5 בניית MCP server ייעודי ל-ULease
 
+> 🎯 **רקע אסטרטגי:** ה-MCP הפנימי הוא לא feature — זה ה-**moat**. לפי הלקח
+> מ-[`CASES/ROX_KEY.md § 5.2`](./CASES/ROX_KEY.md) ("נתונים כנכס אסטרטגי"),
+> חשיפת נתוני הצי / עסקאות / תמחור כ-data assets לסטאק שלנו היא מה שמייצר
+> דיפרנציאציה אמיתית. **בוצע upgrade ב-`LAUNCH.md § 5` מ-"future" ל-Q1 milestone.**
+
 לכלים פנימיים (e.g., "סטטוס צי בזמן אמת") בנו MCP server משלכם:
 
 ```
