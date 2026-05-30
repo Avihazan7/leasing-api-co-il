@@ -3,8 +3,10 @@
 נקודת הכניסה הראשית של ה-Claude Operating System עבור הריפו.
 
 ## Active Modules
-- `COMMAND_API.md` v1.0.0 — 89 slash commands, composition operators, drop-in system prompt loaded.
+- `OPERATING_SYSTEM.md` v1.0.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים, Boot Block והיררכיית הכרעה.
+- `MEMORY.md` v1.0.0 — שכבת זיכרון: schema, כרטיס זהות, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
 - `COWORK_SETUP.md` v1.0.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר ואינטגרציה עם ה-OS.
+- `COMMAND_API.md` v1.0.0 — 89 slash commands, composition operators, drop-in system prompt loaded.
 
 ## Module Load Order
 1. `OPERATING_SYSTEM.md`
