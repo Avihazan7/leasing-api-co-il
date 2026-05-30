@@ -11,7 +11,7 @@ import csv, os
 AVG_DEAL_VALUE = 150_000      # ₪ עסקת רכב ממוצעת
 DEAL_TAKE      = 0.0333       # נתח פלטפורמה משוקלל לעסקה (כולל 1% ספק + מימון/ליסינג)
 DEAL_REV       = round(AVG_DEAL_VALUE * DEAL_TAKE)   # ≈ 4,995 ₪ לעסקה
-LEAD_PRICE     = 148          # ₪ לליד שנמכר לספקים
+LEAD_PRICE     = 150          # ₪ לליד שנמכר לספקים (מאושר ע"י המייסד)
 PRO_PRICE      = 4_500        # ₪/חודש מנוי Pro
 PROMAX_PRICE   = 7_700        # ₪/חודש מנוי Pro Max
 LEADS_PER_DEAL = 5            # יחס יוני: 130 לידים / 26 עסקאות
