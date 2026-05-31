@@ -1,5 +1,13 @@
 # Marketing Strategy Framework
 
+**Module:** `marketing-strategy-framework.md`
+**Version:** 1.0.0
+**Author:** Avraham Bar Yochai Chazan — Claude Operating System
+**Status:** Active — Business layer. Loaded on demand for marketing strategy tasks.
+**Integrates with:** `OPERATING_SYSTEM.md`, `COMMAND_API.md`, `MEMORY.md`
+
+---
+
 A 10-prompt framework for building a complete marketing strategy from psychology to a one-page plan. Fill in the bracketed placeholders and run each prompt in order — outputs from earlier prompts feed the later ones.
 
 ---
@@ -61,3 +69,11 @@ A 10-prompt framework for building a complete marketing strategy from psychology
 ## 10. The One-Page Marketing Strategy
 
 > Using everything we've built together — my customer psychology, positioning, messaging, content plan, funnel, objection responses, email sequence, paid ads strategy, and retention system — compress it into a single one-page marketing strategy document for [business]. Format it as: Customer Avatar (3 lines), Core Message (1 line), Unique Position (2 lines), Top 3 Channels, 30-Day Action Plan (week by week), and the 3 KPIs that tell me my marketing is winning.
+
+---
+
+## Document Control
+
+| Version | Change | Date |
+|---------|--------|------|
+| 1.0.0 | Registered as a Business-layer OS module; added the standard module header. | 2026-05-31 |
