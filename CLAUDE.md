@@ -12,6 +12,7 @@
 - `AI_PROGRESSION_PLAN.md` v1.0.0 — תוכנית התקדמות אישית על המפה: Learn-vs-Delegate, ציר זמן צמוד ל-ULease, תוכנית 90 יום ושערי-מעבר.
 - `AI_LEARNING_RESOURCES.md` v1.0.0 — קוריקולום AI לפי המפה: משאבים לכל שלב, עוגן IBM Agentic AI & RAG (Coursera), ומסלול אישי.
 - `AI_7_SKILLS.md` v1.0.0 — 7 מיומנויות לשליטה ב-AI (2026) + מיפוי ל-OS הקיים (5 מ-7 כבר מיושמים).
+- `AI_SKILLS_ACQUISITION.md` v1.0.0 — תוכנית רכישת מיומנויות hands-on (8 שבועות, Build-to-Learn): פרויקט אמיתי ב-ULease לכל מיומנות, שערי-שליטה.
 - `INVESTOR_RELATIONS.md` v1.0.0 — IR: חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים.
 - `CASES/ULEASE.md` v1.0.0 — תיק ULease 🎯 Leasing.co.il: מודל Marketplace תלת-צדדי + תחזית פיננסית (יוני 26 → דצמ' 27).
 - `CASES/ULEASE_SPEC.md` v1.0.0 — איפיון מוצר ומערכת מקצה-לקצה: שחקנים, ארכיטקטורה, Multi-agent (Ultra·Master·Max), מודל נתונים, אינטגרציות ו-roadmap.
