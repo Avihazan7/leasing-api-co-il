@@ -38,6 +38,19 @@ def _scen(mult):
 SCEN=[("שמרני",0.7,"#9b8557"),("בסיס",1.0,ACCENT),("אופטימי",1.3,GREEN)]
 scen={nm:_scen(mu) for nm,mu,_ in SCEN}
 
+# funnel (2027), what-if base, launch timeline
+leads27=int(S(y27,"leads")); deals27i=int(K["deals27"]); deliv27=round(deals27i*0.95)
+B={"deal":S(y27,"deal_rev"),"lead":S(y27,"lead_rev"),"sub":S(y27,"sub_rev"),"ad":S(y27,"ad_rev"),"uw":S(y27,"uw_rev"),"opex":K["opex27"]}
+def funnel_html():
+    stages=[("לידים",leads27,PAL[1]),("עסקאות",deals27i,ACCENT),("מסירות",deliv27,PAL[2])]; mx=stages[0][1]; out=[]; prev=None
+    for nm,v,c in stages:
+        w=22+78*(v/mx); conv=f" · {v/prev*100:.0f}% מהקודם" if prev else ""
+        out.append(f'<div class="seg" style="width:{w:.0f}%;background:{c}">{nm}: {v:,}{conv}</div>'); prev=v
+    return '<div class="funnel">'+''.join(out)+'</div>'
+TL=[("יוני · שבוע 1","חברה + דומיין + תשתית + ingestion"),("יוני · שבוע 2","חדר-עסקה + מנויים + QA"),
+    ("חצי-שני יוני 26","🚀 Go-Live — 26 עסקאות"),("Q3–Q4 2026","Scale: מכרז · Pro Max · n8n"),("2027","Architect + צמיחה")]
+tl_html="".join(f'<div class="step"><b>{t}</b>{d}</div>' for t,d in TL)
+
 def m(n): return f"₪{n/1e6:.2f}M" if abs(n)>=1e6 else f"₪{n/1e3:.0f}K"
 def f(n): return f"{n:,.0f}"
 
@@ -82,7 +95,7 @@ cards=[("GMV 2027",m(K["gmv27"]),"מצטבר"),("הכנסה 2027",m(K["rev27"]),
        ("Run-rate דצמ' 27",m(K["runrate"]),"שנתי"),("עסקאות 2027",f(K["deals27"]),f"2026: {f(K['deals26'])}"),
        ("מנויים",str(K["subs_end"]),"סוף 2027"),("Cash מצטבר",m(K["cash_end"]),"כולל ₪150K")]
 card_html="".join(f'<div class="card"><div class="cap">{c[0]}</div><div class="big">{c[1]}</div><div class="sub">{c[2]}</div></div>' for c in cards)
-table_rows="".join(f"<tr><td>{r['period']}</td><td>{f(r['deals'])}</td><td>{f(r['total_rev'])}</td><td>{f(r['opex'])}</td><td>{f(r['net_monthly'])}</td><td>{f(r['cum_cash'])}</td></tr>" for r in rows)
+table_rows="".join(f"<tr><td>{r['period']}</td><td>{f(r['deals'])}</td><td>{m(r['total_rev'])}</td><td>{m(r['opex'])}</td><td>{m(r['net_monthly'])}</td><td>{m(r['cum_cash'])}</td></tr>" for r in rows)
 
 CHECKLIST = [("דומיין",["רכישת ULease.co.il","חיבור Leasing.co.il","DNS + SSL + מייל"]),
              ("משפטי",["הקמת חברה","תקנון + מדיניות פרטיות","ייעוץ משפטי לחיתום","עמידה בחוק ספאם"]),
@@ -109,7 +122,8 @@ header h1{{color:{ACCENT};font-size:2rem}} header p{{opacity:.7;margin-top:4px}}
 .panel{{background:{CREAM};border-radius:16px;padding:20px 24px;margin-bottom:16px}}
 .panel h2{{color:{ACCENT};font-size:1.15rem;margin-bottom:12px}}
 .lg{{display:inline-flex;align-items:center;font-size:.82rem;margin-left:12px}} .lg i{{width:12px;height:12px;border-radius:3px;display:inline-block;margin-left:6px}}
-table{{width:100%;border-collapse:collapse;font-size:.88rem}} th,td{{padding:.38rem .6rem;text-align:right;border-bottom:1px solid #ddd}} th{{color:{ACCENT}}}
+.tscroll{{overflow-x:auto;-webkit-overflow-scrolling:touch}}
+table{{width:100%;border-collapse:collapse;font-size:.88rem}} th,td{{padding:.38rem .55rem;text-align:right;border-bottom:1px solid #ddd;white-space:nowrap}} th{{color:{ACCENT}}}
 .two{{display:grid;grid-template-columns:1fr 1fr;gap:16px}}
 ul{{list-style:none}} li{{padding:.22rem 0;padding-right:1.1rem;position:relative;font-size:.9rem}}
 li::before{{content:'';position:absolute;right:0;top:.65em;width:.45rem;height:.45rem;background:{ACCENT};border-radius:50%}}
@@ -118,7 +132,11 @@ li::before{{content:'';position:absolute;right:0;top:.65em;width:.45rem;height:.
 .chk{{display:flex;align-items:center;gap:8px;font-size:.9rem;padding:.18rem 0;cursor:pointer}} .chk input{{width:16px;height:16px;accent-color:{ACCENT}}}
 .clhead{{font-weight:700;color:{ACCENT};margin-top:10px;font-size:.85rem}}
 .prog{{background:#e7e0d3;border-radius:20px;height:20px;overflow:hidden;margin:6px 0 4px}} .prog>div{{background:{ACCENT};height:100%;width:0;transition:width .3s}}
-small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repeat(2,1fr)}}.two{{grid-template-columns:1fr}}}}
+.funnel{{display:flex;flex-direction:column;gap:6px;align-items:center}} .funnel .seg{{color:#fff;border-radius:6px;padding:.55rem;text-align:center;font-size:.85rem;font-weight:700}}
+.tl{{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}} .tl .step{{flex:1;min-width:135px;background:#fff;border-top:3px solid {ACCENT};border-radius:10px;padding:10px;font-size:.82rem}} .tl .step b{{color:{ACCENT};display:block;margin-bottom:3px}}
+.ctrl{{display:flex;flex-direction:column;gap:12px;margin-bottom:10px}} .ctrl input[type=range]{{width:100%;accent-color:{ACCENT}}} .ctrl label{{font-size:.9rem}}
+.out{{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}} .out>div{{background:#fff;border-radius:10px;padding:10px;text-align:center}} .out b{{color:{ACCENT};font-size:1.15rem;display:block;margin-top:2px}}
+small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repeat(2,1fr)}}.two{{grid-template-columns:1fr}} table{{font-size:.8rem}} th,td{{padding:.3rem .4rem}} header h1{{font-size:1.5rem}}}}
 </style></head><body><div class="wrap">
 
 <header><h1>ULease 🎯 Leasing.co.il — Executive Dashboard</h1>
@@ -131,6 +149,9 @@ small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repea
 <div class="panel"><h2>🚗 עסקאות לחודש</h2>{svg_bars([r['deals'] for r in rows], labels, color="#2a6f6b")}</div>
 <div class="panel"><h2>🧩 תמהיל הכנסות 2027</h2>{svg_stacked(mix27)}<div style="margin-top:10px">{legend(mix27)}</div></div>
 
+<div class="panel"><h2>📊 Funnel — לידים → עסקאות → מסירות (2027)</h2>{funnel_html()}
+<small style="display:block;margin-top:8px">המרה: לידים→עסקאות ~20% · עסקאות→מסירות ~95%</small></div>
+
 <div class="panel"><h2>💸 הוצאות חודשיות (₪) + תמהיל 2027</h2>{svg_bars([r['opex'] for r in rows], labels, color="#7a5c3e")}
 <div style="margin-top:10px">{svg_stacked(exp27)}</div><div style="margin-top:8px">{legend(exp27)}</div></div>
 
@@ -141,11 +162,24 @@ small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repea
 </div>
 
 <div class="panel"><h2>🎯 אומדנים — תרחישי קצב עסקאות (±30%)</h2>
-<table><thead><tr><th>תרחיש</th><th>הכנסה 2027</th><th>נטו 2027</th><th>Cash סוף 27</th><th>Run-rate</th></tr></thead><tbody>
+<div class="tscroll"><table><thead><tr><th>תרחיש</th><th>הכנסה 2027</th><th>נטו 2027</th><th>Cash סוף 27</th><th>Run-rate</th></tr></thead><tbody>
 {"".join(f'<tr><td>{nm} (×{mu:g})</td><td>{m(scen[nm]["r27"])}</td><td>{m(scen[nm]["n27"])}</td><td>{m(scen[nm]["cash"])}</td><td>{m(scen[nm]["rr"])}</td></tr>' for nm,mu,_ in SCEN)}
-</tbody></table>
+</tbody></table></div>
 <div style="margin-top:12px;font-size:.85rem;opacity:.7;margin-bottom:2px">נטו 2027 לפי תרחיש (₪)</div>{svg_scen()}
 <div class="flag">גם בתרחיש <b>השמרני</b> (−30% עסקאות) הפלטפורמה נשארת רווחית מאוד — נטו 2027 ₪11.3M. זה ה-operating leverage. הנחה: הוצאות קבועות; בפועל חלק מהשיווק יגדל עם הנפח.</div></div>
+
+<div class="panel"><h2>🎛️ מחוון What-If — קצב עסקאות × מט"ח</h2>
+<div class="ctrl">
+<div><label>קצב עסקאות: <b id="dmv">100%</b></label><input id="dm" type="range" min="50" max="150" value="100"></div>
+<div><label>USD/ILS: <b id="fxv">3.60</b></label><input id="fx" type="range" min="250" max="400" value="360"></div></div>
+<div class="out">
+<div><small>שווי עסקה</small><b id="o_dv">₪150K</b></div>
+<div><small>עמלה/עסקה</small><b id="o_cm">₪4,995</b></div>
+<div><small>הכנסה 2027</small><b id="o_rev">₪16.86M</b></div>
+<div><small>נטו 2027</small><b id="o_net">₪14.77M</b></div>
+<div><small>מרווח</small><b id="o_mg">88%</b></div>
+<div><small>לידים 2027</small><b>{leads27:,}</b></div></div>
+<div class="flag">מט"ח משפיע על <b>שווי העסקה</b> (רכב מיובא; בסיס USD/ILS 3.60 = ₪150K). תזת החברה: שקל חזק → גם <b>יותר נפח</b> — הזז גם את "קצב עסקאות". (אפקט הנפח אינו אוטומטי.)</div></div>
 
 <div class="panel"><h2>✅ צ'קליסט השקה — מעקב חי</h2>
 <div class="prog"><div id="clbar"></div></div><div id="clpct" style="font-weight:700;color:{ACCENT}">0%</div>
@@ -162,8 +196,10 @@ small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repea
 </div>
 
 <div class="panel"><h2>🗓️ תחזית חודשית מלאה</h2>
-<table><thead><tr><th>חודש</th><th>עסקאות</th><th>הכנסה ₪</th><th>הוצאות ₪</th><th>נטו ₪</th><th>Cash ₪</th></tr></thead>
-<tbody>{table_rows}</tbody></table></div>
+<div class="tscroll"><table><thead><tr><th>חודש</th><th>עסקאות</th><th>הכנסה</th><th>הוצאות</th><th>נטו</th><th>Cash</th></tr></thead>
+<tbody>{table_rows}</tbody></table></div></div>
+
+<div class="panel"><h2>📅 טיימליין השקה</h2><div class="tl">{tl_html}</div></div>
 
 <div class="panel"><small>מקור: CASES/ULEASE_FORECAST.csv (Base Case v1.2) · כיול ב-ULEASE_FORECAST.py · ליבה (Deal Score/Match/תמחור) = IP · Claude OS — Avraham Bar Yochai Chazan</small></div>
 
@@ -175,6 +211,25 @@ function upd(){{var d=boxes.filter(function(b){{return b.checked}}).length;var p
   try{{localStorage.setItem('ulease_cl',JSON.stringify(boxes.map(function(b){{return b.checked}})));}}catch(e){{}}}}
 try{{var sv=JSON.parse(localStorage.getItem('ulease_cl')||'[]');boxes.forEach(function(b,i){{if(sv[i])b.checked=true;}});}}catch(e){{}}
 boxes.forEach(function(b){{b.addEventListener('change',upd);}});upd();
+</script>
+<script>
+(function(){{
+ var B={{deal:{B['deal']:.0f},lead:{B['lead']:.0f},sub:{B['sub']:.0f},ad:{B['ad']:.0f},uw:{B['uw']:.0f},opex:{B['opex']:.0f}}};
+ var dm=document.getElementById('dm'),fx=document.getElementById('fx');
+ function mm(n){{return Math.abs(n)>=1e6?'₪'+(n/1e6).toFixed(2)+'M':'₪'+Math.round(n/1e3)+'K';}}
+ function calc(){{
+  var d=dm.value/100,ff=fx.value/100,dv=150000*(ff/3.6),cm=dv*0.0333;
+  var rev=B.deal*d*(ff/3.6)+B.lead*d+B.uw*d+B.sub+B.ad,net=rev-B.opex,mg=rev?net/rev*100:0;
+  document.getElementById('dmv').textContent=Math.round(dm.value)+'%';
+  document.getElementById('fxv').textContent=ff.toFixed(2);
+  document.getElementById('o_dv').textContent=mm(dv);
+  document.getElementById('o_cm').textContent='₪'+Math.round(cm).toLocaleString();
+  document.getElementById('o_rev').textContent=mm(rev);
+  document.getElementById('o_net').textContent=mm(net);
+  document.getElementById('o_mg').textContent=Math.round(mg)+'%';
+ }}
+ dm.addEventListener('input',calc);fx.addEventListener('input',calc);calc();
+}})();
 </script>
 </div></body></html>"""
 
