@@ -69,7 +69,7 @@
 | 1 | `OPERATING_SYSTEM.md` | Kernel | ✅ פעיל | חוקים, סדר, הכרעה |
 | 2 | `MEMORY.md` | Memory | ✅ פעיל | זהות, העדפות, focus/projects |
 | 3 | `COWORK_SETUP.md` | Context | ✅ פעיל | חיבור תיקייה, קבצי md, אונבורדינג |
-| 4 | `COMMAND_API.md` | Interface | ✅ פעיל | 89 פקודות, composition, system prompt |
+| 4 | `COMMAND_API.md` | Interface | ✅ פעיל | 89 פקודות, composition, prompting frameworks, system prompt |
 | 5 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
 | 6 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית פיננסית, ואיפיון מוצר/מערכת |
 

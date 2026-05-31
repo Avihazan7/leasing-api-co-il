@@ -1,7 +1,7 @@
 # CLAUDE COMMAND API — Master Reference & Router
 
 **Module:** `COMMAND_API.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Drop-in. Add to OS context to activate.
 **Integrates with:** `CLAUDE.md`, `MEMORY.md`, `OPERATING_SYSTEM.md`, `AGENT_PIPELINE.md`, `DECISION_LOG.md`, `AGENTIC_SYSTEM.md`
@@ -30,11 +30,12 @@
 4. [קטלוג פקודות מפורט (11 קטגוריות)](#4-קטלוג-פקודות-מפורט)
 5. [Composition — שילוב פקודות](#5-composition--שילוב-פקודות)
 6. [Power Shortcuts](#6-power-shortcuts)
-7. [System Prompt — Drop-in](#7-system-prompt--drop-in)
-8. [אינטגרציה עם ה-Claude OS שלך](#8-אינטגרציה-עם-ה-claude-os-שלך)
-9. [הרחבה ויצירת פקודות אישיות](#9-הרחבה-ויצירת-פקודות-אישיות)
-10. [גרסאות וחיפוי לאחור](#10-גרסאות-וחיפוי-לאחור)
-11. [נספח: כללי הכרעה ו-edge cases](#11-נספח)
+7. [Prompting Frameworks — מסגרות לכתיבת פרומפטים](#7-prompting-frameworks--מסגרות-לכתיבת-פרומפטים)
+8. [System Prompt — Drop-in](#8-system-prompt--drop-in)
+9. [אינטגרציה עם ה-Claude OS שלך](#9-אינטגרציה-עם-ה-claude-os-שלך)
+10. [הרחבה ויצירת פקודות אישיות](#10-הרחבה-ויצירת-פקודות-אישיות)
+11. [גרסאות וחיפוי לאחור](#11-גרסאות-וחיפוי-לאחור)
+12. [נספח: כללי הכרעה ו-edge cases](#12-נספח)
 
 ---
 
@@ -688,7 +689,96 @@ macros:
 
 ---
 
-## 7. System Prompt — Drop-in
+## 7. Prompting Frameworks — מסגרות לכתיבת פרומפטים
+
+אם קטגוריות 1–11 מעצבות את ה**פלט** של Claude, המסגרות כאן מעצבות את ה**קלט** שלך. פקודה מצוינת על פרומפט רשלני עדיין נותנת פלט בינוני — `garbage in` לא מתבטל ב-`/format`.
+
+**מקור ושקיפות:** הסעיף זוקק מהאינפוגרפיקה *"How To Write Better AI Prompts"*. שמרנו את המהות השמישה (techniques, strategies, frameworks, key terms), תיקנו ראשי-תיבות משובשים למסגרות המקובלות בפועל, ודילגנו על ה-hype של אקוסיסטם ChatGPT (Custom GPTs, DALL-E, CTA שיווקי) — באותה דיסציפלינת-מקור של ההקדמה.
+
+**הגשר לפקודות:** כל טכניקה ממופה לפקודה שכבר קיימת ב-API. המסגרות הן ה"איך לחשוב"; הפקודות הן ה"איך לבצע".
+
+### 7.1 ארבע טכניקות ליבה (Core Techniques)
+
+| טכניקה | מה זה | מתי | פקודת OS מקבילה |
+|---------|--------|------|------------------|
+| **Zero-shot / Few-shot** | הוראה ישירה מול הוראה + 2–3 דוגמאות לכיול | few-shot כשהפורמט או הטון קריטיים | `/examples` |
+| **Role-Playing** | הקצאת פרסונה ("אתה אנליסט בכיר", "כמו CFO") | כשצריך עומק-תחום או register ספציפי | `/tone` · `/style` |
+| **Context Injection** | הזרקת רקע/דאטה לפני הבקשה | תמיד כשיש מידע רלוונטי שלא בהקשר | `/context` · `/focus` · `/project` |
+| **Output Formatting** | קביעת צורת הפלט מראש (טבלה, bullets, JSON) | כשהפלט נכנס למסמך או מערכת אחרת | `/format` · `/table` · `/bullet` · `/outline` |
+
+### 7.2 ארבע אסטרטגיות מתקדמות (Advanced Strategies)
+
+| אסטרטגיה | מה זה | מתי | פקודת OS מקבילה |
+|----------|--------|------|------------------|
+| **Chain-of-Thought (CoT)** | "חשוב צעד-אחר-צעד לפני התשובה" | בעיות רב-שלביות, חישוב, היגיון | `/analyze` · `/solve` |
+| **Self-Critique** | בקש מ-Claude לבקר ולשפר את עצמו | טיוטה שנייה כמעט תמיד טובה מהראשונה | `/challenge` · `/review` · `/improve` |
+| **ReAct (Reason + Act)** | היגיון משולב בפעולה או כלי | מחקר, code review, workflows עם כלים | `/research` · `/workflow` + pipelines |
+| **Meta-Prompting** | בקש מ-Claude לשכתב את הפרומפט עצמו | כשהתוצאה חלשה — תקן את הקלט, לא רק את הפלט | `/improve` · `/rewrite` (על הפרומפט) |
+
+> *Tooling:* את ReAct ואת ה-chaining בקנה מידה מתפעלים אוטומטית כלים ייעודיים — DSPy, LangChain, PromptLayer — אך אותו היגיון מתבטא ידנית ב-composition (סעיף 5).
+
+### 7.3 מסגרות פרומפט — מתי כל אחת
+
+מהפשוט למורכב. בחר את הקטנה ביותר שמכסה את המשימה:
+
+| מסגרת | רכיבים | הכי טובה ל… |
+|--------|---------|--------------|
+| **RTF** | Role · Task · Format | בקשה מהירה יומיומית — שלושת המינימום |
+| **RACE** | Role · Action · Context · Expectation | משימה עם רקע ותוצאה מוגדרת |
+| **CO-STAR** | Context · Objective · Style · Tone · Audience · Response | תוכן שיווקי/תקשורת — שליטה מלאה בטון וקהל |
+| **RISE** | Role · Input · Steps · Expectation | משימה אנליטית רב-שלבית (ראו 7.4) |
+| **CLEAR** | Concise · Logical · Explicit · Adaptive · Reflective | עקרונות *לחידוד* פרומפט קיים, לא לבנייתו מאפס |
+
+> **מיפוי לפקודות:** Role → `/tone`+`/style` · Context → `/context` · Format/Response → `/format` · Steps → `/outline` + composition. מסגרת שלמה = stack של פקודות (ראו 7.6).
+
+### 7.4 RISE — פירוק מסגרת לדוגמה (Leasing.co.il)
+
+המסגרת שהאינפוגרפיקה פירקה, על דאטה אמיתית שלך:
+
+```
+Role:        אתה אנליסט נתונים בכיר בתחום הליסינג.
+Input:       דוח עסקאות Q3 — נפח, ריבית ממוצעת, סוג רכב, ספק.
+Steps:       1) זהה 3 מגמות.  2) השווה ל-Q2.  3) הצע 3 הזדמנויות צמיחה.
+Expectation: טבלה + bullet לכל הזדמנות, עד 200 מילה, בעברית.
+```
+
+כאותה משימה ב-API:
+```
+/context דוח עסקאות Q3 [מצורף]
+/analyze-data | /insights | /table + /length 200
+```
+
+### 7.5 מונחי מפתח (Key Terms)
+
+| מונח | פירוש קצר | רלוונטי ל… |
+|------|-----------|-------------|
+| **Context Engineering** | בניית זיכרון/הקשר/דאטה כך שה-LLM "מבוסס" ולא מנחש | `MEMORY.md` · `/context` · `/project` |
+| **Prompt Chaining** | שרשור פרומפטים — פלט אחד מזין את הבא | אופרטור ה-pipeline (סעיף 5) |
+| **Temperature** | 0 = עקבי ולוגי · 1 = יצירתי ופתוח | הגדרת מודל, לא פקודה — שיקול לפי משימה |
+| **RAG** | חיבור המודל לדאטה חיצוני לדיוק עובדתי | `/search` · `/research` · `/sources` |
+| **Self-Consistency** | מספר תשובות → השוואה → הטובה ביותר | מעלה אמינות; שלב עם `/evaluate` |
+
+### 7.6 מסגרת → Stack פקודות
+
+הדרך להפוך מסגרת תיאורטית להרצה: תרגם כל רכיב לפקודה והרכב ב-`+` או `|`. CO-STAR מלאה למייל למשקיע:
+
+```
+/project investor update Q3
+/context [מספרי הרבעון]
+/email to משקיע מוסדי (non-technical) about Q3 update | /tone formal + /length 180
+```
+
+- **C**ontext → `/context` · `/project`
+- **O**bjective → גוף הבקשה (`/email … about …`)
+- **S**tyle + **T**one → `/style` · `/tone`
+- **A**udience → תיאור מפורש בתוך הבקשה (אין פקודה ייעודית)
+- **R**esponse → `/format` · `/length`
+
+**הכלל:** אל תשנן ראשי-תיבות — שנן ש**פרומפט חזק = פרסונה + הקשר + משימה + צורת-פלט**, וזה בדיוק מה שה-stack מבטא.
+
+---
+
+## 8. System Prompt — Drop-in
 
 זה הבלוק שדורש העתקה ל-`userPreferences` או ל-`CLAUDE.md` ראשי. **זה מה שגורם לכל המסמך הזה לעבוד.**
 
@@ -730,7 +820,7 @@ and offer: "Is this a /command, or literal text?"
 
 ---
 
-## 8. אינטגרציה עם ה-Claude OS שלך
+## 9. אינטגרציה עם ה-Claude OS שלך
 
 ### 8.1 מיקום הקובץ
 ```
@@ -788,7 +878,7 @@ Claude OS Root/
 
 ---
 
-## 9. הרחבה ויצירת פקודות אישיות
+## 10. הרחבה ויצירת פקודות אישיות
 
 אתה כבר בנית 18,000+ שורות OS — תרצה להוסיף פקודות משלך.
 
@@ -825,13 +915,14 @@ Claude OS Root/
 
 ---
 
-## 10. גרסאות וחיפוי לאחור
+## 11. גרסאות וחיפוי לאחור
 
 ### 10.1 Versioning
 
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | Initial 89 commands + composition + system prompt | 2026-05-19 |
+| 1.1.0 | Prompting Frameworks (§7) — core techniques, advanced strategies, framework→command mapping, key terms | 2026-05-31 |
 
 ### 10.2 Backward Compatibility
 
@@ -842,14 +933,14 @@ Claude OS Root/
 
 | גרסה | תוכן | יעד |
 |-------|--------|-----|
-| 1.1 | פקודות Avraham Personal (סעיף 9.2) | יוני 2026 |
-| 1.2 | Macros library מורחבת + פקודות multi-step | יולי 2026 |
-| 1.3 | אינטגרציה רשמית עם council-of-sages ו-context-keeper | אוגוסט 2026 |
+| 1.2 | פקודות Avraham Personal (סעיף 10.2) | יוני 2026 |
+| 1.3 | Macros library מורחבת + פקודות multi-step | יולי 2026 |
+| 1.4 | אינטגרציה רשמית עם council-of-sages ו-context-keeper | אוגוסט 2026 |
 | 2.0 | Agentic commands (`/agent <task>` שמפעיל skill chain אוטומטית) | Q4 2026 |
 
 ---
 
-## 11. נספח
+## 12. נספח
 
 ### 11.1 כללי הכרעה ב-edge cases
 
@@ -927,7 +1018,8 @@ interface CommandContract {
 | Command Catalog | this file | 2026-05-19 |
 | System Prompt | this file + userPreferences | 2026-05-19 |
 | Integration | CLAUDE.md (root) | 2026-05-19 |
+| Prompting Frameworks | this file | 2026-05-31 |
 
 **Confidentiality.** This file is part of the personal Claude Operating System of Avraham Bar Yochai Chazan. Commands referencing internal IP (Deal Score, Match API, legal automation) inherit the confidentiality of those sub-systems.
 
-— *End of COMMAND_API.md v1.0 —*
+— *End of COMMAND_API.md v1.1 —*
