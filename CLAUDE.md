@@ -26,7 +26,7 @@
 - `CASES/ULEASE_OUTBOUND_ENGINE.md` v1.0.0 — בלופרינט מנוע outbound (n8n + Claude): 8 שכבות לאקווזיציית צד-היצע, מודלי Haiku/Sonnet, KPIs.
 - `CASES/ULEASE_TECH_ONBOARDING.md` v1.0.0 — Onboarding ל-Tech Lead: יום 0/1, רשימת קריאה ב-OS, ותוכנית 30·60·90.
 - `CASES/ULEASE_LAUNCH_CHECKLIST.md` v1.0.0 — צ'קליסט השקה (שבועיים): דומיין, משפטי, MVP, תוכן, outreach, QA ולוח שבועי.
-- `CASES/ULEASE_DASHBOARD.html` v1.0.0 — דשבורד מנהלים אינטראקטיבי (RTL): KPIs, גרפים, תמהיל הכנסות, תחזית, צוות/גיוס וסטטוס השקה; נוצר ע"י `ULEASE_DASHBOARD.py`.
+- `CASES/ULEASE_DASHBOARD.html` v1.1.0 — דשבורד מנהלים אינטראקטיבי (RTL): KPIs, גרפים (הכנסה/מזומן/עסקאות/הוצאות/רווחיות), תמהילי הכנסה והוצאה, וצ'קליסט השקה חי; נוצר ע"י `ULEASE_DASHBOARD.py`.
 
 ## Module Load Order
 1. `OPERATING_SYSTEM.md`
