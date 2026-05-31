@@ -4,7 +4,7 @@
 **Version:** 1.0.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Kernel — נטען ראשון. כל שאר המודולים תלויים בו.
-**Integrates with:** `CLAUDE.md`, `MEMORY.md`, `COWORK_SETUP.md`, `COMMAND_API.md`, `INVESTOR_RELATIONS.md`, `CASES/*.md`
+**Integrates with:** כל המודולים הרשומים ב-§3 — `CLAUDE.md`, `MEMORY.md`, `DECISION_LOG.md`, `COWORK_SETUP.md`, `COMMAND_API.md`, `marketing-strategy-framework.md`, `AI_*` (Knowledge), `INVESTOR_RELATIONS.md`, `CASES/*.md`
 
 ---
 
@@ -46,14 +46,15 @@
 
 ## 2. ארכיטקטורת השכבות
 
-המערכת בנויה כחמש שכבות, מהליבה כלפי חוץ. כל שכבה צורכת רק את זו שמתחתיה:
+המערכת בנויה כשש שכבות, מהליבה כלפי חוץ. כל שכבה צורכת רק את זו שמתחתיה:
 
 ```
 ┌─ KERNEL ────── OPERATING_SYSTEM.md   חוקים, סדר טעינה, הכרעה
-├─ MEMORY ────── MEMORY.md             מי אתה, מה זוכרים, focus/projects
+├─ MEMORY ────── MEMORY.md · DECISION_LOG.md   מי אתה, מה זוכרים, focus/projects, החלטות
 ├─ CONTEXT ───── COWORK_SETUP.md       חיבור התיקייה, קבצי md, Global Instructions
 ├─ INTERFACE ─── COMMAND_API.md        89 פקודות /command + composition
-└─ BUSINESS ──── INVESTOR_RELATIONS.md · CASES/*.md   הקשר עסקי נקודתי
+├─ KNOWLEDGE ─── AI_SKILL_MAP · AI_PROGRESSION_PLAN · AI_LEARNING_RESOURCES · AI_7_SKILLS · AI_SKILLS_ACQUISITION   ידע אישי/לימודי (on-demand)
+└─ BUSINESS ──── marketing-strategy-framework.md · INVESTOR_RELATIONS.md · CASES/*.md   הקשר עסקי נקודתי
 ```
 
 **הזרימה מקצה לקצה:** המשתמש מקליד פקודה → ה-INTERFACE מזהה אותה → היא נפתרת מול ה-CONTEXT וה-MEMORY → בכפוף לחוקי ה-KERNEL → ומיושמת על מודול ה-BUSINESS הרלוונטי.
@@ -68,11 +69,19 @@
 |-----|--------|------|--------|--------|
 | 1 | `OPERATING_SYSTEM.md` | Kernel | ✅ פעיל | חוקים, סדר, הכרעה |
 | 2 | `MEMORY.md` | Memory | ✅ פעיל | זהות, העדפות, focus/projects |
-| 3 | `COWORK_SETUP.md` | Context | ✅ פעיל | חיבור תיקייה, קבצי md, אונבורדינג |
-| 4 | `COMMAND_API.md` | Interface | ✅ פעיל | 89 פקודות, composition, prompting frameworks, system prompt |
-| 5 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
-| 6 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית פיננסית, ואיפיון מוצר/מערכת |
+| 3 | `DECISION_LOG.md` | Memory | ✅ פעיל | יומן החלטות append-only — רציונל וסטטוס |
+| 4 | `COWORK_SETUP.md` | Context | ✅ פעיל | חיבור תיקייה, קבצי md, אונבורדינג |
+| 5 | `COMMAND_API.md` | Interface | ✅ פעיל | 89 פקודות, composition, prompting frameworks, system prompt |
+| 6 | `marketing-strategy-framework.md` | Business | ✅ פעיל | מסגרת 10-שלבית לאסטרטגיית שיווק |
+| 7 | `AI_SKILL_MAP.md` | Knowledge | ✅ פעיל | מפת מיומנויות AI — 4 שלבים ומיקום ULease |
+| 8 | `AI_PROGRESSION_PLAN.md` | Knowledge | ✅ פעיל | תוכנית התקדמות אישית — Learn-vs-Delegate, 90 יום |
+| 9 | `AI_LEARNING_RESOURCES.md` | Knowledge | ✅ פעיל | קוריקולום AI — משאבים לכל שלב |
+| 10 | `AI_7_SKILLS.md` | Knowledge | ✅ פעיל | 7 מיומנויות לשליטה ב-AI (2026) + מיפוי ל-OS |
+| 11 | `AI_SKILLS_ACQUISITION.md` | Knowledge | ✅ פעיל | תוכנית רכישת מיומנויות hands-on (8 שבועות) |
+| 12 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
+| 13 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית, איפיון, מתודולוגיה, גיוס ו-playbooks |
 
+> **הערה על שכבות:** מודולי `AI_*` הם שכבת **Knowledge** — ידע אישי/לימודי שיושב לוגית בין ה-INTERFACE ל-BUSINESS. הם פעילים אך נטענים on-demand, לא בכל turn.
 > כשמודול עובר מ-🔜 ל-✅ — מעדכנים את הסטטוס כאן ואת ה-Active Modules ב-`CLAUDE.md` ו-`README.md`.
 
 ---
@@ -90,7 +99,7 @@ On every turn, before responding:
 3. Recognize /command syntax per COMMAND_API.md and apply its output contracts.
 
 Module load order (canonical, from OPERATING_SYSTEM.md §3):
-  OPERATING_SYSTEM → MEMORY → COWORK_SETUP → COMMAND_API → BUSINESS modules
+  OPERATING_SYSTEM → MEMORY → DECISION_LOG → COWORK_SETUP → COMMAND_API → KNOWLEDGE (AI_*) → BUSINESS modules
 
 Conflict hierarchy (highest wins, from §5):
   Safety > IP-protection > Kernel rules > Memory/userPreferences > Session commands > Defaults

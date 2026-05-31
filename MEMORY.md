@@ -37,7 +37,7 @@
 | **Identity** | מי אתה, מה אתה עושה | קובץ זה §2 / `about-me.md` | קבוע |
 | **Preferences** | טון, אורך, פורמט, שפה | קובץ זה §4 / `userPreferences` | קבוע עד שינוי |
 | **Focus & Projects** | על מה עובדים עכשיו | קובץ זה §3 | session → עד `/clear` |
-| **Decisions** | החלטות והנמקות | `DECISION_LOG.md` | קבוע, append-only |
+| **Decisions** | החלטות והנמקות | `DECISION_LOG.md` (🔜 מתוכנן) | קבוע, append-only |
 | **Business facts** | משקיעים, תיקים, מספרים | `INVESTOR_RELATIONS.md`, `CASES/*.md` | קבוע, מתעדכן |
 
 ---
