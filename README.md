@@ -4,11 +4,13 @@
 ## Active Modules
 - [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.0.0 — Kernel: core doctrine, layered architecture, module registry, the activation Boot Block, and the conflict-resolution hierarchy.
 - [`MEMORY.md`](./MEMORY.md) v1.0.0 — Persistent memory layer: schema, identity card, active focus/projects, preferences, and the read/write protocol.
+- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.0.0 — Append-only decision log: the founding OS + ULease decisions with rationale and status.
 - [`COWORK_SETUP.md`](./COWORK_SETUP.md) v1.0.0 — Claude Cowork onboarding: 7-step setup, the Global Instructions golden tip, context-file map, and OS integration so Claude always loads your context first.
 - [`COMMAND_API.md`](./COMMAND_API.md) v1.1.0 — CLAUDE Command API: 89 slash commands, composition operators, a prompting-frameworks library, and drop-in system prompt for the Claude Operating System.
 - [`AI_SKILL_MAP.md`](./AI_SKILL_MAP.md) v1.0.0 — The AI Skill Map: the four-stage journey (Tools → Workflows → Agentic → Architect), real-world applications, and where ULease sits on the map.
 - [`AI_PROGRESSION_PLAN.md`](./AI_PROGRESSION_PLAN.md) v1.0.0 — Personal progression plan along the Skill Map: learn-vs-delegate, a ULease-aligned timeline, a 90-day launch plan, and level-up gates.
 - [`AI_LEARNING_RESOURCES.md`](./AI_LEARNING_RESOURCES.md) v1.0.0 — AI learning curriculum mapped to the Skill Map: resources per stage, anchored on IBM's Agentic AI & RAG (Coursera), with a personal learn-vs-delegate path.
+- [`AI_7_SKILLS.md`](./AI_7_SKILLS.md) v1.0.0 — The 7 skills to master AI in 2026, mapped to the modules already live in this OS.
 - [`INVESTOR_RELATIONS.md`](./INVESTOR_RELATIONS.md) v1.0.0 — Investor relations: company, cap table, the ₪150K raise, forecast summary, and investor tracker.
 - [`CASES/ULEASE.md`](./CASES/ULEASE.md) v1.0.0 — ULease 🎯 Leasing.co.il business case: three-sided marketplace model + full monthly financial forecast (Jun 2026 → Dec 2027), with the reproducible model in `CASES/ULEASE_FORECAST.py`.
 - [`CASES/ULEASE_SPEC.md`](./CASES/ULEASE_SPEC.md) v1.0.0 — ULease end-to-end product & system spec: actors, architecture, the Ultra·Master·Max multi-agent engine, data model, integrations, and phased roadmap.
@@ -17,3 +19,6 @@
 - [`CASES/ULEASE_HIRING.md`](./CASES/ULEASE_HIRING.md) v1.0.0 — ULease hiring kit: founding Tech Lead role (job description, ready-to-post ad, tailored interview questions, and hiring process).
 - [`CASES/ULEASE_IMPORTER_PLAYBOOK.md`](./CASES/ULEASE_IMPORTER_PLAYBOOK.md) v1.0.0 — Importer negotiation playbook: pain map, advantages, "unprecedented service", a ready pitch script, objection handling, and a no-risk pilot offer.
 - [`CASES/ULEASE_LEASING_PLAYBOOK.md`](./CASES/ULEASE_LEASING_PLAYBOOK.md) v1.0.0 — Playbook for parallel importers (reach / FX / trust) and leasing companies (two-way: fleet disposal + bulk sourcing via second-price auction).
+- [`CASES/ULEASE_FINANCE_INSURANCE.md`](./CASES/ULEASE_FINANCE_INSURANCE.md) v1.0.0 — Finance/insurance partners + end-to-end digital underwriting: KYC, multi-lender routing, Big Five matching, revenue model, and Israeli licensing flags.
+- [`CASES/ULEASE_OUTREACH_SCRIPTS.md`](./CASES/ULEASE_OUTREACH_SCRIPTS.md) v1.0.0 — Ready outreach scripts (call/email/WhatsApp) for all four supply segments, plus follow-ups.
+- [`CASES/ULEASE_OUTBOUND_ENGINE.md`](./CASES/ULEASE_OUTBOUND_ENGINE.md) v1.0.0 — Supply-acquisition outbound engine blueprint (n8n + Claude): 8 layers, Haiku/Sonnet roles, scripts integration, and KPIs.
