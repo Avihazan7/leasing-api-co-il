@@ -4,7 +4,7 @@
 **Version:** 1.0.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — איפיון (Product & System Spec), נספח ל-`CASES/ULEASE.md`.
-**Integrates with:** `CASES/ULEASE.md`, `INVESTOR_RELATIONS.md`, `OPERATING_SYSTEM.md`, `MEMORY.md`
+**Integrates with:** `CASES/ULEASE.md`, `CASES/ULEASE_METHODOLOGY.md`, `INVESTOR_RELATIONS.md`, `OPERATING_SYSTEM.md`, `MEMORY.md`
 **Confidentiality:** מנגנוני **Deal Score**, **Match** ו**תמחור** הם IP ליבה (§6). מסומן בהתאם.
 
 ---
