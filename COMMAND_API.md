@@ -4,7 +4,7 @@
 **Version:** 1.0.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Drop-in. Add to OS context to activate.
-**Integrates with:** `CLAUDE.md`, `MEMORY.md`, `OPERATING_SYSTEM.md`, `AGENT_PIPELINE.md`, `DECISION_LOG.md`, `AGENTIC_SYSTEM.md`
+**Integrates with:** `CLAUDE.md`, `OPERATING_SYSTEM.md`, `MEMORY.md`, `COWORK_SETUP.md`, `INVESTOR_RELATIONS.md`, `CASES/*.md`
 
 ---
 
@@ -738,13 +738,10 @@ Claude OS Root/
 ├── CLAUDE.md                  ← נקודת כניסה ראשית
 ├── OPERATING_SYSTEM.md        ← הגדרות מערכת
 ├── MEMORY.md                  ← זיכרון נמשך
+├── COWORK_SETUP.md            ← הקשר / אונבורדינג
 ├── COMMAND_API.md             ← ← זה. המסמך הזה.
-├── AGENT_PIPELINE.md
-├── DECISION_LOG.md
-├── AGENTIC_SYSTEM.md
-├── INVESTOR_RELATIONS.md
-└── CASES/
-    ├── Kapsula-CASE.md
+├── INVESTOR_RELATIONS.md      ← 🔜 מתוכנן (BUSINESS)
+└── CASES/                     ← 🔜 מתוכנן (BUSINESS)
     └── …
 ```
 
@@ -754,15 +751,16 @@ Claude OS Root/
 
 ```markdown
 ## Active Modules
-- COMMAND_API.md v1.0 — 89 slash commands, composition, system prompt loaded
+- COMMAND_API.md v1.0.0 — 89 slash commands, composition, system prompt loaded
 - (other modules…)
 
 ## Module Load Order
 1. OPERATING_SYSTEM.md
 2. MEMORY.md
-3. COMMAND_API.md           ← לפני הקטגוריות העסקיות
-4. INVESTOR_RELATIONS.md
-5. CASES/*.md
+3. COWORK_SETUP.md
+4. COMMAND_API.md           ← לפני הקטגוריות העסקיות
+5. INVESTOR_RELATIONS.md
+6. CASES/*.md
 ```
 
 ### 8.3 כללי הכרעה במצב התנגשות
