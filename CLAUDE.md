@@ -10,6 +10,7 @@
 - `INVESTOR_RELATIONS.md` v1.0.0 — IR: חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים.
 - `CASES/ULEASE.md` v1.0.0 — תיק ULease 🎯 Leasing.co.il: מודל Marketplace תלת-צדדי + תחזית פיננסית (יוני 26 → דצמ' 27).
 - `CASES/ULEASE_SPEC.md` v1.0.0 — איפיון מוצר ומערכת מקצה-לקצה: שחקנים, ארכיטקטורה, Multi-agent (Ultra·Master·Max), מודל נתונים, אינטגרציות ו-roadmap.
+- `CASES/ULEASE_DECK.md` v1.0.0 — מצגת פיץ' (13 שקפים): Marp markdown + HTML עצמאי, נוצר ע"י `CASES/ULEASE_DECK.py`.
 
 ## Module Load Order
 1. `OPERATING_SYSTEM.md`
