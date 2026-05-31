@@ -8,6 +8,7 @@
 - `DECISION_LOG.md` v1.0.0 — יומן החלטות append-only: 12 החלטות מכוננות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.0.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר ואינטגרציה עם ה-OS.
 - `COMMAND_API.md` v1.1.0 — 89 slash commands, composition operators, prompting-frameworks library, drop-in system prompt loaded.
+- `marketing-strategy-framework.md` v1.0.0 — Business: מסגרת 10 פרומפטים לבניית אסטרטגיית שיווק מלאה (פסיכולוגיה → תוכנית עמוד).
 - `AI_SKILL_MAP.md` v1.0.0 — מפת מיומנויות AI: 4 שלבים (Tools → Workflows → Agentic → Architect), יישומים, ומיקום ULease על המפה.
 - `AI_PROGRESSION_PLAN.md` v1.0.0 — תוכנית התקדמות אישית על המפה: Learn-vs-Delegate, ציר זמן צמוד ל-ULease, תוכנית 90 יום ושערי-מעבר.
 - `AI_LEARNING_RESOURCES.md` v1.0.0 — קוריקולום AI לפי המפה: משאבים לכל שלב, עוגן IBM Agentic AI & RAG (Coursera), ומסלול אישי.
@@ -30,10 +31,13 @@
 ## Module Load Order
 1. `OPERATING_SYSTEM.md`
 2. `MEMORY.md`
-3. `COWORK_SETUP.md`          ← חיבור התיקייה וטעינת ההקשר (אונבורדינג)
-4. `COMMAND_API.md`           ← לפני הקטגוריות העסקיות
-5. `INVESTOR_RELATIONS.md`    ← שכבת עסק: משקיעים וגיוס
-6. `CASES/*.md`               ← תיקים פעילים (ULease 🎯)
+3. `DECISION_LOG.md`          ← יומן החלטות (Memory)
+4. `COWORK_SETUP.md`          ← חיבור התיקייה וטעינת ההקשר (אונבורדינג)
+5. `COMMAND_API.md`           ← לפני הקטגוריות העסקיות
+6. `marketing-strategy-framework.md`  ← Business: אסטרטגיית שיווק
+7. `AI_*` (SKILL_MAP · PROGRESSION_PLAN · LEARNING_RESOURCES · 7_SKILLS · SKILLS_ACQUISITION)  ← Knowledge (on-demand)
+8. `INVESTOR_RELATIONS.md`    ← שכבת עסק: משקיעים וגיוס
+9. `CASES/*.md`               ← תיקים פעילים (ULease 🎯)
 
 ## Activation
 כדי להפעיל את ה-Command API, טען את בלוק ה-System Prompt מסעיף 8 ב-[`COMMAND_API.md`](./COMMAND_API.md)

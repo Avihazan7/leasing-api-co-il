@@ -7,6 +7,7 @@
 - [`DECISION_LOG.md`](./DECISION_LOG.md) v1.0.0 — Append-only decision log: the founding OS + ULease decisions with rationale and status.
 - [`COWORK_SETUP.md`](./COWORK_SETUP.md) v1.0.0 — Claude Cowork onboarding: 7-step setup, the Global Instructions golden tip, context-file map, and OS integration so Claude always loads your context first.
 - [`COMMAND_API.md`](./COMMAND_API.md) v1.1.0 — CLAUDE Command API: 89 slash commands, composition operators, a prompting-frameworks library, and drop-in system prompt for the Claude Operating System.
+- [`marketing-strategy-framework.md`](./marketing-strategy-framework.md) v1.0.0 — Business layer: a 10-prompt framework for building a full marketing strategy, from customer psychology to a one-page plan.
 - [`AI_SKILL_MAP.md`](./AI_SKILL_MAP.md) v1.0.0 — The AI Skill Map: the four-stage journey (Tools → Workflows → Agentic → Architect), real-world applications, and where ULease sits on the map.
 - [`AI_PROGRESSION_PLAN.md`](./AI_PROGRESSION_PLAN.md) v1.0.0 — Personal progression plan along the Skill Map: learn-vs-delegate, a ULease-aligned timeline, a 90-day launch plan, and level-up gates.
 - [`AI_LEARNING_RESOURCES.md`](./AI_LEARNING_RESOURCES.md) v1.0.0 — AI learning curriculum mapped to the Skill Map: resources per stage, anchored on IBM's Agentic AI & RAG (Coursera), with a personal learn-vs-delegate path.
