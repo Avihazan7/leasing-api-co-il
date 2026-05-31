@@ -124,7 +124,7 @@ SUPPLY  →   │  INGESTION APIs  (יבואן · ליסינג · מימון)   
 | שכבה | תפקיד | סוכנים לדוגמה |
 |------|--------|----------------|
 | **🛰️ Ultra** | **Orchestrator** — מקבל event, מנהל state של העסקה מקצה-לקצה, מנתב למומחים | Deal Orchestrator, Routing |
-| **🧠 Master** | **Domain Masters** — מומחי-תחום שמחליטים | Pricing/Margin, Match, Financing, Compliance, Content/Marketing |
+| **🧠 Master** | **Domain Masters** — מומחי-תחום שמחליטים | Pricing/Margin, Match, **Negotiation**, Financing, Compliance, Content/Marketing |
 | **⚙️ Max** | **Execution** — מבצעים פעולות בעולם | Offer-Builder, Contract/e-Sign, Financing-Submit, Inventory-Sync, Billing |
 | **🛡️ Guardian** | **Safety/IP** — אכיפת מדיניות, חיסיון IP, audit | Compliance Guard |
 
