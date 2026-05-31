@@ -17,3 +17,4 @@
 - [`CASES/ULEASE_HIRING.md`](./CASES/ULEASE_HIRING.md) v1.0.0 — ULease hiring kit: founding Tech Lead role (job description, ready-to-post ad, tailored interview questions, and hiring process).
 - [`CASES/ULEASE_IMPORTER_PLAYBOOK.md`](./CASES/ULEASE_IMPORTER_PLAYBOOK.md) v1.0.0 — Importer negotiation playbook: pain map, advantages, "unprecedented service", a ready pitch script, objection handling, and a no-risk pilot offer.
 - [`CASES/ULEASE_LEASING_PLAYBOOK.md`](./CASES/ULEASE_LEASING_PLAYBOOK.md) v1.0.0 — Playbook for parallel importers (reach / FX / trust) and leasing companies (two-way: fleet disposal + bulk sourcing via second-price auction).
+- [`CASES/ULEASE_FINANCE_INSURANCE.md`](./CASES/ULEASE_FINANCE_INSURANCE.md) v1.0.0 — Finance/insurance partners + end-to-end digital underwriting: KYC, multi-lender routing, Big Five matching, revenue model, and Israeli licensing flags.
