@@ -1,7 +1,7 @@
 # AGENT_BLUEPRINT.md — מ-Skill ל-Agent: דוקטרינת ה-System-First
 
 **Module:** `AGENT_BLUEPRINT.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Doctrine. הגשר בין ה-Docs OS ל-Agent Runtime.
 **Integrates with:** `CLAUDE.md`, `COMMAND_API.md`, `DEV_ENVIRONMENTS.md`, `LAUNCH.md`, `stage-a/`
@@ -179,11 +179,82 @@ agent = כל ה-8.**
 
 ---
 
+## 9. Orchestration Patterns — בחירת ה-topology
+
+מודול 6 (`§ 1`) אומר *לבנות* orchestration. זה לא מספיק. צריך גם **לבחור צורה**.
+9 ה-patterns המוכרים ב-2026 (מקור: Anthropic + רכש קהילה), עם מיפוי ישיר ל-ULease.
+
+### 9.1 הקטלוג
+
+| # | Pattern | מה זה | אצלנו |
+|---|---------|--------|--------|
+| 1 | **Prompt Chaining** | step→step→step, כל קריאה מקבלת פלט מהקודמת | `/deal-quote` (gather→price→validate→format) |
+| 2 | **Parallelization** | N קריאות במקביל, אגרגטור מאחד | `/competitor-scan` (N מתחרים) |
+| 3 | **Orchestrator-Worker** | Central LLM מפרק דינמית ושולח ל-workers, Synthesizer מאחד | `/board-deck` (research + writing + visuals) |
+| 4 | **Evaluator-Optimizer** | Generator→Evaluator→Generator עד אישור (חד-פעמי לרוב) | `/proofread`, `/improve` |
+| 5 | **Router** | Classifier מפנה ל-pipeline ייעודי | Customer support triage, MAD (Multi-Agent Debate) |
+| 6 | **Autonomous Workflow** | LLM פועל עם environment, feedback loop | Computer Use — QA חי, מערכות legacy בלי API |
+| 7 | **Reflexion** | Responder→Tools→Revisor, **n-times** עד שמספיק טוב | `/code-review ultra`, `/security-review` |
+| 8 | **ReWOO** | Planner מגדיר את **כל** המשימות *לפני* הרצה; חוסך LLM calls | `/research`, `/fact-check` ארוכים |
+| 9 | **Plan and Execute** | Planner→Tasks→Single Task Agents→**Replan** דינמי | **`stage-a/` = זה.** Stage-B = + Replan loop |
+
+### 9.2 ULease Skills Map — נכון ל-v1.1.0
+
+| Skill | Pattern | למה דווקא זה |
+|--------|---------|---------------|
+| `/deal-quote` | Chaining (1) | שלבים קבועים, סדר חשוב |
+| `/board-deck` | Orchestrator-Worker (3) | סוכנים שונים (R+W+V), הרכבה דינמית |
+| `/competitor-scan` | Parallelization (2) | אותו flow על N מטרות |
+| `/fleet-report` | Chaining (1) + Tools | ETL ליניארי + DB read |
+| `/code-review` (ultra) | **Reflexion (7)** | loop של ביקורת-תיקון, לא חד-פעמי |
+| `/security-review` | Reflexion (7) | אותה סיבה — n-iterations עם tools |
+| `/proofread`, `/improve` | Evaluator-Optimizer (4) | תיקון חד-פעמי, בלי tools |
+| `/research`, `/fact-check` | ReWOO (8) | תכנון כולל לפני exec, חוסך עלות |
+| `/deal-quote-batch` (עתידי) | Plan and Execute (9) | מורכב, צריך Replan דינמי |
+| Customer FAQ Bot | Router (5) | classify → pipeline ייעודי |
+| Fleet emergency response (עתידי) | Autonomous (6) | sensor input, real-time decisions |
+
+### 9.3 stage-a — הזיהוי
+
+`stage-a/manager.js` + `worker-summarizer.js` = **Plan and Execute (pattern #9)** —
+לא "manager+worker גנרי", אלא pattern מוכר עם use cases מוצהרים: **"Business Process
+Automation · Data Pipeline Orchestration"**. אלה בדיוק שתי הקטגוריות שמתארות את
+ULease. זו לא תאוריה — זו אקסטרנליזציה של החלטה ארכיטקטונית שכבר נכונה.
+
+### 9.4 Stage-B — הגדרה חדה (עדכון § 7)
+
+Roadmap אמר "מנהל + N עובדים מקבילים". ההגדרה החדה:
+
+> **Stage-B = Plan and Execute + Replan loop**
+
+המנהל לא רק מפזר ל-N עובדים — הוא **בודק אם התוכנית עדיין תקפה** אחרי כל step,
+ומוציא Replan כשהקרקע השתנתה. זה ההבדל בין pattern #9 (היעד שלנו) ל-pattern #8
+(ReWOO, שאין לו replan).
+
+### 9.5 כלל בחירה
+
+```
+משימה ליניארית קבועה?      → Chaining (1)
+משימה זהה על N מטרות?      → Parallelization (2)
+משימה תלוית-סיווג?         → Router (5)
+משימה דורשת agents שונים?  → Orchestrator-Worker (3)
+משימה דורשת iteration?     → Evaluator (4) חד-פעמי / Reflexion (7) n-פעמי
+משימה דורשת תכנון מוקדם?   → ReWOO (8) קבוע / Plan&Execute (9) דינמי
+משימה תלוית-environment?   → Autonomous (6)
+משימה פשוטה?              → Skill בלבד — לא agent. חזור ל-COMMAND_API.
+```
+
+**הכלל הראשון:** אם Skill מספיק, אל תבנה agent. agent מצדיק את עצמו רק כשמודול 6
+(orchestration) באמת נדרש.
+
+---
+
 ## גרסאות
 
 | גרסה | תאריך | שינוי |
 |------|--------|-------|
 | 1.0.0 | 2026-05-31 | Initial — 8-module doctrine, coverage map, stage-a bridge, evals layer |
+| 1.1.0 | 2026-05-31 | + § 9 Orchestration Patterns — 9 patterns, ULease Skills map, stage-a קלסיפיקציה (Plan & Execute), Stage-B חדד (= P&E + Replan) |
 
 ---
 
