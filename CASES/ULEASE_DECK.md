@@ -5,9 +5,8 @@ style: |
   section { direction: rtl; text-align: right; font-family: Arial, "Helvetica Neue", sans-serif; }
   h1, h2 { color: #c0532b; }
   strong { color: #c0532b; }
-  section::after { content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total); }
 ---
-<!-- Module: CASES/ULEASE_DECK.md | Version: 1.0.0 | Author: Avraham Bar Yochai Chazan — Claude OS | Status: Active (Pitch Deck, 13 slides) -->
+<!-- Module: CASES/ULEASE_DECK.md | Version: 1.1.0 | Author: Avraham Bar Yochai Chazan — Claude OS | Status: Active (Pitch Deck, 13 slides) -->
 
 
 ---
