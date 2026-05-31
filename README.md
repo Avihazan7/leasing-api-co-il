@@ -23,3 +23,5 @@
 - [`CASES/ULEASE_FINANCE_INSURANCE.md`](./CASES/ULEASE_FINANCE_INSURANCE.md) v1.0.0 — Finance/insurance partners + end-to-end digital underwriting: KYC, multi-lender routing, Big Five matching, revenue model, and Israeli licensing flags.
 - [`CASES/ULEASE_OUTREACH_SCRIPTS.md`](./CASES/ULEASE_OUTREACH_SCRIPTS.md) v1.0.0 — Ready outreach scripts (call/email/WhatsApp) for all four supply segments, plus follow-ups.
 - [`CASES/ULEASE_OUTBOUND_ENGINE.md`](./CASES/ULEASE_OUTBOUND_ENGINE.md) v1.0.0 — Supply-acquisition outbound engine blueprint (n8n + Claude): 8 layers, Haiku/Sonnet roles, scripts integration, and KPIs.
+- [`CASES/ULEASE_TECH_ONBOARDING.md`](./CASES/ULEASE_TECH_ONBOARDING.md) v1.0.0 — Tech Lead onboarding: day 0/1 access + OS reading list, and a 30·60·90 plan.
+- [`CASES/ULEASE_LAUNCH_CHECKLIST.md`](./CASES/ULEASE_LAUNCH_CHECKLIST.md) v1.0.0 — Two-week launch checklist: domains, legal, MVP, content, outreach, QA gates, and a weekly plan.
