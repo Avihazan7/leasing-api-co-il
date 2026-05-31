@@ -24,6 +24,8 @@
 - `CASES/ULEASE_FINANCE_INSURANCE.md` v1.0.0 — מימון/ביטוח + חיתום דיגיטלי מקצה-לקצה: שותפים, זרימת חיתום, ניתוב רב-מלווה, התאמת Big Five, ודגלי רגולציה.
 - `CASES/ULEASE_OUTREACH_SCRIPTS.md` v1.0.0 — סקריפטים לפנייה (שיחה/מייל/וואטסאפ) ל-4 סגמנטי היצע + follow-up.
 - `CASES/ULEASE_OUTBOUND_ENGINE.md` v1.0.0 — בלופרינט מנוע outbound (n8n + Claude): 8 שכבות לאקווזיציית צד-היצע, מודלי Haiku/Sonnet, KPIs.
+- `CASES/ULEASE_TECH_ONBOARDING.md` v1.0.0 — Onboarding ל-Tech Lead: יום 0/1, רשימת קריאה ב-OS, ותוכנית 30·60·90.
+- `CASES/ULEASE_LAUNCH_CHECKLIST.md` v1.0.0 — צ'קליסט השקה (שבועיים): דומיין, משפטי, MVP, תוכן, outreach, QA ולוח שבועי.
 
 ## Module Load Order
 1. `OPERATING_SYSTEM.md`
