@@ -70,8 +70,8 @@
 | 2 | `MEMORY.md` | Memory | ✅ פעיל | זהות, העדפות, focus/projects |
 | 3 | `COWORK_SETUP.md` | Context | ✅ פעיל | חיבור תיקייה, קבצי md, אונבורדינג |
 | 4 | `COMMAND_API.md` | Interface | ✅ פעיל | 89 פקודות, composition, prompting frameworks, system prompt |
-| 5 | `INVESTOR_RELATIONS.md` | Business | 🔜 מתוכנן | פרופילי משקיעים והיסטוריה |
-| 6 | `CASES/*.md` | Business | 🔜 מתוכנן | תיקים/פרויקטים פעילים |
+| 5 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
+| 6 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית פיננסית, ואיפיון מוצר/מערכת |
 
 > כשמודול עובר מ-🔜 ל-✅ — מעדכנים את הסטטוס כאן ואת ה-Active Modules ב-`CLAUDE.md` ו-`README.md`.
 
