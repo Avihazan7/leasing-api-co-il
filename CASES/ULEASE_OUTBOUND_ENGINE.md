@@ -76,6 +76,21 @@ Sourcing → Quality Gate → Intelligence(score) → Personalization(A/B) → S
 
 ---
 
+## 7. קובץ n8n מוכן לייבוא
+
+- **`CASES/ULEASE_OUTBOUND_ENGINE.n8n.json`** — workflow שלד (21 צמתים) לייבוא ישיר ל-n8n (`Workflows → Import from File`).
+- **`CASES/ULEASE_OUTBOUND_ENGINE_n8n.py`** — הגנרטור (מקור-אמת; משנים → מריצים → ה-JSON מתעדכן).
+
+**לפני הרצה:**
+1. הגדר `ANTHROPIC_API_KEY` ב-Environment של n8n (או החלף ל-Credential ב-3 צמתי Claude).
+2. הוסף מפתחות/endpoints ל-Apollo (שכבה 01) ול-Smartlead (05).
+3. כוונן ICP (צומת 02) וסף ניקוד (צומת 03 — כרגע ≥7).
+4. מודלים: **Haiku 4.5** לניקוד/סיווג · **Sonnet 4.6** לפרסונליזציה.
+
+> השלד מייבא as-is; חבר את ה-APIs האמיתיים שכבה-שכבה והעבר מ-assist לאוטומציה מלאה.
+
+---
+
 ## Document Control
 
 | גרסה | שינוי | תאריך |
