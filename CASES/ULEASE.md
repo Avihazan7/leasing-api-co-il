@@ -4,7 +4,7 @@
 **Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — תיק מרכזי (Business layer, slot 6).
-**Integrates with:** `INVESTOR_RELATIONS.md`, `OPERATING_SYSTEM.md`, `MEMORY.md`, `CASES/ULEASE_FORECAST.py`, `CASES/ULEASE_FORECAST.csv`
+**Integrates with:** `INVESTOR_RELATIONS.md`, `CASES/ULEASE_SPEC.md`, `OPERATING_SYSTEM.md`, `MEMORY.md`, `CASES/ULEASE_FORECAST.py`, `CASES/ULEASE_FORECAST.csv`
 
 ---
 
