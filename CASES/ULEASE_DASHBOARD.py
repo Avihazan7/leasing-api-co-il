@@ -27,6 +27,17 @@ K["margin27"] = K["net27"]/K["rev27"] if K["rev27"] else 0
 mix27 = {"עסקאות":S(y27,"deal_rev"),"לידים":S(y27,"lead_rev"),"מנויים":S(y27,"sub_rev"),"פרסום":S(y27,"ad_rev"),"חיתום":S(y27,"uw_rev")}
 exp27 = {"צוות":S(y27,"team"),"שיווק":S(y27,"marketing"),"תשתית":S(y27,"infra"),"תקורה":S(y27,"gna")}
 
+def _scen(mult):
+    cum=150000.0; r26=r27=n26=n27=last=0.0
+    for i,r in enumerate(rows):
+        dd=r['deal_rev']+r['lead_rev']+r['uw_rev']; ind=r['sub_rev']+r['ad_rev']
+        t=mult*dd+ind; nt=t-r['opex']; cum+=nt; last=t
+        if i<7: r26+=t; n26+=nt
+        else: r27+=t; n27+=nt
+    return dict(r27=r27,n27=n27,cash=cum,rr=last*12)
+SCEN=[("שמרני",0.7,"#9b8557"),("בסיס",1.0,ACCENT),("אופטימי",1.3,GREEN)]
+scen={nm:_scen(mu) for nm,mu,_ in SCEN}
+
 def m(n): return f"₪{n/1e6:.2f}M" if abs(n)>=1e6 else f"₪{n/1e3:.0f}K"
 def f(n): return f"{n:,.0f}"
 
@@ -54,6 +65,16 @@ def svg_stacked(parts, w=960, h=50):
     return f'<svg viewBox="0 0 {w} {h}" width="100%">{"".join(segs)}</svg>'
 
 def legend(parts): return "".join(f'<span class="lg"><i style="background:{PAL[i]}"></i>{l} ({v/sum(parts.values())*100:.0f}%)</span>' for i,(l,v) in enumerate(parts.items()))
+
+def svg_scen(w=960, h=220, pad=34):
+    vals=[scen[nm]['n27'] for nm,_,_ in SCEN]; mx=max(vals) or 1; n=len(SCEN); bw=(w-2*pad)/n; out=[]
+    for i,(nm,mu,c) in enumerate(SCEN):
+        v=scen[nm]['n27']; bh=(h-2*pad)*(v/mx); x=pad+i*bw+bw*0.2; y=h-pad-bh
+        out.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bw*0.6:.1f}" height="{bh:.1f}" rx="3" fill="{c}"/>')
+        out.append(f'<text x="{x+bw*0.3:.1f}" y="{y-7:.1f}" text-anchor="middle" font-size="14" font-weight="700" fill="{INK}">{v/1e6:.1f}M</text>')
+        out.append(f'<text x="{x+bw*0.3:.1f}" y="{h-pad+17:.1f}" text-anchor="middle" font-size="12" fill="{INK}">{nm} ×{mu:g}</text>')
+    base=f'<line x1="{pad}" y1="{h-pad}" x2="{w-pad}" y2="{h-pad}" stroke="#ccc"/>'
+    return f'<svg viewBox="0 0 {w} {h}" width="100%">{base}{"".join(out)}</svg>'
 
 labels=[r["period"] for r in rows]
 cards=[("GMV 2027",m(K["gmv27"]),"מצטבר"),("הכנסה 2027",m(K["rev27"]),f"2026: {m(K['rev26'])}"),
@@ -118,6 +139,13 @@ small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repea
 <div class="panel"><h2>📉 מרווח נטו (%)</h2>{svg_line([(r['net_monthly']/r['total_rev']*100 if r['total_rev'] else 0) for r in rows], color=ACCENT, suffix="%")}
 <small>ממוצע 2027: {K['margin27']*100:.0f}%</small></div>
 </div>
+
+<div class="panel"><h2>🎯 אומדנים — תרחישי קצב עסקאות (±30%)</h2>
+<table><thead><tr><th>תרחיש</th><th>הכנסה 2027</th><th>נטו 2027</th><th>Cash סוף 27</th><th>Run-rate</th></tr></thead><tbody>
+{"".join(f'<tr><td>{nm} (×{mu:g})</td><td>{m(scen[nm]["r27"])}</td><td>{m(scen[nm]["n27"])}</td><td>{m(scen[nm]["cash"])}</td><td>{m(scen[nm]["rr"])}</td></tr>' for nm,mu,_ in SCEN)}
+</tbody></table>
+<div style="margin-top:12px;font-size:.85rem;opacity:.7;margin-bottom:2px">נטו 2027 לפי תרחיש (₪)</div>{svg_scen()}
+<div class="flag">גם בתרחיש <b>השמרני</b> (−30% עסקאות) הפלטפורמה נשארת רווחית מאוד — נטו 2027 ₪11.3M. זה ה-operating leverage. הנחה: הוצאות קבועות; בפועל חלק מהשיווק יגדל עם הנפח.</div></div>
 
 <div class="panel"><h2>✅ צ'קליסט השקה — מעקב חי</h2>
 <div class="prog"><div id="clbar"></div></div><div id="clpct" style="font-weight:700;color:{ACCENT}">0%</div>
