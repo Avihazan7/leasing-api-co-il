@@ -11,6 +11,7 @@
 - `AI_SKILL_MAP.md` v1.0.0 — מפת מיומנויות AI: 4 שלבים (Tools → Workflows → Agentic → Architect), יישומים, ומיקום ULease על המפה.
 - `AI_PROGRESSION_PLAN.md` v1.0.0 — תוכנית התקדמות אישית על המפה: Learn-vs-Delegate, ציר זמן צמוד ל-ULease, תוכנית 90 יום ושערי-מעבר.
 - `AI_LEARNING_RESOURCES.md` v1.0.0 — קוריקולום AI לפי המפה: משאבים לכל שלב, עוגן IBM Agentic AI & RAG (Coursera), ומסלול אישי.
+- `AI_7_SKILLS.md` v1.0.0 — 7 מיומנויות לשליטה ב-AI (2026) + מיפוי ל-OS הקיים (5 מ-7 כבר מיושמים).
 - `INVESTOR_RELATIONS.md` v1.0.0 — IR: חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים.
 - `CASES/ULEASE.md` v1.0.0 — תיק ULease 🎯 Leasing.co.il: מודל Marketplace תלת-צדדי + תחזית פיננסית (יוני 26 → דצמ' 27).
 - `CASES/ULEASE_SPEC.md` v1.0.0 — איפיון מוצר ומערכת מקצה-לקצה: שחקנים, ארכיטקטורה, Multi-agent (Ultra·Master·Max), מודל נתונים, אינטגרציות ו-roadmap.
@@ -21,6 +22,7 @@
 - `CASES/ULEASE_LEASING_PLAYBOOK.md` v1.0.0 — Playbook מו"מ ליבואנים מקבילים (reach/מט"ח/אמון) וחברות ליסינג (disposal דו-כיווני + sourcing במכרז מחיר-שני).
 - `CASES/ULEASE_FINANCE_INSURANCE.md` v1.0.0 — מימון/ביטוח + חיתום דיגיטלי מקצה-לקצה: שותפים, זרימת חיתום, ניתוב רב-מלווה, התאמת Big Five, ודגלי רגולציה.
 - `CASES/ULEASE_OUTREACH_SCRIPTS.md` v1.0.0 — סקריפטים לפנייה (שיחה/מייל/וואטסאפ) ל-4 סגמנטי היצע + follow-up.
+- `CASES/ULEASE_OUTBOUND_ENGINE.md` v1.0.0 — בלופרינט מנוע outbound (n8n + Claude): 8 שכבות לאקווזיציית צד-היצע, מודלי Haiku/Sonnet, KPIs.
 
 ## Module Load Order
 1. `OPERATING_SYSTEM.md`
