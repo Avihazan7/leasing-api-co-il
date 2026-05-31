@@ -5,7 +5,7 @@
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — מודול ידע/רפרנס (Learning layer).
 **Source:** מבוסס על האינפוגרפיקה *"The AI Skill Map"* מאת AI Matt · Next Step Agents.
-**Integrates with:** `COMMAND_API.md`, `CASES/ULEASE_SPEC.md`, `OPERATING_SYSTEM.md`
+**Integrates with:** `AI_PROGRESSION_PLAN.md`, `COMMAND_API.md`, `CASES/ULEASE_SPEC.md`, `OPERATING_SYSTEM.md`
 
 ---
 
@@ -124,6 +124,8 @@
 - [x] שלב 2 — בונה workflows ואוטומציות
 - [x] שלב 3 — מתכנן סוכנים ו-orchestration (ULease)
 - [~] שלב 4 — אסטרטגיה וממשל (בתהליך — תלוי באיש טכנולוגיה)
+
+> 📍 תוכנית מעשית להתקדמות בשלבים (מה ללמוד/להאציל, 90 יום, שערי-מעבר): [`AI_PROGRESSION_PLAN.md`](./AI_PROGRESSION_PLAN.md).
 
 ---
 

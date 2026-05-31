@@ -7,6 +7,7 @@
 - [`COWORK_SETUP.md`](./COWORK_SETUP.md) v1.0.0 — Claude Cowork onboarding: 7-step setup, the Global Instructions golden tip, context-file map, and OS integration so Claude always loads your context first.
 - [`COMMAND_API.md`](./COMMAND_API.md) v1.0.0 — CLAUDE Command API: 89 slash commands, composition operators, and drop-in system prompt for the Claude Operating System.
 - [`AI_SKILL_MAP.md`](./AI_SKILL_MAP.md) v1.0.0 — The AI Skill Map: the four-stage journey (Tools → Workflows → Agentic → Architect), real-world applications, and where ULease sits on the map.
+- [`AI_PROGRESSION_PLAN.md`](./AI_PROGRESSION_PLAN.md) v1.0.0 — Personal progression plan along the Skill Map: learn-vs-delegate, a ULease-aligned timeline, a 90-day launch plan, and level-up gates.
 - [`INVESTOR_RELATIONS.md`](./INVESTOR_RELATIONS.md) v1.0.0 — Investor relations: company, cap table, the ₪150K raise, forecast summary, and investor tracker.
 - [`CASES/ULEASE.md`](./CASES/ULEASE.md) v1.0.0 — ULease 🎯 Leasing.co.il business case: three-sided marketplace model + full monthly financial forecast (Jun 2026 → Dec 2027), with the reproducible model in `CASES/ULEASE_FORECAST.py`.
 - [`CASES/ULEASE_SPEC.md`](./CASES/ULEASE_SPEC.md) v1.0.0 — ULease end-to-end product & system spec: actors, architecture, the Ultra·Master·Max multi-agent engine, data model, integrations, and phased roadmap.
