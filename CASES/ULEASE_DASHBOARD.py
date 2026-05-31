@@ -82,7 +82,7 @@ cards=[("GMV 2027",m(K["gmv27"]),"מצטבר"),("הכנסה 2027",m(K["rev27"]),
        ("Run-rate דצמ' 27",m(K["runrate"]),"שנתי"),("עסקאות 2027",f(K["deals27"]),f"2026: {f(K['deals26'])}"),
        ("מנויים",str(K["subs_end"]),"סוף 2027"),("Cash מצטבר",m(K["cash_end"]),"כולל ₪150K")]
 card_html="".join(f'<div class="card"><div class="cap">{c[0]}</div><div class="big">{c[1]}</div><div class="sub">{c[2]}</div></div>' for c in cards)
-table_rows="".join(f"<tr><td>{r['period']}</td><td>{f(r['deals'])}</td><td>{f(r['total_rev'])}</td><td>{f(r['opex'])}</td><td>{f(r['net_monthly'])}</td><td>{f(r['cum_cash'])}</td></tr>" for r in rows)
+table_rows="".join(f"<tr><td>{r['period']}</td><td>{f(r['deals'])}</td><td>{m(r['total_rev'])}</td><td>{m(r['opex'])}</td><td>{m(r['net_monthly'])}</td><td>{m(r['cum_cash'])}</td></tr>" for r in rows)
 
 CHECKLIST = [("דומיין",["רכישת ULease.co.il","חיבור Leasing.co.il","DNS + SSL + מייל"]),
              ("משפטי",["הקמת חברה","תקנון + מדיניות פרטיות","ייעוץ משפטי לחיתום","עמידה בחוק ספאם"]),
@@ -109,7 +109,8 @@ header h1{{color:{ACCENT};font-size:2rem}} header p{{opacity:.7;margin-top:4px}}
 .panel{{background:{CREAM};border-radius:16px;padding:20px 24px;margin-bottom:16px}}
 .panel h2{{color:{ACCENT};font-size:1.15rem;margin-bottom:12px}}
 .lg{{display:inline-flex;align-items:center;font-size:.82rem;margin-left:12px}} .lg i{{width:12px;height:12px;border-radius:3px;display:inline-block;margin-left:6px}}
-table{{width:100%;border-collapse:collapse;font-size:.88rem}} th,td{{padding:.38rem .6rem;text-align:right;border-bottom:1px solid #ddd}} th{{color:{ACCENT}}}
+.tscroll{{overflow-x:auto;-webkit-overflow-scrolling:touch}}
+table{{width:100%;border-collapse:collapse;font-size:.88rem}} th,td{{padding:.38rem .55rem;text-align:right;border-bottom:1px solid #ddd;white-space:nowrap}} th{{color:{ACCENT}}}
 .two{{display:grid;grid-template-columns:1fr 1fr;gap:16px}}
 ul{{list-style:none}} li{{padding:.22rem 0;padding-right:1.1rem;position:relative;font-size:.9rem}}
 li::before{{content:'';position:absolute;right:0;top:.65em;width:.45rem;height:.45rem;background:{ACCENT};border-radius:50%}}
@@ -118,7 +119,7 @@ li::before{{content:'';position:absolute;right:0;top:.65em;width:.45rem;height:.
 .chk{{display:flex;align-items:center;gap:8px;font-size:.9rem;padding:.18rem 0;cursor:pointer}} .chk input{{width:16px;height:16px;accent-color:{ACCENT}}}
 .clhead{{font-weight:700;color:{ACCENT};margin-top:10px;font-size:.85rem}}
 .prog{{background:#e7e0d3;border-radius:20px;height:20px;overflow:hidden;margin:6px 0 4px}} .prog>div{{background:{ACCENT};height:100%;width:0;transition:width .3s}}
-small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repeat(2,1fr)}}.two{{grid-template-columns:1fr}}}}
+small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repeat(2,1fr)}}.two{{grid-template-columns:1fr}} table{{font-size:.8rem}} th,td{{padding:.3rem .4rem}} header h1{{font-size:1.5rem}}}}
 </style></head><body><div class="wrap">
 
 <header><h1>ULease 🎯 Leasing.co.il — Executive Dashboard</h1>
@@ -141,9 +142,9 @@ small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repea
 </div>
 
 <div class="panel"><h2>🎯 אומדנים — תרחישי קצב עסקאות (±30%)</h2>
-<table><thead><tr><th>תרחיש</th><th>הכנסה 2027</th><th>נטו 2027</th><th>Cash סוף 27</th><th>Run-rate</th></tr></thead><tbody>
+<div class="tscroll"><table><thead><tr><th>תרחיש</th><th>הכנסה 2027</th><th>נטו 2027</th><th>Cash סוף 27</th><th>Run-rate</th></tr></thead><tbody>
 {"".join(f'<tr><td>{nm} (×{mu:g})</td><td>{m(scen[nm]["r27"])}</td><td>{m(scen[nm]["n27"])}</td><td>{m(scen[nm]["cash"])}</td><td>{m(scen[nm]["rr"])}</td></tr>' for nm,mu,_ in SCEN)}
-</tbody></table>
+</tbody></table></div>
 <div style="margin-top:12px;font-size:.85rem;opacity:.7;margin-bottom:2px">נטו 2027 לפי תרחיש (₪)</div>{svg_scen()}
 <div class="flag">גם בתרחיש <b>השמרני</b> (−30% עסקאות) הפלטפורמה נשארת רווחית מאוד — נטו 2027 ₪11.3M. זה ה-operating leverage. הנחה: הוצאות קבועות; בפועל חלק מהשיווק יגדל עם הנפח.</div></div>
 
@@ -162,8 +163,8 @@ small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repea
 </div>
 
 <div class="panel"><h2>🗓️ תחזית חודשית מלאה</h2>
-<table><thead><tr><th>חודש</th><th>עסקאות</th><th>הכנסה ₪</th><th>הוצאות ₪</th><th>נטו ₪</th><th>Cash ₪</th></tr></thead>
-<tbody>{table_rows}</tbody></table></div>
+<div class="tscroll"><table><thead><tr><th>חודש</th><th>עסקאות</th><th>הכנסה</th><th>הוצאות</th><th>נטו</th><th>Cash</th></tr></thead>
+<tbody>{table_rows}</tbody></table></div></div>
 
 <div class="panel"><small>מקור: CASES/ULEASE_FORECAST.csv (Base Case v1.2) · כיול ב-ULEASE_FORECAST.py · ליבה (Deal Score/Match/תמחור) = IP · Claude OS — Avraham Bar Yochai Chazan</small></div>
 
