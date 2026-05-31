@@ -83,17 +83,20 @@ for i,(y,m) in enumerate(months):
     rows.append(dict(period=f"{HEB_MON[m]} {y%100:02d}", y=y, m=m,
         deals=deals[i], leads=leads, subs=subs_total[i], pro=pro_subs[i], promax=promax_subs[i],
         deal_rev=deal_rev, lead_rev=lead_rev, sub_rev=sub_rev, ad_rev=ad_rev, uw_rev=uw_rev,
-        total_rev=total_rev, opex=opex, net=net, cum=cum, gmv=deals[i]*AVG_DEAL_VALUE))
+        total_rev=total_rev, opex=opex, team=team_k[i]*K, marketing=mkt_k[i]*K, infra=infra_k[i]*K, gna=gna_k[i]*K,
+        net=net, cum=cum, gmv=deals[i]*AVG_DEAL_VALUE))
 
 # ---------------- פלט: CSV ----------------
 out_csv = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ULEASE_FORECAST.csv")
 with open(out_csv,"w",newline="",encoding="utf-8-sig") as f:
     w=csv.writer(f)
     w.writerow(["period","deals","leads","subscribers","pro","pro_max",
-                "deal_rev","lead_rev","sub_rev","ad_rev","uw_rev","total_rev","opex","net_monthly","cum_cash","gmv"])
+                "deal_rev","lead_rev","sub_rev","ad_rev","uw_rev","total_rev","opex","net_monthly","cum_cash","gmv",
+                "team","marketing","infra","gna"])
     for r in rows:
         w.writerow([r["period"],r["deals"],r["leads"],r["subs"],r["pro"],r["promax"],
-            r["deal_rev"],r["lead_rev"],r["sub_rev"],r["ad_rev"],r["uw_rev"],r["total_rev"],r["opex"],r["net"],r["cum"],r["gmv"]])
+            r["deal_rev"],r["lead_rev"],r["sub_rev"],r["ad_rev"],r["uw_rev"],r["total_rev"],r["opex"],r["net"],r["cum"],r["gmv"],
+            r["team"],r["marketing"],r["infra"],r["gna"]])
 
 # ---------------- פלט: טבלת Markdown חודשית ----------------
 f = lambda n: f"{n:,.0f}"
