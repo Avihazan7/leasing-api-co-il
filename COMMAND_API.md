@@ -830,6 +830,7 @@ Claude OS Root/
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | Initial 89 commands + composition + system prompt | 2026-05-19 |
+| 1.0.0 | תחזוקת עקביות: יישור הפניות המודולים וסדר הטעינה לקנון (§3) — הסרת מודולי-רפאים, החזרת COWORK_SETUP, v1.0→v1.0.0 | 2026-05-31 |
 
 ### 10.2 Backward Compatibility
 
@@ -921,11 +922,11 @@ interface CommandContract {
 
 | Section | Owner | Last reviewed |
 |---------|--------|---------------|
-| Architecture & Grammar | OS Architect (you) | 2026-05-19 |
-| Command Catalog | this file | 2026-05-19 |
-| System Prompt | this file + userPreferences | 2026-05-19 |
-| Integration | CLAUDE.md (root) | 2026-05-19 |
+| Architecture & Grammar | OS Architect (you) | 2026-05-31 |
+| Command Catalog | this file | 2026-05-31 |
+| System Prompt | this file + userPreferences | 2026-05-31 |
+| Integration | CLAUDE.md (root) | 2026-05-31 |
 
 **Confidentiality.** This file is part of the personal Claude Operating System of Avraham Bar Yochai Chazan. Commands referencing internal IP (Deal Score, Match API, legal automation) inherit the confidentiality of those sub-systems.
 
-— *End of COMMAND_API.md v1.0 —*
+— *End of COMMAND_API.md v1.0.0 —*
