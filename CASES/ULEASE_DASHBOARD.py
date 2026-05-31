@@ -51,6 +51,12 @@ TL=[("יוני · שבוע 1","חברה + דומיין + תשתית + ingestion"
     ("חצי-שני יוני 26","🚀 Go-Live — 26 עסקאות"),("Q3–Q4 2026","Scale: מכרז · Pro Max · n8n"),("2027","Architect + צמיחה")]
 tl_html="".join(f'<div class="step"><b>{t}</b>{d}</div>' for t,d in TL)
 
+# מטריקות משקיע (חלקן אומדנים)
+take_blended=K["rev27"]/K["gmv27"] if K["gmv27"] else 0
+mkt27=S(y27,"marketing"); cac=mkt27/deals27i if deals27i else 0
+contrib=4995+990; ltv_pro,ltv_promax=4500*24,7700*24; ltv_cac=contrib/cac if cac else 0
+maxdeals=int(max(r["deals"] for r in rows))
+
 def m(n): return f"₪{n/1e6:.2f}M" if abs(n)>=1e6 else f"₪{n/1e3:.0f}K"
 def f(n): return f"{n:,.0f}"
 
@@ -151,6 +157,50 @@ small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repea
 
 <div class="panel"><h2>📊 Funnel — לידים → עסקאות → מסירות (2027)</h2>{funnel_html()}
 <small style="display:block;margin-top:8px">המרה: לידים→עסקאות ~20% · עסקאות→מסירות ~95%</small></div>
+
+<div class="panel"><h2>💱 Proof of Arbitrage</h2>
+<div class="funnel">
+<div class="seg" style="width:100%;background:#9b8557">מחירון ₪165K</div>
+<div class="seg" style="width:82%;background:#2a6f6b">עלות יבואן (אחרי FX) ₪135K</div>
+<div class="seg" style="width:91%;background:{ACCENT}">עסקה ב-ULease ₪150K</div></div>
+<ul style="margin-top:10px">
+<li><b>מט"ח:</b> USD/ILS 3.60→2.81 (~22% התחזקות שקל) → מרווח יבואן מתרחב</li>
+<li><b>0 ק"מ / גיולים:</b> מלאי תקוע מאמצע 2025 → לחץ למכירה בהנחה</li>
+<li><b>הפער</b> בין מחירון לעלות-יבואן הוא הארביטראז' ש-ULease לוכדת דיגיטלית</li></ul>
+<div class="flag">נתונים להמחשה — לאמת מול עסקאות אמת.</div></div>
+
+<div class="panel"><h2>📐 Unit Economics</h2>
+<div class="out">
+<div><small>Take Rate (עסקה)</small><b>3.33%</b></div>
+<div><small>Take משוקלל</small><b>{take_blended*100:.1f}%</b></div>
+<div><small>CAC (משוער/עסקה)</small><b>₪{cac:,.0f}</b></div>
+<div><small>תרומה/עסקה</small><b>₪{contrib:,.0f}</b></div>
+<div><small>LTV מנוי (24ח')</small><b>₪{ltv_pro/1000:.0f}K–{ltv_promax/1000:.0f}K</b></div>
+<div><small>LTV/CAC</small><b>~{ltv_cac:.0f}x</b></div></div>
+<div class="flag">CAC = שיווק 2027 ÷ עסקאות (משוער; CAC אמת תלוי במקור הלידים). LTV מנוי לפי 24 ח' (churn 2% → LTV גבוה יותר).</div></div>
+
+<div class="panel"><h2>🌍 TAM / SAM / SOM (אומדן)</h2>
+<div class="funnel">
+<div class="seg" style="width:100%;background:#2a6f6b">TAM · רכב חדש בישראל ~₪38B/שנה</div>
+<div class="seg" style="width:58%;background:{ACCENT}">SAM · פלח דיגיטלי ~₪11B</div>
+<div class="seg" style="width:26%;background:#e0894f">SOM · בר-השגה 18ח' ~₪300M</div></div>
+<div class="flag">אומדנים: ~250K כלי רכב/שנה × ₪150K = TAM · SAM ~30% (0ק"מ/גיולים/דיגיטלי) · SOM ≈ תחזית ה-GMV שלנו. לאמת.</div></div>
+
+<div class="panel"><h2>❤️ Marketplace Health</h2>
+<div class="out">
+<div><small>המרת ליד→עסקה</small><b>20%</b></div>
+<div><small>Take משוקלל</small><b>{take_blended*100:.1f}%</b></div>
+<div><small>ספקים פעילים</small><b>7+</b></div>
+<div><small>עסקאות/חודש (שיא)</small><b>{maxdeals}</b></div>
+<div><small>זמן-לעסקה</small><b>דקות</b></div>
+<div><small>נזילות היצע↔ביקוש</small><b>🟢 בריאה</b></div></div></div>
+
+<div class="panel"><h2>🤖 AI Agent Layer — Ultra · Master · Max</h2><ul>
+<li><b>🛰️ Ultra</b> — Orchestrator: ניתוב event + ניהול state עסקה</li>
+<li><b>🧠 Master</b> — <span class="pill">Match</span><span class="pill">Pricing</span><span class="pill">Negotiation</span><span class="pill">Financing</span><span class="pill">Compliance</span></li>
+<li><b>⚙️ Max</b> — <span class="pill">Offer</span><span class="pill">Contract/e-Sign</span><span class="pill">Financing-Submit</span><span class="pill">Billing</span></li>
+<li><b>🛡️ Guardian</b> — אבטחה · IP · אתיקה</li></ul>
+<div class="flag">סטטוס: MVP ב-assist (אדם מאשר) → V1 אוטומציה מלאה. פירוט: ULEASE_SPEC.md §7.</div></div>
 
 <div class="panel"><h2>💸 הוצאות חודשיות (₪) + תמהיל 2027</h2>{svg_bars([r['opex'] for r in rows], labels, color="#7a5c3e")}
 <div style="margin-top:10px">{svg_stacked(exp27)}</div><div style="margin-top:8px">{legend(exp27)}</div></div>
