@@ -5,6 +5,7 @@
 ## Active Modules
 - `OPERATING_SYSTEM.md` v1.0.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים, Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.0.0 — שכבת זיכרון: schema, כרטיס זהות, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
+- `DECISION_LOG.md` v1.0.0 — יומן החלטות append-only: 12 החלטות מכוננות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.0.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר ואינטגרציה עם ה-OS.
 - `COMMAND_API.md` v1.1.0 — 89 slash commands, composition operators, prompting-frameworks library, drop-in system prompt loaded.
 - `AI_SKILL_MAP.md` v1.0.0 — מפת מיומנויות AI: 4 שלבים (Tools → Workflows → Agentic → Architect), יישומים, ומיקום ULease על המפה.
@@ -19,6 +20,7 @@
 - `CASES/ULEASE_IMPORTER_PLAYBOOK.md` v1.0.0 — Playbook מו"מ מול יבואני רכב: כאב, יתרונות, "שירות שלא היה כמותו", סקריפט, התנגדויות ופיילוט.
 - `CASES/ULEASE_LEASING_PLAYBOOK.md` v1.0.0 — Playbook מו"מ ליבואנים מקבילים (reach/מט"ח/אמון) וחברות ליסינג (disposal דו-כיווני + sourcing במכרז מחיר-שני).
 - `CASES/ULEASE_FINANCE_INSURANCE.md` v1.0.0 — מימון/ביטוח + חיתום דיגיטלי מקצה-לקצה: שותפים, זרימת חיתום, ניתוב רב-מלווה, התאמת Big Five, ודגלי רגולציה.
+- `CASES/ULEASE_OUTREACH_SCRIPTS.md` v1.0.0 — סקריפטים לפנייה (שיחה/מייל/וואטסאפ) ל-4 סגמנטי היצע + follow-up.
 
 ## Module Load Order
 1. `OPERATING_SYSTEM.md`

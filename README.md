@@ -4,6 +4,7 @@
 ## Active Modules
 - [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.0.0 — Kernel: core doctrine, layered architecture, module registry, the activation Boot Block, and the conflict-resolution hierarchy.
 - [`MEMORY.md`](./MEMORY.md) v1.0.0 — Persistent memory layer: schema, identity card, active focus/projects, preferences, and the read/write protocol.
+- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.0.0 — Append-only decision log: the founding OS + ULease decisions with rationale and status.
 - [`COWORK_SETUP.md`](./COWORK_SETUP.md) v1.0.0 — Claude Cowork onboarding: 7-step setup, the Global Instructions golden tip, context-file map, and OS integration so Claude always loads your context first.
 - [`COMMAND_API.md`](./COMMAND_API.md) v1.1.0 — CLAUDE Command API: 89 slash commands, composition operators, a prompting-frameworks library, and drop-in system prompt for the Claude Operating System.
 - [`AI_SKILL_MAP.md`](./AI_SKILL_MAP.md) v1.0.0 — The AI Skill Map: the four-stage journey (Tools → Workflows → Agentic → Architect), real-world applications, and where ULease sits on the map.
@@ -18,3 +19,4 @@
 - [`CASES/ULEASE_IMPORTER_PLAYBOOK.md`](./CASES/ULEASE_IMPORTER_PLAYBOOK.md) v1.0.0 — Importer negotiation playbook: pain map, advantages, "unprecedented service", a ready pitch script, objection handling, and a no-risk pilot offer.
 - [`CASES/ULEASE_LEASING_PLAYBOOK.md`](./CASES/ULEASE_LEASING_PLAYBOOK.md) v1.0.0 — Playbook for parallel importers (reach / FX / trust) and leasing companies (two-way: fleet disposal + bulk sourcing via second-price auction).
 - [`CASES/ULEASE_FINANCE_INSURANCE.md`](./CASES/ULEASE_FINANCE_INSURANCE.md) v1.0.0 — Finance/insurance partners + end-to-end digital underwriting: KYC, multi-lender routing, Big Five matching, revenue model, and Israeli licensing flags.
+- [`CASES/ULEASE_OUTREACH_SCRIPTS.md`](./CASES/ULEASE_OUTREACH_SCRIPTS.md) v1.0.0 — Ready outreach scripts (call/email/WhatsApp) for all four supply segments, plus follow-ups.
