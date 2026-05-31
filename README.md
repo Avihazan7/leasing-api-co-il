@@ -15,3 +15,4 @@
 - [`CASES/ULEASE_METHODOLOGY.md`](./CASES/ULEASE_METHODOLOGY.md) v1.1.0 — ULease methodological architecture: Big Five (OCEAN) buyer-vehicle matching, Feuerstein instrumental enrichment, game-theory pricing, and interest-based negotiation (BATNA / Win-Win).
 - [`CASES/ULEASE_HIRING.md`](./CASES/ULEASE_HIRING.md) v1.0.0 — ULease hiring kit: founding Tech Lead role (job description, ready-to-post ad, tailored interview questions, and hiring process).
 - [`CASES/ULEASE_IMPORTER_PLAYBOOK.md`](./CASES/ULEASE_IMPORTER_PLAYBOOK.md) v1.0.0 — Importer negotiation playbook: pain map, advantages, "unprecedented service", a ready pitch script, objection handling, and a no-risk pilot offer.
+- [`CASES/ULEASE_LEASING_PLAYBOOK.md`](./CASES/ULEASE_LEASING_PLAYBOOK.md) v1.0.0 — Playbook for parallel importers (reach / FX / trust) and leasing companies (two-way: fleet disposal + bulk sourcing via second-price auction).
