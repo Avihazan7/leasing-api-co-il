@@ -4,7 +4,7 @@
 **Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Drop-in. Add to OS context to activate.
-**Integrates with:** `CLAUDE.md`, `MEMORY.md`, `OPERATING_SYSTEM.md`, `AGENT_PIPELINE.md`, `DECISION_LOG.md`, `AGENTIC_SYSTEM.md`
+**Integrates with:** כל המודולים הרשומים ב-`OPERATING_SYSTEM.md` §3 (קרנל, זיכרון, הקשר, Knowledge ו-Business).
 
 ---
 
@@ -822,40 +822,45 @@ and offer: "Is this a /command, or literal text?"
 
 ## 9. אינטגרציה עם ה-Claude OS שלך
 
-### 8.1 מיקום הקובץ
+### 9.1 מיקום הקובץ
+> מבנה מתומצת. מקור-האמת המלא לרישום ולסדר הטעינה הוא `OPERATING_SYSTEM.md` §3.
 ```
 Claude OS Root/
 ├── CLAUDE.md                  ← נקודת כניסה ראשית
-├── OPERATING_SYSTEM.md        ← הגדרות מערכת
+├── OPERATING_SYSTEM.md        ← קרנל (חוקים, §3 רישום)
 ├── MEMORY.md                  ← זיכרון נמשך
+├── DECISION_LOG.md            ← יומן החלטות
+├── COWORK_SETUP.md            ← הקשר / אונבורדינג
 ├── COMMAND_API.md             ← ← זה. המסמך הזה.
-├── AGENT_PIPELINE.md
-├── DECISION_LOG.md
-├── AGENTIC_SYSTEM.md
+├── marketing-strategy-framework.md   ← Business: אסטרטגיית שיווק
+├── AI_SKILL_MAP.md · AI_PROGRESSION_PLAN.md · AI_LEARNING_RESOURCES.md · AI_7_SKILLS.md · AI_SKILLS_ACQUISITION.md   ← Knowledge
 ├── INVESTOR_RELATIONS.md
 └── CASES/
-    ├── Kapsula-CASE.md
-    └── …
+    └── ULEASE*.md             ← תיק ULease (12 קבצים)
 ```
 
-### 8.2 רישום ב-CLAUDE.md
+### 9.2 רישום ב-CLAUDE.md
 
-הוסף את השורות הבאות לראש `CLAUDE.md`:
+הסדר הקנוני המלא מוגדר ב-`OPERATING_SYSTEM.md` §3 ומשתקף ב-`CLAUDE.md`. תמצית:
 
 ```markdown
 ## Active Modules
-- COMMAND_API.md v1.0 — 89 slash commands, composition, system prompt loaded
-- (other modules…)
+- COMMAND_API.md v1.1.0 — 89 slash commands, composition, prompting frameworks, system prompt loaded
+- (כל שאר המודולים — ראו §3)
 
-## Module Load Order
+## Module Load Order (canonical, §3)
 1. OPERATING_SYSTEM.md
 2. MEMORY.md
-3. COMMAND_API.md           ← לפני הקטגוריות העסקיות
-4. INVESTOR_RELATIONS.md
-5. CASES/*.md
+3. DECISION_LOG.md
+4. COWORK_SETUP.md
+5. COMMAND_API.md           ← לפני הקטגוריות העסקיות
+6. marketing-strategy-framework.md
+7. AI_* (Knowledge, on-demand)
+8. INVESTOR_RELATIONS.md
+9. CASES/*.md
 ```
 
-### 8.3 כללי הכרעה במצב התנגשות
+### 9.3 כללי הכרעה במצב התנגשות
 
 | התנגשות | כלל |
 |---------|------|
@@ -865,7 +870,7 @@ Claude OS Root/
 | `/focus` ↔ בקשה זמנית | Focus מנצח אבל Claude מציע "side quest" ב-1–2 משפטים. |
 | `/memory` ↔ זיכרון קיים | Claude מבקש אישור לפני שמשנה memory edits קיימים. |
 
-### 8.4 logging אופציונלי
+### 9.4 logging אופציונלי
 
 ב-`DECISION_LOG.md`, מומלץ לשמור log של commands משמעותיים:
 
@@ -882,7 +887,7 @@ Claude OS Root/
 
 אתה כבר בנית 18,000+ שורות OS — תרצה להוסיף פקודות משלך.
 
-### 9.1 תבנית להוספת פקודה
+### 10.1 תבנית להוספת פקודה
 
 ```markdown
 #### `/yourcommand`
@@ -896,7 +901,7 @@ Claude OS Root/
 **Example:**
 ```
 
-### 9.2 המלצות לפקודות אישיות עבורך (Avraham OS)
+### 10.2 המלצות לפקודות אישיות עבורך (Avraham OS)
 
 מבוסס על מבנה השימושים שלך, הפקודות הבאות יוסיפו ערך מיידי:
 
@@ -917,19 +922,19 @@ Claude OS Root/
 
 ## 11. גרסאות וחיפוי לאחור
 
-### 10.1 Versioning
+### 11.1 Versioning
 
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | Initial 89 commands + composition + system prompt | 2026-05-19 |
 | 1.1.0 | Prompting Frameworks (§7) — core techniques, advanced strategies, framework→command mapping, key terms | 2026-05-31 |
 
-### 10.2 Backward Compatibility
+### 11.2 Backward Compatibility
 
 - שדרוגי minor (1.x) — לא ישברו פקודות קיימות; רק יוסיפו ויחדדו
 - שדרוגי major (2.0) — יחייבו עדכון system prompt; הודעת deprecation 30 יום מראש
 
-### 10.3 Roadmap
+### 11.3 Roadmap
 
 | גרסה | תוכן | יעד |
 |-------|--------|-----|
@@ -942,7 +947,7 @@ Claude OS Root/
 
 ## 12. נספח
 
-### 11.1 כללי הכרעה ב-edge cases
+### 12.1 כללי הכרעה ב-edge cases
 
 **מה אם המשתמש כתב `/focus` כדבר אחרון בהודעה?**
 → Claude מתייחס לזה כאופציה לפתוח שיחה חדשה: "תרצה לקבוע focus? על מה?"
@@ -961,7 +966,7 @@ Claude OS Root/
 **מה אם פקודה דורשת כלי שאינו זמין (e.g., `/search` בלי web access)?**
 → Claude מסביר במשפט אחד מה חסר ומה לעשות, לא ממציא תוצאות.
 
-### 11.2 Quick Card להדפסה
+### 12.2 Quick Card להדפסה
 
 ```
 START: /new /project /upload /template /import
@@ -980,7 +985,7 @@ COMPOSE: cmd1 cmd2 (sequence) | (pipeline) + (blend)
 SPECIFIC > GENERAL.  ITERATE.  SAVE WHAT WORKS.
 ```
 
-### 11.3 קונטרקטים ל-LLM gateway (אופציונלי)
+### 12.3 קונטרקטים ל-LLM gateway (אופציונלי)
 
 אם תרצה לבנות parser רשמי כתת-מערכת (לא רק תלוי בקריאת Claude), הנה ה-schema:
 

@@ -4,7 +4,7 @@
 **Version:** 1.0.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Kernel — נטען ראשון. כל שאר המודולים תלויים בו.
-**Integrates with:** `CLAUDE.md`, `MEMORY.md`, `COWORK_SETUP.md`, `COMMAND_API.md`, `INVESTOR_RELATIONS.md`, `CASES/*.md`
+**Integrates with:** כל המודולים הרשומים ב-§3 — `CLAUDE.md`, `MEMORY.md`, `DECISION_LOG.md`, `COWORK_SETUP.md`, `COMMAND_API.md`, `marketing-strategy-framework.md`, `AI_*` (Knowledge), `INVESTOR_RELATIONS.md`, `CASES/*.md`
 
 ---
 
