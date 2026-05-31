@@ -53,7 +53,7 @@
 ├─ MEMORY ────── MEMORY.md             מי אתה, מה זוכרים, focus/projects
 ├─ CONTEXT ───── COWORK_SETUP.md       חיבור התיקייה, קבצי md, Global Instructions
 ├─ INTERFACE ─── COMMAND_API.md        89 פקודות /command + composition
-└─ BUSINESS ──── marketing-strategy-framework.md · INVESTOR_RELATIONS.md · CASES/*.md   הקשר עסקי נקודתי
+└─ BUSINESS ──── INVESTOR_RELATIONS.md · CASES/*.md   הקשר עסקי נקודתי
 ```
 
 **הזרימה מקצה לקצה:** המשתמש מקליד פקודה → ה-INTERFACE מזהה אותה → היא נפתרת מול ה-CONTEXT וה-MEMORY → בכפוף לחוקי ה-KERNEL → ומיושמת על מודול ה-BUSINESS הרלוונטי.
@@ -69,10 +69,9 @@
 | 1 | `OPERATING_SYSTEM.md` | Kernel | ✅ פעיל | חוקים, סדר, הכרעה |
 | 2 | `MEMORY.md` | Memory | ✅ פעיל | זהות, העדפות, focus/projects |
 | 3 | `COWORK_SETUP.md` | Context | ✅ פעיל | חיבור תיקייה, קבצי md, אונבורדינג |
-| 4 | `COMMAND_API.md` | Interface | ✅ פעיל | 89 פקודות, composition, system prompt |
-| 5 | `marketing-strategy-framework.md` | Business | ✅ פעיל | מסגרת 10-שלבית לאסטרטגיית שיווק |
-| 6 | `INVESTOR_RELATIONS.md` | Business | 🔜 מתוכנן | פרופילי משקיעים והיסטוריה |
-| 7 | `CASES/*.md` | Business | 🔜 מתוכנן | תיקים/פרויקטים פעילים |
+| 4 | `COMMAND_API.md` | Interface | ✅ פעיל | 89 פקודות, composition, prompting frameworks, system prompt |
+| 5 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
+| 6 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית פיננסית, ואיפיון מוצר/מערכת |
 
 > כשמודול עובר מ-🔜 ל-✅ — מעדכנים את הסטטוס כאן ואת ה-Active Modules ב-`CLAUDE.md` ו-`README.md`.
 
