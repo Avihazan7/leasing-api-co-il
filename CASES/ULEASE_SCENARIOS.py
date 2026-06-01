@@ -3,7 +3,7 @@
 """
 ULease 🎯 — אומדנים / ניתוח תרחישים (sensitivity)
 קורא את ULEASE_FORECAST.csv ומריץ 3 תרחישים על נקודת הרגישות המרכזית: קצב העסקאות.
-ההכנסות תלויות-העסקה (עסקה+לידים+חיתום) מוכפלות במכפיל; מנויים/פרסום/הוצאות קבועים.
+ההכנסות תלויות-העסקה (עסקה+לידים+מימון) מוכפלות במכפיל; מנויים/פרסום/הוצאות קבועים.
 הרצה:  python3 CASES/ULEASE_FORECAST.py && python3 CASES/ULEASE_SCENARIOS.py
 """
 import csv, os
@@ -19,7 +19,7 @@ def run(mult):
     last_total = 0.0
     for i, r in enumerate(rows):
         yr = 2026 if i < 7 else 2027
-        deal_driven = flo(r,"deal_rev") + flo(r,"lead_rev") + flo(r,"uw_rev")
+        deal_driven = flo(r,"deal_rev") + flo(r,"lead_rev") + flo(r,"fin_rev")
         indep = flo(r,"sub_rev") + flo(r,"ad_rev")
         total = mult*deal_driven + indep
         net = total - flo(r,"opex")

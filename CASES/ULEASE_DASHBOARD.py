@@ -13,7 +13,7 @@ ACCENT, CREAM, INK, GREEN = "#c0532b", "#f5f1e8", "#2a2622", "#2f7d4f"
 PAL = ["#c0532b", "#e0894f", "#2a6f6b", "#9b8557", "#7a5c3e"]
 
 rows = list(csv.DictReader(open(os.path.join(HERE, "ULEASE_FORECAST.csv"), encoding="utf-8-sig")))
-NUM = ("deals","leads","subscribers","deal_rev","lead_rev","sub_rev","ad_rev","uw_rev",
+NUM = ("deals","leads","subscribers","deal_rev","lead_rev","sub_rev","ad_rev","fin_rev",
        "total_rev","opex","net_monthly","cum_cash","gmv","team","marketing","infra","gna")
 for r in rows:
     for k in NUM: r[k] = float(r[k])
@@ -24,13 +24,13 @@ K = dict(gmv27=S(y27,"gmv"), rev26=S(y26,"total_rev"), rev27=S(y27,"total_rev"),
          deals26=S(y26,"deals"), deals27=S(y27,"deals"), subs_end=int(rows[-1]["subscribers"]),
          cash_end=rows[-1]["cum_cash"], runrate=rows[-1]["total_rev"]*12)
 K["margin27"] = K["net27"]/K["rev27"] if K["rev27"] else 0
-mix27 = {"עסקאות":S(y27,"deal_rev"),"לידים":S(y27,"lead_rev"),"מנויים":S(y27,"sub_rev"),"פרסום":S(y27,"ad_rev"),"חיתום":S(y27,"uw_rev")}
+mix27 = {"עסקאות":S(y27,"deal_rev"),"לידים":S(y27,"lead_rev"),"מנויים":S(y27,"sub_rev"),"פרסום":S(y27,"ad_rev"),"מימון":S(y27,"fin_rev")}
 exp27 = {"צוות":S(y27,"team"),"שיווק":S(y27,"marketing"),"תשתית":S(y27,"infra"),"תקורה":S(y27,"gna")}
 
 def _scen(mult):
     cum=150000.0; r26=r27=n26=n27=last=0.0
     for i,r in enumerate(rows):
-        dd=r['deal_rev']+r['lead_rev']+r['uw_rev']; ind=r['sub_rev']+r['ad_rev']
+        dd=r['deal_rev']+r['lead_rev']+r['fin_rev']; ind=r['sub_rev']+r['ad_rev']
         t=mult*dd+ind; nt=t-r['opex']; cum+=nt; last=t
         if i<7: r26+=t; n26+=nt
         else: r27+=t; n27+=nt
@@ -40,7 +40,7 @@ scen={nm:_scen(mu) for nm,mu,_ in SCEN}
 
 # funnel (2027), what-if base, launch timeline
 leads27=int(S(y27,"leads")); deals27i=int(K["deals27"]); deliv27=round(deals27i*0.95)
-B={"deal":S(y27,"deal_rev"),"lead":S(y27,"lead_rev"),"sub":S(y27,"sub_rev"),"ad":S(y27,"ad_rev"),"uw":S(y27,"uw_rev"),"opex":K["opex27"]}
+B={"deal":S(y27,"deal_rev"),"lead":S(y27,"lead_rev"),"sub":S(y27,"sub_rev"),"ad":S(y27,"ad_rev"),"fin":S(y27,"fin_rev"),"opex":K["opex27"]}
 def funnel_html():
     stages=[("לידים",leads27,PAL[1]),("עסקאות",deals27i,ACCENT),("מסירות",deliv27,PAL[2])]; mx=stages[0][1]; out=[]; prev=None
     for nm,v,c in stages:
@@ -48,7 +48,7 @@ def funnel_html():
         out.append(f'<div class="seg" style="width:{w:.0f}%;background:{c}">{nm}: {v:,}{conv}</div>'); prev=v
     return '<div class="funnel">'+''.join(out)+'</div>'
 TL=[("יוני · שבוע 1","חברה + דומיין + תשתית + ingestion"),("יוני · שבוע 2","חדר-עסקה + מנויים + QA"),
-    ("חצי-שני יוני 26","🚀 Go-Live — 26 עסקאות"),("Q3–Q4 2026","Scale: מכרז · Pro Max · n8n"),("2027","Architect + צמיחה")]
+    ("חצי-שני יוני 26","🚀 Go-Live — 26 עסקאות"),("Q3–Q4 2026","Scale: מכרז · מנוי Max · n8n"),("2027","Architect + צמיחה")]
 tl_html="".join(f'<div class="step"><b>{t}</b>{d}</div>' for t,d in TL)
 
 def m(n): return f"₪{n/1e6:.2f}M" if abs(n)>=1e6 else f"₪{n/1e3:.0f}K"
@@ -99,7 +99,7 @@ table_rows="".join(f"<tr><td>{r['period']}</td><td>{f(r['deals'])}</td><td>{m(r[
 
 CHECKLIST = [("דומיין",["רכישת ULease.co.il","חיבור Leasing.co.il","DNS + SSL + מייל"]),
              ("משפטי",["הקמת חברה","תקנון + מדיניות פרטיות","ייעוץ משפטי לחיתום","עמידה בחוק ספאם"]),
-             ("MVP",["אתר + אפליקציה לאוויר","Ingestion (API/CSV)","חדר-עסקה (חתימה+מקדמה)","מנויי Pro + חיוב","Admin בסיסי"]),
+             ("MVP",["אתר + אפליקציה לאוויר","Ingestion (API/CSV)","חדר-עסקה (חתימה+מקדמה)","מנויי Ultra + חיוב","Admin בסיסי"]),
              ("תוכן + Outreach",["מלאי 7 ספקים טעון","Landing + הצעת ערך","שלד n8n ב-assist"]),
              ("QA → Go-Live",["עסקה מקצה-לקצה עברה","תשלום/מקדמה נבדק","גיוס Tech Lead"])]
 cl_html=""
@@ -140,7 +140,7 @@ small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repea
 </style></head><body><div class="wrap">
 
 <header><h1>ULease 🎯 Leasing.co.il — Executive Dashboard</h1>
-<p>Marketplace תלת-צדדי לרכב חדש · Base Case v1.2 (כולל חיתום) · יוני 2026 → דצמבר 2027</p></header>
+<p>Marketplace תלת-צדדי לרכב חדש · Base Case v1.3 (עמלות מדורגות + מימון 1%) · יוני 2026 → דצמבר 2027</p></header>
 
 <div class="grid">{card_html}</div>
 
@@ -166,7 +166,7 @@ small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repea
 {"".join(f'<tr><td>{nm} (×{mu:g})</td><td>{m(scen[nm]["r27"])}</td><td>{m(scen[nm]["n27"])}</td><td>{m(scen[nm]["cash"])}</td><td>{m(scen[nm]["rr"])}</td></tr>' for nm,mu,_ in SCEN)}
 </tbody></table></div>
 <div style="margin-top:12px;font-size:.85rem;opacity:.7;margin-bottom:2px">נטו 2027 לפי תרחיש (₪)</div>{svg_scen()}
-<div class="flag">גם בתרחיש <b>השמרני</b> (−30% עסקאות) הפלטפורמה נשארת רווחית מאוד — נטו 2027 ₪11.3M. זה ה-operating leverage. הנחה: הוצאות קבועות; בפועל חלק מהשיווק יגדל עם הנפח.</div></div>
+<div class="flag">גם בתרחיש <b>השמרני</b> (−30% עסקאות) הפלטפורמה נשארת רווחית מאוד — נטו 2027 ₪8.5M. זה ה-operating leverage. הנחה: הוצאות קבועות; בפועל חלק מהשיווק יגדל עם הנפח.</div></div>
 
 <div class="panel"><h2>🎛️ מחוון What-If — קצב עסקאות × מט"ח</h2>
 <div class="ctrl">
@@ -174,10 +174,10 @@ small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repea
 <div><label>USD/ILS: <b id="fxv">3.60</b></label><input id="fx" type="range" min="250" max="400" value="360"></div></div>
 <div class="out">
 <div><small>שווי עסקה</small><b id="o_dv">₪150K</b></div>
-<div><small>עמלה/עסקה</small><b id="o_cm">₪4,995</b></div>
-<div><small>הכנסה 2027</small><b id="o_rev">₪16.86M</b></div>
-<div><small>נטו 2027</small><b id="o_net">₪14.77M</b></div>
-<div><small>מרווח</small><b id="o_mg">88%</b></div>
+<div><small>עמלה/עסקה (משוקלל)</small><b id="o_cm">₪3,001</b></div>
+<div><small>הכנסה 2027</small><b id="o_rev">₪12.98M</b></div>
+<div><small>נטו 2027</small><b id="o_net">₪10.89M</b></div>
+<div><small>מרווח</small><b id="o_mg">84%</b></div>
 <div><small>לידים 2027</small><b>{leads27:,}</b></div></div>
 <div class="flag">מט"ח משפיע על <b>שווי העסקה</b> (רכב מיובא; בסיס USD/ILS 3.60 = ₪150K). תזת החברה: שקל חזק → גם <b>יותר נפח</b> — הזז גם את "קצב עסקאות". (אפקט הנפח אינו אוטומטי.)</div></div>
 
@@ -189,7 +189,7 @@ small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repea
 <div class="two">
 <div class="panel"><h2>🔺 Marketplace + מנועי הכנסה</h2><ul>
 <li><b>היצע:</b> יבואנים · ליסינג · מימון</li><li><b>ביקוש:</b> פרטי · B2B2C</li><li><b>מפיצים:</b> דילרים/ליסינג (מנויים)</li></ul>
-<span class="pill">עסקה ₪4,995</span><span class="pill">ליד ₪150</span><span class="pill">Pro ₪4,500</span><span class="pill">Pro Max ₪7,700</span><span class="pill">חיתום ₪990</span></div>
+<span class="pill">B2B 1.1–2.2%</span><span class="pill">B2B2C 1.1–3.33%</span><span class="pill">B2C 3.33–7.77%</span><span class="pill">ליד ₪150</span><span class="pill">Ultra ₪4,500</span><span class="pill">Max ₪7,700</span><span class="pill">מימון 1%</span></div>
 <div class="panel"><h2>👥 צוות · גיוס · מתודולוגיה</h2><ul>
 <li>שירי — Super COO · אברהם — מו"פ ושיווק</li><li>גיוס: מנהל מערכות טכנולוגיה ⬅️ הפער</li>
 <li>Cap 37/37/13/13 · גיוס ₪150K</li><li>תורת המשחקים · Big Five · מו"מ · Multi-agent</li></ul></div>
@@ -201,7 +201,7 @@ small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repea
 
 <div class="panel"><h2>📅 טיימליין השקה</h2><div class="tl">{tl_html}</div></div>
 
-<div class="panel"><small>מקור: CASES/ULEASE_FORECAST.csv (Base Case v1.2) · כיול ב-ULEASE_FORECAST.py · ליבה (Deal Score/Match/תמחור) = IP · Claude OS — Avraham Bar Yochai Chazan</small></div>
+<div class="panel"><small>מקור: CASES/ULEASE_FORECAST.csv (Base Case v1.3) · כיול ב-ULEASE_FORECAST.py · ליבה (Deal Score/Match/תמחור) = IP · Claude OS — Avraham Bar Yochai Chazan</small></div>
 
 <script>
 var boxes=[].slice.call(document.querySelectorAll('.chk input'));
@@ -214,12 +214,12 @@ boxes.forEach(function(b){{b.addEventListener('change',upd);}});upd();
 </script>
 <script>
 (function(){{
- var B={{deal:{B['deal']:.0f},lead:{B['lead']:.0f},sub:{B['sub']:.0f},ad:{B['ad']:.0f},uw:{B['uw']:.0f},opex:{B['opex']:.0f}}};
+ var B={{deal:{B['deal']:.0f},lead:{B['lead']:.0f},sub:{B['sub']:.0f},ad:{B['ad']:.0f},fin:{B['fin']:.0f},opex:{B['opex']:.0f}}};
  var dm=document.getElementById('dm'),fx=document.getElementById('fx');
  function mm(n){{return Math.abs(n)>=1e6?'₪'+(n/1e6).toFixed(2)+'M':'₪'+Math.round(n/1e3)+'K';}}
  function calc(){{
-  var d=dm.value/100,ff=fx.value/100,dv=150000*(ff/3.6),cm=dv*0.0333;
-  var rev=B.deal*d*(ff/3.6)+B.lead*d+B.uw*d+B.sub+B.ad,net=rev-B.opex,mg=rev?net/rev*100:0;
+  var d=dm.value/100,ff=fx.value/100,dv=150000*(ff/3.6),cm=dv*0.020;
+  var rev=B.deal*d*(ff/3.6)+B.lead*d+B.fin*d+B.sub+B.ad,net=rev-B.opex,mg=rev?net/rev*100:0;
   document.getElementById('dmv').textContent=Math.round(dm.value)+'%';
   document.getElementById('fxv').textContent=ff.toFixed(2);
   document.getElementById('o_dv').textContent=mm(dv);

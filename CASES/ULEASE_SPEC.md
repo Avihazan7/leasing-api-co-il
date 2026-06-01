@@ -1,7 +1,7 @@
 # ULease 🎯 Leasing.co.il — איפיון מוצר ומערכת (End-to-End Spec)
 
 **Module:** `CASES/ULEASE_SPEC.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — איפיון (Product & System Spec), נספח ל-`CASES/ULEASE.md`.
 **Integrates with:** `CASES/ULEASE.md`, `CASES/ULEASE_METHODOLOGY.md`, `INVESTOR_RELATIONS.md`, `OPERATING_SYSTEM.md`, `MEMORY.md`
@@ -78,11 +78,11 @@ SUPPLY  →   │  INGESTION APIs  (יבואן · ליסינג · מימון)   
 
 ## 4. מסעות משתמש מקצה-לקצה
 
-**4.1 ספק (היצע):** התחברות → חיבור API / העלאת מלאי (CSV fallback) → קביעת מחיר-רצפה ומרווח → המלאי עולה לקטלוג → קבלת לידים/עסקאות → התחשבנות אוטומטית (עמלת 1% + מקדמה).
+**4.1 ספק (היצע):** התחברות → חיבור API / העלאת מלאי (CSV fallback) → קביעת מחיר-רצפה ומרווח → המלאי עולה לקטלוג → קבלת לידים/עסקאות → התחשבנות אוטומטית (עמלה מדורגת 1.1%–2.2% + מקדמה).
 
 **4.2 לקוח פרטי / B2B2C:** חיפוש/סינון → דף רכב עם **Deal Score** → "קבל הצעה" → KYC קצר → **חדר עסקה**: בחירת מימון/ליסינג → אישור מקדמה → **חתימה דיגיטלית** → אישור עסקה → מסירה. *(ליד שלא נחתם → נמכר לספק ב-₪150.)*
 
-**4.3 מפיץ/דילר (מנוי):** מנוי Pro/Pro Max → בקשת כמות/דגם → השתתפות ב**מכרז מחיר-שני** → זכייה → חדר עסקה מרוכז → דאטה ותובנות בלוח הבקרה.
+**4.3 מפיץ/דילר (מנוי):** מנוי Ultra/Max → בקשת כמות/דגם → השתתפות ב**מכרז מחיר-שני** → זכייה → חדר עסקה מרוכז → דאטה ותובנות בלוח הבקרה.
 
 **4.4 Admin/Ops:** ניטור pipeline עסקאות → אישורי KYC → טיפול במחלוקות → חיוב מנויים → ניהול תוכן וקמפיינים → אנליטיקה.
 
@@ -99,7 +99,7 @@ SUPPLY  →   │  INGESTION APIs  (יבואן · ליסינג · מימון)   
 | M5 | **Deal Room** | חתימה דיגיטלית, מקדמה, סטטוס עסקה | MVP |
 | M6 | **Financing/Leasing** | חיבור למימון/ליסינג, הגשת בקשה, אישור | MVP→V1 |
 | M7 | **Auction (Second-Price)** | מכרז כמויות למפיצים (§6) | V1 |
-| M8 | **Subscriptions & Billing** | Pro ₪4,500 / Pro Max ₪7,700, חיוב חוזר | MVP |
+| M8 | **Subscriptions & Billing** | Ultra ₪4,500 / Max ₪7,700, חיוב חוזר | MVP |
 | M9 | **Data & Insights** | לוחות בקרה, דאטה למנויים, BI פנימי | V1 |
 | M10 | **Advertising** | קידום מחברות מימון/ביטוח/שירותי דרך | V1 |
 | M11 | **Admin/Ops Console** | pipeline, KYC, מחלוקות, תוכן | MVP |
@@ -144,7 +144,7 @@ SUPPLY  →   │  INGESTION APIs  (יבואן · ליסינג · מימון)   
 | **Customer** | id, type(private/B2B2C), KYC, profile(Big5) | →Lead, →Deal |
 | **Distributor** | id, subscriptionTier, dataAccess | →Bid, →Deal |
 | **Lead** | id, customerId, vehicleId, status, price(₪150) | →Sold-to-Supplier |
-| **Deal** | id, parties, amount(~150K), take(3.33%), advance, status | →Contract, →Settlement |
+| **Deal** | id, parties, amount(~150K), take(מדורג 1.1%–7.77% לפי סוג), advance, status | →Contract, →Settlement |
 | **Auction/Bid** | id, lot, bids[], winner, clearing_price(2nd) | →Deal |
 | **FinancingApp** | id, dealId, provider, amount, decision | →Deal |
 | **Subscription** | id, distributorId, tier, price, cycle | →Invoice |
@@ -195,7 +195,7 @@ SUPPLY  →   │  INGESTION APIs  (יבואן · ליסינג · מימון)   
 | שלב | יעד | תוכן | מיפוי לתחזית |
 |------|-----|------|--------------|
 | **Phase 0 — MVP** | ≤ שבועיים · חצי שני יוני 26 | M1·M2·M4·M5·M8·M11 + Ultra+2 Masters (assist) + CSV/API ingestion + e-sign + מקדמה | בסיס יוני: 26 עסקאות |
-| **Phase 1 — Scale** | Q3–Q4 2026 | מכרז מחיר-שני (M7), Pro Max, Financing מלא (M6), Data/Insights (M9), Advertising (M10), הרחבת agents | ראמפ H2-2026 |
+| **Phase 1 — Scale** | Q3–Q4 2026 | מכרז מחיר-שני (M7), מנוי Max, Financing מלא (M6), Data/Insights (M9), Advertising (M10), הרחבת agents | ראמפ H2-2026 |
 | **Phase 2 — Automate** | 2027 | אוטומציה מלאה Multi-agent, Deal Score מתקדם, אינטגרציות נוספות, scale | צמיחת 2027 |
 
 ---
@@ -211,7 +211,8 @@ GMV · עסקאות/חודש · take-rate בפועל · המרת ליד→עסק
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | איפיון מוצר ומערכת ראשוני — מקצה-לקצה, Ultra·Master·Max, MVP→V2 | 2026-05-30 |
+| 1.1.0 | יישום D-015: מנויי **Ultra/Max** (M8), עמלות מדורגות 1.1%–7.77% במודל הנתונים ובזרימת הספק | 2026-06-01 |
 
 **Confidentiality.** מסמך זה וכל מנגנוני הליבה (Deal Score, Match, Pricing, Auction) הם IP חסוי של ULease 🎯 — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_SPEC.md v1.0.0 —*
+— *End of CASES/ULEASE_SPEC.md v1.1.0 —*
