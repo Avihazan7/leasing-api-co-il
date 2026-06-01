@@ -833,7 +833,7 @@ Claude OS Root/
 ├── COWORK_SETUP.md            ← הקשר / אונבורדינג
 ├── COMMAND_API.md             ← ← זה. המסמך הזה.
 ├── marketing-strategy-framework.md   ← Business: אסטרטגיית שיווק
-├── AI_SKILL_MAP.md · AI_PROGRESSION_PLAN.md · AI_LEARNING_RESOURCES.md · AI_7_SKILLS.md · AI_SKILLS_ACQUISITION.md   ← Knowledge
+├── AI_SKILL_MAP.md · AI_PROGRESSION_PLAN.md · AI_LEARNING_RESOURCES.md · AI_7_SKILLS.md · AI_SKILLS_ACQUISITION.md · AI_CLAUDE_TOOL_SELECTOR.md   ← Knowledge
 ├── INVESTOR_RELATIONS.md
 └── CASES/
     └── ULEASE*.md             ← תיק ULease (12 קבצים)
