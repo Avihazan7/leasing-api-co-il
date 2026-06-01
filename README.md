@@ -4,7 +4,7 @@
 ## Active Modules
 - [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.0.1 — Kernel: core doctrine, layered architecture, module registry, the activation Boot Block, and the conflict-resolution hierarchy.
 - [`MEMORY.md`](./MEMORY.md) v1.0.0 — Persistent memory layer: schema, identity card, active focus/projects, preferences, and the read/write protocol.
-- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.6.0 — Append-only decision log: the founding OS + ULease decisions with rationale and status.
+- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.7.0 — Append-only decision log: the founding OS + ULease decisions with rationale and status.
 - [`COWORK_SETUP.md`](./COWORK_SETUP.md) v1.0.0 — Claude Cowork onboarding: 7-step setup, the Global Instructions golden tip, context-file map, and OS integration so Claude always loads your context first.
 - [`COMMAND_API.md`](./COMMAND_API.md) v1.1.0 — CLAUDE Command API: 89 slash commands, composition operators, a prompting-frameworks library, and drop-in system prompt for the Claude Operating System.
 - [`marketing-strategy-framework.md`](./marketing-strategy-framework.md) v1.0.0 — Business layer: a 10-prompt framework for building a full marketing strategy, from customer psychology to a one-page plan.
@@ -23,7 +23,8 @@
 - [`CASES/ULEASE_IMPORTER_PLAYBOOK.md`](./CASES/ULEASE_IMPORTER_PLAYBOOK.md) v1.1.0 — Importer negotiation playbook: pain map, advantages, "unprecedented service", a ready pitch script, objection handling, and a no-risk pilot offer.
 - [`CASES/ULEASE_LEASING_PLAYBOOK.md`](./CASES/ULEASE_LEASING_PLAYBOOK.md) v1.1.0 — Playbook for parallel importers (reach / FX / trust) and leasing companies (two-way: fleet disposal + bulk sourcing via second-price auction).
 - [`CASES/ULEASE_DEMAND_PLAYBOOK.md`](./CASES/ULEASE_DEMAND_PLAYBOOK.md) v1.0.0 — Demand-side acquisition playbook: unit economics (CPL ILS 103, 4.9x marketing ROI), 3 Big-Five personas, 6 channels, funnel targets, compliance, and KPIs — closes audit finding C4.
-- [`CASES/ULEASE_PRICING_SLA.md`](./CASES/ULEASE_PRICING_SLA.md) v1.0.0 — Official price book + supplier SLA: tiered fees, Ultra-vs-Max feature comparison, and 11 service commitments (ingestion, uptime, settlement) — closes audit finding W11.
+- [`CASES/ULEASE_PRICING_SLA.md`](./CASES/ULEASE_PRICING_SLA.md) v1.1.0 — Official price book + supplier SLA: tiered fees, Ultra-vs-Max feature comparison, and 11 service commitments (ingestion, uptime, settlement) — closes audit finding W11.
+- [`CASES/ULEASE_LEGAL_BRIEF.md`](./CASES/ULEASE_LEGAL_BRIEF.md) v1.0.0 — Legal brief for counsel: the 2 Go-Live questions (financing-routing licensing, supplier/SLA agreements) + 6 supporting topics, requested deliverables, and timeline — to send ahead of the meeting.
 - [`CASES/ULEASE_FINANCE_INSURANCE.md`](./CASES/ULEASE_FINANCE_INSURANCE.md) v1.1.0 — Finance/insurance partners + end-to-end digital underwriting: KYC, multi-lender routing, Big Five matching, revenue model, and Israeli licensing flags.
 - [`CASES/ULEASE_OUTREACH_SCRIPTS.md`](./CASES/ULEASE_OUTREACH_SCRIPTS.md) v1.2.0 — Ready outreach scripts (call/email/WhatsApp) for all four supply segments, plus follow-ups.
 - [`CASES/ULEASE_OUTBOUND_ENGINE.md`](./CASES/ULEASE_OUTBOUND_ENGINE.md) v1.1.0 — Supply-acquisition outbound engine blueprint (n8n + Claude): 8 layers, Haiku/Sonnet roles, scripts integration, and KPIs.
