@@ -1,13 +1,13 @@
 # ULease 🎯 — Outbound Engine (בלופרינט n8n + Claude)
 
 **Module:** `CASES/ULEASE_OUTBOUND_ENGINE.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — בלופרינט אוטומציה (Stage 2–3).
 **Integrates with:** `CASES/ULEASE_OUTREACH_SCRIPTS.md`, `CASES/ULEASE_IMPORTER_PLAYBOOK.md`, `CASES/ULEASE_LEASING_PLAYBOOK.md`, `CASES/ULEASE_SPEC.md`, `AI_PROGRESSION_PLAN.md`
 **Inspiration:** ארכיטקטורת *Outbound Engine* (Quortihm · Usama Tanveer).
 
-> מנוע אקווזיציה ל**צד ההיצע** — מאתר ומגייס יבואנים/מקבילים/ליסינג/דילרים אוטומטית, ומזין את ה-Marketplace. משתמש בסקריפטים (`ULEASE_OUTREACH_SCRIPTS.md`) ובמודלי Claude.
+> מנוע אקווזיציה ל**צד ההיצע** — מאתר ומגייס את 4 הסגמנטים (יבואן רשמי · יבואן מקביל · חברת ליסינג · מימון/ביטוח, כמו ב-`ULEASE_OUTREACH_SCRIPTS.md`) ומזין את ה-Marketplace. משתמש בסקריפטים ובמודלי Claude.
 
 ---
 
@@ -15,7 +15,7 @@
 
 | # | שכבה | מה היא עושה ל-ULease | כלי / מודל |
 |---|------|----------------------|------------|
-| 01 | **Sourcing** | איתור יבואנים/מקבילים/ליסינג/דילרים | מאגרי חברות · LinkedIn · רישומי יבוא |
+| 01 | **Sourcing** | איתור 4 הסגמנטים: יבואנים רשמיים · מקבילים · ליסינג · מימון/ביטוח | מאגרי חברות · LinkedIn · רישומי יבוא |
 | 02 | **Quality Gate** | סינון ל-ICP (יש מלאי? סגמנט?), dedupe, אימות איש קשר | כללים + אימות אימייל |
 | 03 | **Intelligence** | ניקוד פרוספקט: גודל מלאי, כאב (0 ק"מ תקוע?), reachability | **Claude Haiku 4.5** (ניקוד מהיר/זול) |
 | 04 | **Personalization** | חיבור הפנייה לפי סגמנט + A/B (ערך מול סקרנות), 60–120 מילים, בלי "AI slop" | **Claude Sonnet 4.6** + Quality Gate |
@@ -35,6 +35,14 @@ Sourcing → Quality Gate → Intelligence(score) → Personalization(A/B) → S
 ```
 
 **עיקרון:** כל ליד עובר ניקוד → אם עובר סף, מקבל פנייה מותאמת → תגובה מסווגת ומנותבת → המדדים מזינים את שיפור הפרומפטים.
+
+> ⚠️ **מצב השלד (W14):** בקובץ ה-n8n המיובא, שכבות 01–06 מחווטות; שכבה 07 (Measurement) קיימת כצומת קצה ושכבה 08 (Feedback Loop) **טרם ממומשת** — היא מופעלת ידנית (סקירה שבועית) עד V2.
+
+---
+
+## 2.5 היחס לארכיטקטורת המוצר (Ultra·Master·Max)
+
+מנוע ה-outbound הוא **מערכת acquisition נפרדת** מהמנוע המוצרי (`ULEASE_SPEC.md` §7) — הוא רץ ב-n8n מחוץ לפלטפורמה, לא בתוכה. כשהפלטפורמה תבשיל (Phase 1+), המנוע ימופה ל-**Master "Content/Marketing"** וה-suppression list שלו תסתנכרן עם ישות ה-`Consent` (Guardian).
 
 ---
 
@@ -78,14 +86,15 @@ Sourcing → Quality Gate → Intelligence(score) → Personalization(A/B) → S
 
 ## 7. קובץ n8n מוכן לייבוא
 
-- **`CASES/ULEASE_OUTBOUND_ENGINE.n8n.json`** — workflow שלד (21 צמתים) לייבוא ישיר ל-n8n (`Workflows → Import from File`).
+- **`CASES/ULEASE_OUTBOUND_ENGINE.n8n.json`** — workflow שלד (**25 צמתים**: 21 פונקציונליים + 4 הערות sticky) לייבוא ישיר ל-n8n (`Workflows → Import from File`).
 - **`CASES/ULEASE_OUTBOUND_ENGINE_n8n.py`** — הגנרטור (מקור-אמת; משנים → מריצים → ה-JSON מתעדכן).
 
 **לפני הרצה:**
 1. הגדר `ANTHROPIC_API_KEY` ב-Environment של n8n (או החלף ל-Credential ב-3 צמתי Claude).
 2. הוסף מפתחות/endpoints ל-Apollo (שכבה 01) ול-Smartlead (05).
 3. כוונן ICP (צומת 02) וסף ניקוד (צומת 03 — כרגע ≥7).
-4. מודלים: **Haiku 4.5** לניקוד/סיווג · **Sonnet 4.6** לפרסונליזציה.
+4. מודלים: **Haiku 4.5** לניקוד/סיווג · **Sonnet 4.6** לפרסונליזציה. **(I5)** רכז את שמות המודלים בצומת Set/ENV אחד — לא hard-coded בכל צומת — כדי למנוע drift.
+5. **(I4)** הוסף retry (×2, exponential backoff) + fallback לכל צומת Claude: כשל ניקוד → score 0 (suppress) · כשל סיווג → intent "hard" (לא שולחים) · כשל פרסונליזציה → תבנית גנרית מהסקריפטים.
 
 > השלד מייבא as-is; חבר את ה-APIs האמיתיים שכבה-שכבה והעבר מ-assist לאוטומציה מלאה.
 
@@ -96,7 +105,8 @@ Sourcing → Quality Gate → Intelligence(score) → Personalization(A/B) → S
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | בלופרינט מנוע outbound — 8 שכבות, מודלי Claude, חיבור לסקריפטים, KPIs | 2026-05-31 |
+| 1.1.0 | גל 3 של הביקורת: יישור 4 הסגמנטים לסקריפטים (W6), היחס ל-Ultra·Master·Max (W13), מצב השלד 07–08 (W14), ספירת צמתים (W18), retry/ENV למודלים (I4·I5) | 2026-06-01 |
 
 **Confidentiality.** מסמך תפעולי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_OUTBOUND_ENGINE.md v1.0.0 —*
+— *End of CASES/ULEASE_OUTBOUND_ENGINE.md v1.1.0 —*

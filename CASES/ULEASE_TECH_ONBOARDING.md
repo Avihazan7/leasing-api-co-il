@@ -31,8 +31,8 @@
 
 | תקופה | מיקוד | יעדים |
 |--------|--------|--------|
-| **0–30 · MVP** | לאוויר! | אתר/אפליקציה · ingestion (CSV/API) · חדר-עסקה (e-sign + מקדמה) · מנויי Pro · admin בסיסי · Ultra + 2 Masters (Match, Pricing) ב-assist |
-| **31–60 · Scale** | אוטומציה | סוכנים ב-production (Financing, Negotiation, Guardian) · ניתוב מימון/ביטוח · חיווט מנוע ה-n8n · דשבורדים · Pro Max |
+| **0–30 · MVP** | לאוויר! | אתר/אפליקציה · ingestion (CSV/API) · חדר-עסקה (e-sign + מקדמה) · מנויי Ultra · admin בסיסי · Ultra + 2 Masters (Match, Pricing) ב-assist |
+| **31–60 · Scale** | אוטומציה | סוכנים ב-production (Financing, Negotiation, Guardian) · ניתוב מימון/ביטוח · חיווט מנוע ה-n8n · דשבורדים · מנוי Max |
 | **61–90 · Harden** | יציבות | מכרז מחיר-שני (M7) · אבטחה/PCI · monitoring/audit · ביצועים/scale · error handling |
 
 ---
