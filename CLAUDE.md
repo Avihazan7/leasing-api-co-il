@@ -3,10 +3,11 @@
 נקודת הכניסה הראשית של ה-Claude Operating System עבור הריפו.
 
 ## Active Modules
-- `OPERATING_SYSTEM.md` v1.0.1 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים, Boot Block והיררכיית הכרעה.
+- `OPERATING_SYSTEM.md` v1.0.2 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים, Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.0.0 — שכבת זיכרון: schema, כרטיס זהות, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
-- `DECISION_LOG.md` v1.6.0 — יומן החלטות append-only: 17 החלטות (OS + ULease), רציונל וסטטוס.
+- `DECISION_LOG.md` v1.7.0 — יומן החלטות append-only: 20 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.0.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר ואינטגרציה עם ה-OS.
+- `COWORK_MIGRATION.md` v1.0.0 — תוכנית מיגרציה Claude OS → Cowork: עיקרון ההפשטה (תשתית נמחקת, IP נשמר), טבלת הכרעה לכל קובץ, 7 שלבים עם שערי-אימות, מיפוי הריפו ל-workspace וטיוטת Global Instructions.
 - `COMMAND_API.md` v1.1.0 — 89 slash commands, composition operators, prompting-frameworks library, drop-in system prompt loaded.
 - `marketing-strategy-framework.md` v1.0.0 — Business: מסגרת 10 פרומפטים לבניית אסטרטגיית שיווק מלאה (פסיכולוגיה → תוכנית עמוד).
 - `AI_SKILL_MAP.md` v1.0.0 — מפת מיומנויות AI: 4 שלבים (Tools → Workflows → Agentic → Architect), יישומים, ומיקום ULease על המפה.
@@ -40,11 +41,12 @@
 2. `MEMORY.md`
 3. `DECISION_LOG.md`          ← יומן החלטות (Memory)
 4. `COWORK_SETUP.md`          ← חיבור התיקייה וטעינת ההקשר (אונבורדינג)
-5. `COMMAND_API.md`           ← לפני הקטגוריות העסקיות
-6. `marketing-strategy-framework.md`  ← Business: אסטרטגיית שיווק
-7. `AI_*` (SKILL_MAP · PROGRESSION_PLAN · LEARNING_RESOURCES · 7_SKILLS · SKILLS_ACQUISITION · TYPES · CLAUDE_TOOL_SELECTOR)  ← Knowledge (on-demand)
-8. `INVESTOR_RELATIONS.md`    ← שכבת עסק: משקיעים וגיוס
-9. `CASES/*.md`               ← תיקים פעילים (ULease 🎯)
+5. `COWORK_MIGRATION.md`      ← מיגרציה מלאה ל-Cowork (תוכנית + gates)
+6. `COMMAND_API.md`           ← לפני הקטגוריות העסקיות
+7. `marketing-strategy-framework.md`  ← Business: אסטרטגיית שיווק
+8. `AI_*` (SKILL_MAP · PROGRESSION_PLAN · LEARNING_RESOURCES · 7_SKILLS · SKILLS_ACQUISITION · TYPES · CLAUDE_TOOL_SELECTOR)  ← Knowledge (on-demand)
+9. `INVESTOR_RELATIONS.md`    ← שכבת עסק: משקיעים וגיוס
+10. `CASES/*.md`              ← תיקים פעילים (ULease 🎯)
 
 ## Activation
 כדי להפעיל את ה-Command API, טען את בלוק ה-System Prompt מסעיף 8 ב-[`COMMAND_API.md`](./COMMAND_API.md)

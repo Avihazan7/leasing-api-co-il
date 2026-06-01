@@ -1,10 +1,10 @@
 # CLAUDE OPERATING SYSTEM — Kernel
 
 **Module:** `OPERATING_SYSTEM.md`
-**Version:** 1.0.1
+**Version:** 1.0.2
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Kernel — נטען ראשון. כל שאר המודולים תלויים בו.
-**Integrates with:** כל המודולים הרשומים ב-§3 — `CLAUDE.md`, `MEMORY.md`, `DECISION_LOG.md`, `COWORK_SETUP.md`, `COMMAND_API.md`, `marketing-strategy-framework.md`, `AI_*` (Knowledge), `INVESTOR_RELATIONS.md`, `CASES/*.md`
+**Integrates with:** כל המודולים הרשומים ב-§3 — `CLAUDE.md`, `MEMORY.md`, `DECISION_LOG.md`, `COWORK_SETUP.md`, `COWORK_MIGRATION.md`, `COMMAND_API.md`, `marketing-strategy-framework.md`, `AI_*` (Knowledge), `INVESTOR_RELATIONS.md`, `CASES/*.md`
 
 ---
 
@@ -51,7 +51,7 @@
 ```
 ┌─ KERNEL ────── OPERATING_SYSTEM.md   חוקים, סדר טעינה, הכרעה
 ├─ MEMORY ────── MEMORY.md · DECISION_LOG.md   מי אתה, מה זוכרים, focus/projects, החלטות
-├─ CONTEXT ───── COWORK_SETUP.md       חיבור התיקייה, קבצי md, Global Instructions
+├─ CONTEXT ───── COWORK_SETUP.md · COWORK_MIGRATION.md       חיבור התיקייה, קבצי md, Global Instructions, מיגרציה ל-Cowork
 ├─ INTERFACE ─── COMMAND_API.md        89 פקודות /command + composition
 ├─ KNOWLEDGE ─── AI_SKILL_MAP · AI_PROGRESSION_PLAN · AI_LEARNING_RESOURCES · AI_7_SKILLS · AI_SKILLS_ACQUISITION · AI_TYPES · AI_CLAUDE_TOOL_SELECTOR   ידע אישי/לימודי (on-demand)
 └─ BUSINESS ──── marketing-strategy-framework.md · INVESTOR_RELATIONS.md · CASES/*.md   הקשר עסקי נקודתי
@@ -71,17 +71,18 @@
 | 2 | `MEMORY.md` | Memory | ✅ פעיל | זהות, העדפות, focus/projects |
 | 3 | `DECISION_LOG.md` | Memory | ✅ פעיל | יומן החלטות append-only — רציונל וסטטוס |
 | 4 | `COWORK_SETUP.md` | Context | ✅ פעיל | חיבור תיקייה, קבצי md, אונבורדינג |
-| 5 | `COMMAND_API.md` | Interface | ✅ פעיל | 89 פקודות, composition, prompting frameworks, system prompt |
-| 6 | `marketing-strategy-framework.md` | Business | ✅ פעיל | מסגרת 10-שלבית לאסטרטגיית שיווק |
-| 7 | `AI_SKILL_MAP.md` | Knowledge | ✅ פעיל | מפת מיומנויות AI — 4 שלבים ומיקום ULease |
-| 8 | `AI_PROGRESSION_PLAN.md` | Knowledge | ✅ פעיל | תוכנית התקדמות אישית — Learn-vs-Delegate, 90 יום |
-| 9 | `AI_LEARNING_RESOURCES.md` | Knowledge | ✅ פעיל | קוריקולום AI — משאבים לכל שלב |
-| 10 | `AI_7_SKILLS.md` | Knowledge | ✅ פעיל | 7 מיומנויות לשליטה ב-AI (2026) + מיפוי ל-OS |
-| 11 | `AI_SKILLS_ACQUISITION.md` | Knowledge | ✅ פעיל | תוכנית רכישת מיומנויות hands-on (8 שבועות) |
-| 12 | `AI_TYPES.md` | Knowledge | ✅ פעיל | טקסונומיית סוגי AI (Traditional·Generative·Agentic, 3×9) + מיפוי ל-ULease |
-| 13 | `AI_CLAUDE_TOOL_SELECTOR.md` | Knowledge | ✅ פעיל | עץ החלטה לבחירת כלי Claude — 12 כלים + מיפוי ל-ULease |
-| 14 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
-| 15 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית, איפיון, מתודולוגיה, גיוס, playbooks, ביקורת ומחירון/SLA |
+| 5 | `COWORK_MIGRATION.md` | Context | ✅ פעיל | תוכנית מיגרציה ל-Cowork — הפשטה, טבלת הכרעה, 7 שלבים + gates |
+| 6 | `COMMAND_API.md` | Interface | ✅ פעיל | 89 פקודות, composition, prompting frameworks, system prompt |
+| 7 | `marketing-strategy-framework.md` | Business | ✅ פעיל | מסגרת 10-שלבית לאסטרטגיית שיווק |
+| 8 | `AI_SKILL_MAP.md` | Knowledge | ✅ פעיל | מפת מיומנויות AI — 4 שלבים ומיקום ULease |
+| 9 | `AI_PROGRESSION_PLAN.md` | Knowledge | ✅ פעיל | תוכנית התקדמות אישית — Learn-vs-Delegate, 90 יום |
+| 10 | `AI_LEARNING_RESOURCES.md` | Knowledge | ✅ פעיל | קוריקולום AI — משאבים לכל שלב |
+| 11 | `AI_7_SKILLS.md` | Knowledge | ✅ פעיל | 7 מיומנויות לשליטה ב-AI (2026) + מיפוי ל-OS |
+| 12 | `AI_SKILLS_ACQUISITION.md` | Knowledge | ✅ פעיל | תוכנית רכישת מיומנויות hands-on (8 שבועות) |
+| 13 | `AI_TYPES.md` | Knowledge | ✅ פעיל | טקסונומיית סוגי AI (Traditional·Generative·Agentic, 3×9) + מיפוי ל-ULease |
+| 14 | `AI_CLAUDE_TOOL_SELECTOR.md` | Knowledge | ✅ פעיל | עץ החלטה לבחירת כלי Claude — 12 כלים + מיפוי ל-ULease |
+| 15 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
+| 16 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית, איפיון, מתודולוגיה, גיוס, playbooks, ביקורת ומחירון/SLA |
 
 > **הערה על שכבות:** מודולי `AI_*` הם שכבת **Knowledge** — ידע אישי/לימודי שיושב לוגית בין ה-INTERFACE ל-BUSINESS. הם פעילים אך נטענים on-demand, לא בכל turn.
 > כשמודול עובר מ-🔜 ל-✅ — מעדכנים את הסטטוס כאן ואת ה-Active Modules ב-`CLAUDE.md` ו-`README.md`.
@@ -101,7 +102,7 @@ On every turn, before responding:
 3. Recognize /command syntax per COMMAND_API.md and apply its output contracts.
 
 Module load order (canonical, from OPERATING_SYSTEM.md §3):
-  OPERATING_SYSTEM → MEMORY → DECISION_LOG → COWORK_SETUP → COMMAND_API → KNOWLEDGE (AI_*) → BUSINESS modules
+  OPERATING_SYSTEM → MEMORY → DECISION_LOG → COWORK_SETUP → COWORK_MIGRATION → COMMAND_API → KNOWLEDGE (AI_*) → BUSINESS modules
 
 Conflict hierarchy (highest wins, from §5):
   Safety > IP-protection > Kernel rules > Memory/userPreferences > Session commands > Defaults
@@ -163,7 +164,8 @@ Doctrine:
 |------|--------|--------|
 | 1.0.0 | קרנל ראשוני — עקרונות, ארכיטקטורת שכבות, רישום מודולים, Boot Block, היררכיית הכרעה | 2026-05-30 |
 | 1.0.1 | רישום `AI_CLAUDE_TOOL_SELECTOR` (שורה 13, D-018) + הוספת `CASES/ULEASE_AUDIT.md` לתיק ULease (D-019) | 2026-06-01 |
+| 1.0.2 | רישום `COWORK_MIGRATION.md` (שורה 5, Context, D-020) — תוכנית מיגרציה ל-Cowork; רה-מספור שורות 6–16 ועדכון ה-Boot Block | 2026-06-01 |
 
 **Confidentiality.** קובץ זה הוא הליבה של ה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of OPERATING_SYSTEM.md v1.0.1 —*
+— *End of OPERATING_SYSTEM.md v1.0.2 —*

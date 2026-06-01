@@ -2,10 +2,11 @@
 פלטפורמת מסחר, שיווק ומכירת רכבים חדשים — Leasing.co.il
 
 ## Active Modules
-- [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.0.1 — Kernel: core doctrine, layered architecture, module registry, the activation Boot Block, and the conflict-resolution hierarchy.
+- [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.0.2 — Kernel: core doctrine, layered architecture, module registry, the activation Boot Block, and the conflict-resolution hierarchy.
 - [`MEMORY.md`](./MEMORY.md) v1.0.0 — Persistent memory layer: schema, identity card, active focus/projects, preferences, and the read/write protocol.
-- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.6.0 — Append-only decision log: the founding OS + ULease decisions with rationale and status.
+- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.7.0 — Append-only decision log: the founding OS + ULease decisions with rationale and status.
 - [`COWORK_SETUP.md`](./COWORK_SETUP.md) v1.0.0 — Claude Cowork onboarding: 7-step setup, the Global Instructions golden tip, context-file map, and OS integration so Claude always loads your context first.
+- [`COWORK_MIGRATION.md`](./COWORK_MIGRATION.md) v1.0.0 — Practical Claude OS → Cowork migration plan: the stripping principle (hand-built plumbing deleted, IP preserved), a per-file decision table, 7 staged steps with verification gates, this repo's mapping to the target workspace, and a draft Global Instructions file.
 - [`COMMAND_API.md`](./COMMAND_API.md) v1.1.0 — CLAUDE Command API: 89 slash commands, composition operators, a prompting-frameworks library, and drop-in system prompt for the Claude Operating System.
 - [`marketing-strategy-framework.md`](./marketing-strategy-framework.md) v1.0.0 — Business layer: a 10-prompt framework for building a full marketing strategy, from customer psychology to a one-page plan.
 - [`AI_SKILL_MAP.md`](./AI_SKILL_MAP.md) v1.0.0 — The AI Skill Map: the four-stage journey (Tools → Workflows → Agentic → Architect), real-world applications, and where ULease sits on the map.

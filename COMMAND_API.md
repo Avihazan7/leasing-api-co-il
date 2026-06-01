@@ -831,6 +831,7 @@ Claude OS Root/
 ├── MEMORY.md                  ← זיכרון נמשך
 ├── DECISION_LOG.md            ← יומן החלטות
 ├── COWORK_SETUP.md            ← הקשר / אונבורדינג
+├── COWORK_MIGRATION.md        ← הקשר / מיגרציה ל-Cowork
 ├── COMMAND_API.md             ← ← זה. המסמך הזה.
 ├── marketing-strategy-framework.md   ← Business: אסטרטגיית שיווק
 ├── AI_SKILL_MAP.md · AI_PROGRESSION_PLAN.md · AI_LEARNING_RESOURCES.md · AI_7_SKILLS.md · AI_SKILLS_ACQUISITION.md · AI_CLAUDE_TOOL_SELECTOR.md   ← Knowledge
@@ -853,11 +854,12 @@ Claude OS Root/
 2. MEMORY.md
 3. DECISION_LOG.md
 4. COWORK_SETUP.md
-5. COMMAND_API.md           ← לפני הקטגוריות העסקיות
-6. marketing-strategy-framework.md
-7. AI_* (Knowledge, on-demand)
-8. INVESTOR_RELATIONS.md
-9. CASES/*.md
+5. COWORK_MIGRATION.md
+6. COMMAND_API.md           ← לפני הקטגוריות העסקיות
+7. marketing-strategy-framework.md
+8. AI_* (Knowledge, on-demand)
+9. INVESTOR_RELATIONS.md
+10. CASES/*.md
 ```
 
 ### 9.3 כללי הכרעה במצב התנגשות

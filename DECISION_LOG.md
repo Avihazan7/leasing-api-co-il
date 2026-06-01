@@ -1,7 +1,7 @@
 # DECISION_LOG.md — יומן החלטות
 
 **Module:** `DECISION_LOG.md`
-**Version:** 1.6.0
+**Version:** 1.7.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — יומן append-only (Memory layer).
 **Integrates with:** `OPERATING_SYSTEM.md` §7, `MEMORY.md`, `CASES/ULEASE*.md`
@@ -33,6 +33,7 @@
 | D-017 | 2026-06-01 | **מחירון רשמי + SLA ספקים** → `CASES/ULEASE_PRICING_SLA.md`: השוואת Ultra/Max מפורטת, עמלות מדורגות, ו-11 התחייבויות שירות (onboarding ≤48h · ליד ≤1h · uptime 99.5% · התחשבנות בזמן אמת) | סגירת W11 — הממצא האחרון בביקורת (41/41); "שירות שלא היה כמותו" מגובה במספרים | ✅ טיוטה פעילה · ⚠️ 6 ברירות-מחדל לאישור מייסד |
 | D-018 | 2026-06-01 | רישום מודול **AI_CLAUDE_TOOL_SELECTOR** (Knowledge) — "איזה Claude לבחור?" | עץ החלטה לבחירת כלי/מודל Claude נכון לכל משימה ב-OS וב-ULease (לפי מודל ההרחבה §7) | ✅ פעיל |
 | D-019 | 2026-06-01 | **ביקורת מקצה-לקצה לתיק ULease** (4 סוכנים מקבילים, קדמה כרונולוגית ל-D-015–D-017) → דוח `CASES/ULEASE_AUDIT.md` | אימות מוכנות לפני השקה וגיוס: 9🔴 / 21🟡 / 11🔵 + תוכנית תיקון ב-3 גלים; גל 1 לפני שיחות משקיעים | ✅ הושלם — כל 41 הממצאים נסגרו |
+| D-020 | 2026-06-01 | אימוץ **תוכנית מיגרציה Claude OS → Cowork** → מודול `COWORK_MIGRATION.md` (Context, שורה 5 ב-§3): הפשטת תשתית שהופכת native (loader/registry/memory plumbing/Drive workflow), שימור IP (תיקים, פקודות, מתודולוגיה), 7 שלבים עם 5 שערי-אימות והרצה מקבילה של שבועיים; אף קובץ לא נמחק מהריפו — הריפו נשאר מקור-אמת מגובה-git (אפשרות B מומלצת: הריפו עצמו כ-workspace) | Cowork ב-GA מלא (macOS+Windows, קונקטורי Google); התשתית הידנית כפולה מול היכולות ה-native — משמרים רק את מה שאין לו מקביל | ✅ תוכנית פעילה · ביצוע ידני ב-Claude Desktop |
 
 ---
 
@@ -56,7 +57,8 @@
 | 1.4.0 | הוספת D-016 — גל 2: playbook ביקוש, שערי Go-Live, תוכנית-מגירה Tech Lead, ציות | 2026-06-01 |
 | 1.5.0 | עדכון סטטוס D-019: שלושת גלי התיקון הושלמו (40/41 ממצאים; נותר W11 להכרעה) | 2026-06-01 |
 | 1.6.0 | הוספת D-017 — מחירון רשמי + SLA ספקים (`ULEASE_PRICING_SLA.md`); הביקורת נסגרה 41/41 | 2026-06-01 |
+| 1.7.0 | הוספת D-020 — תוכנית מיגרציה ל-Cowork (`COWORK_MIGRATION.md`) | 2026-06-01 |
 
 **Confidentiality.** מסמך פנימי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of DECISION_LOG.md v1.6.0 —*
+— *End of DECISION_LOG.md v1.7.0 —*
