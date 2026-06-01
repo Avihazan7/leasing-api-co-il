@@ -13,6 +13,7 @@
 - [`AI_LEARNING_RESOURCES.md`](./AI_LEARNING_RESOURCES.md) v1.0.0 — AI learning curriculum mapped to the Skill Map: resources per stage, anchored on IBM's Agentic AI & RAG (Coursera), with a personal learn-vs-delegate path.
 - [`AI_7_SKILLS.md`](./AI_7_SKILLS.md) v1.0.0 — The 7 skills to master AI in 2026, mapped to the modules already live in this OS.
 - [`AI_SKILLS_ACQUISITION.md`](./AI_SKILLS_ACQUISITION.md) v1.0.0 — Hands-on, build-to-learn skills acquisition plan (8 weeks): a real ULease project per skill (n8n, Claude agents, RAG, data) with mastery gates.
+- [`AI_TYPES.md`](./AI_TYPES.md) v1.0.0 — AI types taxonomy (Traditional · Generative · Agentic, 3×9 capabilities), each mapped to where it lives in ULease.
 - [`INVESTOR_RELATIONS.md`](./INVESTOR_RELATIONS.md) v1.0.0 — Investor relations: company, cap table, the ₪150K raise, forecast summary, and investor tracker.
 - [`CASES/ULEASE.md`](./CASES/ULEASE.md) v1.2.0 — ULease 🎯 Leasing.co.il business case: three-sided marketplace model + full monthly financial forecast (Jun 2026 → Dec 2027), with the reproducible model in `CASES/ULEASE_FORECAST.py`.
 - [`CASES/ULEASE_SPEC.md`](./CASES/ULEASE_SPEC.md) v1.0.0 — ULease end-to-end product & system spec: actors, architecture, the Ultra·Master·Max multi-agent engine, data model, integrations, and phased roadmap.
