@@ -20,7 +20,7 @@
 - העלאת האתר/אפליקציה לאוויר + חיבור `Leasing.co.il` ↔ `ULease.co.il` (hosting, דומיינים).
 - **Ingestion מספקים:** APIs + נפילה-לאחור ל-CSV, נרמול מלאי.
 - **חדר-עסקה:** חתימה דיגיטלית + תשלום/מקדמה + handoff למימון/ליסינג.
-- מנויים וחיוב חוזר (Pro / Pro Max).
+- מנויים וחיוב חוזר (Ultra / Max).
 - מימוש מנוע הסוכנים: **Ultra** (orchestration) · **Master** (Match/Pricing/Negotiation) · **Max** (ביצוע) — להתחיל ב-assist.
 - אבטחה, guardrails, monitoring, audit; הוצאת MVP ל-production יציב.
 

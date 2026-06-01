@@ -3,7 +3,8 @@
 """
 ULease 🎯 — אומדנים / ניתוח תרחישים (sensitivity)
 קורא את ULEASE_FORECAST.csv ומריץ 3 תרחישים על נקודת הרגישות המרכזית: קצב העסקאות.
-ההכנסות תלויות-העסקה (עסקה+לידים+חיתום) מוכפלות במכפיל; מנויים/פרסום/הוצאות קבועים.
+ההכנסות תלויות-העסקה (עסקה+לידים+מימון) מוכפלות במכפיל; מנויים/פרסום קבועים.
+W4: השיווק חצי-משתנה — 50% קבוע + 50% צמוד לקצב העסקאות (CAC ריאלי).
 הרצה:  python3 CASES/ULEASE_FORECAST.py && python3 CASES/ULEASE_SCENARIOS.py
 """
 import csv, os
@@ -19,10 +20,13 @@ def run(mult):
     last_total = 0.0
     for i, r in enumerate(rows):
         yr = 2026 if i < 7 else 2027
-        deal_driven = flo(r,"deal_rev") + flo(r,"lead_rev") + flo(r,"uw_rev")
+        deal_driven = flo(r,"deal_rev") + flo(r,"lead_rev") + flo(r,"fin_rev")
         indep = flo(r,"sub_rev") + flo(r,"ad_rev")
         total = mult*deal_driven + indep
-        net = total - flo(r,"opex")
+        # W4: שיווק חצי-משתנה — 50% בסיס קבוע + 50% פרופורציונלי לקצב העסקאות
+        mkt_scaled = flo(r,"marketing") * (0.5 + 0.5*mult)
+        opex = flo(r,"opex") - flo(r,"marketing") + mkt_scaled
+        net = total - opex
         cum += net; last_total = total
         a[yr]["rev"] += total; a[yr]["net"] += net
     return a, cum, last_total*12
@@ -38,4 +42,4 @@ for name, mult in SCEN:
 
 with open(os.path.join(HERE, "ULEASE_SCENARIOS.csv"), "w", newline="", encoding="utf-8-sig") as fcsv:
     csv.writer(fcsv).writerows(out)
-print("\nנכתב → ULEASE_SCENARIOS.csv · ההנחה: הוצאות קבועות (operating leverage); בפועל חלק מהשיווק יגדל עם הנפח.")
+print("\nנכתב → ULEASE_SCENARIOS.csv · הנחת W4: שיווק חצי-משתנה (50% קבוע + 50% צמוד לעסקאות); שאר ההוצאות קבועות (operating leverage).")
