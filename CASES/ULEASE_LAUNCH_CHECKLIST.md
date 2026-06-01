@@ -4,7 +4,7 @@
 **Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — צ'קליסט השקה תפעולי.
-**Integrates with:** `CASES/ULEASE_SPEC.md` (Phase 0), `CASES/ULEASE_TECH_ONBOARDING.md`, `CASES/ULEASE_FINANCE_INSURANCE.md`, `CASES/ULEASE_OUTREACH_SCRIPTS.md`, `CASES/ULEASE_DEMAND_PLAYBOOK.md`
+**Integrates with:** `CASES/ULEASE_SPEC.md` (Phase 0), `CASES/ULEASE_TECH_ONBOARDING.md`, `CASES/ULEASE_FINANCE_INSURANCE.md`, `CASES/ULEASE_OUTREACH_SCRIPTS.md`, `CASES/ULEASE_DEMAND_PLAYBOOK.md`, `CASES/ULEASE_PRICING_SLA.md`
 
 > **יעד:** לאוויר עם עסקאות אמיתיות ב**חצי השני של יוני 2026**. בעלים: A=אברהם · S=שירי · T=Tech Lead.
 > 🔴 = **שער חוסם** — אין Go-Live בלעדיו.
@@ -40,7 +40,7 @@
 ## 4. תוכן והיצע
 - [ ] Landing + הצעת ערך (A) · עמוד מנויים לדילרים (A)
 - [ ] **מלאי 7 הספקים** טעון ומאומת (A + T)
-- [ ] תמחור גלוי: עסקה (מדורג) / ליד / מנוי Ultra·Max (A)
+- [ ] תמחור גלוי באתר לפי המחירון הרשמי + עמוד SLA לספקים (`ULEASE_PRICING_SLA.md`) (A)
 
 ## 5. ביקוש (קונים) — `ULEASE_DEMAND_PLAYBOOK.md` 🆕
 - [ ] 10 עמודי SEO על Leasing.co.il + דפי נחיתה (A)
