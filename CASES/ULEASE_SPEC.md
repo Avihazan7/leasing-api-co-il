@@ -1,7 +1,7 @@
 # ULease 🎯 Leasing.co.il — איפיון מוצר ומערכת (End-to-End Spec)
 
 **Module:** `CASES/ULEASE_SPEC.md`
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — איפיון (Product & System Spec), נספח ל-`CASES/ULEASE.md`.
 **Integrates with:** `CASES/ULEASE.md`, `CASES/ULEASE_METHODOLOGY.md`, `INVESTOR_RELATIONS.md`, `OPERATING_SYSTEM.md`, `MEMORY.md`
@@ -119,7 +119,7 @@ SUPPLY  →   │  INGESTION APIs  (יבואן · ליסינג · מימון)   
 
 ## 7. מנוע Multi-agent: Ultra · Master · Max
 
-ארכיטקטורת סוכנים תלת-שכבתית — "**Ultra Master Max**":
+ארכיטקטורת סוכנים בארבע שכבות — "**Ultra Master Max**" + Guardian:
 
 | שכבה | תפקיד | סוכנים לדוגמה |
 |------|--------|----------------|
@@ -130,7 +130,7 @@ SUPPLY  →   │  INGESTION APIs  (יבואן · ליסינג · מימון)   
 
 **זרימה:** event → **Ultra** מתזמר → **Master** מחליט (תמחור/Match/מימון) → **Max** מבצע (הצעה→חוזה→מימון→חיוב) → **Guardian** מאמת ציות ורושם audit.
 
-> שלב MVP: Ultra + 2 Masters (Match, Pricing) במצב **assist** (אדם מאשר). אוטומציה מלאה מתרחבת ב-V1/V2.
+> שלב MVP: Ultra + 2 Masters (Match, Pricing) במצב **assist** (אדם מאשר) + **Guardian מינימלי** (audit-log · ניהול הסכמות · opt-out) — שער Go-Live. אוטומציה מלאה מתרחבת ב-V1/V2.
 
 ---
 
@@ -194,7 +194,7 @@ SUPPLY  →   │  INGESTION APIs  (יבואן · ליסינג · מימון)   
 
 | שלב | יעד | תוכן | מיפוי לתחזית |
 |------|-----|------|--------------|
-| **Phase 0 — MVP** | ≤ שבועיים · חצי שני יוני 26 | M1·M2·M4·M5·M8·M11 + Ultra+2 Masters (assist) + CSV/API ingestion + e-sign + מקדמה | בסיס יוני: 26 עסקאות |
+| **Phase 0 — MVP** | ≤ שבועיים · חצי שני יוני 26 | M1·M2·M4·M5·M8·M11 + Ultra+2 Masters (assist) + **Guardian מינימלי** + CSV/API ingestion + e-sign + מקדמה | בסיס יוני: 26 עסקאות |
 | **Phase 1 — Scale** | Q3–Q4 2026 | מכרז מחיר-שני (M7), מנוי Max, Financing מלא (M6), Data/Insights (M9), Advertising (M10), הרחבת agents | ראמפ H2-2026 |
 | **Phase 2 — Automate** | 2027 | אוטומציה מלאה Multi-agent, Deal Score מתקדם, אינטגרציות נוספות, scale | צמיחת 2027 |
 
@@ -212,7 +212,8 @@ GMV · עסקאות/חודש · take-rate בפועל · המרת ליד→עסק
 |------|--------|--------|
 | 1.0.0 | איפיון מוצר ומערכת ראשוני — מקצה-לקצה, Ultra·Master·Max, MVP→V2 | 2026-05-30 |
 | 1.1.0 | יישום D-015: מנויי **Ultra/Max** (M8), עמלות מדורגות 1.1%–7.77% במודל הנתונים ובזרימת הספק | 2026-06-01 |
+| 1.2.0 | גל 2 של הביקורת: **Guardian מינימלי** ב-Phase 0 (C5) — audit-log, הסכמות, opt-out; "ארבע שכבות" (W12) | 2026-06-01 |
 
 **Confidentiality.** מסמך זה וכל מנגנוני הליבה (Deal Score, Match, Pricing, Auction) הם IP חסוי של ULease 🎯 — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_SPEC.md v1.1.0 —*
+— *End of CASES/ULEASE_SPEC.md v1.2.0 —*
