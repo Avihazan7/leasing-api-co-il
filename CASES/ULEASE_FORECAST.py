@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-ULease 🎯 Leasing.co.il — Financial Forecast Model (Base Case v1.3)
+ULease 🎯 Leasing.co.il — Financial Forecast Model (Base Case v1.4)
 Horizon: יוני 2026 (בסיס השקה) → דצמבר 2027.
 כל הערכים ב-₪. כל ההנחות מפורשות וניתנות לכיול.
+הערה (W3): "נטו" = רווח תפעולי לפני מס חברות ומע"מ.
 """
 import csv, os
 
@@ -73,12 +74,15 @@ assert all(len(x)==N for x in [team_k,mkt_k,infra_k,gna_k,ad_k])
 
 # ---------------- חישוב P&L ----------------
 OPENING_CASH = 150_000  # גיוס יעד
+LAUNCH_PRORATE = 0.5    # W2: יוני = חצי-חודש השקה — מנויים נצברים, לא משולמים מלא מיום 1
+TAX_RATE = 0.23         # W3: מס חברות (אינפורמטיבי — לא מנוכה משורת ה"נטו")
 rows, cum = [], OPENING_CASH
 for i,(y,m) in enumerate(months):
     leads = deals[i]*LEADS_PER_DEAL
     deal_rev = deals[i]*DEAL_REV
     lead_rev = leads*LEAD_PRICE
     sub_rev  = ultra_subs[i]*ULTRA_PRICE + max_subs[i]*MAX_PRICE
+    if i == 0: sub_rev = round(sub_rev * LAUNCH_PRORATE)   # W2: פרו-רייטה לחודש ההשקה
     ad_rev   = ad_k[i]*K
     fin_rev  = deals[i]*FIN_PER_DEAL if (y, m) >= FIN_START else 0
     total_rev= deal_rev+lead_rev+sub_rev+ad_rev+fin_rev
@@ -125,3 +129,4 @@ print(f"\nRun-rate דצמ' 27: הכנסה חודשית {d['total_rev']:,.0f} →
 print(f"Cash מצטבר סוף 2027 (כולל גיוס 150K): {d['cum']:,.0f}")
 print(f"DEAL_REV/עסקה (משוקלל) = {DEAL_REV:,} ₪  (B2B2C {B2B2C_TAKE:.2%} × {B2B2C_MIX:.0%} + B2B {B2B_TAKE:.2%} × {B2B_MIX:.0%})")
 print(f"מרווח 2027 = {a27['net']/a27['rev']:.1%}")
+print(f"\n[W3] נטו = רווח תפעולי לפני מס. אחרי מס חברות משוער ({TAX_RATE:.0%}): 2026 ≈ {a26['net']*(1-TAX_RATE):,.0f} · 2027 ≈ {a27['net']*(1-TAX_RATE):,.0f}")

@@ -6,7 +6,7 @@ style: |
   h1, h2 { color: #c0532b; }
   strong { color: #c0532b; }
 ---
-<!-- Module: CASES/ULEASE_DECK.md | Version: 1.2.0 | Author: Avraham Bar Yochai Chazan — Claude OS | Status: Active (Pitch Deck, 13 slides) -->
+<!-- Module: CASES/ULEASE_DECK.md | Version: 1.2.0 | Author: Avraham Bar Yochai Chazan — Claude OS | Status: Active (Pitch Deck, 13 slides) | Interactive build: CASES/ULEASE_DECK.html (generated together by ULEASE_DECK.py) -->
 
 
 ---
@@ -100,10 +100,10 @@ style: |
 |---|---|---|
 | עסקאות | 314 | 1,737 |
 | GMV | ₪47.1M | ₪260.5M |
-| הכנסה | ₪2.33M | ₪12.98M |
-| נטו | ₪1.77M | ₪10.89M |
+| הכנסה | ₪2.29M | ₪12.98M |
+| נטו (תפעולי) | ₪1.74M | ₪10.89M |
 
-> *Base Case v1.3 (עמלות מדורגות) · Run-rate דצמבר 2027: ₪17.4M / שנה.*
+> *Base Case v1.4 (עמלות מדורגות) · Run-rate דצמבר 2027: ₪17.4M / שנה · נטו לפני מס.*
 
 ---
 

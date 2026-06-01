@@ -66,9 +66,9 @@ SLIDES = [
          table=dict(headers=["", "2026 (יוני–דצמ')", "2027"],
                     rows=[["עסקאות", "314", "1,737"],
                           ["GMV", "₪47.1M", "₪260.5M"],
-                          ["הכנסה", "₪2.33M", "₪12.98M"],
-                          ["נטו", "₪1.77M", "₪10.89M"]]),
-         note="Base Case v1.3 (עמלות מדורגות) · Run-rate דצמבר 2027: ₪17.4M / שנה."),
+                          ["הכנסה", "₪2.29M", "₪12.98M"],
+                          ["נטו (תפעולי)", "₪1.74M", "₪10.89M"]]),
+         note="Base Case v1.4 (עמלות מדורגות) · Run-rate דצמבר 2027: ₪17.4M / שנה · נטו לפני מס."),
     dict(title="Unit Economics 💎",
          bullets=["₪3,001 הכנסה משוקללת לעסקה (עמלות מדורגות 1.1%–7.77%)",
                   "עמלת מימון: 1% מערך העסקה מחברת המימון",
@@ -117,7 +117,8 @@ def render_md():
           f"  strong {{ color: {ACCENT}; }}\n"
           "---\n")
     meta = ("<!-- Module: CASES/ULEASE_DECK.md | Version: 1.2.0 | "
-            "Author: Avraham Bar Yochai Chazan — Claude OS | Status: Active (Pitch Deck, 13 slides) -->\n")
+            "Author: Avraham Bar Yochai Chazan — Claude OS | Status: Active (Pitch Deck, 13 slides) | "
+            "Interactive build: CASES/ULEASE_DECK.html (generated together by ULEASE_DECK.py) -->\n")
     parts = [fm + meta]
     for s in SLIDES:
         blk = [f"## {s['title']}"]

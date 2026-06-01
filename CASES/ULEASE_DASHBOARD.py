@@ -140,7 +140,7 @@ small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repea
 </style></head><body><div class="wrap">
 
 <header><h1>ULease 🎯 Leasing.co.il — Executive Dashboard</h1>
-<p>Marketplace תלת-צדדי לרכב חדש · Base Case v1.3 (עמלות מדורגות + מימון 1%) · יוני 2026 → דצמבר 2027</p></header>
+<p>Marketplace תלת-צדדי לרכב חדש · Base Case v1.4 (עמלות מדורגות · מימון 1% · פרו-רייטה) · יוני 2026 → דצמבר 2027</p></header>
 
 <div class="grid">{card_html}</div>
 
@@ -166,7 +166,7 @@ small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repea
 {"".join(f'<tr><td>{nm} (×{mu:g})</td><td>{m(scen[nm]["r27"])}</td><td>{m(scen[nm]["n27"])}</td><td>{m(scen[nm]["cash"])}</td><td>{m(scen[nm]["rr"])}</td></tr>' for nm,mu,_ in SCEN)}
 </tbody></table></div>
 <div style="margin-top:12px;font-size:.85rem;opacity:.7;margin-bottom:2px">נטו 2027 לפי תרחיש (₪)</div>{svg_scen()}
-<div class="flag">גם בתרחיש <b>השמרני</b> (−30% עסקאות) הפלטפורמה נשארת רווחית מאוד — נטו 2027 ₪8.5M. זה ה-operating leverage. הנחה: הוצאות קבועות; בפועל חלק מהשיווק יגדל עם הנפח.</div></div>
+<div class="flag">גם בתרחיש <b>השמרני</b> (−30% עסקאות) הפלטפורמה נשארת רווחית מאוד — נטו 2027 ₪8.6M. זה ה-operating leverage. הנחת W4: שיווק חצי-משתנה (50% קבוע + 50% צמוד לעסקאות).</div></div>
 
 <div class="panel"><h2>🎛️ מחוון What-If — קצב עסקאות × מט"ח</h2>
 <div class="ctrl">
@@ -179,7 +179,7 @@ small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repea
 <div><small>נטו 2027</small><b id="o_net">₪10.89M</b></div>
 <div><small>מרווח</small><b id="o_mg">84%</b></div>
 <div><small>לידים 2027</small><b>{leads27:,}</b></div></div>
-<div class="flag">מט"ח משפיע על <b>שווי העסקה</b> (רכב מיובא; בסיס USD/ILS 3.60 = ₪150K). תזת החברה: שקל חזק → גם <b>יותר נפח</b> — הזז גם את "קצב עסקאות". (אפקט הנפח אינו אוטומטי.)</div></div>
+<div class="flag">מט"ח משפיע על <b>שווי העסקה</b> (רכב מיובא; <b>3.60 = עוגן היסטורי</b> שבו ₪150K; שער השוק 29/05: 2.8152). תזת החברה: שקל חזק → גם <b>יותר נפח</b> — הזז גם את "קצב עסקאות". (אפקט הנפח אינו אוטומטי.)</div></div>
 
 <div class="panel"><h2>✅ צ'קליסט השקה — מעקב חי</h2>
 <div class="prog"><div id="clbar"></div></div><div id="clpct" style="font-weight:700;color:{ACCENT}">0%</div>
@@ -201,7 +201,7 @@ small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repea
 
 <div class="panel"><h2>📅 טיימליין השקה</h2><div class="tl">{tl_html}</div></div>
 
-<div class="panel"><small>מקור: CASES/ULEASE_FORECAST.csv (Base Case v1.3) · כיול ב-ULEASE_FORECAST.py · ליבה (Deal Score/Match/תמחור) = IP · Claude OS — Avraham Bar Yochai Chazan</small></div>
+<div class="panel"><small>מקור: CASES/ULEASE_FORECAST.csv (Base Case v1.4) · כיול ב-ULEASE_FORECAST.py · ליבה (Deal Score/Match/תמחור) = IP · Claude OS — Avraham Bar Yochai Chazan</small></div>
 
 <script>
 var boxes=[].slice.call(document.querySelectorAll('.chk input'));
