@@ -3,9 +3,9 @@
 נקודת הכניסה הראשית של ה-Claude Operating System עבור הריפו.
 
 ## Active Modules
-- `OPERATING_SYSTEM.md` v1.0.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים, Boot Block והיררכיית הכרעה.
+- `OPERATING_SYSTEM.md` v1.0.1 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים, Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.0.0 — שכבת זיכרון: schema, כרטיס זהות, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
-- `DECISION_LOG.md` v1.1.0 — יומן החלטות append-only: 13 החלטות (OS + ULease), רציונל וסטטוס.
+- `DECISION_LOG.md` v1.2.0 — יומן החלטות append-only: 14 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.0.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר ואינטגרציה עם ה-OS.
 - `COMMAND_API.md` v1.1.0 — 89 slash commands, composition operators, prompting-frameworks library, drop-in system prompt loaded.
 - `marketing-strategy-framework.md` v1.0.0 — Business: מסגרת 10 פרומפטים לבניית אסטרטגיית שיווק מלאה (פסיכולוגיה → תוכנית עמוד).
@@ -29,6 +29,7 @@
 - `CASES/ULEASE_TECH_ONBOARDING.md` v1.0.0 — Onboarding ל-Tech Lead: יום 0/1, רשימת קריאה ב-OS, ותוכנית 30·60·90.
 - `CASES/ULEASE_LAUNCH_CHECKLIST.md` v1.0.0 — צ'קליסט השקה (שבועיים): דומיין, משפטי, MVP, תוכן, outreach, QA ולוח שבועי.
 - `CASES/ULEASE_DASHBOARD.html` v1.1.0 — דשבורד מנהלים אינטראקטיבי (RTL): KPIs, גרפים (הכנסה/מזומן/עסקאות/הוצאות/רווחיות), תמהילי הכנסה והוצאה, וצ'קליסט השקה חי; נוצר ע"י `ULEASE_DASHBOARD.py`.
+- `CASES/ULEASE_AUDIT.md` v1.0.0 — דוח ביקורת מקצה-לקצה (1.6.2026): 4 סוכני ביקורת מקבילים, 41 ממצאים (9🔴/21🟡/11🔵) ותוכנית תיקון ב-3 גלים לקראת השקה וגיוס.
 
 ## Module Load Order
 1. `OPERATING_SYSTEM.md`

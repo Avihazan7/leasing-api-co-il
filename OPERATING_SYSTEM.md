@@ -1,7 +1,7 @@
 # CLAUDE OPERATING SYSTEM — Kernel
 
 **Module:** `OPERATING_SYSTEM.md`
-**Version:** 1.0.0
+**Version:** 1.0.1
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Kernel — נטען ראשון. כל שאר המודולים תלויים בו.
 **Integrates with:** כל המודולים הרשומים ב-§3 — `CLAUDE.md`, `MEMORY.md`, `DECISION_LOG.md`, `COWORK_SETUP.md`, `COMMAND_API.md`, `marketing-strategy-framework.md`, `AI_*` (Knowledge), `INVESTOR_RELATIONS.md`, `CASES/*.md`
@@ -161,7 +161,8 @@ Doctrine:
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | קרנל ראשוני — עקרונות, ארכיטקטורת שכבות, רישום מודולים, Boot Block, היררכיית הכרעה | 2026-05-30 |
+| 1.0.1 | רישום `AI_CLAUDE_TOOL_SELECTOR` (שורה 12, D-013) + הוספת `CASES/ULEASE_AUDIT.md` לתיק ULease (D-014) | 2026-06-01 |
 
 **Confidentiality.** קובץ זה הוא הליבה של ה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of OPERATING_SYSTEM.md v1.0.0 —*
+— *End of OPERATING_SYSTEM.md v1.0.1 —*
