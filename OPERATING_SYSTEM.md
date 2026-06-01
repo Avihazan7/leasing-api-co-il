@@ -53,7 +53,7 @@
 ├─ MEMORY ────── MEMORY.md · DECISION_LOG.md   מי אתה, מה זוכרים, focus/projects, החלטות
 ├─ CONTEXT ───── COWORK_SETUP.md       חיבור התיקייה, קבצי md, Global Instructions
 ├─ INTERFACE ─── COMMAND_API.md        89 פקודות /command + composition
-├─ KNOWLEDGE ─── AI_SKILL_MAP · AI_PROGRESSION_PLAN · AI_LEARNING_RESOURCES · AI_7_SKILLS · AI_SKILLS_ACQUISITION · AI_CLAUDE_TOOL_SELECTOR   ידע אישי/לימודי (on-demand)
+├─ KNOWLEDGE ─── AI_SKILL_MAP · AI_PROGRESSION_PLAN · AI_LEARNING_RESOURCES · AI_7_SKILLS · AI_SKILLS_ACQUISITION · AI_TYPES · AI_CLAUDE_TOOL_SELECTOR   ידע אישי/לימודי (on-demand)
 └─ BUSINESS ──── marketing-strategy-framework.md · INVESTOR_RELATIONS.md · CASES/*.md   הקשר עסקי נקודתי
 ```
 
@@ -78,9 +78,10 @@
 | 9 | `AI_LEARNING_RESOURCES.md` | Knowledge | ✅ פעיל | קוריקולום AI — משאבים לכל שלב |
 | 10 | `AI_7_SKILLS.md` | Knowledge | ✅ פעיל | 7 מיומנויות לשליטה ב-AI (2026) + מיפוי ל-OS |
 | 11 | `AI_SKILLS_ACQUISITION.md` | Knowledge | ✅ פעיל | תוכנית רכישת מיומנויות hands-on (8 שבועות) |
-| 12 | `AI_CLAUDE_TOOL_SELECTOR.md` | Knowledge | ✅ פעיל | עץ החלטה לבחירת כלי Claude — 12 כלים + מיפוי ל-ULease |
-| 13 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
-| 14 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית, איפיון, מתודולוגיה, גיוס ו-playbooks |
+| 12 | `AI_TYPES.md` | Knowledge | ✅ פעיל | טקסונומיית סוגי AI (Traditional·Generative·Agentic, 3×9) + מיפוי ל-ULease |
+| 13 | `AI_CLAUDE_TOOL_SELECTOR.md` | Knowledge | ✅ פעיל | עץ החלטה לבחירת כלי Claude — 12 כלים + מיפוי ל-ULease |
+| 14 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
+| 15 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית, איפיון, מתודולוגיה, גיוס, playbooks, ביקורת ומחירון/SLA |
 
 > **הערה על שכבות:** מודולי `AI_*` הם שכבת **Knowledge** — ידע אישי/לימודי שיושב לוגית בין ה-INTERFACE ל-BUSINESS. הם פעילים אך נטענים on-demand, לא בכל turn.
 > כשמודול עובר מ-🔜 ל-✅ — מעדכנים את הסטטוס כאן ואת ה-Active Modules ב-`CLAUDE.md` ו-`README.md`.
@@ -161,7 +162,7 @@ Doctrine:
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | קרנל ראשוני — עקרונות, ארכיטקטורת שכבות, רישום מודולים, Boot Block, היררכיית הכרעה | 2026-05-30 |
-| 1.0.1 | רישום `AI_CLAUDE_TOOL_SELECTOR` (שורה 12, D-013) + הוספת `CASES/ULEASE_AUDIT.md` לתיק ULease (D-014) | 2026-06-01 |
+| 1.0.1 | רישום `AI_CLAUDE_TOOL_SELECTOR` (שורה 13, D-018) + הוספת `CASES/ULEASE_AUDIT.md` לתיק ULease (D-019) | 2026-06-01 |
 
 **Confidentiality.** קובץ זה הוא הליבה של ה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 

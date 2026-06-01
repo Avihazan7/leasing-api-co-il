@@ -1,0 +1,140 @@
+# ULease 🎯 — מפת אוטומציות AI לפי פונקציה עסקית
+
+**Module:** `CASES/ULEASE_AUTOMATION_MAP.md`
+**Version:** 1.0.0
+**Author:** Avraham Bar Yochai Chazan — Claude Operating System
+**Status:** Active — Backlog אוטומציות מתועדף (Business layer, תחת CASES).
+**Source:** מבוסס על מסגרת *"546 AI Automation Ideas"* (AI Matt · Next Step Agents) — מסונן ומותאם ל-ULease.
+**Integrates with:** `CASES/ULEASE_SPEC.md`, `CASES/ULEASE_OUTBOUND_ENGINE.md`, `AI_TYPES.md`, `CASES/ULEASE_DASHBOARD.html`
+
+> **הפילוסופיה:** רוב האנשים עוצרים בפרומפטים. מעטים בונים את **המערכת שמריצה את העסק**. Build systems · Own value · **Owned, not rented** — זה בדיוק מה ש-ULease בונה.
+
+---
+
+## מקרא
+✅ **בנוי/מאופיין** (והיכן) · 🔜 **MVP** (עד ההשקה) · **V1** (Q3–Q4 26) · **V2** (2027)
+
+---
+
+## 1. 📈 מכירות ושיווק
+
+| אוטומציה | מה היא עושה ל-ULease | סטטוס |
+|-----------|----------------------|--------|
+| Lead Scoring Agent | ניקוד לידים (Haiku) | ✅ מנוע n8n שכבה 03 |
+| AI SDR / Outreach Agent | פנייה אוטומטית לספקים | ✅ מנוע n8n + סקריפטים |
+| Deal Desk Assistant | חדר-עסקה דיגיטלי | ✅ איפיון M5 |
+| Competitive Pricing Assistant | תמחור מול מחירון/שוק | 🔜 MVP (Deal Score) |
+| Churn Prediction | חיזוי נטישת מנויים | V1 |
+| ROI Calculator for Prospects | מחשבון חיסכון לקונה (כמה חסכת מול מחירון) | V1 — כלי שיווקי חזק |
+| A/B Testing Recommendations | אופטימיזציית הודעות | ✅ מנוע n8n שכבה 04 |
+
+## 2. 🤝 קליטת לקוחות (Onboarding)
+
+| אוטומציה | ל-ULease | סטטוס |
+|-----------|----------|--------|
+| Eligibility & KYC Checker | אימות זהות וזכאות | ✅ חיתום דיגיטלי שלב 1 |
+| Application Guidance Bot | ליווי בקשת מימון | ✅ חיתום שלב 3 |
+| Document Collection Assistant | איסוף מסמכי עסקה | 🔜 MVP |
+| Welcome Journey Orchestrator | מסע קליטת דילר/מנוי חדש | V1 |
+
+## 3. 🎧 שירות לקוחות
+
+| אוטומציה | ל-ULease | סטטוס |
+|-----------|----------|--------|
+| Knowledge-base Q&A Bot | שאלות על רכבים/תהליך/מימון | V1 (RAG) |
+| Order Status Tracker | סטטוס עסקה ומסירה | 🔜 MVP (חדר-עסקה) |
+| Sentiment & Escalation Monitor | ניטור תגובות והסלמה | ✅ Reply Handling (שכבה 06) |
+| Complaint Trend Analyzer | מגמות תלונות | V2 |
+
+## 4. ⚙️ תפעול
+
+| אוטומציה | ל-ULease | סטטוס |
+|-----------|----------|--------|
+| Fraud Detection Agent | זיהוי הונאות בעסקאות | ✅ Guardian (איפיון §7) |
+| Workflow Automation Designer | תכנון תהליכים | ✅ n8n |
+| Compliance Reporting Copilot | ציות: ספאם/פרטיות/רישוי | 🔜 MVP (דגלים קיימים) |
+| Incident Investigation Assistant | תחקור תקלות | V1 |
+
+## 5. 💰 כספים
+
+| אוטומציה | ל-ULease | סטטוס |
+|-----------|----------|--------|
+| Loan Underwriting Agent | חיתום מימון | ✅ ULEASE_FINANCE_INSURANCE |
+| Deal Analyzer Modeler | ניתוח כדאיות עסקה | ✅ Deal Score |
+| Cash Flow Monitor | מעקב תזרים | ✅ דשבורד |
+| Payment Reconciliation Bot | התאמת תשלומים ועמלות (1%, origination) | V1 |
+| Invoice Extraction Bot | קליטת חשבוניות ספקים | V1 |
+| P&L Commentary Drafter | פרשנות דוחות אוטומטית | V2 |
+
+## 6. 👥 משאבי אנוש
+
+| אוטומציה | ל-ULease | סטטוס |
+|-----------|----------|--------|
+| Job Description Generator | תיאורי תפקיד | ✅ ערכת הגיוס |
+| Onboarding Coach | קליטת עובד | ✅ Tech Lead Onboarding |
+| Interview Scheduler Bot | תיאום ראיונות | V1 |
+
+## 7. 💻 IT
+
+| אוטומציה | ל-ULease | סטטוס |
+|-----------|----------|--------|
+| System Health Monitor | ניטור בריאות המערכת | ✅ מנוע n8n (Health) |
+| Security Alert Triage Bot | טריאז' התראות אבטחה | V1 (Guardian) |
+| Backup & DR Monitor | גיבוי והתאוששות | 🔜 MVP (שער Go-Live) |
+
+## 8. 📦 שרשרת אספקה (= צד ההיצע/מלאי)
+
+| אוטומציה | ל-ULease | סטטוס |
+|-----------|----------|--------|
+| Inventory Management Agent | ניהול מלאי ספקים | ✅ Ingestion (M1) |
+| Demand Sensing Assistant | חיזוי ביקוש לדגמים | V1 — מזין את המכרז |
+| Stock-out / Aging Risk Predictor | חיזוי התיישנות מלאי (0 ק"מ!) | **V1 — קריטי לארביטראז'** |
+| Supplier Risk Insight Agent | סיכון ריכוז ספקים | V1 |
+
+## 9. 🤝 ספקים ושותפים
+
+| אוטומציה | ל-ULease | סטטוס |
+|-----------|----------|--------|
+| Vendor Qualification Agent | סינון ICP ספקים | ✅ מנוע n8n שכבה 02 |
+| Vendor Onboarding Assistant | קליטת ספק White-Glove | ✅ Playbooks |
+| Vendor Scorecard Analyzer | דירוג ביצועי ספקים | V1 |
+| Partner Contract / SLA Monitor | מעקב חוזים ו-SLA | V2 |
+
+## 10. 🔗 רוחבי (Cross-Function)
+
+| אוטומציה | ל-ULease | סטטוס |
+|-----------|----------|--------|
+| Dashboard Builder Agent | דשבורד מנהלים | ✅ ULEASE_DASHBOARD |
+| Forecasting Copilot | תחזית פיננסית | ✅ ULEASE_FORECAST |
+| KPI Tracking Assistant | מעקב מדדים | ✅ דשבורד |
+| Executive Briefing Bot | תקציר מנהלים שבועי אוטומטי | **V1 — קל ושווה** |
+| Trend & Anomaly Detector | זיהוי מגמות/חריגות בשוק | V2 |
+| Compliance Monitor | ניטור ציות שוטף | V1 |
+
+---
+
+## סיכום: איפה אנחנו על המפה
+
+| | כמות |
+|---|------|
+| ✅ **כבר בנוי/מאופיין** | **18 אוטומציות** — בעיקר Sales, Onboarding, Finance, Cross |
+| 🔜 **MVP** (עד ההשקה) | 5 |
+| **V1** (Q3–Q4 26) | 12 |
+| **V2** (2027) | 5 |
+
+**3 ההזדמנויות הבולטות הבאות:**
+1. **Aging Risk Predictor** (שרשרת אספקה) — חיזוי התיישנות 0 ק"מ = הלב של הארביטראז'.
+2. **ROI Calculator** (שיווק) — "כמה חסכת מול מחירון" = כלי המרה ללקוח קצה.
+3. **Executive Briefing Bot** (רוחבי) — תקציר שבועי אוטומטי לאברהם+שירי, קל לבנות ב-n8n.
+
+---
+
+## Document Control
+
+| גרסה | שינוי | תאריך |
+|------|--------|--------|
+| 1.0.0 | מפת אוטומציות מסוננת ל-ULease — 10 פונקציות, 40 אוטומציות, סטטוס ועדיפות | 2026-06-01 |
+
+**Attribution.** המסגרת: *546 AI Automation Ideas* (AI Matt · Next Step Agents). הסינון, המיפוי והתעדוף ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+
+— *End of CASES/ULEASE_AUTOMATION_MAP.md v1.0.0 —*

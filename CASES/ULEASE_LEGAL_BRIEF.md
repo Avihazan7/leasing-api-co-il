@@ -4,7 +4,7 @@
 **Version:** 1.0.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — תדריך לפגישת עו"ד (Business layer). לשליחה לעו"ד **לפני** הפגישה.
-**Integrates with:** `CASES/ULEASE_FINANCE_INSURANCE.md` §8, `CASES/ULEASE_LAUNCH_CHECKLIST.md` §2, `CASES/ULEASE_PRICING_SLA.md`, `INVESTOR_RELATIONS.md` §2, `DECISION_LOG.md` (D-003 · D-009 · D-018)
+**Integrates with:** `CASES/ULEASE_FINANCE_INSURANCE.md` §8, `CASES/ULEASE_LAUNCH_CHECKLIST.md` §2, `CASES/ULEASE_PRICING_SLA.md`, `INVESTOR_RELATIONS.md` §2, `DECISION_LOG.md` (D-003 · D-009 · D-020)
 
 > **מטרה:** פגישת עו"ד אחת ממוקדת שפותחת את שני שערי ה-Go-Live המשפטיים. המסמך בנוי כך שעו"ד יוכל לקרוא אותו ב-15 דקות ולהגיע מוכן. **ההשקה: החצי השני של יוני 2026 — הזמן קריטי.**
 
@@ -23,7 +23,7 @@
 **העובדות:**
 - ULease **לא** מלווה, **לא** מבטחת ו**לא** מחתמת בעצמה.
 - היא מציגה ללקוח הצעות ממממנים/מבטחים **מורשים**, מעבירה אליהם בקשה (בהסכמת הלקוח), והם מבצעים את החיתום וההתקשרות.
-- התמורה: חברת המימון משלמת ל-ULease **1% מערך העסקה** על עסקה ממומנת שנסגרה (D-015/D-018).
+- התמורה: חברת המימון משלמת ל-ULease **1% מערך העסקה** על עסקה ממומנת שנסגרה (D-015/D-020).
 - נתוני אשראי — רק דרך לשכת אשראי מורשית, בהסכמת הלקוח.
 
 **השאלות לחוות דעת:**
@@ -38,7 +38,7 @@
 
 צריך נוסח משפטי מחייב ל:
 - **הסכם ספק** (יבואן/ליסינג): הזרמת מלאי, עמלת הצלחה מדורגת 1.1%–2.2%, מכירת לידים, אחריות על המוצר נשארת אצל הספק.
-- **נספח SLA** — 11 ההתחייבויות שכבר הוגדרו עסקית ב-`ULEASE_PRICING_SLA.md` §4 (אושרו ב-D-018).
+- **נספח SLA** — 11 ההתחייבויות שכבר הוגדרו עסקית ב-`ULEASE_PRICING_SLA.md` §4 (אושרו ב-D-020).
 - **הסכם שותף מימון/ביטוח**: ניתוב בקשות ↔ עמלת 1%.
 
 ---
@@ -82,7 +82,7 @@
 
 1. `CASES/ULEASE.md` — התיק העסקי המלא (מודל, תמחור, תחזית).
 2. `CASES/ULEASE_FINANCE_INSURANCE.md` — מודל ניתוב המימון/ביטוח המלא + טבלת הרגולציה (§8).
-3. `CASES/ULEASE_PRICING_SLA.md` — המחירון וה-SLA שאושרו (D-018).
+3. `CASES/ULEASE_PRICING_SLA.md` — המחירון וה-SLA שאושרו (D-020).
 4. `INVESTOR_RELATIONS.md` §2 — מבנה הבעלות המוסכם.
 5. `CASES/ULEASE_OUTREACH_SCRIPTS.md` §7 — נוסח הציות לחוק הספאם.
 
