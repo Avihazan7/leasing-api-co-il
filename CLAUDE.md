@@ -3,9 +3,9 @@
 נקודת הכניסה הראשית של ה-Claude Operating System עבור הריפו.
 
 ## Active Modules
-- `OPERATING_SYSTEM.md` v1.0.1 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים, Boot Block והיררכיית הכרעה.
+- `OPERATING_SYSTEM.md` v1.0.2 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים, Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.0.0 — שכבת זיכרון: schema, כרטיס זהות, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
-- `DECISION_LOG.md` v1.6.0 — יומן החלטות append-only: 17 החלטות (OS + ULease), רציונל וסטטוס.
+- `DECISION_LOG.md` v1.7.0 — יומן החלטות append-only: 20 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.0.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר ואינטגרציה עם ה-OS.
 - `COMMAND_API.md` v1.1.0 — 89 slash commands, composition operators, prompting-frameworks library, drop-in system prompt loaded.
 - `marketing-strategy-framework.md` v1.0.0 — Business: מסגרת 10 פרומפטים לבניית אסטרטגיית שיווק מלאה (פסיכולוגיה → תוכנית עמוד).
@@ -16,6 +16,7 @@
 - `AI_SKILLS_ACQUISITION.md` v1.0.0 — תוכנית רכישת מיומנויות hands-on (8 שבועות, Build-to-Learn): פרויקט אמיתי ב-ULease לכל מיומנות, שערי-שליטה.
 - `AI_TYPES.md` v1.0.0 — טקסונומיית סוגי AI (Traditional·Generative·Agentic, 3×9 יכולות) + מיפוי מלא ל-ULease ולמפת המיומנויות.
 - `AI_CLAUDE_TOOL_SELECTOR.md` v1.0.0 — "איזה Claude לבחור?": עץ החלטה ל-12 כלי Claude (Chat · Code · Cowork · Skills · Routines…), מודלים מומלצים, ומיפוי למשימות ה-OS ו-ULease.
+- `AI_RAG_DESIGN.md` v1.0.0 — תכנון RAG: 15 הטעויות ששוברות מערכות RAG ב-Retrieval + פתרונות, ב-4 שכבות, ממופות לרכיבי ULease (Deal Score, Q&A Bot) עם צ'קליסט design review ל-Tech Lead.
 - `INVESTOR_RELATIONS.md` v1.2.0 — IR: חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים.
 - `CASES/ULEASE.md` v1.4.0 — תיק ULease 🎯 Leasing.co.il: מודל Marketplace תלת-צדדי + תחזית פיננסית (יוני 26 → דצמ' 27).
 - `CASES/ULEASE_SPEC.md` v1.3.0 — איפיון מוצר ומערכת מקצה-לקצה: שחקנים, ארכיטקטורה, Multi-agent (Ultra·Master·Max), מודל נתונים, אינטגרציות ו-roadmap.
@@ -42,7 +43,7 @@
 4. `COWORK_SETUP.md`          ← חיבור התיקייה וטעינת ההקשר (אונבורדינג)
 5. `COMMAND_API.md`           ← לפני הקטגוריות העסקיות
 6. `marketing-strategy-framework.md`  ← Business: אסטרטגיית שיווק
-7. `AI_*` (SKILL_MAP · PROGRESSION_PLAN · LEARNING_RESOURCES · 7_SKILLS · SKILLS_ACQUISITION · TYPES · CLAUDE_TOOL_SELECTOR)  ← Knowledge (on-demand)
+7. `AI_*` (SKILL_MAP · PROGRESSION_PLAN · LEARNING_RESOURCES · 7_SKILLS · SKILLS_ACQUISITION · TYPES · CLAUDE_TOOL_SELECTOR · RAG_DESIGN)  ← Knowledge (on-demand)
 8. `INVESTOR_RELATIONS.md`    ← שכבת עסק: משקיעים וגיוס
 9. `CASES/*.md`               ← תיקים פעילים (ULease 🎯)
 

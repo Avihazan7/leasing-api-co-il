@@ -2,9 +2,9 @@
 פלטפורמת מסחר, שיווק ומכירת רכבים חדשים — Leasing.co.il
 
 ## Active Modules
-- [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.0.1 — Kernel: core doctrine, layered architecture, module registry, the activation Boot Block, and the conflict-resolution hierarchy.
+- [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.0.2 — Kernel: core doctrine, layered architecture, module registry, the activation Boot Block, and the conflict-resolution hierarchy.
 - [`MEMORY.md`](./MEMORY.md) v1.0.0 — Persistent memory layer: schema, identity card, active focus/projects, preferences, and the read/write protocol.
-- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.6.0 — Append-only decision log: the founding OS + ULease decisions with rationale and status.
+- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.7.0 — Append-only decision log: the founding OS + ULease decisions with rationale and status.
 - [`COWORK_SETUP.md`](./COWORK_SETUP.md) v1.0.0 — Claude Cowork onboarding: 7-step setup, the Global Instructions golden tip, context-file map, and OS integration so Claude always loads your context first.
 - [`COMMAND_API.md`](./COMMAND_API.md) v1.1.0 — CLAUDE Command API: 89 slash commands, composition operators, a prompting-frameworks library, and drop-in system prompt for the Claude Operating System.
 - [`marketing-strategy-framework.md`](./marketing-strategy-framework.md) v1.0.0 — Business layer: a 10-prompt framework for building a full marketing strategy, from customer psychology to a one-page plan.
@@ -15,6 +15,7 @@
 - [`AI_SKILLS_ACQUISITION.md`](./AI_SKILLS_ACQUISITION.md) v1.0.0 — Hands-on, build-to-learn skills acquisition plan (8 weeks): a real ULease project per skill (n8n, Claude agents, RAG, data) with mastery gates.
 - [`AI_TYPES.md`](./AI_TYPES.md) v1.0.0 — AI types taxonomy (Traditional · Generative · Agentic, 3×9 capabilities), each mapped to where it lives in ULease.
 - [`AI_CLAUDE_TOOL_SELECTOR.md`](./AI_CLAUDE_TOOL_SELECTOR.md) v1.0.0 — "Which Claude should you use?": a decision tree over 12 Claude tools (Chat · Code · Cowork · Skills · Routines…), recommended models, and the mapping to OS/ULease workflows.
+- [`AI_RAG_DESIGN.md`](./AI_RAG_DESIGN.md) v1.0.0 — RAG design playbook: the 15 retrieval-layer mistakes that break RAG systems + their fixes, grouped into 4 layers and mapped to ULease components (Deal Score knowledge base, Q&A bot), with a Tech-Lead design-review checklist and MVP→V2 priorities.
 - [`INVESTOR_RELATIONS.md`](./INVESTOR_RELATIONS.md) v1.2.0 — Investor relations: company, cap table, the ₪150K raise, forecast summary, and investor tracker.
 - [`CASES/ULEASE.md`](./CASES/ULEASE.md) v1.4.0 — ULease 🎯 Leasing.co.il business case: three-sided marketplace model + full monthly financial forecast (Jun 2026 → Dec 2027), with the reproducible model in `CASES/ULEASE_FORECAST.py`.
 - [`CASES/ULEASE_SPEC.md`](./CASES/ULEASE_SPEC.md) v1.3.0 — ULease end-to-end product & system spec: actors, architecture, the Ultra·Master·Max multi-agent engine, data model, integrations, and phased roadmap.

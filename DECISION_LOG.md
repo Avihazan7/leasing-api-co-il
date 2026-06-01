@@ -1,7 +1,7 @@
 # DECISION_LOG.md — יומן החלטות
 
 **Module:** `DECISION_LOG.md`
-**Version:** 1.6.0
+**Version:** 1.7.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — יומן append-only (Memory layer).
 **Integrates with:** `OPERATING_SYSTEM.md` §7, `MEMORY.md`, `CASES/ULEASE*.md`
@@ -33,6 +33,7 @@
 | D-017 | 2026-06-01 | **מחירון רשמי + SLA ספקים** → `CASES/ULEASE_PRICING_SLA.md`: השוואת Ultra/Max מפורטת, עמלות מדורגות, ו-11 התחייבויות שירות (onboarding ≤48h · ליד ≤1h · uptime 99.5% · התחשבנות בזמן אמת) | סגירת W11 — הממצא האחרון בביקורת (41/41); "שירות שלא היה כמותו" מגובה במספרים | ✅ טיוטה פעילה · ⚠️ 6 ברירות-מחדל לאישור מייסד |
 | D-018 | 2026-06-01 | רישום מודול **AI_CLAUDE_TOOL_SELECTOR** (Knowledge) — "איזה Claude לבחור?" | עץ החלטה לבחירת כלי/מודל Claude נכון לכל משימה ב-OS וב-ULease (לפי מודל ההרחבה §7) | ✅ פעיל |
 | D-019 | 2026-06-01 | **ביקורת מקצה-לקצה לתיק ULease** (4 סוכנים מקבילים, קדמה כרונולוגית ל-D-015–D-017) → דוח `CASES/ULEASE_AUDIT.md` | אימות מוכנות לפני השקה וגיוס: 9🔴 / 21🟡 / 11🔵 + תוכנית תיקון ב-3 גלים; גל 1 לפני שיחות משקיעים | ✅ הושלם — כל 41 הממצאים נסגרו |
+| D-020 | 2026-06-01 | רישום מודול **AI_RAG_DESIGN** (Knowledge) — 15 טעויות תכנון ששוברות מערכות RAG ב-Retrieval + פתרונות, מקובצות ל-4 שכבות וממופות לרכיבי ULease | רוב מערכות RAG נשברות באחזור, לא ב-LLM; בסיס-הידע של Deal Score וה-Q&A Bot תלויים בזה — צ'קליסט design review מול ה-Tech Lead (שבוע 7 ב-`AI_SKILLS_ACQUISITION.md`) | ✅ פעיל |
 
 ---
 
@@ -56,7 +57,8 @@
 | 1.4.0 | הוספת D-016 — גל 2: playbook ביקוש, שערי Go-Live, תוכנית-מגירה Tech Lead, ציות | 2026-06-01 |
 | 1.5.0 | עדכון סטטוס D-019: שלושת גלי התיקון הושלמו (40/41 ממצאים; נותר W11 להכרעה) | 2026-06-01 |
 | 1.6.0 | הוספת D-017 — מחירון רשמי + SLA ספקים (`ULEASE_PRICING_SLA.md`); הביקורת נסגרה 41/41 | 2026-06-01 |
+| 1.7.0 | הוספת D-020 — רישום מודול `AI_RAG_DESIGN.md` (תכנון RAG, Knowledge) | 2026-06-01 |
 
 **Confidentiality.** מסמך פנימי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of DECISION_LOG.md v1.6.0 —*
+— *End of DECISION_LOG.md v1.7.0 —*
