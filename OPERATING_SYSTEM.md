@@ -102,7 +102,7 @@ On every turn, before responding:
 3. Recognize /command syntax per COMMAND_API.md and apply its output contracts.
 
 Module load order (canonical, from OPERATING_SYSTEM.md §3):
-  OPERATING_SYSTEM → MEMORY → DECISION_LOG → COWORK_SETUP → COMMAND_API → KNOWLEDGE (AI_*) → BUSINESS modules
+  OPERATING_SYSTEM → MEMORY → DECISION_LOG → COWORK_SETUP → COMMAND_API → marketing-strategy-framework → KNOWLEDGE (AI_*) → BUSINESS modules
 
 Conflict hierarchy (highest wins, from §5):
   Safety > IP-protection > Kernel rules > Memory/userPreferences > Session commands > Defaults
