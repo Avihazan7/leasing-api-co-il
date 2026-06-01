@@ -55,6 +55,7 @@ tl_html="".join(f'<div class="step"><b>{t}</b>{d}</div>' for t,d in TL)
 take_blended=K["rev27"]/K["gmv27"] if K["gmv27"] else 0
 mkt27=S(y27,"marketing"); cac=mkt27/deals27i if deals27i else 0
 contrib=4995+990; ltv_pro,ltv_promax=4500*24,7700*24; ltv_cac=contrib/cac if cac else 0
+cpl=mkt27/leads27 if leads27 else 0  # עלות לליד (שיווק ÷ לידים)
 maxdeals=int(max(r["deals"] for r in rows))
 
 def m(n): return f"₪{n/1e6:.2f}M" if abs(n)>=1e6 else f"₪{n/1e3:.0f}K"
@@ -169,15 +170,23 @@ small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repea
 <li><b>הפער</b> בין מחירון לעלות-יבואן הוא הארביטראז' ש-ULease לוכדת דיגיטלית</li></ul>
 <div class="flag">נתונים להמחשה — לאמת מול עסקאות אמת.</div></div>
 
-<div class="panel"><h2>📐 Unit Economics</h2>
+<div class="panel"><h2>📐 Unit Economics — חי (מחובר ל-Outbound Engine)</h2>
+<div class="ctrl">
+<div><label>Churn מנויים חודשי: <b id="chv">2.0%</b></label><input id="ch" type="range" min="10" max="100" value="20"></div>
+<div><label>המרת ליד→עסקה: <b id="cvv">20%</b></label><input id="cv" type="range" min="10" max="35" value="20"></div>
+<div><label>Outbound — עלות לפגישה (CPM): <b id="cpv">₪214</b></label><input id="cp" type="range" min="100" max="600" value="214"></div>
+<div><label>סגירת ספק מפגישה: <b id="clv">40%</b></label><input id="cl" type="range" min="20" max="60" value="40"></div></div>
 <div class="out">
-<div><small>Take Rate (עסקה)</small><b>3.33%</b></div>
+<div><small>Take Rate עסקה</small><b>3.33%</b></div>
 <div><small>Take משוקלל</small><b>{take_blended*100:.1f}%</b></div>
-<div><small>CAC (משוער/עסקה)</small><b>₪{cac:,.0f}</b></div>
 <div><small>תרומה/עסקה</small><b>₪{contrib:,.0f}</b></div>
-<div><small>LTV מנוי (24ח')</small><b>₪{ltv_pro/1000:.0f}K–{ltv_promax/1000:.0f}K</b></div>
-<div><small>LTV/CAC</small><b>~{ltv_cac:.0f}x</b></div></div>
-<div class="flag">CAC = שיווק 2027 ÷ עסקאות (משוער; CAC אמת תלוי במקור הלידים). LTV מנוי לפי 24 ח' (churn 2% → LTV גבוה יותר).</div></div>
+<div><small>LTV מנוי Pro</small><b id="u_lp">₪225K</b></div>
+<div><small>LTV Pro Max</small><b id="u_lx">₪385K</b></div>
+<div><small>CAC / עסקה</small><b id="u_cd">₪396</b></div>
+<div><small>CAC / ספק (Outbound)</small><b id="u_cs">₪535</b></div>
+<div><small>יחס עסקה (תרומה/CAC)</small><b id="u_rd">15x</b></div>
+<div><small>יחס מנוי (LTV/CAC ספק)</small><b id="u_rs">420x</b></div></div>
+<div class="flag">עלות-ליד ₪{cpl:.0f} (שיווק 2027 ÷ לידים, מהמודל) · LTV = ARPU ÷ churn · CAC ספק = CPM ÷ סגירה (מנוע ה-Outbound). הזז את המחוונים וראה את הכלכלה חיה.</div></div>
 
 <div class="panel"><h2>🌍 TAM / SAM / SOM (אומדן)</h2>
 <div class="funnel">
@@ -279,6 +288,29 @@ boxes.forEach(function(b){{b.addEventListener('change',upd);}});upd();
   document.getElementById('o_mg').textContent=Math.round(mg)+'%';
  }}
  dm.addEventListener('input',calc);fx.addEventListener('input',calc);calc();
+}})();
+</script>
+<script>
+(function(){{
+ var CPL={cpl:.2f}, CONTRIB=5985, PRO=4500, PMX=7700;
+ var ch=document.getElementById('ch'),cv=document.getElementById('cv'),cp=document.getElementById('cp'),cl=document.getElementById('cl');
+ if(!ch||!cv||!cp||!cl) return;
+ function mm(n){{return Math.abs(n)>=1e6?'₪'+(n/1e6).toFixed(2)+'M':'₪'+Math.round(n/1e3)+'K';}}
+ function calc2(){{
+  var churn=ch.value/1000, conv=cv.value/100, cpm=+cp.value, close=cl.value/100;
+  var ltvP=PRO/churn, ltvX=PMX/churn, cacD=CPL/conv, cacS=cpm/close;
+  document.getElementById('chv').textContent=(ch.value/10).toFixed(1)+'%';
+  document.getElementById('cvv').textContent=cv.value+'%';
+  document.getElementById('cpv').textContent='₪'+cp.value;
+  document.getElementById('clv').textContent=cl.value+'%';
+  document.getElementById('u_lp').textContent=mm(ltvP);
+  document.getElementById('u_lx').textContent=mm(ltvX);
+  document.getElementById('u_cd').textContent='₪'+Math.round(cacD).toLocaleString();
+  document.getElementById('u_cs').textContent='₪'+Math.round(cacS).toLocaleString();
+  document.getElementById('u_rd').textContent=Math.round(CONTRIB/cacD)+'x';
+  document.getElementById('u_rs').textContent=Math.round(ltvP/cacS)+'x';
+ }}
+ [ch,cv,cp,cl].forEach(function(s){{s.addEventListener('input',calc2);}});calc2();
 }})();
 </script>
 </div></body></html>"""
