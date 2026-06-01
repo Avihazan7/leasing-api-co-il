@@ -5,7 +5,7 @@
 ## Active Modules
 - `OPERATING_SYSTEM.md` v1.0.1 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים, Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.0.0 — שכבת זיכרון: schema, כרטיס זהות, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
-- `DECISION_LOG.md` v1.6.0 — יומן החלטות append-only: 17 החלטות (OS + ULease), רציונל וסטטוס.
+- `DECISION_LOG.md` v1.7.0 — יומן החלטות append-only: 20 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.0.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר ואינטגרציה עם ה-OS.
 - `COMMAND_API.md` v1.1.0 — 89 slash commands, composition operators, prompting-frameworks library, drop-in system prompt loaded.
 - `marketing-strategy-framework.md` v1.0.0 — Business: מסגרת 10 פרומפטים לבניית אסטרטגיית שיווק מלאה (פסיכולוגיה → תוכנית עמוד).
@@ -25,7 +25,8 @@
 - `CASES/ULEASE_IMPORTER_PLAYBOOK.md` v1.1.0 — Playbook מו"מ מול יבואני רכב: כאב, יתרונות, "שירות שלא היה כמותו", סקריפט, התנגדויות ופיילוט.
 - `CASES/ULEASE_LEASING_PLAYBOOK.md` v1.1.0 — Playbook מו"מ ליבואנים מקבילים (reach/מט"ח/אמון) וחברות ליסינג (disposal דו-כיווני + sourcing במכרז מחיר-שני).
 - `CASES/ULEASE_DEMAND_PLAYBOOK.md` v1.0.0 — Playbook צד-הביקוש: יחידת כלכלה (CPL ₪103, ROI ×4.9), 3 פרסונות Big Five, 6 ערוצי רכישה, משפך, ציות ו-KPIs — סוגר את ממצא C4.
-- `CASES/ULEASE_PRICING_SLA.md` v1.0.0 — מחירון רשמי + SLA ספקים: עמלות מדורגות, השוואת Ultra/Max, ו-11 התחייבויות שירות (ingestion, uptime, התחשבנות) — סוגר את ממצא W11.
+- `CASES/ULEASE_PRICING_SLA.md` v1.1.0 — מחירון רשמי + SLA ספקים: עמלות מדורגות, השוואת Ultra/Max, ו-11 התחייבויות שירות (ingestion, uptime, התחשבנות) — סוגר את ממצא W11.
+- `CASES/ULEASE_LEGAL_BRIEF.md` v1.0.0 — תדריך משפטי לעו"ד: 2 שאלות Go-Live (רישוי ניתוב מימון, הסכם ספק/SLA) + 6 נושאים, תוצרים מבוקשים ולוח זמנים — לשליחה לפני הפגישה.
 - `CASES/ULEASE_FINANCE_INSURANCE.md` v1.1.0 — מימון/ביטוח + חיתום דיגיטלי מקצה-לקצה: שותפים, זרימת חיתום, ניתוב רב-מלווה, התאמת Big Five, ודגלי רגולציה.
 - `CASES/ULEASE_OUTREACH_SCRIPTS.md` v1.2.0 — סקריפטים לפנייה (שיחה/מייל/וואטסאפ) ל-4 סגמנטי היצע + follow-up.
 - `CASES/ULEASE_OUTBOUND_ENGINE.md` v1.1.0 — בלופרינט מנוע outbound (n8n + Claude): 8 שכבות לאקווזיציית צד-היצע, מודלי Haiku/Sonnet, KPIs.
