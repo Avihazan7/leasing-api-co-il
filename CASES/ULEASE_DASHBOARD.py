@@ -51,6 +51,13 @@ TL=[("יוני · שבוע 1","חברה + דומיין + תשתית + ingestion"
     ("חצי-שני יוני 26","🚀 Go-Live — 26 עסקאות"),("Q3–Q4 2026","Scale: מכרז · Pro Max · n8n"),("2027","Architect + צמיחה")]
 tl_html="".join(f'<div class="step"><b>{t}</b>{d}</div>' for t,d in TL)
 
+# מטריקות משקיע (חלקן אומדנים)
+take_blended=K["rev27"]/K["gmv27"] if K["gmv27"] else 0
+mkt27=S(y27,"marketing"); cac=mkt27/deals27i if deals27i else 0
+contrib=4995+990; ltv_pro,ltv_promax=4500*24,7700*24; ltv_cac=contrib/cac if cac else 0
+cpl=mkt27/leads27 if leads27 else 0  # עלות לליד (שיווק ÷ לידים)
+maxdeals=int(max(r["deals"] for r in rows))
+
 def m(n): return f"₪{n/1e6:.2f}M" if abs(n)>=1e6 else f"₪{n/1e3:.0f}K"
 def f(n): return f"{n:,.0f}"
 
@@ -152,6 +159,58 @@ small{{opacity:.55}} @media(max-width:760px){{.grid{{grid-template-columns:repea
 <div class="panel"><h2>📊 Funnel — לידים → עסקאות → מסירות (2027)</h2>{funnel_html()}
 <small style="display:block;margin-top:8px">המרה: לידים→עסקאות ~20% · עסקאות→מסירות ~95%</small></div>
 
+<div class="panel"><h2>💱 Proof of Arbitrage</h2>
+<div class="funnel">
+<div class="seg" style="width:100%;background:#9b8557">מחירון ₪165K</div>
+<div class="seg" style="width:82%;background:#2a6f6b">עלות יבואן (אחרי FX) ₪135K</div>
+<div class="seg" style="width:91%;background:{ACCENT}">עסקה ב-ULease ₪150K</div></div>
+<ul style="margin-top:10px">
+<li><b>מט"ח:</b> USD/ILS 3.60→2.81 (~22% התחזקות שקל) → מרווח יבואן מתרחב</li>
+<li><b>0 ק"מ / גיולים:</b> מלאי תקוע מאמצע 2025 → לחץ למכירה בהנחה</li>
+<li><b>הפער</b> בין מחירון לעלות-יבואן הוא הארביטראז' ש-ULease לוכדת דיגיטלית</li></ul>
+<div class="flag">נתונים להמחשה — לאמת מול עסקאות אמת.</div></div>
+
+<div class="panel"><h2>📐 Unit Economics — חי (מחובר ל-Outbound Engine)</h2>
+<div class="ctrl">
+<div><label>Churn מנויים חודשי: <b id="chv">2.0%</b></label><input id="ch" type="range" min="10" max="100" value="20"></div>
+<div><label>המרת ליד→עסקה: <b id="cvv">20%</b></label><input id="cv" type="range" min="10" max="35" value="20"></div>
+<div><label>Outbound — עלות לפגישה (CPM): <b id="cpv">₪214</b></label><input id="cp" type="range" min="100" max="600" value="214"></div>
+<div><label>סגירת ספק מפגישה: <b id="clv">40%</b></label><input id="cl" type="range" min="20" max="60" value="40"></div></div>
+<div class="out">
+<div><small>Take Rate עסקה</small><b>3.33%</b></div>
+<div><small>Take משוקלל</small><b>{take_blended*100:.1f}%</b></div>
+<div><small>תרומה/עסקה</small><b>₪{contrib:,.0f}</b></div>
+<div><small>LTV מנוי Pro</small><b id="u_lp">₪225K</b></div>
+<div><small>LTV Pro Max</small><b id="u_lx">₪385K</b></div>
+<div><small>CAC / עסקה</small><b id="u_cd">₪396</b></div>
+<div><small>CAC / ספק (Outbound)</small><b id="u_cs">₪535</b></div>
+<div><small>יחס עסקה (תרומה/CAC)</small><b id="u_rd">15x</b></div>
+<div><small>יחס מנוי (LTV/CAC ספק)</small><b id="u_rs">420x</b></div></div>
+<div class="flag">עלות-ליד ₪{cpl:.0f} (שיווק 2027 ÷ לידים, מהמודל) · LTV = ARPU ÷ churn · CAC ספק = CPM ÷ סגירה (מנוע ה-Outbound). הזז את המחוונים וראה את הכלכלה חיה.</div></div>
+
+<div class="panel"><h2>🌍 TAM / SAM / SOM (אומדן)</h2>
+<div class="funnel">
+<div class="seg" style="width:100%;background:#2a6f6b">TAM · רכב חדש בישראל ~₪38B/שנה</div>
+<div class="seg" style="width:58%;background:{ACCENT}">SAM · פלח דיגיטלי ~₪11B</div>
+<div class="seg" style="width:26%;background:#e0894f">SOM · בר-השגה 18ח' ~₪300M</div></div>
+<div class="flag">אומדנים: ~250K כלי רכב/שנה × ₪150K = TAM · SAM ~30% (0ק"מ/גיולים/דיגיטלי) · SOM ≈ תחזית ה-GMV שלנו. לאמת.</div></div>
+
+<div class="panel"><h2>❤️ Marketplace Health</h2>
+<div class="out">
+<div><small>המרת ליד→עסקה</small><b>20%</b></div>
+<div><small>Take משוקלל</small><b>{take_blended*100:.1f}%</b></div>
+<div><small>ספקים פעילים</small><b>7+</b></div>
+<div><small>עסקאות/חודש (שיא)</small><b>{maxdeals}</b></div>
+<div><small>זמן-לעסקה</small><b>דקות</b></div>
+<div><small>נזילות היצע↔ביקוש</small><b>🟢 בריאה</b></div></div></div>
+
+<div class="panel"><h2>🤖 AI Agent Layer — Ultra · Master · Max</h2><ul>
+<li><b>🛰️ Ultra</b> — Orchestrator: ניתוב event + ניהול state עסקה</li>
+<li><b>🧠 Master</b> — <span class="pill">Match</span><span class="pill">Pricing</span><span class="pill">Negotiation</span><span class="pill">Financing</span><span class="pill">Compliance</span></li>
+<li><b>⚙️ Max</b> — <span class="pill">Offer</span><span class="pill">Contract/e-Sign</span><span class="pill">Financing-Submit</span><span class="pill">Billing</span></li>
+<li><b>🛡️ Guardian</b> — אבטחה · IP · אתיקה</li></ul>
+<div class="flag">סטטוס: MVP ב-assist (אדם מאשר) → V1 אוטומציה מלאה. פירוט: ULEASE_SPEC.md §7.</div></div>
+
 <div class="panel"><h2>💸 הוצאות חודשיות (₪) + תמהיל 2027</h2>{svg_bars([r['opex'] for r in rows], labels, color="#7a5c3e")}
 <div style="margin-top:10px">{svg_stacked(exp27)}</div><div style="margin-top:8px">{legend(exp27)}</div></div>
 
@@ -229,6 +288,29 @@ boxes.forEach(function(b){{b.addEventListener('change',upd);}});upd();
   document.getElementById('o_mg').textContent=Math.round(mg)+'%';
  }}
  dm.addEventListener('input',calc);fx.addEventListener('input',calc);calc();
+}})();
+</script>
+<script>
+(function(){{
+ var CPL={cpl:.2f}, CONTRIB=5985, PRO=4500, PMX=7700;
+ var ch=document.getElementById('ch'),cv=document.getElementById('cv'),cp=document.getElementById('cp'),cl=document.getElementById('cl');
+ if(!ch||!cv||!cp||!cl) return;
+ function mm(n){{return Math.abs(n)>=1e6?'₪'+(n/1e6).toFixed(2)+'M':'₪'+Math.round(n/1e3)+'K';}}
+ function calc2(){{
+  var churn=ch.value/1000, conv=cv.value/100, cpm=+cp.value, close=cl.value/100;
+  var ltvP=PRO/churn, ltvX=PMX/churn, cacD=CPL/conv, cacS=cpm/close;
+  document.getElementById('chv').textContent=(ch.value/10).toFixed(1)+'%';
+  document.getElementById('cvv').textContent=cv.value+'%';
+  document.getElementById('cpv').textContent='₪'+cp.value;
+  document.getElementById('clv').textContent=cl.value+'%';
+  document.getElementById('u_lp').textContent=mm(ltvP);
+  document.getElementById('u_lx').textContent=mm(ltvX);
+  document.getElementById('u_cd').textContent='₪'+Math.round(cacD).toLocaleString();
+  document.getElementById('u_cs').textContent='₪'+Math.round(cacS).toLocaleString();
+  document.getElementById('u_rd').textContent=Math.round(CONTRIB/cacD)+'x';
+  document.getElementById('u_rs').textContent=Math.round(ltvP/cacS)+'x';
+ }}
+ [ch,cv,cp,cl].forEach(function(s){{s.addEventListener('input',calc2);}});calc2();
 }})();
 </script>
 </div></body></html>"""

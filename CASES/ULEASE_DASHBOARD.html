@@ -43,6 +43,58 @@ small{opacity:.55} @media(max-width:760px){.grid{grid-template-columns:repeat(2,
 <div class="panel"><h2>📊 Funnel — לידים → עסקאות → מסירות (2027)</h2><div class="funnel"><div class="seg" style="width:100%;background:#e0894f">לידים: 8,685</div><div class="seg" style="width:38%;background:#c0532b">עסקאות: 1,737 · 20% מהקודם</div><div class="seg" style="width:37%;background:#2a6f6b">מסירות: 1,650 · 95% מהקודם</div></div>
 <small style="display:block;margin-top:8px">המרה: לידים→עסקאות ~20% · עסקאות→מסירות ~95%</small></div>
 
+<div class="panel"><h2>💱 Proof of Arbitrage</h2>
+<div class="funnel">
+<div class="seg" style="width:100%;background:#9b8557">מחירון ₪165K</div>
+<div class="seg" style="width:82%;background:#2a6f6b">עלות יבואן (אחרי FX) ₪135K</div>
+<div class="seg" style="width:91%;background:#c0532b">עסקה ב-ULease ₪150K</div></div>
+<ul style="margin-top:10px">
+<li><b>מט"ח:</b> USD/ILS 3.60→2.81 (~22% התחזקות שקל) → מרווח יבואן מתרחב</li>
+<li><b>0 ק"מ / גיולים:</b> מלאי תקוע מאמצע 2025 → לחץ למכירה בהנחה</li>
+<li><b>הפער</b> בין מחירון לעלות-יבואן הוא הארביטראז' ש-ULease לוכדת דיגיטלית</li></ul>
+<div class="flag">נתונים להמחשה — לאמת מול עסקאות אמת.</div></div>
+
+<div class="panel"><h2>📐 Unit Economics — חי (מחובר ל-Outbound Engine)</h2>
+<div class="ctrl">
+<div><label>Churn מנויים חודשי: <b id="chv">2.0%</b></label><input id="ch" type="range" min="10" max="100" value="20"></div>
+<div><label>המרת ליד→עסקה: <b id="cvv">20%</b></label><input id="cv" type="range" min="10" max="35" value="20"></div>
+<div><label>Outbound — עלות לפגישה (CPM): <b id="cpv">₪214</b></label><input id="cp" type="range" min="100" max="600" value="214"></div>
+<div><label>סגירת ספק מפגישה: <b id="clv">40%</b></label><input id="cl" type="range" min="20" max="60" value="40"></div></div>
+<div class="out">
+<div><small>Take Rate עסקה</small><b>3.33%</b></div>
+<div><small>Take משוקלל</small><b>6.5%</b></div>
+<div><small>תרומה/עסקה</small><b>₪5,985</b></div>
+<div><small>LTV מנוי Pro</small><b id="u_lp">₪225K</b></div>
+<div><small>LTV Pro Max</small><b id="u_lx">₪385K</b></div>
+<div><small>CAC / עסקה</small><b id="u_cd">₪396</b></div>
+<div><small>CAC / ספק (Outbound)</small><b id="u_cs">₪535</b></div>
+<div><small>יחס עסקה (תרומה/CAC)</small><b id="u_rd">15x</b></div>
+<div><small>יחס מנוי (LTV/CAC ספק)</small><b id="u_rs">420x</b></div></div>
+<div class="flag">עלות-ליד ₪79 (שיווק 2027 ÷ לידים, מהמודל) · LTV = ARPU ÷ churn · CAC ספק = CPM ÷ סגירה (מנוע ה-Outbound). הזז את המחוונים וראה את הכלכלה חיה.</div></div>
+
+<div class="panel"><h2>🌍 TAM / SAM / SOM (אומדן)</h2>
+<div class="funnel">
+<div class="seg" style="width:100%;background:#2a6f6b">TAM · רכב חדש בישראל ~₪38B/שנה</div>
+<div class="seg" style="width:58%;background:#c0532b">SAM · פלח דיגיטלי ~₪11B</div>
+<div class="seg" style="width:26%;background:#e0894f">SOM · בר-השגה 18ח' ~₪300M</div></div>
+<div class="flag">אומדנים: ~250K כלי רכב/שנה × ₪150K = TAM · SAM ~30% (0ק"מ/גיולים/דיגיטלי) · SOM ≈ תחזית ה-GMV שלנו. לאמת.</div></div>
+
+<div class="panel"><h2>❤️ Marketplace Health</h2>
+<div class="out">
+<div><small>המרת ליד→עסקה</small><b>20%</b></div>
+<div><small>Take משוקלל</small><b>6.5%</b></div>
+<div><small>ספקים פעילים</small><b>7+</b></div>
+<div><small>עסקאות/חודש (שיא)</small><b>204</b></div>
+<div><small>זמן-לעסקה</small><b>דקות</b></div>
+<div><small>נזילות היצע↔ביקוש</small><b>🟢 בריאה</b></div></div></div>
+
+<div class="panel"><h2>🤖 AI Agent Layer — Ultra · Master · Max</h2><ul>
+<li><b>🛰️ Ultra</b> — Orchestrator: ניתוב event + ניהול state עסקה</li>
+<li><b>🧠 Master</b> — <span class="pill">Match</span><span class="pill">Pricing</span><span class="pill">Negotiation</span><span class="pill">Financing</span><span class="pill">Compliance</span></li>
+<li><b>⚙️ Max</b> — <span class="pill">Offer</span><span class="pill">Contract/e-Sign</span><span class="pill">Financing-Submit</span><span class="pill">Billing</span></li>
+<li><b>🛡️ Guardian</b> — אבטחה · IP · אתיקה</li></ul>
+<div class="flag">סטטוס: MVP ב-assist (אדם מאשר) → V1 אוטומציה מלאה. פירוט: ULEASE_SPEC.md §7.</div></div>
+
 <div class="panel"><h2>💸 הוצאות חודשיות (₪) + תמהיל 2027</h2><svg viewBox="0 0 960 210" width="100%" preserveAspectRatio="xMidYMid meet"><line x1="22" y1="188" x2="938" y2="188" stroke="#ccc"/><line x1="359.5" y1="22" x2="359.5" y2="188" stroke="#c0532b" stroke-dasharray="4" opacity=".4"/><rect x="27.8" y="145.9" width="36.6" height="42.1" rx="2" fill="#7a5c3e"><title>יוני 26: 54,000</title></rect><rect x="76.0" y="141.2" width="36.6" height="46.8" rx="2" fill="#7a5c3e"><title>יולי 26: 60,000</title></rect><rect x="124.2" y="138.9" width="36.6" height="49.1" rx="2" fill="#7a5c3e"><title>אוגוסט 26: 63,000</title></rect><rect x="172.4" y="118.6" width="36.6" height="69.4" rx="2" fill="#7a5c3e"><title>ספטמבר 26: 89,000</title></rect><rect x="220.6" y="114.7" width="36.6" height="73.3" rx="2" fill="#7a5c3e"><title>אוקטובר 26: 94,000</title></rect><rect x="268.8" y="110.8" width="36.6" height="77.2" rx="2" fill="#7a5c3e"><title>נובמבר 26: 99,000</title></rect><rect x="317.0" y="111.6" width="36.6" height="76.4" rx="2" fill="#7a5c3e"><title>דצמבר 26: 98,000</title></rect><rect x="365.3" y="77.3" width="36.6" height="110.7" rx="2" fill="#7a5c3e"><title>ינואר 27: 142,000</title></rect><rect x="413.5" y="79.7" width="36.6" height="108.3" rx="2" fill="#7a5c3e"><title>פברואר 27: 139,000</title></rect><rect x="461.7" y="75.8" width="36.6" height="112.2" rx="2" fill="#7a5c3e"><title>מרץ 27: 144,000</title></rect><rect x="509.9" y="75.8" width="36.6" height="112.2" rx="2" fill="#7a5c3e"><title>אפריל 27: 144,000</title></rect><rect x="558.1" y="70.3" width="36.6" height="117.7" rx="2" fill="#7a5c3e"><title>מאי 27: 151,000</title></rect><rect x="606.3" y="65.6" width="36.6" height="122.4" rx="2" fill="#7a5c3e"><title>יוני 27: 157,000</title></rect><rect x="654.5" y="39.9" width="36.6" height="148.1" rx="2" fill="#7a5c3e"><title>יולי 27: 190,000</title></rect><rect x="702.7" y="38.4" width="36.6" height="149.6" rx="2" fill="#7a5c3e"><title>אוגוסט 27: 192,000</title></rect><rect x="750.9" y="29.0" width="36.6" height="159.0" rx="2" fill="#7a5c3e"><title>ספטמבר 27: 204,000</title></rect><rect x="799.2" y="27.5" width="36.6" height="160.5" rx="2" fill="#7a5c3e"><title>אוקטובר 27: 206,000</title></rect><rect x="847.4" y="22.0" width="36.6" height="166.0" rx="2" fill="#7a5c3e"><title>נובמבר 27: 213,000</title></rect><rect x="895.6" y="25.9" width="36.6" height="162.1" rx="2" fill="#7a5c3e"><title>דצמבר 27: 208,000</title></rect></svg>
 <div style="margin-top:10px"><svg viewBox="0 0 960 50" width="100%"><rect x="0.0" y="0" width="482.3" height="50" fill="#c0532b"><title>צוות: 1,050,000 (50%)</title></rect><rect x="482.3" y="0" width="315.6" height="50" fill="#e0894f"><title>שיווק: 687,000 (33%)</title></rect><rect x="797.9" y="0" width="75.3" height="50" fill="#2a6f6b"><title>תשתית: 164,000 (8%)</title></rect><rect x="873.2" y="0" width="86.8" height="50" fill="#9b8557"><title>תקורה: 189,000 (9%)</title></rect></svg></div><div style="margin-top:8px"><span class="lg"><i style="background:#c0532b"></i>צוות (50%)</span><span class="lg"><i style="background:#e0894f"></i>שיווק (33%)</span><span class="lg"><i style="background:#2a6f6b"></i>תשתית (8%)</span><span class="lg"><i style="background:#9b8557"></i>תקורה (9%)</span></div></div>
 
@@ -120,6 +172,29 @@ boxes.forEach(function(b){b.addEventListener('change',upd);});upd();
   document.getElementById('o_mg').textContent=Math.round(mg)+'%';
  }
  dm.addEventListener('input',calc);fx.addEventListener('input',calc);calc();
+})();
+</script>
+<script>
+(function(){
+ var CPL=79.10, CONTRIB=5985, PRO=4500, PMX=7700;
+ var ch=document.getElementById('ch'),cv=document.getElementById('cv'),cp=document.getElementById('cp'),cl=document.getElementById('cl');
+ if(!ch||!cv||!cp||!cl) return;
+ function mm(n){return Math.abs(n)>=1e6?'₪'+(n/1e6).toFixed(2)+'M':'₪'+Math.round(n/1e3)+'K';}
+ function calc2(){
+  var churn=ch.value/1000, conv=cv.value/100, cpm=+cp.value, close=cl.value/100;
+  var ltvP=PRO/churn, ltvX=PMX/churn, cacD=CPL/conv, cacS=cpm/close;
+  document.getElementById('chv').textContent=(ch.value/10).toFixed(1)+'%';
+  document.getElementById('cvv').textContent=cv.value+'%';
+  document.getElementById('cpv').textContent='₪'+cp.value;
+  document.getElementById('clv').textContent=cl.value+'%';
+  document.getElementById('u_lp').textContent=mm(ltvP);
+  document.getElementById('u_lx').textContent=mm(ltvX);
+  document.getElementById('u_cd').textContent='₪'+Math.round(cacD).toLocaleString();
+  document.getElementById('u_cs').textContent='₪'+Math.round(cacS).toLocaleString();
+  document.getElementById('u_rd').textContent=Math.round(CONTRIB/cacD)+'x';
+  document.getElementById('u_rs').textContent=Math.round(ltvP/cacS)+'x';
+ }
+ [ch,cv,cp,cl].forEach(function(s){s.addEventListener('input',calc2);});calc2();
 })();
 </script>
 </div></body></html>
