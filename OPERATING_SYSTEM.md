@@ -162,7 +162,7 @@ Doctrine:
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | קרנל ראשוני — עקרונות, ארכיטקטורת שכבות, רישום מודולים, Boot Block, היררכיית הכרעה | 2026-05-30 |
-| 1.0.1 | רישום `AI_CLAUDE_TOOL_SELECTOR` (שורה 12, D-013) + הוספת `CASES/ULEASE_AUDIT.md` לתיק ULease (D-014) | 2026-06-01 |
+| 1.0.1 | רישום `AI_CLAUDE_TOOL_SELECTOR` (שורה 13, D-018) + הוספת `CASES/ULEASE_AUDIT.md` לתיק ULease (D-019) | 2026-06-01 |
 
 **Confidentiality.** קובץ זה הוא הליבה של ה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
