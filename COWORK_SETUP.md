@@ -4,7 +4,7 @@
 **Version:** 1.0.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Drop-in / Onboarding guide. עקוב פעם אחת — תיהנה לתמיד.
-**Integrates with:** `CLAUDE.md`, `COMMAND_API.md`, `MEMORY.md`, `OPERATING_SYSTEM.md`, `INVESTOR_RELATIONS.md`, `CASES/*.md`
+**Integrates with:** `CLAUDE.md`, `COMMAND_API.md`, `MEMORY.md`, `OPERATING_SYSTEM.md`, `COWORK_MIGRATION.md`, `INVESTOR_RELATIONS.md`, `CASES/*.md`
 
 ---
 
