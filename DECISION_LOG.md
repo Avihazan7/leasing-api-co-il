@@ -1,7 +1,7 @@
 # DECISION_LOG.md — יומן החלטות
 
 **Module:** `DECISION_LOG.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — יומן append-only (Memory layer).
 **Integrates with:** `OPERATING_SYSTEM.md` §7, `MEMORY.md`, `CASES/ULEASE*.md`
@@ -26,6 +26,7 @@
 | D-010 | 2026-05-31 | הוספת **עמלות חיתום** לתחזית (~₪990/עסקה, מספט' 26) | upside ריאלי; 2027 +₪1.72M | ✅ במודל |
 | D-011 | 2026-05-30 | **גיוס ₪150K** — הון צמיחה/כרית (לא runway להישרדות) | התחזית תזרימית-חיובית מההשקה | 🔜 בתהליך |
 | D-012 | 2026-05-31 | **גיוס מנהל מערכות טכנולוגיה** — הצורך הקריטי היחיד | להוציא שלב 3 (Agentic) ל-production | 🔜 פתוח |
+| D-013 | 2026-06-01 | רישום מודול **AI_CLAUDE_TOOL_SELECTOR** (Knowledge) — "איזה Claude לבחור?" | עץ החלטה לבחירת כלי/מודל Claude נכון לכל משימה ב-OS וב-ULease (לפי מודל ההרחבה §7) | ✅ פעיל |
 
 ---
 
@@ -43,7 +44,8 @@
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | יומן ראשוני — 12 החלטות מכוננות (OS + ULease) | 2026-05-31 |
+| 1.1.0 | הוספת D-013 — רישום מודול `AI_CLAUDE_TOOL_SELECTOR.md` | 2026-06-01 |
 
 **Confidentiality.** מסמך פנימי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of DECISION_LOG.md v1.0.0 —*
+— *End of DECISION_LOG.md v1.1.0 —*
