@@ -1,11 +1,12 @@
 {
-  "name": "factum-il-stage-a",
-  "version": "0.1.0",
-  "description": "שלב א' — הוכחת היתכנות רב-סוכנית (מנהל, עובד, זיכרון משותף) עבור Factum IL",
+  "name": "factum-il-multi-agent",
+  "version": "0.2.0",
+  "description": "שלבים א'-ב' — שכבת רב-סוכנים (מנהל, עובדים, זיכרון משותף, תלות בין-צעדים) עבור Factum IL",
   "private": true,
   "scripts": {
-    "start": "node stage-a/run-stage-a.js",
-    "stage-a": "node stage-a/run-stage-a.js"
+    "start": "node stage-b/run-stage-b.js",
+    "stage-a": "node stage-a/run-stage-a.js",
+    "stage-b": "node stage-b/run-stage-b.js"
   },
   "license": "UNLICENSED"
 }
