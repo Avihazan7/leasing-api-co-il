@@ -1,10 +1,10 @@
 # יסודות System Design — ארכיטקטורת הפלטפורמה
 
 **Module:** `AI_SYSTEM_DESIGN.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Knowledge layer (§3 שורה 23). מודול ההנדסה השני (אחרי `AI_PROJECT_STRUCTURE.md`) — שפת הארכיטקטורה מול ה-Tech Lead.
-**Source:** מבוסס על *"Reverse Proxy vs API Gateway vs Load Balancer"* (Level Up Coding) · *"Queues 101"* (Raul Junco) · *"How JWT Works"* (Amigoscode) · *"6 API Architecture Styles"* (James Code Lab).
+**Source:** מבוסס על *"Reverse Proxy vs API Gateway vs Load Balancer"* (Level Up Coding) · *"Queues 101"* (Raul Junco) · *"How JWT Works"* (Amigoscode) · *"6 API Architecture Styles"* (James Code Lab) · *"System Design Cheatsheet"* (21 רכיבים).
 **Integrates with:** `CASES/ULEASE_SPEC.md` (§3 · §8 · §9 · §10), `AI_PROJECT_STRUCTURE.md`, `AI_RAG_DESIGN.md`, `AI_DATA_BI.md`, `CASES/ULEASE_HIRING.md`, `CASES/ULEASE_PRICING_SLA.md`
 
 > ארבעה מושגי-יסוד של ארכיטקטורת backend — שער כניסה, סגנונות API, תורים ואימות — מתורגמים לרכיבי הפלטפורמה של ULease. המטרה: שאברהם יוכל לנהל design review מול ה-Tech Lead **בלי לכתוב שורת קוד**, ולזהות החלטה גרועה לפני שהיא נבנית.
@@ -77,6 +77,41 @@ Producers                    Broker/Queue                  Consumers
 
 ---
 
+## 4.5 מפת 21 הרכיבים — מה נכנס מתי
+
+הצ'יטשיט המלא של רכיבי מערכת, ממוין לפי **מתי ULease באמת צריכה כל אחד**:
+
+### 🔜 MVP (Phase 0) — בלי זה אין פלטפורמה
+| רכיב | תפקיד | ב-ULease |
+|------|--------|-----------|
+| **Web/App Server** | מגיש את האתר ומריץ את הלוגיקה | האתר + חדר-העסקה |
+| **Database** (PostgreSQL) | דאטה פרסיסטנטית | מודל הנתונים §8 + pgvector ל-RAG (§7.1) — DB אחד להכל |
+| **API Gateway + Auth** | כניסה אחת + JWT | §1 + §4 לעיל |
+| **Load Balancer** | זמינות | ה-SLA (uptime 99.5%) |
+| **Backup & Recovery** | גיבוי יומי, RPO ≤ 24h, RTO ≤ 4h | כבר ב-NFR §10 (C8) — שער Go-Live |
+
+### V1 (Phase 1) — כשיש תנועה אמיתית
+| רכיב | תפקיד | ב-ULease |
+|------|--------|-----------|
+| **Cache** (Redis) | דאטה חמה בזיכרון | הקטלוג + Deal Scores מחושבים — חיפוש < 500ms בעומס |
+| **Search** (Elasticsearch) | חיפוש מהיר ואינדוקס | חיפוש רכב (יצרן/דגם/מחיר/אבזור) — הלב של חוויית הקונה |
+| **CDN** | תוכן סטטי מהקצה | תמונות רכבים — אלפי תמונות, חייבות להיטען מהר |
+| **Monitoring + Logging** (Prometheus/ELK) | מדדים ולוגים | מחובר להתראות (`AI_DATA_BI.md` §6.ד) + ה-AuditLog |
+| **Rate Limiter** | הגבלת קריאות per-client | מגן על ה-API מספק עם אינטגרציה שבורה (loop) ומ-scraping |
+
+### V2 (Phase 2 / Scale) — כשהמספרים גדלים
+| רכיב | תפקיד | ב-ULease |
+|------|--------|-----------|
+| **Read Replica** | עותקי קריאה של ה-DB | דוחות ו-BI (M9) רצים על ה-replica — לא מאיטים עסקאות |
+| **Circuit Breaker** | עוצר כשל מתגלגל | אם API של יבואן נופל — הפלטפורמה לא נופלת איתו |
+| **Distributed Tracing** (Jaeger) | מעקב בקשה בין שירותים | חוב של ה-Correlation ID מ-§3 |
+| **WAF / Firewall** | הגנה מתקיפות | חובה כשמחזיקים נתוני אשראי/KYC בהיקף |
+| **Sharding** | פיצול DB | רק אם עוברים מיליוני רשומות — לא לפני |
+
+> **הכלל ל-design review:** כל רכיב שה-Tech Lead רוצה להוסיף ב-MVP מהרשימות של V1/V2 — צריך הצדקה. Over-engineering ב-Phase 0 = השקה מאוחרת.
+
+---
+
 ## 5. צ'קליסט Design Review מול ה-Tech Lead
 
 - [ ] **שער כניסה:** מי עושה אימות — ה-Gateway או כל שירות לחוד? (תשובה נכונה: Gateway)
@@ -106,9 +141,10 @@ Producers                    Broker/Queue                  Consumers
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | ארבעה יסודות backend (שער כניסה · סגנונות API · תורים · JWT) ממופים לארכיטקטורת ULease + צ'קליסט design review | 2026-06-02 |
+| 1.1.0 | §4.5 חדש (D-037): מפת 21 הרכיבים מחולקת ל-MVP/V1/V2 — Redis לקטלוג, Elasticsearch לחיפוש רכב, Rate Limiter, Circuit Breaker + כלל נגד over-engineering | 2026-06-02 |
 
-**Attribution.** המקורות: *Reverse Proxy vs API Gateway vs Load Balancer* (Level Up Coding) · *Queues 101* (Raul Junco) · *How JWT Works* (Amigoscode) · *6 API Architecture Styles* (James Code Lab). העיבוד והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** המקורות: *Reverse Proxy vs API Gateway vs Load Balancer* (Level Up Coding) · *Queues 101* (Raul Junco) · *How JWT Works* (Amigoscode) · *6 API Architecture Styles* (James Code Lab) · *System Design Cheatsheet*. העיבוד והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
 **Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of AI_SYSTEM_DESIGN.md v1.0.0 —*
+— *End of AI_SYSTEM_DESIGN.md v1.1.0 —*

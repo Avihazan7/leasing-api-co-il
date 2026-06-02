@@ -1,7 +1,7 @@
 # DECISION_LOG.md — יומן החלטות
 
 **Module:** `DECISION_LOG.md`
-**Version:** 1.23.0
+**Version:** 1.24.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — יומן append-only (Memory layer).
 **Integrates with:** `OPERATING_SYSTEM.md` §7, `MEMORY.md`, `CASES/ULEASE*.md`
@@ -50,6 +50,7 @@
 | D-034 | 2026-06-02 | **העשרת AI_DATA_BI ל-v1.2.0** (נושאים 16–20, סוגר את המחברת): §6.ד **תפעול ה-BI כשירות** — (א) **התראות**: "עסקאות < 80% מהתחזית" / "ליד ממתין > שעה" = ניטור SLA אוטומטי (ב) **מנויי דוחות**: דוח ביקוש שבועי לספקים במייל (ג) ספי KPI בצבעים (🟢🟡🔴) (ד) מודל הרשאות: ספק/מפיץ = Viewer + RLS (ה) Apps כחבילות המידע של Ultra/Max + כלל הזהב: עמודות מאחסנות, מדדים מחשבים | ההתראות והמנויים הופכים את ה-BI ממוצר פסיבי לשירות פרואקטיבי — "דוח הביקוש השבועי" הוא בדיוק ההבטחה מה-playbooks לספקים, עכשיו עם מנגנון אספקה; הקוריקולום המלא (20 נושאים) סגור | ✅ פעיל |
 | D-035 | 2026-06-02 | **גל יישום עסקי — שלוש העשרות בתיק ULease** ("מקצה לקצה ברמת קצה"): (א) `AUTOMATION_MAP` v1.1.0 — **31 ה-Skills של Anthropic** ממופים למפה: 5+ אוטומציות V1/V2 הופכות ל"התקן עכשיו" (briefings · כספים · חוזים) על Gmail/QuickBooks/Stripe/HubSpot (ב) `DEMAND_PLAYBOOK` v1.1.0 + `LAUNCH_CHECKLIST` v1.3.0 — **ערוץ GEO**: ציטוט בתשובות AI (Claude/ChatGPT/Perplexity) בעלות אפס + פריט robots.txt שמתיר citation crawlers (ג) `ULEASE` v1.5.0 — **Lean Canvas בעמוד אחד** + 5 מדדי מעקב שבועיים למייל משקיע | שלושת התכנים סוגרים פערים תפעוליים אמיתיים: תפעול העסק (Skills מדף במקום פיתוח), ערוץ רכישה שאף מתחרה לא מנצל (GEO), וכלי תקשורת למשקיעים (one-pager); הסכנה שנחסמה: robots.txt ישן שחוסם AI crawlers = אפס נראות במנועי ה-AI בדיוק כשהקונים עוברים לשאול אותם | ✅ פעיל |
 | D-036 | 2026-06-02 | **גל ידע הנדסי**: (א) מודול חדש **AI_SYSTEM_DESIGN** (Knowledge, שורה 23 ב-§3) — שער כניסה (Gateway/Proxy/LB), 6 סגנונות API (REST ל-MVP · WebSocket למכרז), **תורים** (המימוש של ארכיטקטורת ה-events, כולל Idempotency לתשלומים ו-DLQ), ו-**JWT** (אימות ספקים + RLS ברמת API) + צ'קליסט design review (ב) `COWORK_SETUP` v1.2.0 — §9 **ראש המטה**: 5 תפקידים מתוזמנים (Briefer · Inbox · Meetings · Decision Tracker מסונכרן ל-DECISION_LOG · Files) (ג) `AI_DATA_BI` v1.3.0 — §6.ה מבחנים סטטיסטיים להחלטות (A/B, השוואת ערוצים, ולידציית Deal Score) | משלים את שלישיית ההנדסה (RAG · BI · System Design) — אברהם מנהל design review מלא בלי לכתוב קוד; ראש המטה הופך את Cowork למפעיל אוטונומי; הסטטיסטיקה מונעת החלטות על סמך רעש | ✅ פעיל |
+| D-037 | 2026-06-02 | **השלמת שכבת ההנדסה**: (א) `AI_SYSTEM_DESIGN` v1.1.0 — §4.5 **מפת 21 הרכיבים** מחולקת MVP/V1/V2: Redis לקטלוג, **Elasticsearch לחיפוש רכב**, CDN לתמונות, Rate Limiter, Circuit Breaker (API של יבואן נופל ≠ הפלטפורמה נופלת) + כלל נגד over-engineering (ב) `AI_CLAUDE_STACK_2026` v1.3.0 — §5.5 **ה-Agent Extension Stack**: Skills=WHAT · MCP=HOW · Subagents=WHO · Hooks=WHEN · CLAUDE.md=WHERE · Plugins=SHIP, עם המיפוי Ultra=ראשי · Masters=Subagents · **Guardian=Hooks דטרמיניסטיים** (ציות לא נתון לשיקול LLM) | מפת הרכיבים נותנת לאברהם את הכוח לעצור over-engineering ב-design review; ששת השכבות הן המפרט שה-Tech Lead יממש ב-Agent Teams — וההבנה ש-Guardian חייב להיות Hook (דטרמיניסטי) ולא סוכן (סטוכסטי) היא הכרעה ארכיטקטונית מהותית לציות | ✅ פעיל |
 
 ---
 
@@ -90,7 +91,8 @@
 | 1.21.0 | הוספת D-034 — העשרת `AI_DATA_BI.md` ל-v1.2.0: תפעול ה-BI כשירות — התראות, מנויים, הרשאות (נושאים 16–20) | 2026-06-02 |
 | 1.22.0 | הוספת D-035 — גל יישום עסקי: 31 Skills (AUTOMATION_MAP) · ערוץ GEO (DEMAND+CHECKLIST) · Lean Canvas (ULEASE) | 2026-06-02 |
 | 1.23.0 | הוספת D-036 — גל ידע הנדסי: מודול `AI_SYSTEM_DESIGN.md` + ראש המטה (COWORK_SETUP) + סטטיסטיקה (AI_DATA_BI) | 2026-06-02 |
+| 1.24.0 | הוספת D-037 — מפת 21 הרכיבים (AI_SYSTEM_DESIGN) + ה-Agent Extension Stack (AI_CLAUDE_STACK_2026) | 2026-06-02 |
 
 **Confidentiality.** מסמך פנימי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of DECISION_LOG.md v1.23.0 —*
+— *End of DECISION_LOG.md v1.24.0 —*

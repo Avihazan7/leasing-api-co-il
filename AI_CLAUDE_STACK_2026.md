@@ -1,10 +1,10 @@
 # Claude Stack 2026 — How to use Claude in 2026
 
 **Module:** `AI_CLAUDE_STACK_2026.md`
-**Version:** 1.2.0
+**Version:** 1.3.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Knowledge layer (§3 שורה 16) + מפרט ה-build התפעולי של 4 העמודים.
-**Source:** מבוסס על ה-cheat sheet *"How to use Claude in 2026"* + סדרת *"The 7 Levels of Claude Code"* (learn.nextwork.org).
+**Source:** מבוסס על ה-cheat sheet *"How to use Claude in 2026"* + סדרת *"The 7 Levels of Claude Code"* (learn.nextwork.org) + *"Understanding Agent Skills"* (Skills·MCP·Subagents·Hooks·Plugins).
 **Integrates with:** `AI_CLAUDE_TOOL_SELECTOR.md`, `AI_CLAUDE_GLOSSARY.md` (מודול אחות — המילון), `COWORK_SETUP.md`, `PROJECTS_SETUP.md`, `COMMAND_API.md`, `OPERATING_SYSTEM.md` §3.1, `COWORK/README.md`, `.claude/skills/`, `CASES/ULEASE.md`
 
 ---
@@ -167,6 +167,27 @@
 
 ---
 
+## 5.5 ה-Agent Extension Stack — שש השכבות שמרכיבות סוכן production
+
+רוב האנשים מבלבלים בין Skills ל-MCP. הם לא מתחרים — הם **שכבות שנערמות**, וכל אחת עונה על שאלה אחרת:
+
+| שכבה | השאלה שהיא עונה עליה | מהות | ✅ אצלך בריפו |
+|-------|------------------------|-------|----------------|
+| **Skills** | WHAT — מה לדעת | מודולי ידע שנטענים on-demand (Progressive Disclosure: קודם metadata, תוכן מלא רק כשצריך) | `.claude/skills/` — 4 skills |
+| **MCP** | HOW — איך להתחבר | פרוטוקול חיבור אוניברסלי לעולם החיצון ("USB-C של AI", ‎10,000+ שרתים) | GitHub MCP פעיל; יומן/Gmail בהמשך |
+| **Subagents** | WHO — מי מבצע | סוכני-משנה בהקשר מבודד: מודל משלהם, הרשאות משלהן, מחזירים סיכום | `os-auditor` |
+| **Hooks** | WHEN — מתי לאוטומט | סקריפטים **דטרמיניסטיים** מחוץ ללולאת ה-LLM: pre-tool, post-tool, on-edit | ה-CI שלנו (בדיקות עקביות על כל PR) הוא בדיוק זה |
+| **CLAUDE.md** | WHERE — איפה מעוגן | הקשר always-on שנטען בכל session | `CLAUDE.md` — נקודת הכניסה של ה-OS |
+| **Plugins** | SHIP — איך אורזים | אריזת הכל (Skills+Hooks+Subagents+MCP) ליחידה אחת ניתנת להתקנה | חבילת 31 ה-Skills (`ULEASE_AUTOMATION_MAP.md` §11) היא דוגמה |
+
+**הכוח האמיתי הוא בשרשור:** `CLAUDE.md` טוען הקשר → Skill נותן מומחיות → MCP מתחבר למערכות → Subagent מבצע בבידוד → Hook מאוטמט את המסירה → Plugin אורז הכל לצוות.
+
+> **ל-ULease:** זו בדיוק הארכיטקטורה שה-Tech Lead ירכיב ב-Agent Teams (רמה 7): Ultra = הסוכן הראשי עם CLAUDE.md, ה-Masters = Subagents עם Skills תחומיים, החיבור לספקים/סולק = MCP, וה-Guardian רץ כ-Hooks דטרמיניסטיים (לא נתון לשיקול ה-LLM — בדיוק כמו שציות צריך להיות).
+
+**Skills קהילתיים ששווה להתקין** (מ-"Make Claude 10x Smarter"): `/brainstorming` · `/skill-creator` · `/writing-plans` + `/executing-plans` · `/frontend-design` (נגד AI-slop) · Brave Search / `/firecrawl` (דאטה חי מהרשת — רלוונטי למחקר מתחרים ומחירונים).
+
+---
+
 ## 6. ה-build בריפו — מה קיים איפה
 
 | עמוד | תשתית בריפו | איך מפעילים |
@@ -218,7 +239,8 @@
 | 1.0.0 | זיקוק ה-cheat sheet "How to use Claude in 2026" + תיעוד ה-build התפעולי המלא (COWORK/ · PROJECTS_SETUP.md · `.claude/skills/`) | 2026-06-02 |
 | 1.1.0 | נוסף ל-§5 בלוק **Agent Teams** (ניסיוני): Team lead · Teammates · Shared tasks + מסלול prototype ל-Ultra·Master·Max (D-029) | 2026-06-02 |
 | 1.2.0 | נוסף ל-§5 **סולם 7 הרמות של Claude Code** (Prompt→Context→Tools→MCP→Skills→Subagents→Agent Teams) + הציון: רמה 6/7 (D-030) | 2026-06-02 |
+| 1.3.0 | §5.5 חדש (D-037): **ה-Agent Extension Stack** — שש השכבות (Skills=WHAT · MCP=HOW · Subagents=WHO · Hooks=WHEN · CLAUDE.md=WHERE · Plugins=SHIP) + המיפוי ל-Ultra·Master·Max ו-Guardian-as-Hooks + Skills קהילתיים מומלצים | 2026-06-02 |
 
-**Attribution.** מבוסס על ה-cheat sheet *"How to use Claude in 2026"*; סולם 7 הרמות ובלוק Agent Teams (§5): סדרת *The 7 Levels of Claude Code* (learn.nextwork.org). העיבוד, התרגום, ובעיקר ה-build התפעולי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** מבוסס על ה-cheat sheet *"How to use Claude in 2026"*; סולם 7 הרמות ובלוק Agent Teams (§5): סדרת *The 7 Levels of Claude Code* (learn.nextwork.org); ה-Extension Stack (§5.5): *Understanding Agent Skills* + *Make Claude 10x Smarter*. העיבוד, התרגום, ובעיקר ה-build התפעולי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of AI_CLAUDE_STACK_2026.md v1.2.0 —*
+— *End of AI_CLAUDE_STACK_2026.md v1.3.0 —*
