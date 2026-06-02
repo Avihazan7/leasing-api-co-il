@@ -4,10 +4,10 @@
 ## Active Modules
 - [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.2.0 — Kernel: core doctrine, layered architecture, module registry (§3 + §3.1 working sets), the activation Boot Block, and the conflict-resolution hierarchy.
 - [`MEMORY.md`](./MEMORY.md) v1.0.0 — Persistent memory layer: schema, identity card, active focus/projects, preferences, and the read/write protocol.
-- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.10.0 — Append-only decision log: 23 founding OS + ULease decisions with rationale and status.
+- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.11.0 — Append-only decision log: 24 founding OS + ULease decisions with rationale and status.
 - [`COWORK_SETUP.md`](./COWORK_SETUP.md) v1.1.0 — Claude Cowork onboarding: 7-step setup, the Global Instructions golden tip, context-file map, and OS integration — now implemented as a real workspace in [`COWORK/`](./COWORK/).
 - [`PROJECTS_SETUP.md`](./PROJECTS_SETUP.md) v1.0.0 — Claude Projects setup: 3 projects (ULease Launch, the ₪150K raise, Claude OS), one deliverable each, with drop-in instruction blocks, upload lists, and acceptance tests.
-- [`COMMAND_API.md`](./COMMAND_API.md) v1.1.0 — CLAUDE Command API: 89 slash commands, composition operators, a prompting-frameworks library, and drop-in system prompt for the Claude Operating System.
+- [`COMMAND_API.md`](./COMMAND_API.md) v1.2.0 — CLAUDE Command API: 89 slash commands, composition operators, a prompting-frameworks library (incl. Opus 4.8 deltas §7.7), and drop-in system prompt for the Claude Operating System.
 - [`marketing-strategy-framework.md`](./marketing-strategy-framework.md) v1.0.0 — Business layer: a 10-prompt framework for building a full marketing strategy, from customer psychology to a one-page plan.
 - [`AI_SKILL_MAP.md`](./AI_SKILL_MAP.md) v1.0.0 — The AI Skill Map: the four-stage journey (Tools → Workflows → Agentic → Architect), real-world applications, and where ULease sits on the map.
 - [`AI_PROGRESSION_PLAN.md`](./AI_PROGRESSION_PLAN.md) v1.0.0 — Personal progression plan along the Skill Map: learn-vs-delegate, a ULease-aligned timeline, a 90-day launch plan, and level-up gates.
@@ -15,7 +15,7 @@
 - [`AI_7_SKILLS.md`](./AI_7_SKILLS.md) v1.0.0 — The 7 skills to master AI in 2026, mapped to the modules already live in this OS.
 - [`AI_SKILLS_ACQUISITION.md`](./AI_SKILLS_ACQUISITION.md) v1.0.0 — Hands-on, build-to-learn skills acquisition plan (8 weeks): a real ULease project per skill (n8n, Claude agents, RAG, data) with mastery gates.
 - [`AI_TYPES.md`](./AI_TYPES.md) v1.0.0 — AI types taxonomy (Traditional · Generative · Agentic, 3×9 capabilities), each mapped to where it lives in ULease.
-- [`AI_CLAUDE_TOOL_SELECTOR.md`](./AI_CLAUDE_TOOL_SELECTOR.md) v1.0.0 — "Which Claude should you use?": a decision tree over 12 Claude tools (Chat · Code · Cowork · Skills · Routines…), recommended models, and the mapping to OS/ULease workflows.
+- [`AI_CLAUDE_TOOL_SELECTOR.md`](./AI_CLAUDE_TOOL_SELECTOR.md) v1.1.0 — "Which Claude should you use?": a decision tree over 12 Claude tools (Chat · Code · Cowork · Skills · Routines…), recommended models + the Opus 4.8 effort lever, and the mapping to OS/ULease workflows.
 - [`AI_CLAUDE_STACK_2026.md`](./AI_CLAUDE_STACK_2026.md) v1.0.0 — The 2026 Claude stack (Cowork · Projects · Skills · Code): each pillar distilled, the golden rule, and the full operational build mapped in this repo.
 - [`INVESTOR_RELATIONS.md`](./INVESTOR_RELATIONS.md) v1.2.0 — Investor relations: company, cap table, the ₪150K raise, forecast summary, and investor tracker.
 - [`CASES/ULEASE.md`](./CASES/ULEASE.md) v1.4.0 — ULease 🎯 Leasing.co.il business case: three-sided marketplace model + full monthly financial forecast (Jun 2026 → Dec 2027), with the reproducible model in `CASES/ULEASE_FORECAST.py`.
@@ -31,8 +31,8 @@
 - [`CASES/ULEASE_FINANCE_INSURANCE.md`](./CASES/ULEASE_FINANCE_INSURANCE.md) v1.1.0 — Finance/insurance partners + end-to-end digital underwriting: KYC, multi-lender routing, Big Five matching, revenue model, and Israeli licensing flags.
 - [`CASES/ULEASE_OUTREACH_SCRIPTS.md`](./CASES/ULEASE_OUTREACH_SCRIPTS.md) v1.2.0 — Ready outreach scripts (call/email/WhatsApp) for all four supply segments, plus follow-ups.
 - [`CASES/ULEASE_OUTBOUND_ENGINE.md`](./CASES/ULEASE_OUTBOUND_ENGINE.md) v1.1.0 — Supply-acquisition outbound engine blueprint (n8n + Claude): 8 layers, Haiku/Sonnet roles, scripts integration, and KPIs.
-- [`CASES/ULEASE_TECH_ONBOARDING.md`](./CASES/ULEASE_TECH_ONBOARDING.md) v1.0.0 — Tech Lead onboarding: day 0/1 access + OS reading list, and a 30·60·90 plan.
-- [`CASES/ULEASE_LAUNCH_CHECKLIST.md`](./CASES/ULEASE_LAUNCH_CHECKLIST.md) v1.1.0 — Two-week launch checklist: domains, legal, MVP, content, outreach, QA gates, and a weekly plan.
+- [`CASES/ULEASE_TECH_ONBOARDING.md`](./CASES/ULEASE_TECH_ONBOARDING.md) v1.1.0 — Tech Lead onboarding: day 0/1 access + OS reading list, and a 30·60·90 plan.
+- [`CASES/ULEASE_LAUNCH_CHECKLIST.md`](./CASES/ULEASE_LAUNCH_CHECKLIST.md) v1.2.0 — Two-week launch checklist: domains, legal, MVP, content, outreach, QA gates, and a weekly plan.
 - [`CASES/ULEASE_DASHBOARD.html`](./CASES/ULEASE_DASHBOARD.html) v1.2.0 — Interactive executive dashboard (RTL): KPIs, charts (revenue/cash/deals/expenses/margin), revenue & expense mix, full forecast, and a live launch checklist; generated by `CASES/ULEASE_DASHBOARD.py`.
 - [`CASES/ULEASE_AUTOMATION_MAP.md`](./CASES/ULEASE_AUTOMATION_MAP.md) v1.0.0 — AI automation map across 10 business functions: 40 automations curated for ULease with status (18 already built/specified) and MVP/V1/V2 priorities.
 - [`CASES/ULEASE_AUDIT.md`](./CASES/ULEASE_AUDIT.md) v1.4.0 — End-to-end audit report (June 1, 2026): 4 parallel audit agents, 41 findings (9 critical / 21 warnings / 11 info) — all closed across 3 fix waves + the price book/SLA.

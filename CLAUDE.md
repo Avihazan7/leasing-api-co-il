@@ -5,10 +5,10 @@
 ## Active Modules
 - `OPERATING_SYSTEM.md` v1.2.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.0.0 — שכבת זיכרון: schema, כרטיס זהות, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
-- `DECISION_LOG.md` v1.10.0 — יומן החלטות append-only: 23 החלטות (OS + ULease), רציונל וסטטוס.
+- `DECISION_LOG.md` v1.11.0 — יומן החלטות append-only: 24 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.1.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר ואינטגרציה עם ה-OS — מיושם בפועל ב-`COWORK/`.
 - `PROJECTS_SETUP.md` v1.0.0 — Claude Projects: 3 פרויקטים (השקה 🎯 · גיוס ₪150K · Claude OS) — תוצר אחד לכל פרויקט, הוראות drop-in, רשימות העלאה ובדיקות קבלה.
-- `COMMAND_API.md` v1.1.0 — 89 slash commands, composition operators, prompting-frameworks library, drop-in system prompt loaded.
+- `COMMAND_API.md` v1.2.0 — 89 slash commands, composition operators, prompting-frameworks library (כולל Opus 4.8 deltas §7.7), drop-in system prompt loaded.
 - `marketing-strategy-framework.md` v1.0.0 — Business: מסגרת 10 פרומפטים לבניית אסטרטגיית שיווק מלאה (פסיכולוגיה → תוכנית עמוד).
 - `AI_SKILL_MAP.md` v1.0.0 — מפת מיומנויות AI: 4 שלבים (Tools → Workflows → Agentic → Architect), יישומים, ומיקום ULease על המפה.
 - `AI_PROGRESSION_PLAN.md` v1.0.0 — תוכנית התקדמות אישית על המפה: Learn-vs-Delegate, ציר זמן צמוד ל-ULease, תוכנית 90 יום ושערי-מעבר.
@@ -16,7 +16,7 @@
 - `AI_7_SKILLS.md` v1.0.0 — 7 מיומנויות לשליטה ב-AI (2026) + מיפוי ל-OS הקיים (5 מ-7 כבר מיושמים).
 - `AI_SKILLS_ACQUISITION.md` v1.0.0 — תוכנית רכישת מיומנויות hands-on (8 שבועות, Build-to-Learn): פרויקט אמיתי ב-ULease לכל מיומנות, שערי-שליטה.
 - `AI_TYPES.md` v1.0.0 — טקסונומיית סוגי AI (Traditional·Generative·Agentic, 3×9 יכולות) + מיפוי מלא ל-ULease ולמפת המיומנויות.
-- `AI_CLAUDE_TOOL_SELECTOR.md` v1.0.0 — "איזה Claude לבחור?": עץ החלטה ל-12 כלי Claude (Chat · Code · Cowork · Skills · Routines…), מודלים מומלצים, ומיפוי למשימות ה-OS ו-ULease.
+- `AI_CLAUDE_TOOL_SELECTOR.md` v1.1.0 — "איזה Claude לבחור?": עץ החלטה ל-12 כלי Claude (Chat · Code · Cowork · Skills · Routines…), מודלים מומלצים + מנוף Effort, ומיפוי למשימות ה-OS ו-ULease.
 - `AI_CLAUDE_STACK_2026.md` v1.0.0 — Claude Stack 2026: 4 עמודי ה-cheat sheet (Cowork · Projects · Skills · Code), כלל הזהב, ומיפוי ה-build התפעולי המלא בריפו.
 - `INVESTOR_RELATIONS.md` v1.2.0 — IR: חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים.
 - `CASES/ULEASE.md` v1.4.0 — תיק ULease 🎯 Leasing.co.il: מודל Marketplace תלת-צדדי + תחזית פיננסית (יוני 26 → דצמ' 27).
@@ -32,8 +32,8 @@
 - `CASES/ULEASE_FINANCE_INSURANCE.md` v1.1.0 — מימון/ביטוח + חיתום דיגיטלי מקצה-לקצה: שותפים, זרימת חיתום, ניתוב רב-מלווה, התאמת Big Five, ודגלי רגולציה.
 - `CASES/ULEASE_OUTREACH_SCRIPTS.md` v1.2.0 — סקריפטים לפנייה (שיחה/מייל/וואטסאפ) ל-4 סגמנטי היצע + follow-up.
 - `CASES/ULEASE_OUTBOUND_ENGINE.md` v1.1.0 — בלופרינט מנוע outbound (n8n + Claude): 8 שכבות לאקווזיציית צד-היצע, מודלי Haiku/Sonnet, KPIs.
-- `CASES/ULEASE_TECH_ONBOARDING.md` v1.0.0 — Onboarding ל-Tech Lead: יום 0/1, רשימת קריאה ב-OS, ותוכנית 30·60·90.
-- `CASES/ULEASE_LAUNCH_CHECKLIST.md` v1.1.0 — צ'קליסט השקה (שבועיים): דומיין, משפטי, MVP, תוכן, outreach, QA ולוח שבועי.
+- `CASES/ULEASE_TECH_ONBOARDING.md` v1.1.0 — Onboarding ל-Tech Lead: יום 0/1, רשימת קריאה ב-OS, ותוכנית 30·60·90.
+- `CASES/ULEASE_LAUNCH_CHECKLIST.md` v1.2.0 — צ'קליסט השקה (שבועיים): דומיין, משפטי, MVP, תוכן, outreach, QA ולוח שבועי.
 - `CASES/ULEASE_DASHBOARD.html` v1.2.0 — דשבורד מנהלים אינטראקטיבי (RTL): KPIs, גרפים (הכנסה/מזומן/עסקאות/הוצאות/רווחיות), תמהילי הכנסה והוצאה, וצ'קליסט השקה חי; נוצר ע"י `ULEASE_DASHBOARD.py`.
 - `CASES/ULEASE_AUTOMATION_MAP.md` v1.0.0 — מפת אוטומציות AI לפי 10 פונקציות עסקיות: 40 אוטומציות מסוננות ל-ULease, סטטוס (18 כבר בנויות) ועדיפות MVP/V1/V2.
 - `CASES/ULEASE_AUDIT.md` v1.4.0 — דוח ביקורת מקצה-לקצה (1.6.2026): 4 סוכני ביקורת מקבילים, 41 ממצאים (9🔴/21🟡/11🔵) — **כולם נסגרו** ב-3 גלי תיקון + מחירון/SLA.

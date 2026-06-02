@@ -1,7 +1,7 @@
 # ULease 🎯 — Onboarding למנהל מערכות הטכנולוגיה
 
 **Module:** `CASES/ULEASE_TECH_ONBOARDING.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — קליטת Tech Lead.
 **Integrates with:** `CASES/ULEASE_HIRING.md`, `CASES/ULEASE_SPEC.md`, `CASES/ULEASE_OUTBOUND_ENGINE.md`, `CASES/ULEASE_LAUNCH_CHECKLIST.md`, `DECISION_LOG.md`
@@ -42,6 +42,7 @@
 - **Learn-vs-Delegate:** אברהם בעל החלטות מוצר + "החיבורים" + עיצוב סוכנים (מוצר); **אתה** בעל המימוש, infra, אבטחה, scale.
 - **קצב:** demo שבועי (ship-before-perfect) · החלטות → `DECISION_LOG.md`.
 - **חיסיון:** Deal Score / Match / תמחור = IP.
+- **מיתוג (D-024):** הדשבורד והמצגת הפנימיים משתמשים בפלטת ברירת-המחדל של Claude (`#c0532b`/`#f5f1e8`) — זה מקובל לכלים פנימיים. **האתר הצרכני מחייב פלטת מותג נפרדת** שתוגדר בצ'קליסט ההשקה §1 — אל תיירש את הצבעים מהדשבורד.
 
 ## 5. הגדרת הצלחה (90 יום)
 MVP לאוויר ב-2 שבועות · עסקה דיגיטלית עובדת מקצה-לקצה · סוכנים assist→auto · מערכת יציבה ומנוטרת. (פירוט תפקיד: `ULEASE_HIRING.md`.)
@@ -56,7 +57,8 @@ MVP לאוויר ב-2 שבועות · עסקה דיגיטלית עובדת מק�
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | Onboarding ראשוני — יום 0/1, רשימת קריאה, 30·60·90, נורמות | 2026-05-31 |
+| 1.1.0 | נורמת מיתוג (§4, D-024): האתר הצרכני לא יורש את פלטת ברירת-המחדל של Claude מהכלים הפנימיים | 2026-06-02 |
 
 **Confidentiality.** מסמך פנימי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_TECH_ONBOARDING.md v1.0.0 —*
+— *End of CASES/ULEASE_TECH_ONBOARDING.md v1.1.0 —*
