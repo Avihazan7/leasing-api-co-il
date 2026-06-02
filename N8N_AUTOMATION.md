@@ -217,6 +217,51 @@ n8n כוללת **AI Agent node**: LLM (Anthropic Claude) + Memory + Tools על �
 - **השילוב:** workflow ב-n8n יכול לקרוא ל-`stage-a` (Execute Command / HTTP) כשנדרש reasoning,
   ו-`stage-a` יכול להפעיל workflows ב-n8n כ-tools דרך MCP (ראה § 8). כל שכבה עושה את מה שהיא טובה בו.
 
+### 7.3 אנטומיה של AI Agent על הקנבס — דוגמה חיה
+
+כך נראה Tools Agent ב-n8n בפועל (מבוסס על ה-workflow הרשמי של n8n לקליטת משתמש חדש):
+
+```
+⚡ On 'Create User'          ┌──────────────────────┐         ┌─────────────┐    true   Slack:
+   form submission  ───────► │      AI Agent        │ ──────► │ Is manager? │ ───────►  Add to channel
+                             │     (Tools Agent)    │         └─────────────┘
+                             └──┬───────┬───────┬───┘                │ false     Slack:
+                                ┆       ┆       ┆                    └────────►  Update profile
+                          Chat Model  Memory   Tools
+                                ┆       ┆       ┆
+                         ┌──────┴─┐ ┌───┴────┐ ┌┴──────────────┬─────────────┐
+                         │Anthropic│ │Postgres│ │Microsoft Entra│    Jira     │
+                         │  Claude │ │  Chat  │ │ID (getAll:user)│(create:user)│
+                         └─────────┘ │ Memory │ └───────────────┴─────────────┘
+                                     └────────┘
+```
+
+ארבעת אבני הבניין של כל AI Agent ב-n8n:
+
+| רכיב | בתרשים | התפקיד |
+|------|---------|--------|
+| **Trigger** | Form submission | האירוע שמעיר את הסוכן — אצלנו: Webhook מה-Outbox או טופס ליד |
+| **Chat Model** | Anthropic Claude | המוח — מקבל את הקלט ומחליט אילו tools להפעיל ובאיזה סדר |
+| **Memory** | Postgres Chat Memory | הקשר בין הרצות — נשמר באותו Postgres של ה-stack |
+| **Tools** | Entra ID + Jira | הידיים — הסוכן קורא להם *לפי שיקול דעתו*, לא לפי סדר קבוע |
+
+אחרי הסוכן: **Switch node** (`Is manager?`) מפצל לשני ענפי Slack — כלומר הסוכן עושה את החלק
+ה"חכם", וההמשך חוזר להיות דטרמיניסטי. **זה בדיוק העיקרון מ-§ 7.2** — LLM רק איפה שצריך שיקול דעת.
+
+**ההתאמה ל-ULease — קליטת סוכנות חדשה (Dealer Onboarding):**
+
+| בתרשים המקורי | בגרסת ULease |
+|----------------|---------------|
+| On 'Create User' form | טופס "הצטרפות סוכנות" באתר |
+| Anthropic Chat Model | Claude (אותו דבר) |
+| Postgres Chat Memory | אותו Postgres של `leasing-api`, schema `n8n` |
+| Tool: Microsoft Entra ID | Tool: `GET /v1/catalog` — שליפת מלאי רלוונטי לאזור הסוכנות |
+| Tool: Jira (create user) | Tool: CRM — יצירת רשומת סוכנות + Commission Plan |
+| Is manager? | Is fleet dealer? (סוכנות ציי רכב או פרטית?) |
+| Slack: Add to channel | Slack: צירוף ל-`#dealers-fleet` + הודעת ברכה |
+| Slack: Update profile | Slack: צירוף ל-`#dealers-retail` + שליחת ערכת onboarding |
+
+
 ---
 
 ## 8. MCP — הגשר הדו-כיווני ל-Claude
@@ -329,6 +374,7 @@ Claude Code / Desktop ──(MCP client)──► n8n MCP Server Trigger ──�
 | גרסה | תאריך | שינוי |
 |------|--------|-------|
 | 1.0.0 | 2026-06-02 | Initial — מושגי יסוד, חיבור ל-Leasing API (HMAC + Outbox→Webhook), קטלוג אירועים, 5 workflows, מיפוי ל-AGENT_BLUEPRINT § 9, MCP דו-כיווני, טופולוגיית פריסה, ממשל |
+| 1.1.0 | 2026-06-02 | + § 7.3 אנטומיה של AI Agent על הקנבס — פירוק ה-workflow הרשמי (Form → Tools Agent → Switch → Slack) והתאמתו ל-Dealer Onboarding של ULease |
 
 ---
 
