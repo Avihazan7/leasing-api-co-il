@@ -1,10 +1,10 @@
 # יסודות BI ומידול נתונים — Power BI כמקרה לימוד
 
 **Module:** `AI_DATA_BI.md`
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Knowledge layer (§3 שורה 22). מודול הדאטה הראשון — משרת את M9 (Data & Insights).
-**Source:** מבוסס על מחברת לימוד *"Power BI — Topics 1–15"* (מבוא · ממשק · מקורות · Power Query · מידול · DAX · ויזואליזציות · פילטרים · עיצוב · Get Data · מידול מתקדם · DAX מתקדם · אינטראקטיביות · Dashboard & Publishing · Power Query מתקדם).
+**Source:** מבוסס על מחברת לימוד *"Power BI — Topics 1–20"* (יסודות · Power Query · מידול · DAX · ויזואליזציה · אינטראקטיביות · Dashboards · Service · Measures-vs-Columns · ניהול ושיתוף).
 **Integrates with:** `CASES/ULEASE_SPEC.md` (§8 מודל נתונים · M9), `CASES/ULEASE_DASHBOARD.html`, `AI_PROJECT_STRUCTURE.md`, `AI_CLAUDE_TOOL_SELECTOR.md`, `AI_SKILL_MAP.md`, `CASES/ULEASE_TECH_ONBOARDING.md`
 
 > **BI = להפוך דאטה גולמית להחלטות.** המודול מזקק קוריקולום Power BI שלם (10 נושאים) לקונספטים שמשרתים את **M9 — מוצר הדאטה למנויי Ultra/Max** — בלי קשר לכלי שייבחר בסוף. Power BI הוא מקרה הלימוד; star schema, ETL ו-measures הם הנכס.
@@ -97,7 +97,7 @@
 | **Date Table + Time Intelligence** | טבלת תאריכים ייעודית מאפשרת YTD · MTD · השוואה לתקופה מקבילה (`TOTALYTD` · `SAMEPERIODLASTYEAR`) | **מעקב תחזית מול ביצוע**: "GMV יוני בפועל מול התחזית" ו"צמיחה מול החודש הקודם" — בדיוק מה שהמשקיעים שואלים |
 | **CALCULATE (שינוי הקשר)** | אותו מדד, הקשר שונה: `עסקאות B2B = CALCULATE([עסקאות], Deals[Type]="B2B")` | פילוח כל KPI לפי סוג עסקה (B2B / B2B2C / B2C) — שלושת מסלולי העמלה של D-015 |
 
-> **כלל מהמחברת שתקף תמיד:** Measures (דינמי) עדיף על Calculated Columns (סטטי) — ביצועים ופחות נפח. ולתת שמות משמעותיים: `סה"כ GMV`, לא `Measure 1`.
+> **כלל הזהב (נושא 18):** **עמודות מאחסנות דאטה · מדדים מחשבים תוצאות.** עמודה מחושבת = סטטית, מגדילה את המודל; מדד = דינמי, מגיב לפילטרים, לא תופס נפח. ערך שצריך בכל שורה → עמודה; חישוב שמשתנה לפי הקשר → מדד. ועוד שניים: `DIVIDE()` במקום `/` (מונע חלוקה באפס — רלוונטי ל"עמלה ממוצעת" כשאין עסקאות), ושמות משמעותיים (`סה"כ GMV`, לא `Measure 1`).
 
 ---
 
@@ -145,6 +145,18 @@
 
 **Dashboard** = עמוד אחד, ניטור KPIs, מבט-על · **Report** = רב-עמודי, ניתוח עומק, drill. ב-ULease: הדשבורד הקיים = Dashboard למייסד/משקיעים · לוח ה-Ultra למנויים = Report אינטראקטיבי. **רענון מתוזמן** (scheduled refresh) חובה בשניהם — מתחבר ל-SLA העדכון (≤ 24h).
 
+### ד. תפעול ה-BI כשירות (נושאים 19–20)
+
+| יכולת | מה זה | השימוש ב-ULease 🎯 |
+|--------|--------|----------------------|
+| **התראות (Alerts)** | התראה אוטומטית כשמדד חוצה סף | 🔔 "עסקאות החודש < 80% מהתחזית" → התראה למייסד · "ליד ממתין > 1 שעה" → הפרת SLA |
+| **מנויי דוחות (Subscriptions)** | דוח קבוע במייל לפי לוח זמנים | דוח שבועי אוטומטי לספקים ("הביקוש לרכבים שלך") — בלי עבודה ידנית |
+| **ספי KPI** | 🟢 ≥100% · 🟡 70–99% · 🔴 <70% מהיעד | מעקב תחזית-מול-ביצוע בצבעים — בדשבורד ובעדכון המשקיעים |
+| **מודל הרשאות** | Admin · Member · Contributor · **Viewer** | Ops=Admin · Tech Lead=Member · ספק/מפיץ=**Viewer בלבד** (+RLS) — עיקרון "least privilege" |
+| **Apps (חבילות תוכן)** | אריזת דשבורדים והפצה מרוכזת | "חבילת הספק" ו"חבילת המפיץ" — מוצרי המידע של Ultra/Max כחבילה אחת מנוהלת |
+
+> **טבלת התקלות הנפוצות** (נושא 16) — לשיחת ה-debug עם ה-Tech Lead: סכומים שגויים → לבדוק קשרים וכיווניות · ביצועים איטיים → bi-directional filters או טבלאות גדולות · שורות כפולות → מפתחות חסרים · דאטה חסרה → קשר לא פעיל.
+
 ---
 
 ## 7. ההכרעה ל-M9: Power BI מול Custom — שאלה ל-Tech Lead
@@ -180,9 +192,10 @@
 |------|--------|--------|
 | 1.0.0 | זיקוק קוריקולום Power BI (10 נושאים) ליסודות BI ממופים ל-M9: צינור, ETL, star schema של ULease, DAX, ויזואליזציה, והכרעת Power-BI-מול-custom ל-Tech Lead | 2026-06-02 |
 | 1.1.0 | נושאים 11–15 (D-033): Time Intelligence + CALCULATE לפילוח KPIs, §6 חדש — אינטראקטיביות (Drill-through · Q&A Visual · Bookmarks) ו-**RLS** כדרישת חובה ל-M9, Dashboard-מול-Report | 2026-06-02 |
+| 1.2.0 | נושאים 16–20 (D-034): §6.ד תפעול ה-BI כשירות — התראות, מנויי דוחות, ספי KPI, מודל הרשאות (Viewer לספקים), Apps + כלל הזהב עמודות-מול-מדדים וטבלת תקלות | 2026-06-02 |
 
-**Attribution.** מבוסס על מחברת הלימוד *Power BI Topics 1–15*. הזיקוק, התרגום והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** מבוסס על מחברת הלימוד *Power BI Topics 1–20*. הזיקוק, התרגום והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
 **Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of AI_DATA_BI.md v1.1.0 —*
+— *End of AI_DATA_BI.md v1.2.0 —*
