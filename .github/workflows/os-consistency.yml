@@ -1,0 +1,41 @@
+name: OS Consistency
+
+# CI של ה-Claude OS (D-023):
+#   Job 1 — בדיקות עקביות מכניות (גרסאות, ספירות, הפניות)
+#   Job 2 — שחזור ארטיפקטים מהגנרטורים ואימות bit-exact
+# המקבילה האוטומטית של מה שסוכן os-auditor וה-skill ulease-refresh עושים ידנית.
+
+on:
+  pull_request:
+  push:
+    branches:
+      - claude/marketing-strategy-framework-Is1dZ
+  workflow_dispatch:
+
+jobs:
+  consistency:
+    name: OS consistency (versions, counts, references)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run mechanical consistency checks
+        run: python3 scripts/os_consistency_check.py
+
+  artifacts:
+    name: Artifact reproduction (bit-exact)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Regenerate all artifacts from their generators
+        run: |
+          python3 CASES/ULEASE_FORECAST.py
+          python3 CASES/ULEASE_SCENARIOS.py
+          python3 CASES/ULEASE_DASHBOARD.py
+          python3 CASES/ULEASE_DECK.py
+      - name: Verify bit-exact (generated files only, no diff allowed)
+        run: |
+          GENERATED="CASES/ULEASE_FORECAST.csv CASES/ULEASE_SCENARIOS.csv CASES/ULEASE_DASHBOARD.html CASES/ULEASE_DECK.md CASES/ULEASE_DECK.html"
+          if ! git diff --exit-code -- $GENERATED; then
+            echo "::error::Generated artifacts do not match their generators. Run the ulease-refresh skill (or the 4 generators) and commit the result."
+            exit 1
+          fi

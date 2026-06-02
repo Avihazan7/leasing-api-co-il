@@ -1,7 +1,7 @@
 # CLAUDE COMMAND API — Master Reference & Router
 
 **Module:** `COMMAND_API.md`
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Drop-in. Add to OS context to activate.
 **Integrates with:** כל המודולים הרשומים ב-`OPERATING_SYSTEM.md` §3 (קרנל, זיכרון, הקשר, Knowledge ו-Business).
@@ -776,6 +776,29 @@ Expectation: טבלה + bullet לכל הזדמנות, עד 200 מילה, בעב�
 
 **הכלל:** אל תשנן ראשי-תיבות — שנן ש**פרומפט חזק = פרסונה + הקשר + משימה + צורת-פלט**, וזה בדיוק מה שה-stack מבטא.
 
+### 7.7 Opus 4.8 — שש ההתאמות (Model-Specific Deltas)
+
+> מקור: מדריך *"How to prompt Claude Opus 4.8"*. העיקרון: **לכוון את המודל, לא להילחם בו** — רוב השיפור מגיע מהעלאת effort והגדרת scope מפורשת, לא מפרומפטים ארוכים יותר.
+
+| # | התנהגות Opus 4.8 | ההתאמה | פקודת OS רלוונטית |
+|---|-------------------|---------|---------------------|
+| 1 | **אורך אוטומטי** — קצר על פשוט, ארוך על פתוח | צריך אורך קבוע? אמור במפורש | `/length` · `/tldr` — החוזים כבר עושים זאת |
+| 2 | **Effort = המנוף החדש הגדול** | תשובה רדודה על משימה קשה? העלה effort, אל תנסח מחדש | טבלת ה-Effort למטה |
+| 3 | **קריאה מילולית** — לא מרחיב כלל בשקט | כלל שחל על הכל? אמור "על הכל", לא רק על המקרה הראשון | `/constraints` · ניסוח skills |
+| 4 | **חושב לפני שליפת כלי** | רוצה יותר שימוש בכלים? אמור מתי במפורש ("בכל עובדה שעשויה להשתנות") | `/search` · `/research` |
+| 5 | **סגנון בית ויזואלי** — קרם · סריף · טרקוטה | תן פלטה ופונטים מדויקים, או בקש הצעות. אל תסמוך על ברירת מחדל | `/visualize` · `/format` |
+| 6 | **פחות זה יותר** — בלי scaffolding צועקני | "השתמש בכלי כשזה עוזר" עובד; "CRITICAL: YOU MUST" מיותר | כל ה-system prompts |
+
+**מנוף ה-Effort — הציר השני לצד בחירת מודל:**
+
+| Effort | מתי | דוגמה ב-OS / ULease |
+|--------|------|----------------------|
+| **low** | מהיר וממוקד — סיכומים, ניסוחים, סינון | `/tldr` · `/summarize` · סינון לידים במנוע ה-outbound |
+| **high** | חשיבה עמוקה — אסטרטגיה, החלטות, ניתוח | `/analyze` · `/recommend` · הכרעות מחירון ומו"מ |
+| **xhigh** | קוד וסוכנים — עבודה ארוכה ומורכבת | Claude Code על הריפו · מנוע Ultra·Master·Max |
+
+> **גבול הריכוך (חשוב):** כללי שלמות וביטחון — IP-protection, append-only של יומן ההחלטות, קריאה-בלבד של os-auditor — נשארים מודגשים וחד-משמעיים. הריכוך חל על דחיפות *התנהגותיות*, לא על חוזי יסוד.
+
 ---
 
 ## 8. System Prompt — Drop-in
@@ -783,7 +806,7 @@ Expectation: טבלה + bullet לכל הזדמנות, עד 200 מילה, בעב�
 זה הבלוק שדורש העתקה ל-`userPreferences` או ל-`CLAUDE.md` ראשי. **זה מה שגורם לכל המסמך הזה לעבוד.**
 
 ```
-COMMAND API ENABLED — v1.0
+COMMAND API ENABLED — v1.2
 
 When the user begins a message with /command syntax, parse and execute
 according to COMMAND_API.md (loaded in OS context).
@@ -812,7 +835,7 @@ Integration with existing OS:
 - Commands DO NOT override safety rules
 - Commands DO NOT override IP-protection rules (e.g., Deal Score Engine secrecy)
 - Commands respect skill triggers — if /code triggers a Python skill, the skill loads first
-- Memory commands (/memory) ALWAYS call memory_user_edits tool — never just acknowledge
+- Memory commands (/memory) call the memory_user_edits tool — acknowledging without writing is a broken promise
 
 When uncertain whether something is a command, default to LITERAL interpretation
 and offer: "Is this a /command, or literal text?"
@@ -827,16 +850,19 @@ and offer: "Is this a /command, or literal text?"
 ```
 Claude OS Root/
 ├── CLAUDE.md                  ← נקודת כניסה ראשית
-├── OPERATING_SYSTEM.md        ← קרנל (חוקים, §3 רישום)
+├── OPERATING_SYSTEM.md        ← קרנל (חוקים, §3 רישום + §3.1 תשתית תפעולית)
 ├── MEMORY.md                  ← זיכרון נמשך
 ├── DECISION_LOG.md            ← יומן החלטות
-├── COWORK_SETUP.md            ← הקשר / אונבורדינג
+├── COWORK_SETUP.md            ← הקשר / אונבורדינג Cowork
+├── PROJECTS_SETUP.md          ← הקשר / Claude Projects
 ├── COMMAND_API.md             ← ← זה. המסמך הזה.
 ├── marketing-strategy-framework.md   ← Business: אסטרטגיית שיווק
-├── AI_SKILL_MAP.md · AI_PROGRESSION_PLAN.md · AI_LEARNING_RESOURCES.md · AI_7_SKILLS.md · AI_SKILLS_ACQUISITION.md · AI_CLAUDE_TOOL_SELECTOR.md   ← Knowledge
+├── AI_SKILL_MAP.md · AI_PROGRESSION_PLAN.md · AI_LEARNING_RESOURCES.md · AI_7_SKILLS.md · AI_SKILLS_ACQUISITION.md · AI_TYPES.md · AI_CLAUDE_TOOL_SELECTOR.md · AI_CLAUDE_STACK_2026.md   ← Knowledge
 ├── INVESTOR_RELATIONS.md
+├── COWORK/                    ← סביבת Cowork בפועל (ABOUT-ME · TEMPLATES · OUTPUTS)
+├── .claude/                   ← Claude Code (4 skills + סוכן os-auditor)
 └── CASES/
-    └── ULEASE*.md             ← תיק ULease (15 קבצים)
+    └── ULEASE*.md             ← תיק ULease 🎯
 ```
 
 ### 9.2 רישום ב-CLAUDE.md
@@ -845,7 +871,7 @@ Claude OS Root/
 
 ```markdown
 ## Active Modules
-- COMMAND_API.md v1.1.0 — 89 slash commands, composition, prompting frameworks, system prompt loaded
+- COMMAND_API.md v1.2.0 — 89 slash commands, composition, prompting frameworks (כולל Opus 4.8 deltas §7.7), system prompt loaded
 - (כל שאר המודולים — ראו §3)
 
 ## Module Load Order (canonical, §3)
@@ -853,11 +879,12 @@ Claude OS Root/
 2. MEMORY.md
 3. DECISION_LOG.md
 4. COWORK_SETUP.md
-5. COMMAND_API.md           ← לפני הקטגוריות העסקיות
-6. marketing-strategy-framework.md
-7. AI_* (Knowledge, on-demand)
-8. INVESTOR_RELATIONS.md
-9. CASES/*.md
+5. PROJECTS_SETUP.md
+6. COMMAND_API.md           ← לפני הקטגוריות העסקיות
+7. marketing-strategy-framework.md
+8. AI_* (Knowledge, on-demand)
+9. INVESTOR_RELATIONS.md
+10. CASES/*.md
 ```
 
 ### 9.3 כללי הכרעה במצב התנגשות
@@ -928,6 +955,7 @@ Claude OS Root/
 |------|--------|--------|
 | 1.0.0 | Initial 89 commands + composition + system prompt | 2026-05-19 |
 | 1.1.0 | Prompting Frameworks (§7) — core techniques, advanced strategies, framework→command mapping, key terms | 2026-05-31 |
+| 1.2.0 | Opus 4.8 deltas (§7.7) — שש ההתאמות + מנוף ה-Effort (D-024); ריכוך scaffolding ישן ב-§8 | 2026-06-02 |
 
 ### 11.2 Backward Compatibility
 
@@ -1027,4 +1055,4 @@ interface CommandContract {
 
 **Confidentiality.** This file is part of the personal Claude Operating System of Avraham Bar Yochai Chazan. Commands referencing internal IP (Deal Score, Match API, legal automation) inherit the confidentiality of those sub-systems.
 
-— *End of COMMAND_API.md v1.1 —*
+— *End of COMMAND_API.md v1.2.0 —*

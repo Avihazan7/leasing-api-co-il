@@ -1,10 +1,10 @@
 # CLAUDE COWORK — מדריך הגדרה ואונבורדינג
 
 **Module:** `COWORK_SETUP.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Drop-in / Onboarding guide. עקוב פעם אחת — תיהנה לתמיד.
-**Integrates with:** `CLAUDE.md`, `COMMAND_API.md`, `MEMORY.md`, `OPERATING_SYSTEM.md`, `INVESTOR_RELATIONS.md`, `CASES/*.md`
+**Integrates with:** `CLAUDE.md`, `PROJECTS_SETUP.md`, `COMMAND_API.md`, `MEMORY.md`, `OPERATING_SYSTEM.md`, `INVESTOR_RELATIONS.md`, `CASES/*.md`, `COWORK/` (סביבת העבודה בפועל)
 
 ---
 
@@ -133,15 +133,18 @@ Settings → Cowork → Global instructions → Edit
 
 ## 5. מפת קבצי ה-Context שכדאי לבנות
 
-| קובץ | תוכן | משרת |
-|------|------|-------|
-| `about-me.md` | פרופיל אישי, טון, העדפות, מטרות | כל שיחה |
-| `business.md` | המוצר, קהל היעד, מודל, מתחרים, יעדים | החלטות עסקיות, שיווק, מכירות |
-| `templates.md` | מבנים קבועים: מייל, מסמך, מצגת, פוסט | פלטים חוזרים ועקביים |
-| `style.md` | דוגמאות לכתיבה שלך + מה לא לעשות | התאמת קול וסגנון |
-| `cases/` | תיקייה לכל תיק/פרויקט פעיל | הקשר נקודתי לפי נושא |
+> ✅ **בנוי בפועל (D-021):** סביבת העבודה קיימת בריפו תחת [`COWORK/`](./COWORK/) — הוראות חיבור ו-Global Instructions מוכנות להעתקה ב-`COWORK/README.md`.
 
-> שמות הקבצים והמבנה כאן תואמים בכוונה ל-OS שלך — ראו את האינטגרציה בסעיף הבא.
+| קובץ | תוכן | משרת | סטטוס |
+|------|------|-------|--------|
+| `COWORK/ABOUT-ME/about-me.md` | פרופיל אישי, איך אני עובד, סטנדרטים, מטרות | כל שיחה | ✅ קיים |
+| `COWORK/ABOUT-ME/my-company.md` | ULease 🎯: מספרים, תמחור, קהלים, למה אומרים לא | החלטות עסקיות, שיווק, מכירות | ✅ קיים |
+| `COWORK/ABOUT-ME/anti-ai-style.md` | מילים וביטויים שאסור ל-Claude לכתוב + כללי סגנון | כל תוצר כתוב | ✅ קיים |
+| `COWORK/TEMPLATES/` | מייל משקיע · סטטוס שבועי · רשומת החלטה · header מודול | פלטים חוזרים ועקביים | ✅ קיים (4) |
+| `COWORK/OUTPUTS/` | כל תוצר ש-Claude מפיק, עם תאריך בשם הקובץ | ארכיון תוצרים | ✅ קיים |
+| `CASES/` | תיקייה לכל תיק/פרויקט פעיל | הקשר נקודתי לפי נושא | ✅ קיים |
+
+> שמות הקבצים והמבנה תואמים ל-cheat sheet "How to use Claude in 2026" (ראו `AI_CLAUDE_STACK_2026.md`) — ABOUT-ME · TEMPLATES · OUTPUTS, יחד מתחת ל-6,000 tokens.
 
 ---
 
@@ -173,13 +176,13 @@ Settings → Cowork → Global instructions → Edit
 
 - [ ] התקנתי את אפליקציית המחשב של Claude
 - [ ] יש לי מנוי פעיל (התחלתי בבסיסי)
-- [ ] יצרתי תיקייה ייעודית (`Claude Cowork`)
-- [ ] עברתי למצב Cowork וחיברתי את התיקייה
-- [ ] ראיינתי את עצמי ובניתי `about-me.md`
-- [ ] בניתי `business.md`
-- [ ] בניתי `templates.md`
-- [ ] הגדרתי Global Instruction: "תמיד תקרא את עליי לפני שאתה עונה"
-- [ ] (אופציונלי) חיברתי את תיקיית ה-OS (`CLAUDE.md`, `COMMAND_API.md`, …) כסביבת העבודה
+- [x] יש תיקייה ייעודית — `COWORK/` בריפו (לא צריך ליצור; משכפלים את הריפו או מסנכרנים אותו)
+- [ ] עברתי למצב Cowork וחיברתי את תיקיית הריפו
+- [x] `about-me.md` בנוי — `COWORK/ABOUT-ME/about-me.md` (מאוכלס מ-`MEMORY.md`)
+- [x] קובץ העסק בנוי — `COWORK/ABOUT-ME/my-company.md` (מאוכלס מתיק ULease)
+- [x] תבניות בנויות — `COWORK/TEMPLATES/` (4 תבניות)
+- [ ] הגדרתי Global Instructions — העתקה מ-`COWORK/README.md` אל Settings → Cowork
+- [ ] בדיקת קבלה: שיחה חדשה ב-Cowork עונה מתוך ההקשר בלי שהזכרתי אותו
 
 ---
 
@@ -198,7 +201,8 @@ Settings → Cowork → Global instructions → Edit
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | מדריך הגדרת Cowork ראשוני — 7 שלבים, Global Instructions, אינטגרציה עם ה-OS | 2026-05-30 |
+| 1.1.0 | המדריך הפך למיושם (D-021): §5 ו-§7 מצביעים על סביבת העבודה האמיתית `COWORK/` שנבנתה בריפו | 2026-06-02 |
 
 **Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of COWORK_SETUP.md v1.0.0 —*
+— *End of COWORK_SETUP.md v1.1.0 —*
