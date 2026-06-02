@@ -1,7 +1,7 @@
 # CLAUDE OPERATING SYSTEM — Kernel
 
 **Module:** `OPERATING_SYSTEM.md`
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Kernel — נטען ראשון. כל שאר המודולים תלויים בו.
 **Integrates with:** כל המודולים הרשומים ב-§3 — `CLAUDE.md`, `MEMORY.md`, `DECISION_LOG.md`, `COWORK_SETUP.md`, `PROJECTS_SETUP.md`, `COMMAND_API.md`, `marketing-strategy-framework.md`, `AI_*` (Knowledge), `INVESTOR_RELATIONS.md`, `CASES/*.md` + תשתית תפעולית ב-§3.1 (`COWORK/`, `.claude/`)
@@ -97,6 +97,7 @@
 | `COWORK/` (ABOUT-ME · TEMPLATES · OUTPUTS) | Context | אפליקציית Claude Cowork | סביבת העבודה בפועל — קבצי זהות, תבניות ותוצרים |
 | `.claude/skills/` (os-module · os-decision · ulease-refresh · investor-update) | Interface | Claude Code (auto-trigger) | 4 משימות חוזרות שהפכו ל-skills |
 | `.claude/agents/os-auditor.md` | Interface | Claude Code (sub-agent) | סוכן ביקורת עקביות קריאה-בלבד |
+| `.github/workflows/` + `scripts/` | Interface | GitHub Actions (כל PR) | CI — בדיקות עקביות מכניות + שחזור ארטיפקטים bit-exact (D-023) |
 
 ---
 
@@ -177,7 +178,8 @@ Doctrine:
 | 1.0.0 | קרנל ראשוני — עקרונות, ארכיטקטורת שכבות, רישום מודולים, Boot Block, היררכיית הכרעה | 2026-05-30 |
 | 1.0.1 | רישום `AI_CLAUDE_TOOL_SELECTOR` (כיום שורה 14, D-018) + הוספת `CASES/ULEASE_AUDIT.md` לתיק ULease (D-019) | 2026-06-01 |
 | 1.1.0 | Claude Stack 2026 (D-021): רישום `PROJECTS_SETUP.md` (שורה 5) + `AI_CLAUDE_STACK_2026.md` (שורה 15), סעיף §3.1 תשתית תפעולית (`COWORK/`, `.claude/`), ועדכון Boot Block. הסטת שורות: IR 14→16 · CASES 15→17 | 2026-06-02 |
+| 1.2.0 | רישום תשתית CI ב-§3.1 (D-023): `.github/workflows/os-consistency.yml` + `scripts/os_consistency_check.py` — בדיקות עקביות אוטומטיות על כל PR | 2026-06-02 |
 
 **Confidentiality.** קובץ זה הוא הליבה של ה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of OPERATING_SYSTEM.md v1.1.0 —*
+— *End of OPERATING_SYSTEM.md v1.2.0 —*

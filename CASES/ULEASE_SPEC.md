@@ -1,7 +1,7 @@
 # ULease 🎯 Leasing.co.il — איפיון מוצר ומערכת (End-to-End Spec)
 
 **Module:** `CASES/ULEASE_SPEC.md`
-**Version:** 1.4.0
+**Version:** 1.5.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — איפיון (Product & System Spec), נספח ל-`CASES/ULEASE.md`.
 **Integrates with:** `CASES/ULEASE.md`, `CASES/ULEASE_METHODOLOGY.md`, `CASES/ULEASE_AUTOMATION_MAP.md`, `INVESTOR_RELATIONS.md`, `OPERATING_SYSTEM.md`, `MEMORY.md`
@@ -130,7 +130,7 @@ SUPPLY  →   │  INGESTION APIs  (יבואן · ליסינג · מימון)   
 
 **זרימה:** event → **Ultra** מתזמר → **Master** מחליט (תמחור/Match/מימון) → **Max** מבצע (הצעה→חוזה→מימון→חיוב) → **Guardian** מאמת ציות ורושם audit.
 
-> שלב MVP: Ultra + 2 Masters (Match, Pricing) במצב **assist** (אדם מאשר) + **Guardian מינימלי** (audit-log · ניהול הסכמות · opt-out) — שער Go-Live. אוטומציה מלאה מתרחבת ב-V1/V2.
+> שלב MVP: Ultra + 2 Masters (Match, Pricing) במצב **assist** (אדם מאשר) + **Guardian מינימלי** (audit-log · ניהול הסכמות · opt-out · grounding checks · eval suite — §7.2) — שער Go-Live. אוטומציה מלאה מתרחבת ב-V1/V2.
 
 ### 7.1 שכבת הידע — RAG (Context Engineering) — D-022
 
@@ -173,6 +173,35 @@ SUPPLY  →   │  INGESTION APIs  (יבואן · ליסינג · מימון)   
 | אין עדיין דאטה קניינית מתויגת (0 עסקאות) | אין על מה לאמן; הקורפוס נבנה מההשקה |
 | ה-stack מבוסס Claude | האופטימיזציה: Skills + RAG + הקשר (לא כוונון משקולות) |
 | **נקודת בחינה מחדש** | אחרי **~1,000 עסקאות סגורות** (צפי 2027) — מודל התאמה קנייני מאומן על דאטת העסקאות = חפיר תחרותי |
+
+### 7.2 Guardrails & Evals — LLMOps (D-023)
+
+ה-Guardian (§7) אוכף **ציות ו-IP**. השכבה הזו משלימה אותו עם **בקרת איכות לפלטי ה-LLM** — כי מרקטפלייס שבו סוכן ממציא מחיר, מפרט או זמינות הוא חשיפה משפטית וכספית ישירה.
+
+**לפני Deploy — חבילת Evals (תנאי לעליית כל גרסת סוכן):**
+
+| בדיקה | מה נבדק | סף מעבר |
+|--------|----------|----------|
+| **Grounding** | כל טענה עובדתית (מחיר, מפרט, זמינות, תנאי מימון) חייבת מקור ב-RAG (§7.1) | **100%** לעובדות כספיות · ≥95% כללי |
+| **Golden Set** | 50 תרחישי בדיקה עם תשובות ידועות: Match, Deal Score, ניסוח הצעה, ניתוב מימון | ≥90% התאמה |
+| **Red Team** | ניסיונות לחלץ IP (משקלי Deal Score), לעקוף את המחירון, לחרוג מהסמכה | **0** הצלחות |
+| **שפה ומותג** | עברית תקינה, טון, ללא ביטויים אסורים (`COWORK/ABOUT-ME/anti-ai-style.md`) | 100% |
+
+**ב-Production — ניטור רציף:**
+
+| מדד | יעד | פעולה בחריגה |
+|------|-----|----------------|
+| **שיעור הזיות** (טענות ללא גיבוי RAG) | < 1% | > 3% → השבתת auto-mode, חזרה ל-assist |
+| **Latency סוכנים** | Ultra ניתוב < 2s · Master החלטה < 10s · Max ביצוע < 30s | חריגה מתמשכת מסכנת SLA ליד ≤ 1h → התראת Ops |
+| **משוב אנושי** (במצב assist) | אישור ≥ 80% מהמלצות הסוכן | < 60% → עצירה וכיול מחדש |
+| **Drift** | הרצת ה-eval suite שבועית על סוכני production | ירידה > 5% מציון הבסיס → חקירה לפני המשך |
+
+**חיבור לשערים ולשלבים:**
+- **שער Go-Live (D-016) מורחב:** Guardian מינימלי = audit-log + הסכמות + opt-out **+ grounding checks + eval suite עובר**.
+- **Phase 0 (MVP):** grounding + golden set + אישור אנושי (מצב assist הוא בעצמו guardrail).
+- **Phase 1:** ניטור אוטומטי, דשבורד הזיות/latency, משוב לקוח מובנה.
+- **Phase 2:** deploy מותנה-evals — אף סוכן לא עולה אוטומטית בלי לעבור את החבילה.
+
 
 ---
 
@@ -268,7 +297,8 @@ GMV · עסקאות/חודש · take-rate בפועל · **המרת פנייה→
 | 1.2.0 | גל 2 של הביקורת: **Guardian מינימלי** ב-Phase 0 (C5) — audit-log, הסכמות, opt-out; "ארבע שכבות" (W12) | 2026-06-01 |
 | 1.3.0 | גל 3 (C8): ישויות Event/AgentRun/Consent/Inquiry, סביבות dev/staging/prod, בדיקות אוטומטיות, גיבוי/DR (RPO/RTO); הבהרת וריאנט המכרז (I3); KPI פנייה→עסקה (W16); WhatsApp נדחה ל-V1 (W17) | 2026-06-01 |
 | 1.4.0 | יישום D-022: שכבת ידע RAG (§7.1) — קורפוס, pgvector, כללי שליפה, צרכנים ומדיניות "RAG ולא Fine-Tuning"; ישות KnowledgeChunk (§8); שורת Knowledge/RAG באינטגרציות (§9) וב-roadmap (§12) | 2026-06-02 |
+| 1.5.0 | יישום D-023: Guardrails & Evals (§7.2) — eval suite לפני deploy (grounding, golden set, red team), ניטור production (הזיות, latency, drift), והרחבת שער ה-Go-Live (Guardian מינימלי כולל evals) | 2026-06-02 |
 
 **Confidentiality.** מסמך זה וכל מנגנוני הליבה (Deal Score, Match, Pricing, Auction) הם IP חסוי של ULease 🎯 — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_SPEC.md v1.4.0 —*
+— *End of CASES/ULEASE_SPEC.md v1.5.0 —*
