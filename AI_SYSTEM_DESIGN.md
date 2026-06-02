@@ -1,7 +1,7 @@
 # יסודות System Design — ארכיטקטורת הפלטפורמה
 
 **Module:** `AI_SYSTEM_DESIGN.md`
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Knowledge layer (§3 שורה 23). מודול ההנדסה השני (אחרי `AI_PROJECT_STRUCTURE.md`) — שפת הארכיטקטורה מול ה-Tech Lead.
 **Source:** מבוסס על *"Reverse Proxy vs API Gateway vs Load Balancer"* (Level Up Coding) · *"Queues 101"* (Raul Junco) · *"How JWT Works"* (Amigoscode) · *"6 API Architecture Styles"* (James Code Lab) · *"System Design Cheatsheet"* (21 רכיבים).
@@ -32,6 +32,8 @@
 | **GraphQL** | הלקוח שולף בדיוק את השדות שהוא צריך | ⏳ לא עכשיו — מורכבות שרת/caching מיותרת ב-MVP; לשקול ב-V2 לפורטל המפיצים (דאטה עשירה) |
 | **gRPC** | RPC בינארי מהיר עם סכמה | ⏳ V2 — תקשורת פנימית בין שירותי הסוכנים אם ה-scale ידרוש |
 | **SOAP** | XML ארגוני כבד | רק אם יבואן ותיק מחייב (אינטגרציה ל-ERP ישן) — לא מתכננים |
+| **Webhook** | callback ב-HTTP על אירוע (חד-כיווני, אסינכרוני) | ✅ **MVP** — עדכון מלאי מספק → webhook אלינו; אישור עסקה → webhook לספק. הזול והפשוט מכולם |
+| **AMQP** (RabbitMQ) | פרוטוקול הודעות אמין: Exchange → Queues | המימוש הנפוץ של התורים מ-§3 — בחירת ה-broker היא של ה-Tech Lead |
 | **MQTT** | pub/sub קל ל-IoT | ❌ לא רלוונטי |
 
 > **הכלל:** אין סגנון "הכי טוב" — יש הכי-נכון-לאילוץ. ל-MVP: REST לכל דבר + webhook אחד למכרז. כל חריגה מזה צריכה הצדקה בכתב מה-Tech Lead.
@@ -107,6 +109,9 @@ Producers                    Broker/Queue                  Consumers
 | **Distributed Tracing** (Jaeger) | מעקב בקשה בין שירותים | חוב של ה-Correlation ID מ-§3 |
 | **WAF / Firewall** | הגנה מתקיפות | חובה כשמחזיקים נתוני אשראי/KYC בהיקף |
 | **Sharding** | פיצול DB | רק אם עוברים מיליוני רשומות — לא לפני |
+| **Auto Scaling** | הוספת/הסרת שרתים לפי עומס | קמפיין Meta מצליח ב-21:00 → השרתים גדלים לבד; 02:00 → מתכווצים וחוסכים |
+| **Service Discovery** | שירותים מוצאים זה את זה אוטומטית | רלוונטי רק כשעוברים ל-microservices/קוברנטיס — V2 ומעלה |
+| **Consistent Hashing** | פיזור דאטה בין nodes עם מינימום ערבול | פנימי ל-Redis/Cassandra — ידע כללי, לא החלטה שלנו |
 
 > **הכלל ל-design review:** כל רכיב שה-Tech Lead רוצה להוסיף ב-MVP מהרשימות של V1/V2 — צריך הצדקה. Over-engineering ב-Phase 0 = השקה מאוחרת.
 
@@ -142,9 +147,10 @@ Producers                    Broker/Queue                  Consumers
 |------|--------|--------|
 | 1.0.0 | ארבעה יסודות backend (שער כניסה · סגנונות API · תורים · JWT) ממופים לארכיטקטורת ULease + צ'קליסט design review | 2026-06-02 |
 | 1.1.0 | §4.5 חדש (D-037): מפת 21 הרכיבים מחולקת ל-MVP/V1/V2 — Redis לקטלוג, Elasticsearch לחיפוש רכב, Rate Limiter, Circuit Breaker + כלל נגד over-engineering | 2026-06-02 |
+| 1.2.0 | השלמות (D-038): Webhook (MVP — עדכוני מלאי) ו-AMQP ב-§2 · Auto Scaling, Service Discovery, Consistent Hashing ב-§4.5 | 2026-06-02 |
 
 **Attribution.** המקורות: *Reverse Proxy vs API Gateway vs Load Balancer* (Level Up Coding) · *Queues 101* (Raul Junco) · *How JWT Works* (Amigoscode) · *6 API Architecture Styles* (James Code Lab) · *System Design Cheatsheet*. העיבוד והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
 **Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of AI_SYSTEM_DESIGN.md v1.1.0 —*
+— *End of AI_SYSTEM_DESIGN.md v1.2.0 —*
