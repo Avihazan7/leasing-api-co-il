@@ -2,9 +2,9 @@
 פלטפורמת מסחר, שיווק ומכירת רכבים חדשים — Leasing.co.il
 
 ## Active Modules
-- [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.4.0 — Kernel: core doctrine, layered architecture, module registry (§3 + §3.1 working sets), the activation Boot Block, and the conflict-resolution hierarchy.
+- [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.5.0 — Kernel: core doctrine, layered architecture, module registry (§3 + §3.1 working sets), the activation Boot Block, and the conflict-resolution hierarchy.
 - [`MEMORY.md`](./MEMORY.md) v1.0.0 — Persistent memory layer: schema, identity card, active focus/projects, preferences, and the read/write protocol.
-- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.12.0 — Append-only decision log: 25 founding OS + ULease decisions with rationale and status.
+- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.13.0 — Append-only decision log: 26 founding OS + ULease decisions with rationale and status.
 - [`COWORK_SETUP.md`](./COWORK_SETUP.md) v1.1.0 — Claude Cowork onboarding: 7-step setup, the Global Instructions golden tip, context-file map, and OS integration — now implemented as a real workspace in [`COWORK/`](./COWORK/).
 - [`PROJECTS_SETUP.md`](./PROJECTS_SETUP.md) v1.0.0 — Claude Projects setup: 3 projects (ULease Launch, the ₪150K raise, Claude OS), one deliverable each, with drop-in instruction blocks, upload lists, and acceptance tests.
 - [`COMMAND_API.md`](./COMMAND_API.md) v1.1.0 — CLAUDE Command API: 89 slash commands, composition operators, a prompting-frameworks library, and drop-in system prompt for the Claude Operating System.
@@ -22,6 +22,7 @@
 - [`AI_RAG_DESIGN.md`](./AI_RAG_DESIGN.md) v1.0.0 — RAG design playbook: the 15 retrieval-layer mistakes that break RAG systems + their fixes, grouped into 4 layers and mapped to ULease components (Deal Score knowledge base, Q&A bot), with a Tech-Lead design-review checklist and MVP→V2 priorities — companion to the RAG knowledge layer spec'd in `ULEASE_SPEC.md` §7.1.
 - [`AI_PROJECT_STRUCTURE.md`](./AI_PROJECT_STRUCTURE.md) v1.0.0 — AI project structure standard: the 4-folder layout (prompts · data · agents · evals) mapped to every spec component — the skeleton the ULease platform repo starts from on the Tech Lead's day 1.
 - [`AI_ROLES_2026.md`](./AI_ROLES_2026.md) v1.0.0 — The hottest AI roles of 2026: all 21 roles mapped to ULease — founder (3 roles), Tech Lead (5 roles in one), Guardian architecture (2) — validating the hiring spec and turning it into a recruiting pitch.
+- [`AI_CLAUDE_ENGINEER_ROADMAP.md`](./AI_CLAUDE_ENGINEER_ROADMAP.md) v1.0.0 — Claude AI Engineer roadmap: all 15 stages mapped against this OS — 11/15 already built; the gap (stages 12–14) is exactly the Tech Lead role; stage 15 is the ULease launch itself.
 - [`INVESTOR_RELATIONS.md`](./INVESTOR_RELATIONS.md) v1.2.0 — Investor relations: company, cap table, the ₪150K raise, forecast summary, and investor tracker.
 - [`CASES/ULEASE.md`](./CASES/ULEASE.md) v1.4.0 — ULease 🎯 Leasing.co.il business case: three-sided marketplace model + full monthly financial forecast (Jun 2026 → Dec 2027), with the reproducible model in `CASES/ULEASE_FORECAST.py`.
 - [`CASES/ULEASE_SPEC.md`](./CASES/ULEASE_SPEC.md) v1.5.0 — ULease end-to-end product & system spec: actors, architecture, the Ultra·Master·Max multi-agent engine, the RAG knowledge layer (§7.1), guardrails & evals (§7.2), data model, integrations, and phased roadmap.

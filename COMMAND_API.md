@@ -835,7 +835,7 @@ Claude OS Root/
 ├── COMMAND_API.md             ← ← זה. המסמך הזה.
 ├── COMMAND_API_TASKS.md       ← ספריית פקודות המשימה (98 פקודות, 9 קטגוריות)
 ├── marketing-strategy-framework.md   ← Business: אסטרטגיית שיווק
-├── AI_SKILL_MAP.md · AI_PROGRESSION_PLAN.md · AI_LEARNING_RESOURCES.md · AI_7_SKILLS.md · AI_SKILLS_ACQUISITION.md · AI_TYPES.md · AI_CLAUDE_TOOL_SELECTOR.md · AI_CLAUDE_STACK_2026.md · AI_CLAUDE_GLOSSARY.md · AI_RAG_DESIGN.md · AI_PROJECT_STRUCTURE.md · AI_ROLES_2026.md   ← Knowledge
+├── AI_SKILL_MAP.md · AI_PROGRESSION_PLAN.md · AI_LEARNING_RESOURCES.md · AI_7_SKILLS.md · AI_SKILLS_ACQUISITION.md · AI_TYPES.md · AI_CLAUDE_TOOL_SELECTOR.md · AI_CLAUDE_STACK_2026.md · AI_CLAUDE_GLOSSARY.md · AI_RAG_DESIGN.md · AI_PROJECT_STRUCTURE.md · AI_ROLES_2026.md · AI_CLAUDE_ENGINEER_ROADMAP.md   ← Knowledge
 ├── INVESTOR_RELATIONS.md
 ├── COWORK/                    ← סביבת Cowork בפועל (ABOUT-ME · TEMPLATES · OUTPUTS)
 ├── .claude/                   ← Claude Code (4 skills + סוכן os-auditor)
