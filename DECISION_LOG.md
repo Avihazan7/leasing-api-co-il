@@ -1,7 +1,7 @@
 # DECISION_LOG.md — יומן החלטות
 
 **Module:** `DECISION_LOG.md`
-**Version:** 1.7.0
+**Version:** 1.8.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — יומן append-only (Memory layer).
 **Integrates with:** `OPERATING_SYSTEM.md` §7, `MEMORY.md`, `CASES/ULEASE*.md`
@@ -34,6 +34,7 @@
 | D-018 | 2026-06-01 | רישום מודול **AI_CLAUDE_TOOL_SELECTOR** (Knowledge) — "איזה Claude לבחור?" | עץ החלטה לבחירת כלי/מודל Claude נכון לכל משימה ב-OS וב-ULease (לפי מודל ההרחבה §7) | ✅ פעיל |
 | D-019 | 2026-06-01 | **ביקורת מקצה-לקצה לתיק ULease** (4 סוכנים מקבילים, קדמה כרונולוגית ל-D-015–D-017) → דוח `CASES/ULEASE_AUDIT.md` | אימות מוכנות לפני השקה וגיוס: 9🔴 / 21🟡 / 11🔵 + תוכנית תיקון ב-3 גלים; גל 1 לפני שיחות משקיעים | ✅ הושלם — כל 41 הממצאים נסגרו |
 | D-020 | 2026-06-01 | **אישור מייסד ל-6 ברירות-המחדל של המחירון/SLA**: מכסת מכרזים Ultra 2/חודש · משתמשים 2/5 · הנחה שנתית −10% · ingestion 4h/24h · פיצוי uptime בזיכוי עמלות · מקדמה T+3. בנוסף הופעלו: **תדריך משפטי לעו"ד** (`CASES/ULEASE_LEGAL_BRIEF.md`) + תזכורות יומן (תיאום עו"ד 2.6 · הכרעת Tech Lead 8.6) | המחירון וה-SLA סופיים לפרסום (בכפוף לעיבוד משפטי); שני השערים שנותרו (משפטי + Tech Lead) קיבלו תאריך ובעלים | ✅ אושר מייסד |
+| D-021 | 2026-06-02 | **בניית Claude Stack 2026 מקצה לקצה** — כל 4 עמודי ה-cheat sheet תפעוליים: (א) **Cowork** — סביבת עבודה אמיתית `COWORK/` (ABOUT-ME · TEMPLATES · OUTPUTS) (ב) **Projects** — `PROJECTS_SETUP.md` עם 3 פרויקטים (השקה · גיוס · OS) (ג) **Skills** — 4 קבצי SKILL.md ב-`.claude/skills/` (os-module · os-decision · ulease-refresh · investor-update) (ד) **Code** — מודול ידע `AI_CLAUDE_STACK_2026.md` + רישום תשתית תפעולית בקרנל §3.1 | סגירת הפער תיעוד↔יישום: עד כה רק עמוד Code היה בנוי בפועל; "הוראות יותר מ-3 פעמים = Skill"; ההקשר נטען עכשיו אוטומטית בכל כלי (Chat / Cowork / Code) — טכנולוגיה מקצה לקצה ביכולות משותפות | ✅ פעיל |
 
 ---
 
@@ -58,7 +59,8 @@
 | 1.5.0 | עדכון סטטוס D-019: שלושת גלי התיקון הושלמו (40/41 ממצאים; נותר W11 להכרעה) | 2026-06-01 |
 | 1.6.0 | הוספת D-017 — מחירון רשמי + SLA ספקים (`ULEASE_PRICING_SLA.md`); הביקורת נסגרה 41/41 | 2026-06-01 |
 | 1.7.0 | הוספת D-020 — אישור 6 ברירות-המחדל (מחירון/SLA סופיים) + תדריך משפטי + תזכורות יומן | 2026-06-01 |
+| 1.8.0 | הוספת D-021 — בניית Claude Stack 2026 מקצה לקצה (COWORK/ · PROJECTS_SETUP · `.claude/skills/` · AI_CLAUDE_STACK_2026) | 2026-06-02 |
 
 **Confidentiality.** מסמך פנימי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of DECISION_LOG.md v1.7.0 —*
+— *End of DECISION_LOG.md v1.8.0 —*
