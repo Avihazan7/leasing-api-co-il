@@ -1,10 +1,10 @@
 # יסודות BI ומידול נתונים — Power BI כמקרה לימוד
 
 **Module:** `AI_DATA_BI.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Knowledge layer (§3 שורה 22). מודול הדאטה הראשון — משרת את M9 (Data & Insights).
-**Source:** מבוסס על מחברת לימוד *"Power BI — Topics 1–10"* (מבוא · ממשק · מקורות · Power Query · מידול · DAX · ויזואליזציות · פילטרים · עיצוב · Get Data).
+**Source:** מבוסס על מחברת לימוד *"Power BI — Topics 1–15"* (מבוא · ממשק · מקורות · Power Query · מידול · DAX · ויזואליזציות · פילטרים · עיצוב · Get Data · מידול מתקדם · DAX מתקדם · אינטראקטיביות · Dashboard & Publishing · Power Query מתקדם).
 **Integrates with:** `CASES/ULEASE_SPEC.md` (§8 מודל נתונים · M9), `CASES/ULEASE_DASHBOARD.html`, `AI_PROJECT_STRUCTURE.md`, `AI_CLAUDE_TOOL_SELECTOR.md`, `AI_SKILL_MAP.md`, `CASES/ULEASE_TECH_ONBOARDING.md`
 
 > **BI = להפוך דאטה גולמית להחלטות.** המודול מזקק קוריקולום Power BI שלם (10 נושאים) לקונספטים שמשרתים את **M9 — מוצר הדאטה למנויי Ultra/Max** — בלי קשר לכלי שייבחר בסוף. Power BI הוא מקרה הלימוד; star schema, ETL ו-measures הם הנכס.
@@ -90,6 +90,15 @@
 
 **פונקציות הליבה ל-KPIs של ULease** (`ULEASE_SPEC.md` §13): SUM (GMV) · COUNT (עסקאות/חודש) · DISTINCTCOUNT (לקוחות ייחודיים) · AVERAGE (גודל עסקה ממוצע) · MIN/MAX (טווחים).
 
+**שתי תוספות שהופכות KPIs לדוח מנהלים:**
+
+| יכולת | מה זה | למה ULease חייבת את זה |
+|--------|--------|--------------------------|
+| **Date Table + Time Intelligence** | טבלת תאריכים ייעודית מאפשרת YTD · MTD · השוואה לתקופה מקבילה (`TOTALYTD` · `SAMEPERIODLASTYEAR`) | **מעקב תחזית מול ביצוע**: "GMV יוני בפועל מול התחזית" ו"צמיחה מול החודש הקודם" — בדיוק מה שהמשקיעים שואלים |
+| **CALCULATE (שינוי הקשר)** | אותו מדד, הקשר שונה: `עסקאות B2B = CALCULATE([עסקאות], Deals[Type]="B2B")` | פילוח כל KPI לפי סוג עסקה (B2B / B2B2C / B2C) — שלושת מסלולי העמלה של D-015 |
+
+> **כלל מהמחברת שתקף תמיד:** Measures (דינמי) עדיף על Calculated Columns (סטטי) — ביצועים ופחות נפח. ולתת שמות משמעותיים: `סה"כ GMV`, לא `Measure 1`.
+
 ---
 
 ## 5. ויזואליזציה — איזה גרף לאיזו שאלה
@@ -110,7 +119,35 @@
 
 ---
 
-## 6. ההכרעה ל-M9: Power BI מול Custom — שאלה ל-Tech Lead
+## 6. אינטראקטיביות ואבטחה — מה שהופך BI למוצר בתשלום
+
+### א. שלוש יכולות האינטראקציה שמנוי Ultra מצפה להן
+
+| יכולת | מה זה | התרחיש ב-ULease 🎯 |
+|--------|--------|----------------------|
+| **Drill-through** | קליק על מספר-סיכום → דף פירוט | "47 עסקאות החודש" → קליק → רשימת העסקאות עם סטטוס וספק |
+| **Q&A Visual** | שאלות בשפה טבעית על הדאטה | המפיץ מקליד "כמה מאזדה נמכרו בצפון ברבעון" — מקבל גרף. מתחבר ל-Q&A Bot (RAG, §7.1) |
+| **Bookmarks + Sync Slicers** | תצוגות שמורות + פילטרים עקביים בין דפים | "תצוגת מנהל" / "תצוגת ספק" / "תצוגת משקיע" על אותו מודל |
+
+### ב. RLS — אבטחת שורות (החובה של M9) 🔒
+
+**Row-Level Security**: כל משתמש רואה רק את השורות שלו — אותו דשבורד, דאטה שונה לכל מתחבר.
+
+| משתמש | מה הוא רואה |
+|--------|---------------|
+| ספק (יבואן/ליסינג) | רק העסקאות, הלידים וההתחשבנות **שלו** |
+| מפיץ (מנוי Ultra/Max) | רק המכרזים והעסקאות **שלו** + דאטת שוק מצרפית (אנונימית) |
+| ULease Ops | הכל |
+
+> **זו לא תכונה נחמדה — זו דרישת ה-RBAC מה-NFR** (`ULEASE_SPEC.md` §10) ותנאי לציות (Guardian). בלי RLS, M9 לא יכול לצאת ללקוחות: ספק שרואה עסקאות של ספק מתחרה = הפרת סודיות עסקית. **שאלת design review ל-Tech Lead: איך RLS ממומש — ב-BI או ב-API?**
+
+### ג. Dashboard מול Report (הבחנה מהמחברת)
+
+**Dashboard** = עמוד אחד, ניטור KPIs, מבט-על · **Report** = רב-עמודי, ניתוח עומק, drill. ב-ULease: הדשבורד הקיים = Dashboard למייסד/משקיעים · לוח ה-Ultra למנויים = Report אינטראקטיבי. **רענון מתוזמן** (scheduled refresh) חובה בשניהם — מתחבר ל-SLA העדכון (≤ 24h).
+
+---
+
+## 7. ההכרעה ל-M9: Power BI מול Custom — שאלה ל-Tech Lead
 
 | שיקול | Power BI | Custom (הקיים: Python → HTML) |
 |--------|----------|-------------------------------|
@@ -121,11 +158,11 @@
 | עומק מותאם (Deal Score, מכרזים) | מוגבל | ✅ מלא |
 | **המלצת ביניים** | **BI פנימי** (ניתוח עסקאות, משפך, ספקים) | **המוצר ללקוח** (פורטל מנויים, דוחות ספק) |
 
-> **ההכרעה הסופית = ה-Tech Lead, יחד עם בחירת ה-DB** (pgvector/PostgreSQL כבר נבחר ל-RAG — §7.1 — מה שמטה לכיוון BI שיושב על אותו PostgreSQL). מה שלא תלוי בהכרעה: **ה-star schema של §3 נבנה בכל מקרה.**
+> **ההכרעה הסופית = ה-Tech Lead, יחד עם בחירת ה-DB** (pgvector/PostgreSQL כבר נבחר ל-RAG — §7.1 — מה שמטה לכיוון BI שיושב על אותו PostgreSQL). מה שלא תלוי בהכרעה: **ה-star schema של §3 וה-RLS של §6 נבנים בכל מקרה.**
 
 ---
 
-## 7. החיבור למסלול הלמידה
+## 8. החיבור למסלול הלמידה
 
 | איפה | מה |
 |------|-----|
@@ -142,9 +179,10 @@
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | זיקוק קוריקולום Power BI (10 נושאים) ליסודות BI ממופים ל-M9: צינור, ETL, star schema של ULease, DAX, ויזואליזציה, והכרעת Power-BI-מול-custom ל-Tech Lead | 2026-06-02 |
+| 1.1.0 | נושאים 11–15 (D-033): Time Intelligence + CALCULATE לפילוח KPIs, §6 חדש — אינטראקטיביות (Drill-through · Q&A Visual · Bookmarks) ו-**RLS** כדרישת חובה ל-M9, Dashboard-מול-Report | 2026-06-02 |
 
-**Attribution.** מבוסס על מחברת הלימוד *Power BI Topics 1–10*. הזיקוק, התרגום והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** מבוסס על מחברת הלימוד *Power BI Topics 1–15*. הזיקוק, התרגום והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
 **Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of AI_DATA_BI.md v1.0.0 —*
+— *End of AI_DATA_BI.md v1.1.0 —*
