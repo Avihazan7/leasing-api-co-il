@@ -7,7 +7,7 @@
 - [`DECISION_LOG.md`](./DECISION_LOG.md) v1.27.0 — Append-only decision log: 40 founding OS + ULease decisions with rationale and status.
 - [`COWORK_SETUP.md`](./COWORK_SETUP.md) v1.2.0 — Claude Cowork onboarding: 7-step setup, the Global Instructions golden tip, context-file map, OS integration, and the Chief-of-Staff setup (5 scheduled roles) — now implemented as a real workspace in [`COWORK/`](./COWORK/).
 - [`PROJECTS_SETUP.md`](./PROJECTS_SETUP.md) v1.0.0 — Claude Projects setup: 3 projects (ULease Launch, the ₪150K raise, Claude OS), one deliverable each, with drop-in instruction blocks, upload lists, and acceptance tests.
-- [`COMMAND_API.md`](./COMMAND_API.md) v1.2.0 — CLAUDE Command API: 89 slash commands, composition operators, a prompting-frameworks library (incl. Opus 4.8 deltas §7.7), and drop-in system prompt for the Claude Operating System.
+- [`COMMAND_API.md`](./COMMAND_API.md) v1.2.1 — CLAUDE Command API: 89 slash commands, composition operators, a prompting-frameworks library (incl. Opus 4.8 deltas §7.7), and drop-in system prompt for the Claude Operating System.
 - [`COMMAND_API_TASKS.md`](./COMMAND_API_TASKS.md) v1.0.0 — Task-command library: 98 ready-to-use task commands in 9 categories (email, writing, decisions, learning, planning, brainstorming, career, content, meetings), mapped to ULease workflows.
 - [`marketing-strategy-framework.md`](./marketing-strategy-framework.md) v1.0.0 — Business layer: a 10-prompt framework for building a full marketing strategy, from customer psychology to a one-page plan.
 - [`AI_SKILL_MAP.md`](./AI_SKILL_MAP.md) v1.0.0 — The AI Skill Map: the four-stage journey (Tools → Workflows → Agentic → Architect), real-world applications, and where ULease sits on the map.

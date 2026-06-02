@@ -1,7 +1,7 @@
 # CLAUDE COMMAND API — Master Reference & Router
 
 **Module:** `COMMAND_API.md`
-**Version:** 1.2.0
+**Version:** 1.2.1
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Drop-in. Add to OS context to activate.
 **Integrates with:** כל המודולים הרשומים ב-`OPERATING_SYSTEM.md` §3 (קרנל, זיכרון, הקשר, Knowledge ו-Business).
@@ -858,7 +858,7 @@ Claude OS Root/
 ├── COMMAND_API.md             ← ← זה. המסמך הזה.
 ├── COMMAND_API_TASKS.md       ← ספריית פקודות המשימה (98 פקודות, 9 קטגוריות)
 ├── marketing-strategy-framework.md   ← Business: אסטרטגיית שיווק
-├── AI_SKILL_MAP.md · AI_PROGRESSION_PLAN.md · AI_LEARNING_RESOURCES.md · AI_7_SKILLS.md · AI_SKILLS_ACQUISITION.md · AI_TYPES.md · AI_CLAUDE_TOOL_SELECTOR.md · AI_CLAUDE_STACK_2026.md · AI_CLAUDE_GLOSSARY.md · AI_RAG_DESIGN.md · AI_PROJECT_STRUCTURE.md · AI_ROLES_2026.md · AI_CLAUDE_ENGINEER_ROADMAP.md · AI_DATA_BI.md · AI_SYSTEM_DESIGN.md   ← Knowledge
+├── AI_*.md                    ← Knowledge — הרשימה המלאה והעדכנית: OPERATING_SYSTEM.md §3
 ├── INVESTOR_RELATIONS.md
 ├── COWORK/                    ← סביבת Cowork בפועל (ABOUT-ME · TEMPLATES · OUTPUTS)
 ├── .claude/                   ← Claude Code (4 skills + סוכן os-auditor)
@@ -872,7 +872,7 @@ Claude OS Root/
 
 ```markdown
 ## Active Modules
-- COMMAND_API.md v1.2.0 — 89 slash commands, composition, prompting frameworks (כולל Opus 4.8 deltas §7.7), system prompt loaded
+- COMMAND_API.md v1.2.1 — 89 slash commands, composition, prompting frameworks (כולל Opus 4.8 deltas §7.7), system prompt loaded
 - (כל שאר המודולים — ראו §3)
 
 ## Module Load Order (canonical, §3)
@@ -958,6 +958,7 @@ Claude OS Root/
 | 1.0.0 | Initial 89 commands + composition + system prompt | 2026-05-19 |
 | 1.1.0 | Prompting Frameworks (§7) — core techniques, advanced strategies, framework→command mapping, key terms | 2026-05-31 |
 | 1.2.0 | Opus 4.8 deltas (§7.7) — שש ההתאמות + מנוף ה-Effort (D-024); ריכוך scaffolding ישן ב-§8 | 2026-06-02 |
+| 1.2.1 | תיקון עקביות (ביקורת D-040): עץ §9.1 — רשימת ה-Knowledge המפורשת (שהתיישנה פעמיים) הוחלפה ב-`AI_*.md` עם הפניה ל-§3, לפי One Source of Truth | 2026-06-02 |
 
 ### 11.2 Backward Compatibility
 
@@ -1057,4 +1058,4 @@ interface CommandContract {
 
 **Confidentiality.** This file is part of the personal Claude Operating System of Avraham Bar Yochai Chazan. Commands referencing internal IP (Deal Score, Match API, legal automation) inherit the confidentiality of those sub-systems.
 
-— *End of COMMAND_API.md v1.2.0 —*
+— *End of COMMAND_API.md v1.2.1 —*

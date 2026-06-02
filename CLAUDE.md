@@ -8,7 +8,7 @@
 - `DECISION_LOG.md` v1.27.0 — יומן החלטות append-only: 40 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.2.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר, אינטגרציה עם ה-OS + ראש המטה (5 תפקידים מתוזמנים) — מיושם בפועל ב-`COWORK/`.
 - `PROJECTS_SETUP.md` v1.0.0 — Claude Projects: 3 פרויקטים (השקה 🎯 · גיוס ₪150K · Claude OS) — תוצר אחד לכל פרויקט, הוראות drop-in, רשימות העלאה ובדיקות קבלה.
-- `COMMAND_API.md` v1.2.0 — 89 slash commands, composition operators, prompting-frameworks library (כולל Opus 4.8 deltas §7.7), drop-in system prompt loaded.
+- `COMMAND_API.md` v1.2.1 — 89 slash commands, composition operators, prompting-frameworks library (כולל Opus 4.8 deltas §7.7), drop-in system prompt loaded.
 - `COMMAND_API_TASKS.md` v1.0.0 — ספריית פקודות משימה: 98 פקודות ב-9 קטגוריות (99 Claude Commands) — אימייל, כתיבה, החלטות, למידה, תכנון, brainstorm, קריירה, תוכן, פגישות — ממופות לתרחישי ULease.
 - `marketing-strategy-framework.md` v1.0.0 — Business: מסגרת 10 פרומפטים לבניית אסטרטגיית שיווק מלאה (פסיכולוגיה → תוכנית עמוד).
 - `AI_SKILL_MAP.md` v1.0.0 — מפת מיומנויות AI: 4 שלבים (Tools → Workflows → Agentic → Architect), יישומים, ומיקום ULease על המפה.
