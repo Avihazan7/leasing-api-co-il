@@ -5,7 +5,7 @@
 ## Active Modules
 - `OPERATING_SYSTEM.md` v1.8.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.1.0 — שכבת זיכרון: schema, כרטיס זהות **מלא**, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
-- `DECISION_LOG.md` v1.28.0 — יומן החלטות append-only: 41 החלטות (OS + ULease), רציונל וסטטוס.
+- `DECISION_LOG.md` v1.29.0 — יומן החלטות append-only: 42 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.2.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר, אינטגרציה עם ה-OS + ראש המטה (5 תפקידים מתוזמנים) — מיושם בפועל ב-`COWORK/`.
 - `PROJECTS_SETUP.md` v1.0.0 — Claude Projects: 3 פרויקטים (השקה 🎯 · גיוס ₪150K · Claude OS) — תוצר אחד לכל פרויקט, הוראות drop-in, רשימות העלאה ובדיקות קבלה.
 - `COMMAND_API.md` v1.2.0 — 89 slash commands, composition operators, prompting-frameworks library (כולל Opus 4.8 deltas §7.7), drop-in system prompt loaded.
@@ -35,12 +35,13 @@
 - `CASES/ULEASE_HIRING.md` v1.0.0 — ערכת גיוס: מנהל מערכות טכנולוגיה (תיאור תפקיד, מודעת דרושים, שאלות ראיון, תהליך).
 - `CASES/ULEASE_IMPORTER_PLAYBOOK.md` v1.1.0 — Playbook מו"מ מול יבואני רכב: כאב, יתרונות, "שירות שלא היה כמותו", סקריפט, התנגדויות ופיילוט.
 - `CASES/ULEASE_LEASING_PLAYBOOK.md` v1.1.0 — Playbook מו"מ ליבואנים מקבילים (reach/מט"ח/אמון) וחברות ליסינג (disposal דו-כיווני + sourcing במכרז מחיר-שני).
-- `CASES/ULEASE_DEMAND_PLAYBOOK.md` v1.1.0 — Playbook צד-הביקוש: יחידת כלכלה (CPL ₪103, ROI ×4.9), 3 פרסונות Big Five, 7 ערוצי רכישה (כולל GEO — ציטוט בתשובות AI), משפך, ציות ו-KPIs — סוגר את ממצא C4.
+- `CASES/ULEASE_DEMAND_PLAYBOOK.md` v1.2.0 — Playbook צד-הביקוש: יחידת כלכלה (CPL ₪103, ROI ×4.9), 3 פרסונות Big Five, 7 ערוצי רכישה (כולל GEO — ציטוט בתשובות AI), משפך, ציות ו-KPIs — סוגר את ממצא C4; מנוע הביצוע: `ULEASE_DEMAND_ENGINE.md`.
 - `CASES/ULEASE_PRICING_SLA.md` v1.1.0 — מחירון רשמי + SLA ספקים: עמלות מדורגות, השוואת Ultra/Max, ו-11 התחייבויות שירות (ingestion, uptime, התחשבנות) — סוגר את ממצא W11.
 - `CASES/ULEASE_LEGAL_BRIEF.md` v1.0.0 — תדריך משפטי לעו"ד: 2 שאלות Go-Live (רישוי ניתוב מימון, הסכם ספק/SLA) + 6 נושאים, תוצרים מבוקשים ולוח זמנים — לשליחה לפני הפגישה.
 - `CASES/ULEASE_FINANCE_INSURANCE.md` v1.1.0 — מימון/ביטוח + חיתום דיגיטלי מקצה-לקצה: שותפים, זרימת חיתום, ניתוב רב-מלווה, התאמת Big Five, ודגלי רגולציה.
 - `CASES/ULEASE_OUTREACH_SCRIPTS.md` v1.2.0 — סקריפטים לפנייה (שיחה/מייל/וואטסאפ) ל-4 סגמנטי היצע + follow-up.
 - `CASES/ULEASE_OUTBOUND_ENGINE.md` v1.2.0 — בלופרינט מנוע outbound (n8n + Claude): 8 שכבות לאקווזיציית צד-היצע, מודלי Haiku/Sonnet, KPIs + שער הבגרות (§6.1): שלושה שלבי HITL מ-assist לאוטונומיה מנוטרת.
+- `CASES/ULEASE_DEMAND_ENGINE.md` v1.0.0 — מנוע צד-הביקוש (n8n, 18 צמתים): קליטת לידים → ניקוד Haiku → nurture Sonnet → עסקה → **לופ אורגני** (תוכן אנונימי → SEO/GEO → לידים ב-CPL ~₪0) — מותאם לציות ישראלי (inbound בלבד) + שערי בגרות D-040; מנוע הביצוע של ה-DEMAND_PLAYBOOK.
 - `CASES/ULEASE_TECH_ONBOARDING.md` v1.2.0 — Onboarding ל-Tech Lead: יום 0/1, רשימת קריאה ב-OS, תוכנית 30·60·90 + שקיפות SDLC (Jira/GitHub מיום 0, דוח תהליך שבועי, cycle time).
 - `CASES/ULEASE_LAUNCH_CHECKLIST.md` v1.3.0 — צ'קליסט השקה (שבועיים): דומיין, משפטי, MVP, תוכן, outreach, GEO, QA ולוח שבועי.
 - `CASES/ULEASE_DASHBOARD.html` v1.2.0 — דשבורד מנהלים אינטראקטיבי (RTL): KPIs, גרפים (הכנסה/מזומן/עסקאות/הוצאות/רווחיות), תמהילי הכנסה והוצאה, וצ'קליסט השקה חי; נוצר ע"י `CASES/ULEASE_DASHBOARD.py`.
