@@ -1,7 +1,7 @@
 # DECISION_LOG.md — יומן החלטות
 
 **Module:** `DECISION_LOG.md`
-**Version:** 1.9.0
+**Version:** 1.10.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — יומן append-only (Memory layer).
 **Integrates with:** `OPERATING_SYSTEM.md` §7, `MEMORY.md`, `CASES/ULEASE*.md`
@@ -36,6 +36,7 @@
 | D-020 | 2026-06-01 | **אישור מייסד ל-6 ברירות-המחדל של המחירון/SLA**: מכסת מכרזים Ultra 2/חודש · משתמשים 2/5 · הנחה שנתית −10% · ingestion 4h/24h · פיצוי uptime בזיכוי עמלות · מקדמה T+3. בנוסף הופעלו: **תדריך משפטי לעו"ד** (`CASES/ULEASE_LEGAL_BRIEF.md`) + תזכורות יומן (תיאום עו"ד 2.6 · הכרעת Tech Lead 8.6) | המחירון וה-SLA סופיים לפרסום (בכפוף לעיבוד משפטי); שני השערים שנותרו (משפטי + Tech Lead) קיבלו תאריך ובעלים | ✅ אושר מייסד |
 | D-021 | 2026-06-02 | **בניית Claude Stack 2026 מקצה לקצה** — כל 4 עמודי ה-cheat sheet תפעוליים: (א) **Cowork** — סביבת עבודה אמיתית `COWORK/` (ABOUT-ME · TEMPLATES · OUTPUTS) (ב) **Projects** — `PROJECTS_SETUP.md` עם 3 פרויקטים (השקה · גיוס · OS) (ג) **Skills** — 4 קבצי SKILL.md ב-`.claude/skills/` (os-module · os-decision · ulease-refresh · investor-update) (ד) **Code** — מודול ידע `AI_CLAUDE_STACK_2026.md` + רישום תשתית תפעולית בקרנל §3.1 | סגירת הפער תיעוד↔יישום: עד כה רק עמוד Code היה בנוי בפועל; "הוראות יותר מ-3 פעמים = Skill"; ההקשר נטען עכשיו אוטומטית בכל כלי (Chat / Cowork / Code) — טכנולוגיה מקצה לקצה ביכולות משותפות | ✅ פעיל |
 | D-022 | 2026-06-02 | **מדיניות אופטימיזציית LLM** (Context vs Prompt vs Fine-Tuning): (א) **RAG** — שכבת ידע ל-Ultra·Master·Max אופיינה ב-`ULEASE_SPEC.md` §7.1: pgvector ב-MVP, קורפוס = מלאי · מחירונים · רגולציה · playbooks · היסטוריית עסקאות (ב) **Prompt Engineering** — ממשיך דרך `COMMAND_API.md` §7 + `.claude/skills/` (ג) **Fine-Tuning נדחה** — ייבחן מחדש רק אחרי **~1,000 עסקאות סגורות** (צפי 2027) למודל התאמה קנייני | המלאי והמחירים משתנים יומית → RAG תמיד עדכני, fine-tuning מתיישן ביום; אין עדיין דאטה מתויגת (0 עסקאות); ה-stack מבוסס Claude — האופטימיזציה הנכונה: Skills + RAG + הקשר | ✅ פעיל |
+| D-023 | 2026-06-02 | **LLMOps + CI** (משלים את D-022 לפי מסגרת AiOps·MLops·DevOps·LLMops): (א) **Guardrails & Evals** — `ULEASE_SPEC.md` §7.2: eval suite חוסם-deploy (grounding **100%** לעובדות כספיות · golden set 50 תרחישים · red team 0 הצלחות), ניטור production (הזיות <1% · latency · drift שבועי), **הרחבת שער Go-Live של D-016** — Guardian מינימלי כולל מעתה grounding+evals (ב) **CI לריפו** — `.github/workflows/os-consistency.yml` + `scripts/os_consistency_check.py`: 101 בדיקות עקביות + שחזור ארטיפקטים bit-exact על כל PR (ג) MLOps נשאר דחוי (D-022) · AIOps (ניטור פלטפורמה) — V1 | סוכן שממציא מחיר/מפרט = חשיפה משפטית וכספית ישירה; ה-SLA (ליד ≤1h · uptime 99.5%) תלוי בסוכנים תקינים; ה-CI מחליף בדיקה ידנית שחזרה 3 פעמים (ביקורות os-auditor) | ✅ פעיל |
 
 ---
 
@@ -62,7 +63,8 @@
 | 1.7.0 | הוספת D-020 — אישור 6 ברירות-המחדל (מחירון/SLA סופיים) + תדריך משפטי + תזכורות יומן | 2026-06-01 |
 | 1.8.0 | הוספת D-021 — בניית Claude Stack 2026 מקצה לקצה (COWORK/ · PROJECTS_SETUP · `.claude/skills/` · AI_CLAUDE_STACK_2026) | 2026-06-02 |
 | 1.9.0 | הוספת D-022 — מדיניות אופטימיזציית LLM: RAG ב-SPEC §7.1, Fine-Tuning נדחה ל-~1,000 עסקאות | 2026-06-02 |
+| 1.10.0 | הוספת D-023 — Guardrails & Evals (SPEC §7.2) + CI לריפו (workflow + סקריפט בדיקות עקביות) | 2026-06-02 |
 
 **Confidentiality.** מסמך פנימי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of DECISION_LOG.md v1.9.0 —*
+— *End of DECISION_LOG.md v1.10.0 —*
