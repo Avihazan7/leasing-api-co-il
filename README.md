@@ -2,9 +2,9 @@
 פלטפורמת מסחר, שיווק ומכירת רכבים חדשים — Leasing.co.il
 
 ## Active Modules
-- [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.7.0 — Kernel: core doctrine, layered architecture, module registry (§3 + §3.1 working sets), the activation Boot Block, and the conflict-resolution hierarchy.
+- [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.8.0 — Kernel: core doctrine, layered architecture, module registry (§3 + §3.1 working sets), the activation Boot Block, and the conflict-resolution hierarchy.
 - [`MEMORY.md`](./MEMORY.md) v1.1.0 — Persistent memory layer: schema, fully-populated identity card, active focus/projects, preferences, and the read/write protocol.
-- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.25.0 — Append-only decision log: 38 founding OS + ULease decisions with rationale and status.
+- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.26.0 — Append-only decision log: 39 founding OS + ULease decisions with rationale and status.
 - [`COWORK_SETUP.md`](./COWORK_SETUP.md) v1.2.0 — Claude Cowork onboarding: 7-step setup, the Global Instructions golden tip, context-file map, OS integration, and the Chief-of-Staff setup (5 scheduled roles) — now implemented as a real workspace in [`COWORK/`](./COWORK/).
 - [`PROJECTS_SETUP.md`](./PROJECTS_SETUP.md) v1.0.0 — Claude Projects setup: 3 projects (ULease Launch, the ₪150K raise, Claude OS), one deliverable each, with drop-in instruction blocks, upload lists, and acceptance tests.
 - [`COMMAND_API.md`](./COMMAND_API.md) v1.2.0 — CLAUDE Command API: 89 slash commands, composition operators, a prompting-frameworks library (incl. Opus 4.8 deltas §7.7), and drop-in system prompt for the Claude Operating System.
@@ -25,6 +25,7 @@
 - [`AI_CLAUDE_ENGINEER_ROADMAP.md`](./AI_CLAUDE_ENGINEER_ROADMAP.md) v1.0.0 — Claude AI Engineer roadmap: all 15 stages mapped against this OS — 11/15 already built; the gap (stages 12–14) is exactly the Tech Lead role; stage 15 is the ULease launch itself.
 - [`AI_DATA_BI.md`](./AI_DATA_BI.md) v1.3.0 — BI & data-modeling foundations (Power BI as the study case, 20 topics): the BI pipeline, ETL, ULease's star schema, DAX + time intelligence, visualization guide, interactivity, row-level security, BI-as-a-service operations (alerts · report subscriptions · permissions · apps), and which statistical test for which business decision — mapped to M9 with the Power-BI-vs-custom decision framed for the Tech Lead.
 - [`AI_SYSTEM_DESIGN.md`](./AI_SYSTEM_DESIGN.md) v1.2.0 — System-design foundations: the entry layer (gateway · proxy · load balancer), 8 API styles (incl. webhooks for MVP inventory sync), queues (idempotency · DLQ · the event architecture), JWT auth, and the 24-component map staged across MVP/V1/V2 — mapped to the ULease platform architecture with a Tech-Lead design-review checklist.
+- [`AI_PROCESS_INTELLIGENCE.md`](./AI_PROCESS_INTELLIGENCE.md) v1.0.0 — Process intelligence & AI-rollout control: the GenIQ (HatchWorks × Bloomfilter) model — find where Gen AI belongs by mining the process first and measure its ROI (the 56% trap), plus the n8n agent anatomy and the human-in-the-loop (sendAndWait) pattern with a graduation gate — mapped to founder-level SDLC oversight of the Tech Lead, the automation map, and the outbound engine.
 - [`INVESTOR_RELATIONS.md`](./INVESTOR_RELATIONS.md) v1.2.0 — Investor relations: company, cap table, the ₪150K raise, forecast summary, and investor tracker.
 - [`CASES/ULEASE.md`](./CASES/ULEASE.md) v1.5.0 — ULease 🎯 Leasing.co.il business case: three-sided marketplace model + full monthly financial forecast (Jun 2026 → Dec 2027) + a one-page lean canvas, with the reproducible model in `CASES/ULEASE_FORECAST.py`.
 - [`CASES/ULEASE_SPEC.md`](./CASES/ULEASE_SPEC.md) v1.5.0 — ULease end-to-end product & system spec: actors, architecture, the Ultra·Master·Max multi-agent engine, the RAG knowledge layer (§7.1), guardrails & evals (§7.2), data model, integrations, and phased roadmap.
