@@ -5,11 +5,11 @@
 ## Active Modules
 - `OPERATING_SYSTEM.md` v1.8.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.1.0 — שכבת זיכרון: schema, כרטיס זהות **מלא**, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
-- `DECISION_LOG.md` v1.29.0 — יומן החלטות append-only: 42 החלטות (OS + ULease), רציונל וסטטוס.
+- `DECISION_LOG.md` v1.30.0 — יומן החלטות append-only: 43 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.2.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר, אינטגרציה עם ה-OS + ראש המטה (5 תפקידים מתוזמנים) — מיושם בפועל ב-`COWORK/`.
 - `PROJECTS_SETUP.md` v1.0.0 — Claude Projects: 3 פרויקטים (השקה 🎯 · גיוס ₪150K · Claude OS) — תוצר אחד לכל פרויקט, הוראות drop-in, רשימות העלאה ובדיקות קבלה.
 - `COMMAND_API.md` v1.2.0 — 89 slash commands, composition operators, prompting-frameworks library (כולל Opus 4.8 deltas §7.7), drop-in system prompt loaded.
-- `COMMAND_API_TASKS.md` v1.0.0 — ספריית פקודות משימה: 98 פקודות ב-9 קטגוריות (99 Claude Commands) — אימייל, כתיבה, החלטות, למידה, תכנון, brainstorm, קריירה, תוכן, פגישות — ממופות לתרחישי ULease.
+- `COMMAND_API_TASKS.md` v1.1.0 — ספריית פקודות משימה: 98 פקודות ב-9 קטגוריות (99 Claude Commands) — אימייל, כתיבה, החלטות, למידה, תכנון, brainstorm, קריירה, תוכן, פגישות — ממופות לתרחישי ULease + 30 פרומפטי גיליונות (§4, Top 30 Spreadsheet Prompts) לעבודה על המודל הפיננסי ועדכוני משקיעים.
 - `marketing-strategy-framework.md` v1.0.0 — Business: מסגרת 10 פרומפטים לבניית אסטרטגיית שיווק מלאה (פסיכולוגיה → תוכנית עמוד).
 - `AI_SKILL_MAP.md` v1.0.0 — מפת מיומנויות AI: 4 שלבים (Tools → Workflows → Agentic → Architect), יישומים, ומיקום ULease על המפה.
 - `AI_PROGRESSION_PLAN.md` v1.0.0 — תוכנית התקדמות אישית על המפה: Learn-vs-Delegate, ציר זמן צמוד ל-ULease, תוכנית 90 יום ושערי-מעבר.
