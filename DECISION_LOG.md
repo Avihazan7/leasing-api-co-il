@@ -1,7 +1,7 @@
 # DECISION_LOG.md — יומן החלטות
 
 **Module:** `DECISION_LOG.md`
-**Version:** 1.21.0
+**Version:** 1.22.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — יומן append-only (Memory layer).
 **Integrates with:** `OPERATING_SYSTEM.md` §7, `MEMORY.md`, `CASES/ULEASE*.md`
@@ -48,6 +48,7 @@
 | D-032 | 2026-06-02 | רישום מודול **AI_DATA_BI** (Knowledge, שורה 22 ב-§3) — מודול הדאטה הראשון ב-OS: זיקוק קוריקולום Power BI שלם (10 נושאים) ליסודות BI ממופים ל-ULease — צינור BI, ETL, **ה-star schema של מודל הנתונים** (Deal=fact · Supplier/Vehicle/Customer/Date=dimensions), DAX, מדריך ויזואליזציה, והכרעת Power-BI-מול-custom | M9 (Data & Insights) הוא מוצר בתשלום — מנוי Ultra ₪4,500 כולל "מידע וניתוחים"; ה-star schema הוא התשתית של המוצר הזה בלי קשר לכלי; אושר ע"י המייסד שהקונספטים נכנסים כמודול (לא רק הערה ב-SPEC) | ✅ פעיל |
 | D-033 | 2026-06-02 | **העשרת AI_DATA_BI ל-v1.1.0** (נושאים 11–15 מאותה מחברת): (א) **Time Intelligence** (YTD/MTD, Date Table) — מעקב תחזית-מול-ביצוע + **CALCULATE** לפילוח KPIs לפי סוג עסקה (ב) §6 חדש: אינטראקטיביות — Drill-through, **Q&A Visual** (שפה טבעית → גרף), Bookmarks (ג) **RLS — Row-Level Security** מסומן כדרישת **חובה** ל-M9: ספק רואה רק את הדאטה שלו | לפי תקדים D-029 (אותה סדרה → אותו מודול); RLS הוא הפער הקריטי שהתגלה — בלעדיו M9 מפר סודיות עסקית בין ספקים מתחרים; שאלת design review חדשה ל-Tech Lead: RLS ב-BI או ב-API | ✅ פעיל |
 | D-034 | 2026-06-02 | **העשרת AI_DATA_BI ל-v1.2.0** (נושאים 16–20, סוגר את המחברת): §6.ד **תפעול ה-BI כשירות** — (א) **התראות**: "עסקאות < 80% מהתחזית" / "ליד ממתין > שעה" = ניטור SLA אוטומטי (ב) **מנויי דוחות**: דוח ביקוש שבועי לספקים במייל (ג) ספי KPI בצבעים (🟢🟡🔴) (ד) מודל הרשאות: ספק/מפיץ = Viewer + RLS (ה) Apps כחבילות המידע של Ultra/Max + כלל הזהב: עמודות מאחסנות, מדדים מחשבים | ההתראות והמנויים הופכים את ה-BI ממוצר פסיבי לשירות פרואקטיבי — "דוח הביקוש השבועי" הוא בדיוק ההבטחה מה-playbooks לספקים, עכשיו עם מנגנון אספקה; הקוריקולום המלא (20 נושאים) סגור | ✅ פעיל |
+| D-035 | 2026-06-02 | **גל יישום עסקי — שלוש העשרות בתיק ULease** ("מקצה לקצה ברמת קצה"): (א) `AUTOMATION_MAP` v1.1.0 — **31 ה-Skills של Anthropic** ממופים למפה: 5+ אוטומציות V1/V2 הופכות ל"התקן עכשיו" (briefings · כספים · חוזים) על Gmail/QuickBooks/Stripe/HubSpot (ב) `DEMAND_PLAYBOOK` v1.1.0 + `LAUNCH_CHECKLIST` v1.3.0 — **ערוץ GEO**: ציטוט בתשובות AI (Claude/ChatGPT/Perplexity) בעלות אפס + פריט robots.txt שמתיר citation crawlers (ג) `ULEASE` v1.5.0 — **Lean Canvas בעמוד אחד** + 5 מדדי מעקב שבועיים למייל משקיע | שלושת התכנים סוגרים פערים תפעוליים אמיתיים: תפעול העסק (Skills מדף במקום פיתוח), ערוץ רכישה שאף מתחרה לא מנצל (GEO), וכלי תקשורת למשקיעים (one-pager); הסכנה שנחסמה: robots.txt ישן שחוסם AI crawlers = אפס נראות במנועי ה-AI בדיוק כשהקונים עוברים לשאול אותם | ✅ פעיל |
 
 ---
 
@@ -86,7 +87,8 @@
 | 1.19.0 | הוספת D-032 — רישום מודול `AI_DATA_BI.md` (יסודות BI ל-M9, Knowledge) | 2026-06-02 |
 | 1.20.0 | הוספת D-033 — העשרת `AI_DATA_BI.md` ל-v1.1.0: Time Intelligence, אינטראקטיביות ו-RLS (נושאים 11–15) | 2026-06-02 |
 | 1.21.0 | הוספת D-034 — העשרת `AI_DATA_BI.md` ל-v1.2.0: תפעול ה-BI כשירות — התראות, מנויים, הרשאות (נושאים 16–20) | 2026-06-02 |
+| 1.22.0 | הוספת D-035 — גל יישום עסקי: 31 Skills (AUTOMATION_MAP) · ערוץ GEO (DEMAND+CHECKLIST) · Lean Canvas (ULEASE) | 2026-06-02 |
 
 **Confidentiality.** מסמך פנימי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of DECISION_LOG.md v1.21.0 —*
+— *End of DECISION_LOG.md v1.22.0 —*
