@@ -1,11 +1,11 @@
 # ULease 🎯 — מפת אוטומציות AI לפי פונקציה עסקית
 
 **Module:** `CASES/ULEASE_AUTOMATION_MAP.md`
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Backlog אוטומציות מתועדף (Business layer, תחת CASES).
 **Source:** מבוסס על מסגרת *"546 AI Automation Ideas"* (AI Matt · Next Step Agents) + *"31 Claude Skills For Small Businesses"* (Anthropic plugin pack) — מסונן ומותאם ל-ULease.
-**Integrates with:** `CASES/ULEASE_SPEC.md`, `CASES/ULEASE_OUTBOUND_ENGINE.md`, `AI_TYPES.md`, `CASES/ULEASE_DASHBOARD.html`
+**Integrates with:** `CASES/ULEASE_SPEC.md`, `CASES/ULEASE_OUTBOUND_ENGINE.md`, `AI_TYPES.md`, `AI_PROCESS_INTELLIGENCE.md`, `CASES/ULEASE_DASHBOARD.html`
 
 > **הפילוסופיה:** רוב האנשים עוצרים בפרומפטים. מעטים בונים את **המערכת שמריצה את העסק**. Build systems · Own value · **Owned, not rented** — זה בדיוק מה ש-ULease בונה.
 
@@ -137,6 +137,28 @@ Anthropic שחררה חבילת **31 Claude Skills לעסקים קטנים** ש�
 
 ---
 
+## 12. 📏 שכבת המדידה — ROI לכל אוטומציה (D-040)
+
+> **מלכודת ה-56%** (`AI_PROCESS_INTELLIGENCE.md` §1): רוב המנהלים *מאמינים* שה-AI שלהם מחזיר את ההשקעה — ולא מודדים. המפה הזו לא עוצרת ברשימת אוטומציות; כל אוטומציה שעולה לאוויר נמדדת.
+
+**הנוסחה לכל אוטומציה:**
+
+| צד | מה נספר | דוגמה (Lead Scoring, מנוע n8n שכבה 03) |
+|-----|----------|------------------------------------------|
+| **עלות** | שעות בנייה (חד-פעמי, מופחת על 6 חודשים) + טוקנים/תשתית (חודשי) | הקמה + ~₪40/חודש Haiku |
+| **תשואה** | שעות שנחסכו · לידים שהומרו · עסקאות שנוספו — **במספרים, לא בתחושה** | ~3 שעות סינון ידני בשבוע |
+| **ROI** | תשואה חודשית ÷ עלות חודשית | נמדד מהשקה |
+
+**שלושת הכללים:**
+
+1. **אין עלייה לאוויר בלי baseline** — לפני שהאוטומציה רצה, מתעדים כמה זמן/כסף התהליך עולה ידנית. בלי baseline אין השוואה.
+2. **כלל 90 הימים** — אוטומציה שלא החזירה את עלותה תוך 90 יום: מושהית, מתוקנת או נמחקת. אין "אולי בהמשך".
+3. **המדידה בדשבורד, לא בזיכרון** — מדדי ה-ROI מצטרפים לשכבת ה-Measurement (מנוע n8n שכבה 07) ומדווחים בדשבורד המנהלים.
+
+> ⚠️ **הדרישה החדשה:** שלוש ההזדמנויות הבאות (Aging Predictor · ROI Calculator · Briefing Bot) נכנסות לבנייה **רק עם אומדן ROI כתוב מראש** — עלות צפויה, תשואה צפויה, ותאריך בדיקת 90 הימים.
+
+---
+
 ## סיכום: איפה אנחנו על המפה
 
 | | כמות |
@@ -159,7 +181,8 @@ Anthropic שחררה חבילת **31 Claude Skills לעסקים קטנים** ש�
 |------|--------|--------|
 | 1.0.0 | מפת אוטומציות מסוננת ל-ULease — 10 פונקציות, 40 אוטומציות, סטטוס ועדיפות | 2026-06-01 |
 | 1.1.0 | §11 חדש (D-035): 31 ה-Skills של Anthropic ממופים למפה — לפחות 5 אוטומציות V1/V2 הופכות ל"התקן עכשיו" (כספים, חוזים, briefings) | 2026-06-02 |
+| 1.2.0 | §12 חדש (D-040): שכבת המדידה — baseline חובה, עלות-מול-תשואה, כלל 90 הימים, ואומדן ROI כתוב כתנאי לבניית ההזדמנויות הבאות | 2026-06-02 |
 
 **Attribution.** המסגרות: *546 AI Automation Ideas* (AI Matt · Next Step Agents) · *31 Claude Skills For Small Businesses* (Anthropic). הסינון, המיפוי והתעדוף ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_AUTOMATION_MAP.md v1.1.0 —*
+— *End of CASES/ULEASE_AUTOMATION_MAP.md v1.2.0 —*
