@@ -833,8 +833,9 @@ Claude OS Root/
 ├── COWORK_SETUP.md            ← הקשר / אונבורדינג Cowork
 ├── PROJECTS_SETUP.md          ← הקשר / Claude Projects
 ├── COMMAND_API.md             ← ← זה. המסמך הזה.
+├── COMMAND_API_TASKS.md       ← ספריית פקודות המשימה (98 פקודות, 9 קטגוריות)
 ├── marketing-strategy-framework.md   ← Business: אסטרטגיית שיווק
-├── AI_SKILL_MAP.md · AI_PROGRESSION_PLAN.md · AI_LEARNING_RESOURCES.md · AI_7_SKILLS.md · AI_SKILLS_ACQUISITION.md · AI_TYPES.md · AI_CLAUDE_TOOL_SELECTOR.md · AI_CLAUDE_STACK_2026.md · AI_RAG_DESIGN.md   ← Knowledge
+├── AI_SKILL_MAP.md · AI_PROGRESSION_PLAN.md · AI_LEARNING_RESOURCES.md · AI_7_SKILLS.md · AI_SKILLS_ACQUISITION.md · AI_TYPES.md · AI_CLAUDE_TOOL_SELECTOR.md · AI_CLAUDE_STACK_2026.md · AI_CLAUDE_GLOSSARY.md · AI_RAG_DESIGN.md · AI_PROJECT_STRUCTURE.md · AI_ROLES_2026.md   ← Knowledge
 ├── INVESTOR_RELATIONS.md
 ├── COWORK/                    ← סביבת Cowork בפועל (ABOUT-ME · TEMPLATES · OUTPUTS)
 ├── .claude/                   ← Claude Code (4 skills + סוכן os-auditor)
@@ -858,10 +859,11 @@ Claude OS Root/
 4. COWORK_SETUP.md
 5. PROJECTS_SETUP.md
 6. COMMAND_API.md           ← לפני הקטגוריות העסקיות
-7. marketing-strategy-framework.md
-8. AI_* (Knowledge, on-demand)
-9. INVESTOR_RELATIONS.md
-10. CASES/*.md
+7. COMMAND_API_TASKS.md     ← ספריית פקודות המשימה
+8. marketing-strategy-framework.md
+9. AI_* (Knowledge, on-demand)
+10. INVESTOR_RELATIONS.md
+11. CASES/*.md
 ```
 
 ### 9.3 כללי הכרעה במצב התנגשות

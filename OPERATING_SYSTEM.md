@@ -1,7 +1,7 @@
 # CLAUDE OPERATING SYSTEM — Kernel
 
 **Module:** `OPERATING_SYSTEM.md`
-**Version:** 1.3.0
+**Version:** 1.4.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Kernel — נטען ראשון. כל שאר המודולים תלויים בו.
 **Integrates with:** כל המודולים הרשומים ב-§3 — `CLAUDE.md`, `MEMORY.md`, `DECISION_LOG.md`, `COWORK_SETUP.md`, `PROJECTS_SETUP.md`, `COMMAND_API.md`, `marketing-strategy-framework.md`, `AI_*` (Knowledge), `INVESTOR_RELATIONS.md`, `CASES/*.md` + תשתית תפעולית ב-§3.1 (`COWORK/`, `.claude/`)
@@ -52,8 +52,8 @@
 ┌─ KERNEL ────── OPERATING_SYSTEM.md   חוקים, סדר טעינה, הכרעה
 ├─ MEMORY ────── MEMORY.md · DECISION_LOG.md   מי אתה, מה זוכרים, focus/projects, החלטות
 ├─ CONTEXT ───── COWORK_SETUP.md · PROJECTS_SETUP.md · COWORK/   חיבור התיקייה, קבצי md, Global Instructions, פרויקטים
-├─ INTERFACE ─── COMMAND_API.md · .claude/ (skills · agents)   89 פקודות /command + 4 Claude Code skills + os-auditor
-├─ KNOWLEDGE ─── AI_SKILL_MAP · AI_PROGRESSION_PLAN · AI_LEARNING_RESOURCES · AI_7_SKILLS · AI_SKILLS_ACQUISITION · AI_TYPES · AI_CLAUDE_TOOL_SELECTOR · AI_CLAUDE_STACK_2026 · AI_RAG_DESIGN   ידע אישי/לימודי (on-demand)
+├─ INTERFACE ─── COMMAND_API.md · COMMAND_API_TASKS.md · .claude/ (skills · agents)   89 פקודות ליבה + 98 פקודות משימה + 4 Claude Code skills + os-auditor
+├─ KNOWLEDGE ─── AI_SKILL_MAP · AI_PROGRESSION_PLAN · AI_LEARNING_RESOURCES · AI_7_SKILLS · AI_SKILLS_ACQUISITION · AI_TYPES · AI_CLAUDE_TOOL_SELECTOR · AI_CLAUDE_STACK_2026 · AI_CLAUDE_GLOSSARY · AI_RAG_DESIGN · AI_PROJECT_STRUCTURE · AI_ROLES_2026   ידע אישי/לימודי (on-demand)
 └─ BUSINESS ──── marketing-strategy-framework.md · INVESTOR_RELATIONS.md · CASES/*.md   הקשר עסקי נקודתי
 ```
 
@@ -73,18 +73,22 @@
 | 4 | `COWORK_SETUP.md` | Context | ✅ פעיל | חיבור תיקייה, קבצי md, אונבורדינג |
 | 5 | `PROJECTS_SETUP.md` | Context | ✅ פעיל | Claude Projects — 3 פרויקטים, תוצר אחד לכל אחד, הוראות drop-in |
 | 6 | `COMMAND_API.md` | Interface | ✅ פעיל | 89 פקודות, composition, prompting frameworks, system prompt |
-| 7 | `marketing-strategy-framework.md` | Business | ✅ פעיל | מסגרת 10-שלבית לאסטרטגיית שיווק |
-| 8 | `AI_SKILL_MAP.md` | Knowledge | ✅ פעיל | מפת מיומנויות AI — 4 שלבים ומיקום ULease |
-| 9 | `AI_PROGRESSION_PLAN.md` | Knowledge | ✅ פעיל | תוכנית התקדמות אישית — Learn-vs-Delegate, 90 יום |
-| 10 | `AI_LEARNING_RESOURCES.md` | Knowledge | ✅ פעיל | קוריקולום AI — משאבים לכל שלב |
-| 11 | `AI_7_SKILLS.md` | Knowledge | ✅ פעיל | 7 מיומנויות לשליטה ב-AI (2026) + מיפוי ל-OS |
-| 12 | `AI_SKILLS_ACQUISITION.md` | Knowledge | ✅ פעיל | תוכנית רכישת מיומנויות hands-on (8 שבועות) |
-| 13 | `AI_TYPES.md` | Knowledge | ✅ פעיל | טקסונומיית סוגי AI (Traditional·Generative·Agentic, 3×9) + מיפוי ל-ULease |
-| 14 | `AI_CLAUDE_TOOL_SELECTOR.md` | Knowledge | ✅ פעיל | עץ החלטה לבחירת כלי Claude — 12 כלים + מיפוי ל-ULease |
-| 15 | `AI_CLAUDE_STACK_2026.md` | Knowledge | ✅ פעיל | 4 עמודי ה-stack של 2026 (Cowork · Projects · Skills · Code) + מיפוי ה-build התפעולי |
-| 16 | `AI_RAG_DESIGN.md` | Knowledge | ✅ פעיל | תכנון RAG — 15 טעויות Retrieval + פתרונות, ממופה ל-ULease (משלים את SPEC §7.1) |
-| 17 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
-| 18 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית, איפיון, מתודולוגיה, גיוס, playbooks, ביקורת ומחירון/SLA |
+| 7 | `COMMAND_API_TASKS.md` | Interface | ✅ פעיל | 98 פקודות משימה ב-9 קטגוריות (99 Claude Commands) + מיפוי לתרחישי ULease |
+| 8 | `marketing-strategy-framework.md` | Business | ✅ פעיל | מסגרת 10-שלבית לאסטרטגיית שיווק |
+| 9 | `AI_SKILL_MAP.md` | Knowledge | ✅ פעיל | מפת מיומנויות AI — 4 שלבים ומיקום ULease |
+| 10 | `AI_PROGRESSION_PLAN.md` | Knowledge | ✅ פעיל | תוכנית התקדמות אישית — Learn-vs-Delegate, 90 יום |
+| 11 | `AI_LEARNING_RESOURCES.md` | Knowledge | ✅ פעיל | קוריקולום AI — משאבים לכל שלב |
+| 12 | `AI_7_SKILLS.md` | Knowledge | ✅ פעיל | 7 מיומנויות לשליטה ב-AI (2026) + מיפוי ל-OS |
+| 13 | `AI_SKILLS_ACQUISITION.md` | Knowledge | ✅ פעיל | תוכנית רכישת מיומנויות hands-on (8 שבועות) |
+| 14 | `AI_TYPES.md` | Knowledge | ✅ פעיל | טקסונומיית סוגי AI (Traditional·Generative·Agentic, 3×9) + מיפוי ל-ULease |
+| 15 | `AI_CLAUDE_TOOL_SELECTOR.md` | Knowledge | ✅ פעיל | עץ החלטה לבחירת כלי Claude — 12 כלים + מיפוי ל-ULease |
+| 16 | `AI_CLAUDE_STACK_2026.md` | Knowledge | ✅ פעיל | 4 עמודי ה-stack של 2026 (Cowork · Projects · Skills · Code) + מיפוי ה-build התפעולי |
+| 17 | `AI_CLAUDE_GLOSSARY.md` | Knowledge | ✅ פעיל | מילון 30 מונחי Claude + מיפוי "איפה אצלך" (21/30 מיושמים) |
+| 18 | `AI_RAG_DESIGN.md` | Knowledge | ✅ פעיל | תכנון RAG — 15 טעויות Retrieval + פתרונות, ממופה ל-ULease (משלים את SPEC §7.1) |
+| 19 | `AI_PROJECT_STRUCTURE.md` | Knowledge | ✅ פעיל | תקן 4 התיקיות (prompts·data·agents·evals) לריפו הפלטפורמה + צ'קליסט Tech Lead |
+| 20 | `AI_ROLES_2026.md` | Knowledge | ✅ פעיל | 21 תפקידי AI (2026) ממופים: מייסד · Tech Lead (5 בכובע אחד) · Guardian |
+| 21 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
+| 22 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית, איפיון, מתודולוגיה, גיוס, playbooks, ביקורת ומחירון/SLA |
 
 > **הערה על שכבות:** מודולי `AI_*` הם שכבת **Knowledge** — ידע אישי/לימודי שיושב לוגית בין ה-INTERFACE ל-BUSINESS. הם פעילים אך נטענים on-demand, לא בכל turn.
 > כשמודול עובר מ-🔜 ל-✅ — מעדכנים את הסטטוס כאן ואת ה-Active Modules ב-`CLAUDE.md` ו-`README.md`.
@@ -177,11 +181,12 @@ Doctrine:
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | קרנל ראשוני — עקרונות, ארכיטקטורת שכבות, רישום מודולים, Boot Block, היררכיית הכרעה | 2026-05-30 |
-| 1.0.1 | רישום `AI_CLAUDE_TOOL_SELECTOR` (כיום שורה 14, D-018) + הוספת `CASES/ULEASE_AUDIT.md` לתיק ULease (D-019) | 2026-06-01 |
-| 1.1.0 | Claude Stack 2026 (D-021): רישום `PROJECTS_SETUP.md` (שורה 5) + `AI_CLAUDE_STACK_2026.md` (שורה 15), סעיף §3.1 תשתית תפעולית (`COWORK/`, `.claude/`), ועדכון Boot Block. הסטת שורות: IR 14→16 · CASES 15→17 | 2026-06-02 |
+| 1.0.1 | רישום `AI_CLAUDE_TOOL_SELECTOR` (כיום שורה 15, D-018) + הוספת `CASES/ULEASE_AUDIT.md` לתיק ULease (D-019) | 2026-06-01 |
+| 1.1.0 | Claude Stack 2026 (D-021): רישום `PROJECTS_SETUP.md` (שורה 5) + `AI_CLAUDE_STACK_2026.md` (כיום שורה 16), סעיף §3.1 תשתית תפעולית (`COWORK/`, `.claude/`), ועדכון Boot Block | 2026-06-02 |
 | 1.2.0 | רישום תשתית CI ב-§3.1 (D-023): `.github/workflows/os-consistency.yml` + `scripts/os_consistency_check.py` — בדיקות עקביות אוטומטיות על כל PR | 2026-06-02 |
-| 1.3.0 | רישום `AI_RAG_DESIGN` (שורה 16, D-024) — מודול Knowledge לתכנון RAG, משלים את שכבת ה-RAG ב-SPEC §7.1; Boot Block כולל את marketing-strategy-framework בסדר הטעינה. הסטת שורות: IR 16→17 · CASES 17→18 | 2026-06-02 |
+| 1.3.0 | רישום `AI_RAG_DESIGN` (כיום שורה 18, D-024) — מודול Knowledge לתכנון RAG, משלים את שכבת ה-RAG ב-SPEC §7.1; Boot Block כולל את marketing-strategy-framework בסדר הטעינה | 2026-06-02 |
+| 1.4.0 | גל ידע #2 (D-025): רישום `COMMAND_API_TASKS` (שורה 7, Interface) + `AI_CLAUDE_GLOSSARY` (שורה 17) + `AI_PROJECT_STRUCTURE` (שורה 19) + `AI_ROLES_2026` (שורה 20). הסטת שורות: marketing 7→8 · AI_* 8→9 עד 16→18 · IR 17→21 · CASES 18→22 | 2026-06-02 |
 
 **Confidentiality.** קובץ זה הוא הליבה של ה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of OPERATING_SYSTEM.md v1.3.0 —*
+— *End of OPERATING_SYSTEM.md v1.4.0 —*

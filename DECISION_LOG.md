@@ -1,7 +1,7 @@
 # DECISION_LOG.md — יומן החלטות
 
 **Module:** `DECISION_LOG.md`
-**Version:** 1.11.0
+**Version:** 1.12.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — יומן append-only (Memory layer).
 **Integrates with:** `OPERATING_SYSTEM.md` §7, `MEMORY.md`, `CASES/ULEASE*.md`
@@ -37,7 +37,8 @@
 | D-021 | 2026-06-02 | **בניית Claude Stack 2026 מקצה לקצה** — כל 4 עמודי ה-cheat sheet תפעוליים: (א) **Cowork** — סביבת עבודה אמיתית `COWORK/` (ABOUT-ME · TEMPLATES · OUTPUTS) (ב) **Projects** — `PROJECTS_SETUP.md` עם 3 פרויקטים (השקה · גיוס · OS) (ג) **Skills** — 4 קבצי SKILL.md ב-`.claude/skills/` (os-module · os-decision · ulease-refresh · investor-update) (ד) **Code** — מודול ידע `AI_CLAUDE_STACK_2026.md` + רישום תשתית תפעולית בקרנל §3.1 | סגירת הפער תיעוד↔יישום: עד כה רק עמוד Code היה בנוי בפועל; "הוראות יותר מ-3 פעמים = Skill"; ההקשר נטען עכשיו אוטומטית בכל כלי (Chat / Cowork / Code) — טכנולוגיה מקצה לקצה ביכולות משותפות | ✅ פעיל |
 | D-022 | 2026-06-02 | **מדיניות אופטימיזציית LLM** (Context vs Prompt vs Fine-Tuning): (א) **RAG** — שכבת ידע ל-Ultra·Master·Max אופיינה ב-`ULEASE_SPEC.md` §7.1: pgvector ב-MVP, קורפוס = מלאי · מחירונים · רגולציה · playbooks · היסטוריית עסקאות (ב) **Prompt Engineering** — ממשיך דרך `COMMAND_API.md` §7 + `.claude/skills/` (ג) **Fine-Tuning נדחה** — ייבחן מחדש רק אחרי **~1,000 עסקאות סגורות** (צפי 2027) למודל התאמה קנייני | המלאי והמחירים משתנים יומית → RAG תמיד עדכני, fine-tuning מתיישן ביום; אין עדיין דאטה מתויגת (0 עסקאות); ה-stack מבוסס Claude — האופטימיזציה הנכונה: Skills + RAG + הקשר | ✅ פעיל |
 | D-023 | 2026-06-02 | **LLMOps + CI** (משלים את D-022 לפי מסגרת AiOps·MLops·DevOps·LLMops): (א) **Guardrails & Evals** — `ULEASE_SPEC.md` §7.2: eval suite חוסם-deploy (grounding **100%** לעובדות כספיות · golden set 50 תרחישים · red team 0 הצלחות), ניטור production (הזיות <1% · latency · drift שבועי), **הרחבת שער Go-Live של D-016** — Guardian מינימלי כולל מעתה grounding+evals (ב) **CI לריפו** — `.github/workflows/os-consistency.yml` + `scripts/os_consistency_check.py`: 101 בדיקות עקביות + שחזור ארטיפקטים bit-exact על כל PR (ג) MLOps נשאר דחוי (D-022) · AIOps (ניטור פלטפורמה) — V1 | סוכן שממציא מחיר/מפרט = חשיפה משפטית וכספית ישירה; ה-SLA (ליד ≤1h · uptime 99.5%) תלוי בסוכנים תקינים; ה-CI מחליף בדיקה ידנית שחזרה 3 פעמים (ביקורות os-auditor) | ✅ פעיל |
-| D-024 | 2026-06-02 | רישום מודול **AI_RAG_DESIGN** (Knowledge, שורה 16 ב-§3) — 15 טעויות תכנון ששוברות מערכות RAG ב-Retrieval + פתרונות, מקובצות ל-4 שכבות וממופות לרכיבי ULease | משלים את D-022: ה-SPEC §7.1 מגדיר *מה* בונים (pgvector, קורפוס, top-k) — המודול מגדיר *איך לא לשבור את זה*; צ'קליסט design review מול ה-Tech Lead (שבוע 7 ב-`AI_SKILLS_ACQUISITION.md`) + עיגון מדדי ה-eval של D-023 (Precision@k, grounding) | ✅ פעיל |
+| D-024 | 2026-06-02 | רישום מודול **AI_RAG_DESIGN** (Knowledge, שורה 18 ב-§3) — 15 טעויות תכנון ששוברות מערכות RAG ב-Retrieval + פתרונות, מקובצות ל-4 שכבות וממופות לרכיבי ULease | משלים את D-022: ה-SPEC §7.1 מגדיר *מה* בונים (pgvector, קורפוס, top-k) — המודול מגדיר *איך לא לשבור את זה*; צ'קליסט design review מול ה-Tech Lead (שבוע 7 ב-`AI_SKILLS_ACQUISITION.md`) + עיגון מדדי ה-eval של D-023 (Precision@k, grounding) | ✅ פעיל |
+| D-025 | 2026-06-02 | **גל ידע #2 — ארבעה מודולים חדשים**: (א) `COMMAND_API_TASKS.md` (Interface, שורה 7) — 98 פקודות משימה ב-9 קטגוריות (ב) `AI_CLAUDE_GLOSSARY.md` (Knowledge, שורה 17) — 30 מונחי Claude, 21/30 כבר מיושמים (ג) `AI_PROJECT_STRUCTURE.md` (Knowledge, שורה 19) — תקן 4 התיקיות (prompts·data·agents·evals) לריפו הפלטפורמה (ד) `AI_ROLES_2026.md` (Knowledge, שורה 20) — 21 תפקידי AI: מייסד 3 · Tech Lead 5-בכובע-אחד · Guardian 2 | ארבע אינפוגרפיקות → ידע מופעל: פקודות מוכנות לעבודה היומית (outreach, משקיעים, גיוס), שפה משותפת לכל כלי Claude, שלד מחייב לריפו שה-Tech Lead יקים ביום 1, והפיכת הגדרת התפקיד ב-`ULEASE_HIRING.md` להצעת ערך ("5 התפקידים החמים של 2026 במשרה אחת") | ✅ פעיל |
 
 ---
 
@@ -66,7 +67,8 @@
 | 1.9.0 | הוספת D-022 — מדיניות אופטימיזציית LLM: RAG ב-SPEC §7.1, Fine-Tuning נדחה ל-~1,000 עסקאות | 2026-06-02 |
 | 1.10.0 | הוספת D-023 — Guardrails & Evals (SPEC §7.2) + CI לריפו (workflow + סקריפט בדיקות עקביות) | 2026-06-02 |
 | 1.11.0 | הוספת D-024 — רישום מודול `AI_RAG_DESIGN.md` (תכנון RAG, Knowledge) — משלים את D-022/D-023 | 2026-06-02 |
+| 1.12.0 | הוספת D-025 — גל ידע #2: `COMMAND_API_TASKS` · `AI_CLAUDE_GLOSSARY` · `AI_PROJECT_STRUCTURE` · `AI_ROLES_2026` | 2026-06-02 |
 
 **Confidentiality.** מסמך פנימי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of DECISION_LOG.md v1.11.0 —*
+— *End of DECISION_LOG.md v1.12.0 —*
