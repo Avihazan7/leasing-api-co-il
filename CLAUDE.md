@@ -9,6 +9,7 @@
 - `LAUNCH.md` v1.0.0 — Master ignition file. ULease go-live playbook: Day 0 → Week 1 → Month 1 → Quarter 1, RACI, kill-switch, master switch.
 - `AGENT_BLUEPRINT.md` v1.1.0 — System-first doctrine. הגשר בין ה-Docs OS ל-Agent Runtime (`stage-a/`): 8-module blueprint, coverage map, evals layer, governance-in-code, **+ § 9 Orchestration Patterns** (9 topologies · ULease Skills map · `stage-a`=Plan&Execute · Stage-B=P&E+Replan).
 - `CASES/ROX_KEY.md` v1.0.0 — Vietnamese benchmark — ROX Key digital transformation. Direct parallel to ULease positioning; 5 operational lessons + 6 action items woven into LAUNCH and DEV_ENVIRONMENTS.
+- `power-bi-essential-concepts.md` v1.1.0 — 10 מושגי יסוד ב-Power BI + **§ דשבורדים ל-ULease**: חיבור ל-Supabase, מודל Star Schema על `settlements`/`ledger_entries`/`vehicle_read_model`, מדדי DAX (מכירות, עמלות, המרה), RLS לסוכנויות.
 
 ## Module Load Order
 1. `OPERATING_SYSTEM.md`      ← roadmap (ראה AGENT_BLUEPRINT § 7)
@@ -18,8 +19,9 @@
 5. `DEV_ENVIRONMENTS.md`      ← סביבות פיתוח מקצה לקצה
 6. `LAUNCH.md`                ← Master Switch — Go-Live
 7. `AGENT_BLUEPRINT.md`       ← Docs OS ⇄ Agent Runtime (stage-a/)
-8. `INVESTOR_RELATIONS.md`    ← roadmap
-9. `CASES/*.md`
+8. `power-bi-essential-concepts.md` ← BI ודשבורדים על נתוני ה-API
+9. `INVESTOR_RELATIONS.md`    ← roadmap
+10. `CASES/*.md`
 
 ## Activation
 כדי להפעיל את ה-Command API, טען את בלוק ה-System Prompt מסעיף 7 ב-[`COMMAND_API.md`](./COMMAND_API.md)
