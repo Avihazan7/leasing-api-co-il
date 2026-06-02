@@ -1,10 +1,10 @@
 # Claude Stack 2026 — How to use Claude in 2026
 
 **Module:** `AI_CLAUDE_STACK_2026.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Knowledge layer (§3 שורה 16) + מפרט ה-build התפעולי של 4 העמודים.
-**Source:** מבוסס על ה-cheat sheet *"How to use Claude in 2026"*.
+**Source:** מבוסס על ה-cheat sheet *"How to use Claude in 2026"* + *"Agent Teams"* (learn.nextwork.org, Lvl 7).
 **Integrates with:** `AI_CLAUDE_TOOL_SELECTOR.md`, `AI_CLAUDE_GLOSSARY.md` (מודול אחות — המילון), `COWORK_SETUP.md`, `PROJECTS_SETUP.md`, `COMMAND_API.md`, `OPERATING_SYSTEM.md` §3.1, `COWORK/README.md`, `.claude/skills/`, `CASES/ULEASE.md`
 
 ---
@@ -135,6 +135,20 @@
 | `/clear` | בין משימות | מצב נקי, חוסך ~40% tokens |
 | sub-agent | משימות כבדות | סוכן טרי עושה את העבודה ומחזיר סיכום נקי — ההקשר נשאר רזה |
 
+**הרמה הבאה — Agent Teams (ניסיוני, opt-in):** צי של Claude sessions שמתקשרים זה עם זה ורצים על העבודה במקביל:
+
+| רכיב | תפקיד |
+|------|--------|
+| **Team lead** | session מוביל — מפרק את העבודה, מחלק ומסנכרן |
+| **Teammates** | sessions עמיתים — כל אחד תופס (claim) משימה מהרשימה |
+| **Shared tasks** | רשימת משימות משותפת ומסונכרנת בין כולם |
+
+שתי משמעויות:
+1. **ל-OS** — זו ההסמכה של מה שכבר קורה כאן: ביקורת 4 הסוכנים (D-019) וה-`os-auditor` כ-sub-agent. ההבדל: ב-Agent Teams הסוכנים מתקשרים זה עם זה, לא רק מחזירים דוח.
+2. **ל-ULease 🎯** — מסלול ה-prototype של **Ultra·Master·Max** (`ULEASE_SPEC.md` §7): Team lead = Ultra (מתזמר) · Teammates = Masters (מומחים) · Shared tasks = מודל Event/AgentRun (§8). ה-Tech Lead יכול להוכיח את הארכיטקטורה עם Agent Teams **לפני** שבונים תשתית ייעודית.
+
+> ⚠️ ניסיוני ודורש הפעלה מפורשת — כלי prototype ולמידה, לא תשתית production.
+
 **✅ הסטטוס אצלך:** בנוי. הריפו הזה הוא ה-codebase: `CLAUDE.md` (נקודת הכניסה, רזה), סוכן `os-auditor` (sub-agent לביקורת עקביות), 4 skills, וצינור ארטיפקטים ב-Python (`CASES/ULEASE_FORECAST.py` → דשבורד → deck).
 
 ---
@@ -188,7 +202,8 @@
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | זיקוק ה-cheat sheet "How to use Claude in 2026" + תיעוד ה-build התפעולי המלא (COWORK/ · PROJECTS_SETUP.md · `.claude/skills/`) | 2026-06-02 |
+| 1.1.0 | נוסף ל-§5 בלוק **Agent Teams** (ניסיוני): Team lead · Teammates · Shared tasks + מסלול prototype ל-Ultra·Master·Max (D-028) | 2026-06-02 |
 
-**Attribution.** מבוסס על ה-cheat sheet *"How to use Claude in 2026"*. העיבוד, התרגום, ובעיקר ה-build התפעולי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** מבוסס על ה-cheat sheet *"How to use Claude in 2026"*; בלוק Agent Teams (§5): *learn.nextwork.org* (Lvl 7). העיבוד, התרגום, ובעיקר ה-build התפעולי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of AI_CLAUDE_STACK_2026.md v1.0.0 —*
+— *End of AI_CLAUDE_STACK_2026.md v1.1.0 —*
