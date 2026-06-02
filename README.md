@@ -3,7 +3,7 @@
 
 ## Active Modules
 - [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.2.0 — Kernel: core doctrine, layered architecture, module registry (§3 + §3.1 working sets), the activation Boot Block, and the conflict-resolution hierarchy.
-- [`MEMORY.md`](./MEMORY.md) v1.0.0 — Persistent memory layer: schema, identity card, active focus/projects, preferences, and the read/write protocol.
+- [`MEMORY.md`](./MEMORY.md) v1.1.0 — Persistent memory layer: schema, fully-populated identity card, active focus/projects, preferences, and the read/write protocol.
 - [`DECISION_LOG.md`](./DECISION_LOG.md) v1.11.0 — Append-only decision log: 24 founding OS + ULease decisions with rationale and status.
 - [`COWORK_SETUP.md`](./COWORK_SETUP.md) v1.1.0 — Claude Cowork onboarding: 7-step setup, the Global Instructions golden tip, context-file map, and OS integration — now implemented as a real workspace in [`COWORK/`](./COWORK/).
 - [`PROJECTS_SETUP.md`](./PROJECTS_SETUP.md) v1.0.0 — Claude Projects setup: 3 projects (ULease Launch, the ₪150K raise, Claude OS), one deliverable each, with drop-in instruction blocks, upload lists, and acceptance tests.
