@@ -1,7 +1,7 @@
 # CLAUDE OPERATING SYSTEM — Kernel
 
 **Module:** `OPERATING_SYSTEM.md`
-**Version:** 1.6.0
+**Version:** 1.7.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Kernel — נטען ראשון. כל שאר המודולים תלויים בו.
 **Integrates with:** כל המודולים הרשומים ב-§3 — `CLAUDE.md`, `MEMORY.md`, `DECISION_LOG.md`, `COWORK_SETUP.md`, `PROJECTS_SETUP.md`, `COMMAND_API.md`, `marketing-strategy-framework.md`, `AI_*` (Knowledge), `INVESTOR_RELATIONS.md`, `CASES/*.md` + תשתית תפעולית ב-§3.1 (`COWORK/`, `.claude/`)
@@ -53,7 +53,7 @@
 ├─ MEMORY ────── MEMORY.md · DECISION_LOG.md   מי אתה, מה זוכרים, focus/projects, החלטות
 ├─ CONTEXT ───── COWORK_SETUP.md · PROJECTS_SETUP.md · COWORK/   חיבור התיקייה, קבצי md, Global Instructions, פרויקטים
 ├─ INTERFACE ─── COMMAND_API.md · COMMAND_API_TASKS.md · .claude/ (skills · agents)   89 פקודות ליבה + 98 פקודות משימה + 4 Claude Code skills + os-auditor
-├─ KNOWLEDGE ─── AI_SKILL_MAP · AI_PROGRESSION_PLAN · AI_LEARNING_RESOURCES · AI_7_SKILLS · AI_SKILLS_ACQUISITION · AI_TYPES · AI_CLAUDE_TOOL_SELECTOR · AI_CLAUDE_STACK_2026 · AI_CLAUDE_GLOSSARY · AI_RAG_DESIGN · AI_PROJECT_STRUCTURE · AI_ROLES_2026 · AI_CLAUDE_ENGINEER_ROADMAP · AI_DATA_BI   ידע אישי/לימודי (on-demand)
+├─ KNOWLEDGE ─── AI_SKILL_MAP · AI_PROGRESSION_PLAN · AI_LEARNING_RESOURCES · AI_7_SKILLS · AI_SKILLS_ACQUISITION · AI_TYPES · AI_CLAUDE_TOOL_SELECTOR · AI_CLAUDE_STACK_2026 · AI_CLAUDE_GLOSSARY · AI_RAG_DESIGN · AI_PROJECT_STRUCTURE · AI_ROLES_2026 · AI_CLAUDE_ENGINEER_ROADMAP · AI_DATA_BI · AI_SYSTEM_DESIGN   ידע אישי/לימודי (on-demand)
 └─ BUSINESS ──── marketing-strategy-framework.md · INVESTOR_RELATIONS.md · CASES/*.md   הקשר עסקי נקודתי
 ```
 
@@ -89,8 +89,9 @@
 | 20 | `AI_ROLES_2026.md` | Knowledge | ✅ פעיל | 21 תפקידי AI (2026) ממופים: מייסד · Tech Lead (5 בכובע אחד) · Guardian |
 | 21 | `AI_CLAUDE_ENGINEER_ROADMAP.md` | Knowledge | ✅ פעיל | רודמאפ 15 השלבים ל-Claude AI Engineer — 11/15 כבר בנויים ב-OS; הפער = Tech Lead |
 | 22 | `AI_DATA_BI.md` | Knowledge | ✅ פעיל | יסודות BI ומידול נתונים (Power BI) — star schema, ETL, DAX — ממופה ל-M9 |
-| 23 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
-| 24 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית, איפיון, מתודולוגיה, גיוס, playbooks, ביקורת ומחירון/SLA |
+| 23 | `AI_SYSTEM_DESIGN.md` | Knowledge | ✅ פעיל | יסודות System Design — Gateway, סגנונות API, תורים, JWT — ממופה לארכיטקטורת הפלטפורמה |
+| 24 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
+| 25 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית, איפיון, מתודולוגיה, גיוס, playbooks, ביקורת ומחירון/SLA |
 
 > **הערה על שכבות:** מודולי `AI_*` הם שכבת **Knowledge** — ידע אישי/לימודי שיושב לוגית בין ה-INTERFACE ל-BUSINESS. הם פעילים אך נטענים on-demand, לא בכל turn.
 > כשמודול עובר מ-🔜 ל-✅ — מעדכנים את הסטטוס כאן ואת ה-Active Modules ב-`CLAUDE.md` ו-`README.md`.
@@ -113,7 +114,7 @@
 זה הבלוק שמפעיל את כל ה-OS. העתק אותו ל-`userPreferences` / system prompt / Cowork Global Instructions:
 
 ```
-CLAUDE OS ENABLED — Kernel v1.6
+CLAUDE OS ENABLED — Kernel v1.7
 
 On every turn, before responding:
 1. Load identity & context from MEMORY.md (and the Cowork "about-me" file if connected).
@@ -190,7 +191,8 @@ Doctrine:
 | 1.4.0 | גל ידע #2 (D-026): רישום `COMMAND_API_TASKS` (שורה 7, Interface) + `AI_CLAUDE_GLOSSARY` (שורה 17) + `AI_PROJECT_STRUCTURE` (שורה 19) + `AI_ROLES_2026` (שורה 20). הסטת שורות: marketing 7→8 · AI_* 8→9 עד 16→18 · IR 17→21 · CASES 18→22 | 2026-06-02 |
 | 1.5.0 | רישום `AI_CLAUDE_ENGINEER_ROADMAP` (שורה 21, D-027) — רודמאפ 15 השלבים, סוגר את משפחת הלמידה. הסטת שורות: IR 21→22 · CASES 22→23 | 2026-06-02 |
 | 1.6.0 | רישום `AI_DATA_BI` (שורה 22, D-032) — מודול הדאטה הראשון: יסודות BI ל-M9. הסטת שורות: IR 22→23 · CASES 23→24 | 2026-06-02 |
+| 1.7.0 | רישום `AI_SYSTEM_DESIGN` (שורה 23, D-036) — יסודות backend לארכיטקטורת הפלטפורמה. הסטת שורות: IR 23→24 · CASES 24→25 | 2026-06-02 |
 
 **Confidentiality.** קובץ זה הוא הליבה של ה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of OPERATING_SYSTEM.md v1.6.0 —*
+— *End of OPERATING_SYSTEM.md v1.7.0 —*

@@ -1,7 +1,7 @@
 # יסודות BI ומידול נתונים — Power BI כמקרה לימוד
 
 **Module:** `AI_DATA_BI.md`
-**Version:** 1.2.0
+**Version:** 1.3.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Knowledge layer (§3 שורה 22). מודול הדאטה הראשון — משרת את M9 (Data & Insights).
 **Source:** מבוסס על מחברת לימוד *"Power BI — Topics 1–20"* (יסודות · Power Query · מידול · DAX · ויזואליזציה · אינטראקטיביות · Dashboards · Service · Measures-vs-Columns · ניהול ושיתוף).
@@ -157,6 +157,20 @@
 
 > **טבלת התקלות הנפוצות** (נושא 16) — לשיחת ה-debug עם ה-Tech Lead: סכומים שגויים → לבדוק קשרים וכיווניות · ביצועים איטיים → bi-directional filters או טבלאות גדולות · שורות כפולות → מפתחות חסרים · דאטה חסרה → קשר לא פעיל.
 
+### ה. איזה מבחן סטטיסטי לאיזו החלטה עסקית
+
+כשהדשבורד מראה הבדל — איך יודעים שהוא **אמיתי** ולא רעש? המבחנים שרלוונטיים ל-ULease:
+
+| ההחלטה העסקית | המבחן | מתי |
+|-----------------|--------|------|
+| איזו הודעת outreach עובדת יותר (A/B)? | **Chi-Square** (שיעורי תגובה) | אחרי ≥100 שליחות לכל גרסה |
+| איזה ערוץ רכישה זול יותר (CPL)? | **t-Test** (שני ערוצים) / **ANOVA** (שלושה+) | סוף כל חודש |
+| האם Deal Score באמת מנבא סגירה? | **Pearson Correlation** (ציון ↔ אחוז סגירה) | אחרי ~50 עסקאות — ולידציה ל-IP |
+| האם שינוי תמחור שיפר המרה? | **Paired t-Test** (לפני/אחרי) | חודש אחרי כל שינוי D-015 |
+| מדגם קטן / לא נורמלי? | **Mann-Whitney / Wilcoxon** (החלופות הא-פרמטריות) | כשאין מספיק דאטה |
+
+> **הכלל למייסד:** אל תחליף ערוץ/הודעה/תמחור על סמך "נראה יותר טוב" — דרוש מה-Tech Lead p-value. הבדל שלא עובר מבחן = רעש.
+
 ---
 
 ## 7. ההכרעה ל-M9: Power BI מול Custom — שאלה ל-Tech Lead
@@ -193,9 +207,10 @@
 | 1.0.0 | זיקוק קוריקולום Power BI (10 נושאים) ליסודות BI ממופים ל-M9: צינור, ETL, star schema של ULease, DAX, ויזואליזציה, והכרעת Power-BI-מול-custom ל-Tech Lead | 2026-06-02 |
 | 1.1.0 | נושאים 11–15 (D-033): Time Intelligence + CALCULATE לפילוח KPIs, §6 חדש — אינטראקטיביות (Drill-through · Q&A Visual · Bookmarks) ו-**RLS** כדרישת חובה ל-M9, Dashboard-מול-Report | 2026-06-02 |
 | 1.2.0 | נושאים 16–20 (D-034): §6.ד תפעול ה-BI כשירות — התראות, מנויי דוחות, ספי KPI, מודל הרשאות (Viewer לספקים), Apps + כלל הזהב עמודות-מול-מדדים וטבלת תקלות | 2026-06-02 |
+| 1.3.0 | §6.ה חדש (D-036): איזה מבחן סטטיסטי לאיזו החלטה — A/B להודעות (Chi-Square), השוואת ערוצים (ANOVA), ולידציית Deal Score (Correlation) | 2026-06-02 |
 
-**Attribution.** מבוסס על מחברת הלימוד *Power BI Topics 1–20*. הזיקוק, התרגום והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** מבוסס על מחברת הלימוד *Power BI Topics 1–20* + *Statistical Tests Cheat Sheet* (ML). הזיקוק, התרגום והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
 **Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of AI_DATA_BI.md v1.2.0 —*
+— *End of AI_DATA_BI.md v1.3.0 —*

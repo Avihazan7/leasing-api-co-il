@@ -1,7 +1,7 @@
 # CLAUDE COWORK — מדריך הגדרה ואונבורדינג
 
 **Module:** `COWORK_SETUP.md`
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Drop-in / Onboarding guide. עקוב פעם אחת — תיהנה לתמיד.
 **Integrates with:** `CLAUDE.md`, `PROJECTS_SETUP.md`, `COMMAND_API.md`, `MEMORY.md`, `OPERATING_SYSTEM.md`, `INVESTOR_RELATIONS.md`, `CASES/*.md`, `COWORK/` (סביבת העבודה בפועל)
@@ -32,6 +32,7 @@
 6. [אינטגרציה עם ה-Claude OS שלך](#6-אינטגרציה-עם-ה-claude-os-שלך)
 7. [Checklist להגדרה](#7-checklist-להגדרה)
 8. [Anti-patterns — מה לא לעשות](#8-anti-patterns--מה-לא-לעשות)
+9. [ראש המטה (Chief of Staff) — 5 תפקידים שרצים לבד](#9-ראש-המטה-chief-of-staff--5-תפקידים-שרצים-לבד)
 
 ---
 
@@ -196,13 +197,36 @@ Settings → Cowork → Global instructions → Edit
 
 ---
 
+## 9. ראש המטה (Chief of Staff) — 5 תפקידים שרצים לבד
+
+> השלב הבא אחרי ה-setup: להפוך את Cowork מחלון צ'אט ל**מפעיל שרץ על השעון שלו** (Scheduled Tasks). חמישה תפקידים, נוסחת פרומפט אחת.
+
+**נוסחת הפרומפט (5 חלקים):** `ROLE` (אתה ה-___ שלי) → `GOAL` (משפט אחד על התוצאה) → `TASK` (צעדים ממוספרים, שמות קבצים מדויקים) → `CONTEXT` (אילו connectors וקבצים) → `OUTPUT` (שמור כ-[קובץ].md בתיקייה [___]).
+
+| # | תפקיד | מה הוא עושה | 🎯 הגרסה של אברהם | תזמון |
+|---|--------|---------------|---------------------|--------|
+| 1 | **Morning Briefer** | סורק Gmail + יומן, מציף מה דחוף ומה דורש החלטה | תדריך בוקר ULease: לידים חדשים · פגישות היום · התראות תחזית → `daily-brief.md` | יומי 8:00 |
+| 2 | **Inbox Manager** | קורא מיילים מסומנים, מנסח טיוטות תשובה בקול שלך | טיוטות לספקים ומשקיעים (בטון מ-`anti-ai-style.md`) — לאישור לפני שליחה | לפי דרישה |
+| 3 | **Meeting Preparer** | 30 דק' לפני פגישה: מי מגיע, מה דיברתם, מה פתוח | הכנה לפגישות יבואנים/משקיעים — מושך מ-`INVESTOR_RELATIONS.md` וה-playbooks → `prep.md` | 30 דק' לפני |
+| 4 | **Decision Tracker** | סורק את התיקייה שבועית, מציף מה תקוע 5+ ימים | **מסונכרן עם `DECISION_LOG.md`**: החלטות פתוחות (🔜/⚠️) + מי הבעלים → `loops.md` | שישי |
+| 5 | **File Organizer** | ממיין, משנה שמות ומסדר את ה-Downloads והתיקיות | סידור `COWORK/OUTPUTS/` בפורמט `YYYY-MM-DD_שם` | חודשי |
+
+**ההתקנה (3 צעדים):** (1) Cowork מחובר לתיקיית הריפו — כבר יש ✅ (2) חיבור Connectors: Gmail · Calendar · Drive (3) הדבקת 5 הפרומפטים כ-Scheduled Tasks.
+
+> **טיפים מהמקור:** CLAUDE.md טוב = פלט טוב (כבר יש ✅) · sub-agent לכל סקשן למקבול · Routines רצות גם כשהלפטופ סגור. **החיבור ל-OS:** תפקיד 4 הוא הגרסה האוטומטית של ה-skill `os-decision`, ותפקיד 1 משלים את `/business-pulse` מחבילת ה-31 Skills (`ULEASE_AUTOMATION_MAP.md` §11).
+
+---
+
 ## Document Control
 
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | מדריך הגדרת Cowork ראשוני — 7 שלבים, Global Instructions, אינטגרציה עם ה-OS | 2026-05-30 |
 | 1.1.0 | המדריך הפך למיושם (D-021): §5 ו-§7 מצביעים על סביבת העבודה האמיתית `COWORK/` שנבנתה בריפו | 2026-06-02 |
+| 1.2.0 | §9 חדש (D-036): ראש המטה — 5 תפקידים מתוזמנים (Briefer · Inbox · Meetings · Decisions · Files) בנוסחת ROLE→GOAL→TASK→CONTEXT→OUTPUT, ממופים לזרימת העבודה של אברהם | 2026-06-02 |
+
+**Attribution.** §9 מבוסס על *The AI Chief of Staff Prompt (Cowork)*. העיבוד והמיפוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
 **Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of COWORK_SETUP.md v1.1.0 —*
+— *End of COWORK_SETUP.md v1.2.0 —*
