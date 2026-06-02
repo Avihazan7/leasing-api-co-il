@@ -1,7 +1,7 @@
 # ULease 🎯 — צ'קליסט השקה (שבועיים)
 
 **Module:** `CASES/ULEASE_LAUNCH_CHECKLIST.md`
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — צ'קליסט השקה תפעולי.
 **Integrates with:** `CASES/ULEASE_SPEC.md` (Phase 0), `CASES/ULEASE_TECH_ONBOARDING.md`, `CASES/ULEASE_FINANCE_INSURANCE.md`, `CASES/ULEASE_OUTREACH_SCRIPTS.md`, `CASES/ULEASE_DEMAND_PLAYBOOK.md`, `CASES/ULEASE_PRICING_SLA.md`
@@ -15,6 +15,7 @@
 - [ ] רכישת **ULease.co.il** (S) · חיבור **Leasing.co.il** (redirect/branding) (T)
 - [ ] DNS + SSL + אימייל (MX, כתובות @ULease) (T)
 - [ ] לוגו: ULease 🎯 + Leasing.co.il כדומיין-מאסטר בגלישה (A)
+- [ ] **פלטת מותג מכוונת לאתר הצרכני** (A + S) — צבעים ופונטים שנבחרו בהחלטה, לא ירושת ברירת-המחדל של Claude (טרקוטה `#c0532b` / קרם `#f5f1e8` — מקובלת לכלים פנימיים בלבד; D-024)
 
 ## 2. חברה ומשפטי
 - [ ] הקמת חברה — **השבוע** (S) · חשבון בנק + סליקה
@@ -97,7 +98,8 @@
 |------|--------|--------|
 | 1.0.0 | צ'קליסט השקה ראשוני — דומיין, משפטי, MVP, תוכן, outreach, QA, לוח שבועיים | 2026-05-31 |
 | 1.1.0 | יישום גל 2 של הביקורת: שערי Go-Live חוסמים (C3·C5·C6), סעיף ביקוש חדש (C4), פיצול משפטי + רישוי רכב + ביטולים (W8·W9·W10), תוכנית-מגירה ל-Tech Lead | 2026-06-01 |
+| 1.2.0 | פריט מיתוג (§1, D-024): פלטת מותג מכוונת לאתר הצרכני — לא ברירת-המחדל הוויזואלית של Claude | 2026-06-02 |
 
 **Confidentiality.** מסמך תפעולי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_LAUNCH_CHECKLIST.md v1.1.0 —*
+— *End of CASES/ULEASE_LAUNCH_CHECKLIST.md v1.2.0 —*

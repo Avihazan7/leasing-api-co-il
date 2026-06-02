@@ -1,7 +1,7 @@
 # איזה Claude לבחור? — Which Claude Should You Use?
 
 **Module:** `AI_CLAUDE_TOOL_SELECTOR.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — מודול ידע/רפרנס (Knowledge layer).
 **Source:** מבוסס על האינפוגרפיקה *"Which Claude Should You Use?"*.
@@ -91,6 +91,8 @@
 
 > **בחירת מודל:** Sonnet כברירת מחדל · Haiku למהיר/פשוט/המוני · **Opus לקשה, לארוך ולאסטרטגי** — אותו עיקרון בדיוק שמיושם ב-`CASES/ULEASE_OUTBOUND_ENGINE.md` (Haiku לסינון וניקוד, Sonnet לפרסונליזציה).
 
+> **המנוף השני — Effort (Opus 4.8):** לצד בחירת המודל, קבע רמת מאמץ: **low** למהיר וממוקד · **high** לחשיבה עמוקה · **xhigh** לקוד וסוכנים. משימה קשה שמקבלת תשובה רדודה? העלה effort לפני שאתה משכתב את הפרומפט. פירוט מלא: `COMMAND_API.md` §7.7.
+
 ---
 
 ## Document Control
@@ -98,7 +100,8 @@
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | עץ החלטה לבחירת כלי Claude — 12 כלים + מיפוי למשימות ה-OS ו-ULease | 2026-06-01 |
+| 1.1.0 | מנוף ה-Effort של Opus 4.8 (§4) — low/high/xhigh לצד בחירת המודל (D-024) | 2026-06-02 |
 
 **Attribution.** מבוסס על האינפוגרפיקה *Which Claude Should You Use?*. העיבוד, התרגום והמיפוי ל-ULease הם חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of AI_CLAUDE_TOOL_SELECTOR.md v1.0.0 —*
+— *End of AI_CLAUDE_TOOL_SELECTOR.md v1.1.0 —*

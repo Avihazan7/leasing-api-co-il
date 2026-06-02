@@ -112,7 +112,7 @@
 זה הבלוק שמפעיל את כל ה-OS. העתק אותו ל-`userPreferences` / system prompt / Cowork Global Instructions:
 
 ```
-CLAUDE OS ENABLED — Kernel v1.1
+CLAUDE OS ENABLED — Kernel v1.5
 
 On every turn, before responding:
 1. Load identity & context from MEMORY.md (and the Cowork "about-me" file if connected).
@@ -185,9 +185,9 @@ Doctrine:
 | 1.0.1 | רישום `AI_CLAUDE_TOOL_SELECTOR` (כיום שורה 15, D-018) + הוספת `CASES/ULEASE_AUDIT.md` לתיק ULease (D-019) | 2026-06-01 |
 | 1.1.0 | Claude Stack 2026 (D-021): רישום `PROJECTS_SETUP.md` (שורה 5) + `AI_CLAUDE_STACK_2026.md` (כיום שורה 16), סעיף §3.1 תשתית תפעולית (`COWORK/`, `.claude/`), ועדכון Boot Block | 2026-06-02 |
 | 1.2.0 | רישום תשתית CI ב-§3.1 (D-023): `.github/workflows/os-consistency.yml` + `scripts/os_consistency_check.py` — בדיקות עקביות אוטומטיות על כל PR | 2026-06-02 |
-| 1.3.0 | רישום `AI_RAG_DESIGN` (כיום שורה 18, D-024) — מודול Knowledge לתכנון RAG, משלים את שכבת ה-RAG ב-SPEC §7.1; Boot Block כולל את marketing-strategy-framework בסדר הטעינה | 2026-06-02 |
-| 1.4.0 | גל ידע #2 (D-025): רישום `COMMAND_API_TASKS` (שורה 7, Interface) + `AI_CLAUDE_GLOSSARY` (שורה 17) + `AI_PROJECT_STRUCTURE` (שורה 19) + `AI_ROLES_2026` (שורה 20). הסטת שורות: marketing 7→8 · AI_* 8→9 עד 16→18 · IR 17→21 · CASES 18→22 | 2026-06-02 |
-| 1.5.0 | רישום `AI_CLAUDE_ENGINEER_ROADMAP` (שורה 21, D-026) — רודמאפ 15 השלבים, סוגר את משפחת הלמידה. הסטת שורות: IR 21→22 · CASES 22→23 | 2026-06-02 |
+| 1.3.0 | רישום `AI_RAG_DESIGN` (כיום שורה 18, D-025) — מודול Knowledge לתכנון RAG, משלים את שכבת ה-RAG ב-SPEC §7.1; Boot Block כולל את marketing-strategy-framework בסדר הטעינה | 2026-06-02 |
+| 1.4.0 | גל ידע #2 (D-026): רישום `COMMAND_API_TASKS` (שורה 7, Interface) + `AI_CLAUDE_GLOSSARY` (שורה 17) + `AI_PROJECT_STRUCTURE` (שורה 19) + `AI_ROLES_2026` (שורה 20). הסטת שורות: marketing 7→8 · AI_* 8→9 עד 16→18 · IR 17→21 · CASES 18→22 | 2026-06-02 |
+| 1.5.0 | רישום `AI_CLAUDE_ENGINEER_ROADMAP` (שורה 21, D-027) — רודמאפ 15 השלבים, סוגר את משפחת הלמידה. הסטת שורות: IR 21→22 · CASES 22→23 | 2026-06-02 |
 
 **Confidentiality.** קובץ זה הוא הליבה של ה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 

@@ -216,8 +216,8 @@
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | זיקוק ה-cheat sheet "How to use Claude in 2026" + תיעוד ה-build התפעולי המלא (COWORK/ · PROJECTS_SETUP.md · `.claude/skills/`) | 2026-06-02 |
-| 1.1.0 | נוסף ל-§5 בלוק **Agent Teams** (ניסיוני): Team lead · Teammates · Shared tasks + מסלול prototype ל-Ultra·Master·Max (D-028) | 2026-06-02 |
-| 1.2.0 | נוסף ל-§5 **סולם 7 הרמות של Claude Code** (Prompt→Context→Tools→MCP→Skills→Subagents→Agent Teams) + הציון: רמה 6/7 (D-029) | 2026-06-02 |
+| 1.1.0 | נוסף ל-§5 בלוק **Agent Teams** (ניסיוני): Team lead · Teammates · Shared tasks + מסלול prototype ל-Ultra·Master·Max (D-029) | 2026-06-02 |
+| 1.2.0 | נוסף ל-§5 **סולם 7 הרמות של Claude Code** (Prompt→Context→Tools→MCP→Skills→Subagents→Agent Teams) + הציון: רמה 6/7 (D-030) | 2026-06-02 |
 
 **Attribution.** מבוסס על ה-cheat sheet *"How to use Claude in 2026"*; סולם 7 הרמות ובלוק Agent Teams (§5): סדרת *The 7 Levels of Claude Code* (learn.nextwork.org). העיבוד, התרגום, ובעיקר ה-build התפעולי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 

@@ -12,9 +12,12 @@ Claude OS — בדיקות עקביות מכניות (CI)
   2. ספירת החלטות: שורות D-XXX ב-DECISION_LOG ↔ הספירה המוצהרת ב-CLAUDE.md וב-README.md
   3. No Dangling Modules: כל קובץ שמצוטט עם גרסה — קיים בפועל
   4. No Orphan Modules: כל מודול עם Version header — מצוטט ב-CLAUDE.md וב-README.md
+  5. ציטוט-עצמי: מודול שמצטט את עצמו (דוגמת רישום, footer) — תואם ל-header שלו
+  6. סמני פרוטוקול: באנרי "ENABLED — vX.Y" עוקבים אחרי major.minor של המודול
 
 הרצה מקומית:   python3 scripts/os_consistency_check.py
 חלוקת עבודה:   הסקריפט = בדיקות מכניות · os-auditor (סוכן) = בדיקות סמנטיות עמוקות
+(בדיקות 5–6 נוספו אחרי שביקורת os-auditor מצאה ממצאים מהסוגים האלה — כל ממצא ידני הופך לבדיקה אוטומטית.)
 """
 import re
 import sys
@@ -42,8 +45,12 @@ def header_version(path: pathlib.Path):
 
 
 def end_line_version(path: pathlib.Path):
-    """גרסה משורת '— End of FILE vX.Y.Z —' בסוף מודול (אם קיימת)."""
-    m = re.search(r"End of\s+\S+\s+v(\d+\.\d+\.\d+)", path.read_text(encoding="utf-8"))
+    """גרסה משורת '— End of FILE vX.Y[.Z] —' בסוף מודול (אם קיימת).
+
+    מקבל גם פורמט חלקי (v1.1) כדי שסטייה מהקונבנציה X.Y.Z תיתפס כשגיאה
+    במקום להיות מדולגת בשקט.
+    """
+    m = re.search(r"End of\s+\S+\s+v(\d+(?:\.\d+){1,2})\b", path.read_text(encoding="utf-8"))
     return m.group(1) if m else None
 
 
@@ -102,6 +109,32 @@ for rel in sorted(modules):
         errors.append(f"מודול יתום (orphan): {rel} נושא Version header אך אינו מצוטט ב-CLAUDE.md")
     if rel not in readme_cites:
         errors.append(f"מודול יתום (orphan): {rel} נושא Version header אך אינו מצוטט ב-README.md")
+
+# ---------- בדיקה 5: ציטוט-עצמי בתוך מודול ----------
+# מודול שמצטט את עצמו עם גרסה (דוגמת רישום ב-§9.2, footer וכו') חייב להתאים ל-header שלו.
+for rel, v_header in sorted(modules.items()):
+    text = (ROOT / rel).read_text(encoding="utf-8")
+    fname = re.escape(rel.split("/")[-1])
+    for m in re.finditer(fname + r"\s+v(\d+(?:\.\d+){1,2})\b", text):
+        checks += 1
+        if m.group(1) != v_header:
+            errors.append(f"{rel}: ציטוט-עצמי v{m.group(1)} ≠ גרסת header ({v_header})")
+
+# ---------- בדיקה 6: סמני פרוטוקול (ENABLED banners) ----------
+# הקונבנציה (D-021/D-024): באנר הפרוטוקול עוקב אחרי major.minor של המודול שמכיל אותו.
+PROTOCOL_BANNERS = {
+    "OPERATING_SYSTEM.md": r"CLAUDE OS ENABLED — Kernel v(\d+\.\d+)\b",
+    "COMMAND_API.md": r"COMMAND API ENABLED — v(\d+\.\d+)\b",
+}
+for rel, pattern in PROTOCOL_BANNERS.items():
+    if rel not in modules:
+        continue
+    checks += 1
+    m = re.search(pattern, (ROOT / rel).read_text(encoding="utf-8"))
+    if m:
+        major_minor = ".".join(modules[rel].split(".")[:2])
+        if m.group(1) != major_minor:
+            errors.append(f"{rel}: סמן פרוטוקול v{m.group(1)} ≠ major.minor של המודול ({major_minor})")
 
 # ---------- דוח ----------
 print(f"Claude OS consistency check · {len(modules)} מודולים · {checks} בדיקות")
