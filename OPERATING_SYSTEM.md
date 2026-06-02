@@ -106,7 +106,7 @@
 זה הבלוק שמפעיל את כל ה-OS. העתק אותו ל-`userPreferences` / system prompt / Cowork Global Instructions:
 
 ```
-CLAUDE OS ENABLED — Kernel v1.1
+CLAUDE OS ENABLED — Kernel v1.2
 
 On every turn, before responding:
 1. Load identity & context from MEMORY.md (and the Cowork "about-me" file if connected).
