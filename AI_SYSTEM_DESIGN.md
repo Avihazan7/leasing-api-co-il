@@ -1,7 +1,7 @@
 # יסודות System Design — ארכיטקטורת הפלטפורמה
 
 **Module:** `AI_SYSTEM_DESIGN.md`
-**Version:** 1.2.0
+**Version:** 1.3.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Knowledge layer (§3 שורה 23). מודול ההנדסה השני (אחרי `AI_PROJECT_STRUCTURE.md`) — שפת הארכיטקטורה מול ה-Tech Lead.
 **Source:** מבוסס על *"Reverse Proxy vs API Gateway vs Load Balancer"* (Level Up Coding) · *"Queues 101"* (Raul Junco) · *"How JWT Works"* (Amigoscode) · *"6 API Architecture Styles"* (James Code Lab) · *"System Design Cheatsheet"* (21 רכיבים).
@@ -37,6 +37,25 @@
 | **MQTT** | pub/sub קל ל-IoT | ❌ לא רלוונטי |
 
 > **הכלל:** אין סגנון "הכי טוב" — יש הכי-נכון-לאילוץ. ל-MVP: REST לכל דבר + webhook אחד למכרז. כל חריגה מזה צריכה הצדקה בכתב מה-Tech Lead.
+
+### 2.1 תקני איכות ל-API — מה שהספקים יפגשו
+
+ה-API שלנו הוא מוצר: יבואן שמתחבר אליו שופט אותנו לפיו. עשרת התקנים שכל endpoint חייב לעמוד בהם:
+
+| תקן | למה | הביטוי ב-ULease |
+|------|------|------------------|
+| **Versioning** (`/api/v1/`) | שינוי עתידי לא ישבור אינטגרציות קיימות | חוזה עם 7 הספקים: v1 יציב לשנה לפחות |
+| **Pagination** | אסור להחזיר את כל המלאי בקריאה אחת | `GET /v1/vehicles?page=2&limit=100` |
+| **Filtering & Sorting** | הספק שולף רק את מה שרלוונטי | `?make=mazda&status=available&sort=price` |
+| **Input Validation** (שרת!) | נתון שגוי לא נכנס לקטלוג | מחיר שלילי / ק"מ ≠ 0 → נדחה עם הסבר |
+| **Auth על כל endpoint** | JWT (ראו §4) — אין endpoint פתוח | כולל ה-webhooks |
+| **Rate Limiting** | אינטגרציה שבורה לא מפילה אותנו | ראו §4.5 |
+| **שגיאות ברורות** | `400: price must be positive` ולא `error` | חוסך פניות support מהספקים |
+| **Logging & Monitoring** | כל קריאה מתועדת | מתחבר ל-AuditLog (SPEC §8) |
+| **תיעוד Swagger/OpenAPI** | הספק מתחבר לבד, בלי שיחות | **חלק מהבטחת ה-SLA**: onboarding ≤ 48h אפשרי רק עם תיעוד self-service |
+| **HTTPS בלבד + caching headers** | אבטחה וביצועים | ברירת מחדל |
+
+> **החיבור ל-SLA:** ההבטחה "אנחנו עושים את האינטגרציה תוך 48 שעות" (`ULEASE_PRICING_SLA.md` §4) נשענת על API מתועד ועקבי. API גרוע = כל onboarding הוא פרויקט; API טוב = הספק מתחבר לבד.
 
 ---
 
@@ -148,9 +167,10 @@ Producers                    Broker/Queue                  Consumers
 | 1.0.0 | ארבעה יסודות backend (שער כניסה · סגנונות API · תורים · JWT) ממופים לארכיטקטורת ULease + צ'קליסט design review | 2026-06-02 |
 | 1.1.0 | §4.5 חדש (D-037): מפת 21 הרכיבים מחולקת ל-MVP/V1/V2 — Redis לקטלוג, Elasticsearch לחיפוש רכב, Rate Limiter, Circuit Breaker + כלל נגד over-engineering | 2026-06-02 |
 | 1.2.0 | השלמות (D-038): Webhook (MVP — עדכוני מלאי) ו-AMQP ב-§2 · Auto Scaling, Service Discovery, Consistent Hashing ב-§4.5 | 2026-06-02 |
+| 1.3.0 | §2.1 חדש (D-040): עשרת תקני האיכות ל-API הספקים — versioning, pagination, validation, Swagger — והחיבור להבטחת ה-SLA (onboarding ≤ 48h) | 2026-06-02 |
 
-**Attribution.** המקורות: *Reverse Proxy vs API Gateway vs Load Balancer* (Level Up Coding) · *Queues 101* (Raul Junco) · *How JWT Works* (Amigoscode) · *6 API Architecture Styles* (James Code Lab) · *System Design Cheatsheet*. העיבוד והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** המקורות: *Reverse Proxy vs API Gateway vs Load Balancer* (Level Up Coding) · *Queues 101* (Raul Junco) · *How JWT Works* (Amigoscode) · *6 API Architecture Styles* (James Code Lab) · *System Design Cheatsheet* · *API Guide* (codepathindia). העיבוד והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
 **Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of AI_SYSTEM_DESIGN.md v1.2.0 —*
+— *End of AI_SYSTEM_DESIGN.md v1.3.0 —*
