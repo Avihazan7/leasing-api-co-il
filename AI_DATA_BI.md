@@ -1,11 +1,11 @@
 # יסודות BI ומידול נתונים — Power BI כמקרה לימוד
 
 **Module:** `AI_DATA_BI.md`
-**Version:** 1.4.0
+**Version:** 1.5.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Knowledge layer (§3 שורה 22). מודול הדאטה הראשון — משרת את M9 (Data & Insights).
-**Source:** מבוסס על מחברת לימוד *"Power BI — Topics 1–20"* (יסודות · Power Query · מידול · DAX · ויזואליזציה · אינטראקטיביות · Dashboards · Service · Measures-vs-Columns · ניהול ושיתוף) + *"Power BI DAX — Financial Functions"* (16 פונקציות).
-**Integrates with:** `CASES/ULEASE_SPEC.md` (§8 מודל נתונים · M9), `CASES/ULEASE_FINANCE_INSURANCE.md`, `CASES/ULEASE_DASHBOARD.html`, `CASES/ULEASE_AUTOMATION_MAP.md`, `AI_PROJECT_STRUCTURE.md`, `AI_CLAUDE_TOOL_SELECTOR.md`, `AI_SKILL_MAP.md`, `CASES/ULEASE_TECH_ONBOARDING.md`
+**Source:** מבוסס על מחברת לימוד *"Power BI — Topics 1–20"* (יסודות · Power Query · מידול · DAX · ויזואליזציה · אינטראקטיביות · Dashboards · Service · Measures-vs-Columns · ניהול ושיתוף) + *"Power BI DAX — Financial Functions"* (16 פונקציות) + *"Power BI for Marketing"* ו-*"BI Architecture"* (Jalalelaji).
+**Integrates with:** `CASES/ULEASE_SPEC.md` (§8 מודל נתונים · M9), `CASES/ULEASE_FINANCE_INSURANCE.md`, `CASES/ULEASE_DASHBOARD.html`, `CASES/ULEASE_AUTOMATION_MAP.md`, `CASES/ULEASE_DEMAND_PLAYBOOK.md` (§8), `CASES/ULEASE_DEMAND_ENGINE.md`, `AI_PROJECT_STRUCTURE.md`, `AI_CLAUDE_TOOL_SELECTOR.md`, `AI_SKILL_MAP.md`, `CASES/ULEASE_TECH_ONBOARDING.md`
 
 > **BI = להפוך דאטה גולמית להחלטות.** המודול מזקק קוריקולום Power BI שלם (10 נושאים) לקונספטים שמשרתים את **M9 — מוצר הדאטה למנויי Ultra/Max** — בלי קשר לכלי שייבחר בסוף. Power BI הוא מקרה הלימוד; star schema, ETL ו-measures הם הנכס.
 
@@ -26,6 +26,8 @@
 | **צריכה** | מובייל / web / שגרת בוקר | פורטל המפיץ + דוח ביקוש לספק |
 
 **רישוי Power BI** (אם ייבחר): Free (Desktop + שיתוף בסיסי) · Pro (שיתוף ושיתוף-פעולה) · Premium (ארגונים גדולים). MVP יכול לחיות על Free/Pro.
+
+> **שמות השכבות הפורמליים** (BI Architecture): מקורות → Data Pipeline → **Store & Model** (Data Lake = גולמי-הכול · Data Warehouse = מובנה-ממודל · SQL) → **Present & Analyze** (Power BI · Tableau · Looker · Excel) → **Data Consumers** (הנהלה · צוותים). ל-MVP של ULease: PostgreSQL אחד הוא גם ה-lake וגם ה-warehouse — ההפרדה האמיתית היא שאלת V2, לא עכשיו.
 
 ---
 
@@ -218,7 +220,45 @@
 
 ---
 
-## 7. ההכרעה ל-M9: Power BI מול Custom — שאלה ל-Tech Lead
+## 7. BI לשיווק — מדידת מנוע הביקוש 🎯
+
+הקמפיינים עולים ב-Go-Live (Google Ads ₪7K + Meta ₪5K, צ'קליסט §5) — והכלל מהמקור: **דאטה מאוחדת → תובנות עשירות → החלטות שיווק טובות.** בלי איחוד הדאטה מיום 1, אי-אפשר לדעת איזה ערוץ עובד.
+
+### 7.1 מחזור חיי דאטת השיווק
+
+```
+ערוצים (Google Ads · Meta · אתר · CRM)  →  דאטה שיווקית מאוחדת  →  BI  →  תובנות
+        ↑                                                                      ↓
+        └──────────────  כיול פרמטרים של קמפיין (feedback loop)  ←────────────┘
+```
+
+**התנאי הקריטי ל-ULease:** שלושת המקורות — קמפיינים (Ad APIs) · אנליטיקת אתר · CRM (לידים→עסקאות) — חייבים לזרום ל**מקום אחד** מיום ההשקה. אחרת אי-אפשר לחשב ROAS פר-ערוץ, וה-feedback loop של מנוע הביקוש (`ULEASE_DEMAND_ENGINE.md` §2) עיוור.
+
+### 7.2 ששת ה-KPIs השיווקיים — מה כבר נמדד ומה חסר
+
+| KPI | מה זה | מצב ב-ULease (`DEMAND_PLAYBOOK` §8) |
+|-----|--------|--------------------------------------|
+| **CPL** — עלות לליד | כמה עולה פנייה | ✅ נמדד — יעד ≤ ₪103, קו אדום ₪150 |
+| **Conversion Rate** | אתר→ליד · ליד→עסקה | ✅ נמדד — ≥4% · ≥10% |
+| **ROAS** — תשואה על הוצאת פרסום | הכנסה ÷ הוצאת פרסום **פר ערוץ** | 🆕 להוסיף — ROI ×4.9 קיים רק ברמת-על; צריך פירוק Google מול Meta |
+| **CPA** — עלות לעסקה סגורה | עלות שיווק ÷ עסקאות | 🆕 להוסיף — ההשלמה של CPL (ליד זול שלא נסגר = יקר) |
+| **CLV** — ערך חיי לקוח | ערך הקונה מעבר לעסקה הראשונה | 🆕 להוסיף — החלפת רכב ב-3–4 שנים, הפניות, חידוש מימון. משנה את כל תקרת ה-CAC |
+| **Churn** — נטישה | אובדן מנויים | 🆕 להוסיף — קריטי ל**מנויי Ultra/Max** (₪4,500–7,700/חודש), לא לקונים |
+
+> **המסקנה:** הקיים מודד את *המשפך*; החסר מודד את *הכלכלה לאורך זמן*. CLV הוא המספר שמשנה את שיחת המשקיעים — "כל קונה שווה לא ₪3,330 אלא פי 2–3 מזה על פני 5 שנים".
+
+### 7.3 שני הדשבורדים של תקופת ההשקה
+
+| דשבורד | מה עליו | מתי בונים |
+|---------|----------|------------|
+| **ביצועי קמפיין** | הוצאה מול המרות **פר ערוץ** · מגמת ROAS · CPL מול קו אדום | לפני הפעלת Ads (14.6) — אסור להדליק קמפיין בלי זה |
+| **ניתוח קהל** | איזו פרסונה ממירה (צייד/זהיר/עסק) · דמוגרפיה · דגמים מבוקשים | שבוע 2 אחרי השקה — מזין חזרה את ה-Big Five matching ואת מנוע התוכן |
+
+> **Learn-vs-Delegate:** את דשבורד הקמפיינים אברהם בונה בעצמו (Claude in Excel / Sheets על ייצוא ה-Ads — פרומפטי הגיליונות ‎#6, ‎#10 ב-`COMMAND_API_TASKS.md` §4); דשבורד הקהל נבנה ע"י ה-Tech Lead על דאטת ה-CRM.
+
+---
+
+## 8. ההכרעה ל-M9: Power BI מול Custom — שאלה ל-Tech Lead
 
 | שיקול | Power BI | Custom (הקיים: Python → HTML) |
 |--------|----------|-------------------------------|
@@ -233,7 +273,7 @@
 
 ---
 
-## 8. החיבור למסלול הלמידה
+## 9. החיבור למסלול הלמידה
 
 | איפה | מה |
 |------|-----|
@@ -254,9 +294,10 @@
 | 1.2.0 | נושאים 16–20 (D-034): §6.ד תפעול ה-BI כשירות — התראות, מנויי דוחות, ספי KPI, מודל הרשאות (Viewer לספקים), Apps + כלל הזהב עמודות-מול-מדדים וטבלת תקלות | 2026-06-02 |
 | 1.3.0 | §6.ה חדש (D-036): איזה מבחן סטטיסטי לאיזו החלטה — A/B להודעות (Chi-Square), השוואת ערוצים (ANOVA), ולידציית Deal Score (Correlation) | 2026-06-02 |
 | 1.4.0 | §4.1 חדש (D-041): 16 הפונקציות הפיננסיות של DAX בשלוש קבוצות — לוח סילוקין (PMT·IPMT·CUMIPMT·RATE), כדאיות (PV·FV·IRR), פחת/ערך שייר (SLN·DDB·VDB) — ממופות ל-M6, Deal Score, Aging Predictor ו-M9 + הכרעת BI-מול-API לחישובי הלקוח | 2026-06-02 |
+| 1.5.0 | §7 חדש (D-044): BI לשיווק — מחזור דאטת השיווק, ששת ה-KPIs (ROAS·CPA·CLV·Churn מסומנים 🆕 כחסרים), ושני דשבורדי ההשקה + שמות שכבות הארכיטקטורה (Lake/Warehouse) ב-§1; ההכרעה ל-M9 → §8, מסלול הלמידה → §9 | 2026-06-02 |
 
-**Attribution.** מבוסס על מחברת הלימוד *Power BI Topics 1–20* + *Power BI DAX — Financial Functions* + *Statistical Tests Cheat Sheet* (ML). הזיקוק, התרגום והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** מבוסס על מחברת הלימוד *Power BI Topics 1–20* + *Power BI DAX — Financial Functions* + *Power BI for Marketing* ו-*BI Architecture* (Jalalelaji.com) + *Statistical Tests Cheat Sheet* (ML). הזיקוק, התרגום והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
 **Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of AI_DATA_BI.md v1.4.0 —*
+— *End of AI_DATA_BI.md v1.5.0 —*
