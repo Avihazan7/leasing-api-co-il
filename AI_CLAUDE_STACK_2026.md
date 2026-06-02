@@ -5,7 +5,7 @@
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Knowledge layer (§3 שורה 16) + מפרט ה-build התפעולי של 4 העמודים.
 **Source:** מבוסס על ה-cheat sheet *"How to use Claude in 2026"*.
-**Integrates with:** `AI_CLAUDE_TOOL_SELECTOR.md`, `COWORK_SETUP.md`, `PROJECTS_SETUP.md`, `COMMAND_API.md`, `OPERATING_SYSTEM.md` §3.1, `COWORK/README.md`, `.claude/skills/`, `CASES/ULEASE.md`
+**Integrates with:** `AI_CLAUDE_TOOL_SELECTOR.md`, `AI_CLAUDE_GLOSSARY.md` (מודול אחות — המילון), `COWORK_SETUP.md`, `PROJECTS_SETUP.md`, `COMMAND_API.md`, `OPERATING_SYSTEM.md` §3.1, `COWORK/README.md`, `.claude/skills/`, `CASES/ULEASE.md`
 
 ---
 
