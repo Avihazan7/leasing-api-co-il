@@ -1,102 +1,102 @@
-# Power BI Essential Concepts
+# מושגי יסוד ב-Power BI
 
-**10 Essential Power BI Concepts Every Analyst Should Know**
+**10 מושגים חיוניים ב-Power BI שכל אנליסט חייב להכיר**
 
-> Master the fundamentals. Build better dashboards. Great Power BI solutions are built on clean data, strong data models, efficient DAX, and a clear understanding of business requirements — not just visuals.
-
----
-
-## The 10 Concepts at a Glance
-
-| # | Concept | One-liner |
-|---|---------|-----------|
-| 1 | **Data Sources** | Connect to Excel, SQL Server, Web, SharePoint, CSV, APIs and more. |
-| 2 | **Power Query (Data Transformation)** | Clean and reshape data before it ever hits the model. |
-| 3 | **Data Model** | Relationships between tables — the foundation of everything. |
-| 4 | **DAX (Data Analysis Expressions)** | Calculated columns, measures, and tables for advanced analysis. |
-| 5 | **Slicers & Filters** | Interactivity and drilldown for end users. |
-| 6 | **Visualizations** | Bars, pies, tables, maps, KPIs, slicers, cards, matrices. |
-| 7 | **Reports** | Interactive, multi-page, rich-visual deliverables. |
-| 8 | **Dashboards vs Reports** | Know the difference — they serve different purposes. |
-| 9 | **Publishing & Sharing** | Power BI Service, workspaces, and collaboration. |
-| 10 | **Row-Level Security (RLS)** | Restrict data visibility based on user roles. |
+> לשלוט ביסודות. לבנות דשבורדים טובים יותר. פתרונות Power BI מעולים נבנים על דאטה נקי, מודל נתונים חזק, DAX יעיל והבנה ברורה של הדרישות העסקיות — לא רק על ויזואליזציות.
 
 ---
 
-## 1. Data Sources
+## 10 המושגים במבט-על
 
-Connect to Excel, SQL Server, Web, SharePoint, CSV, APIs and more.
+| # | מושג | בשורה אחת |
+|---|------|-----------|
+| 1 | **מקורות נתונים (Data Sources)** | חיבור ל-Excel, SQL Server, Web, SharePoint, CSV, APIs ועוד. |
+| 2 | **Power Query (טרנספורמציית נתונים)** | ניקוי ועיצוב הדאטה לפני שהוא מגיע למודל. |
+| 3 | **מודל נתונים (Data Model)** | קשרים בין טבלאות — הבסיס לכל דבר. |
+| 4 | **DAX (Data Analysis Expressions)** | עמודות מחושבות, מדדים (Measures) וטבלאות לניתוח מתקדם. |
+| 5 | **Slicers ופילטרים** | אינטראקטיביות ו-Drilldown למשתמשי הקצה. |
+| 6 | **ויזואליזציות (Visualizations)** | עמודות, עוגות, טבלאות, מפות, KPI, כרטיסים, מטריצות. |
+| 7 | **דוחות (Reports)** | תוצרים אינטראקטיביים, מרובי עמודים ועשירים בוויזואלים. |
+| 8 | **דשבורדים מול דוחות** | להכיר את ההבדל — הם משרתים מטרות שונות. |
+| 9 | **פרסום ושיתוף (Publishing & Sharing)** | Power BI Service, סביבות עבודה (Workspaces) ושיתוף פעולה. |
+| 10 | **אבטחה ברמת שורה (RLS)** | הגבלת נראוּת הדאטה לפי תפקיד המשתמש. |
 
-- **Use:** Home → Get Data
+---
 
-## 2. Power Query (Data Transformation)
+## 1. מקורות נתונים (Data Sources)
 
-Clean and reshape data using the Power Query Editor.
+חיבור ל-Excel, SQL Server, Web, SharePoint, CSV, APIs ועוד.
 
-- **Examples:** remove columns, filter rows, split text, change data types
+- **איך:** Home → Get Data
 
-## 3. Data Model
+## 2. Power Query (טרנספורמציית נתונים)
 
-Create relationships between tables (one-to-many, many-to-one).
+ניקוי ועיצוב מחדש של הדאטה באמצעות Power Query Editor.
 
-- **Tip:** Use a Star Schema for better performance.
+- **דוגמאות:** הסרת עמודות, סינון שורות, פיצול טקסט, שינוי סוגי נתונים
+
+## 3. מודל נתונים (Data Model)
+
+יצירת קשרים בין טבלאות (אחד-לרבים, רבים-לאחד).
+
+- **טיפ:** השתמשו ב-Star Schema לביצועים טובים יותר.
 
 ## 4. DAX (Data Analysis Expressions)
 
-Create calculated columns, measures, and tables to perform advanced analysis.
+יצירת עמודות מחושבות, מדדים (Measures) וטבלאות לביצוע ניתוחים מתקדמים.
 
-- **Examples:** `SUM`, `CALCULATE`, `FILTER`, `VALUES`, `DATEADD`
-- Sample measure: `Total Sales = SUM(Sales[Amount])`
+- **דוגמאות:** `SUM`, `CALCULATE`, `FILTER`, `VALUES`, `DATEADD`
+- מדד לדוגמה: `Total Sales = SUM(Sales[Amount])`
 
-> DAX is often the turning point between *building reports* and *delivering real business insights*.
+> DAX הוא לרוב נקודת המפנה בין *בניית דוחות* לבין *הפקת תובנות עסקיות אמיתיות*.
 
-## 5. Slicers & Filters
+## 5. Slicers ופילטרים
 
-Used for interactivity and drilldown.
+משמשים לאינטראקטיביות ו-Drilldown.
 
-- **Example:** Add a slicer by region or year.
+- **דוגמה:** הוספת Slicer לפי אזור או שנה.
 
-## 6. Visualizations
+## 6. ויזואליזציות (Visualizations)
 
-Bar, pie, table, map, KPI, slicers, cards, matrix and many more.
+עמודות, עוגה, טבלה, מפה, KPI, Slicers, כרטיסים, מטריצה ועוד רבים.
 
-- Drag fields into **Values**, **Axis**, **Legend** to customize.
+- גוררים שדות אל **Values**, **Axis**, **Legend** כדי להתאים אישית.
 
-## 7. Reports
+## 7. דוחות (Reports)
 
-Build interactive reports with multiple pages and rich visuals.
+בניית דוחות אינטראקטיביים עם מספר עמודים וויזואלים עשירים.
 
-- **Tip:** Keep it simple, clear and focused.
+- **טיפ:** לשמור על פשטות, בהירות ומיקוד.
 
-## 8. Dashboards vs Reports
+## 8. דשבורדים מול דוחות
 
-| | Report | Dashboard |
-|---|--------|-----------|
-| **Pages** | Multiple pages | Single canvas |
-| **Content** | Interactive visuals | Pinned visuals from reports |
-| **Mode** | Authoring & exploration | View-only, shared |
+| | דוח (Report) | דשבורד (Dashboard) |
+|---|--------------|---------------------|
+| **עמודים** | מספר עמודים | קנבס אחד |
+| **תוכן** | ויזואלים אינטראקטיביים | ויזואלים מוצמדים (Pinned) מדוחות |
+| **מצב** | עריכה וחקירה | צפייה בלבד, משותף |
 
-## 9. Publishing & Sharing
+## 9. פרסום ושיתוף (Publishing & Sharing)
 
-Publish to Power BI Service (cloud), share reports or dashboards via workspaces.
+פרסום ל-Power BI Service (ענן), שיתוף דוחות או דשבורדים דרך Workspaces.
 
-- **Tip:** Use Workspaces for collaboration and access control.
+- **טיפ:** השתמשו ב-Workspaces לשיתוף פעולה ובקרת גישה.
 
-## 10. Row-Level Security (RLS)
+## 10. אבטחה ברמת שורה (Row-Level Security — RLS)
 
-Restrict data visibility based on user roles.
+הגבלת נראוּת הדאטה בהתאם לתפקיד המשתמש.
 
-- **Example:** A salesperson only sees their region's data.
-- Sample rule: `[Region] = USERPRINCIPALNAME()`
+- **דוגמה:** איש מכירות רואה רק את הדאטה של האזור שלו.
+- חוק לדוגמה: `[Region] = USERPRINCIPALNAME()`
 
 ---
 
-## The Big Idea
+## הרעיון הגדול
 
-> Many people focus only on creating visuals, but great Power BI solutions are built on **clean data**, **strong data models**, **efficient DAX**, and a **clear understanding of business requirements**.
+> רבים מתמקדים רק ביצירת ויזואליזציות, אבל פתרונות Power BI מעולים נבנים על **דאטה נקי**, **מודל נתונים חזק**, **DAX יעיל** ו**הבנה ברורה של הדרישות העסקיות**.
 >
-> **Better Insights. Better Decisions. Better Business.**
+> **תובנות טובות יותר. החלטות טובות יותר. עסק טוב יותר.**
 
 ---
 
-*Transcribed from the "10 Essential Power BI Concepts" infographic.*
+*תומלל מהאינפוגרפיקה "10 Essential Power BI Concepts".*
