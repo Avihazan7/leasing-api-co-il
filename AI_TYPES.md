@@ -1,10 +1,10 @@
 # סוגי AI — Traditional · Generative · Agentic
 
 **Module:** `AI_TYPES.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — מודול ידע/טקסונומיה (Learning layer).
-**Source:** מבוסס על האינפוגרפיקה *"How to Explain AI Types"* (AIForLeaders.com).
+**Source:** מבוסס על האינפוגרפיקה *"How to Explain AI Types"* (AIForLeaders.com) + *"What are AI Agents?"* (Dianas AI Agents Tips).
 **Integrates with:** `AI_SKILL_MAP.md`, `CASES/ULEASE_SPEC.md`, `CASES/ULEASE_OUTBOUND_ENGINE.md`, `CASES/ULEASE_METHODOLOGY.md`
 
 > שלושה סוגי AI, תשע יכולות — וכל אחת מהן ממופה למקום שבו היא חיה (או תחיה) ב-**ULease 🎯**. השורה התחתונה: ULease היא מוצר **Agentic AI** שמשתמש בכל תשע היכולות.
@@ -49,7 +49,23 @@
 
 ---
 
-## 3. איך להסביר את זה למשקיע (במשפט)
+## 3. ההסבר הפשוט — צ'אטבוט מול סוכן
+
+> **צ'אטבוט עונה על שאלה. סוכן AI מקדם משימה.**
+
+| | 💬 צ'אטבוט | 🤖 סוכן AI |
+|---|------------|------------|
+| **מה הוא עושה** | נותן תשובה | לוקח מטרה, פועל בשלבים, משתמש בכלים |
+| **מתי זה נגמר** | כשקיבלת תשובה | כשהמשימה הושלמה |
+| **🎯 ב-ULease** | Q&A Bot — "מה ההבדל בין ליסינג למימון?" | Ultra·Master·Max — "מצא רכב, סגור הצעה, הגש מימון" |
+
+**ההגדרה הלא-טכנית** (לפגישות עם ספקים, משקיעים ולקוחות): *"סוכן AI הוא עוזר שיודע לקחת מטרה, לפעול לפי שלבים ולהשתמש בכלים — עד שהמשימה גמורה. לא עונה ושוכח; עובד עד שסגור."*
+
+**למה זה המסר של ULease:** הלקוח לא מדבר עם צ'אט שעונה — הוא עובד עם סוכן שמקדם את העסקה שלו: התאמה → הצעה → חוזה → מימון. זו ההבחנה שהופכת את ULease מ"אתר עם צ'אט" ל"מערכת שסוגרת עסקאות".
+
+---
+
+## 4. איך להסביר את זה למשקיע (במשפט)
 
 > *"רוב הפלטפורמות משתמשות ב-AI אחד. ULease משתמשת בכל שלושת הסוגים: Traditional לחיזוי וניקוד, Generative לתוכן ולידע, ו-Agentic — סוכנים שסוגרים עסקה מקצה לקצה. זו לא תוספת AI למוצר; זה מוצר שבנוי מ-AI."*
 
@@ -60,7 +76,8 @@
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | טקסונומיית סוגי AI (3×9) + מיפוי מלא ל-ULease + חיבור למפה | 2026-06-01 |
+| 1.1.0 | נוסף §3 "ההסבר הפשוט — צ'אטבוט מול סוכן" (D-028); סעיף המשקיע הוסט ל-§4 | 2026-06-02 |
 
-**Attribution.** מבנה הטקסונומיה: *How to Explain AI Types* (AIForLeaders.com). המיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** מבנה הטקסונומיה: *How to Explain AI Types* (AIForLeaders.com). ההבחנה צ'אטבוט/סוכן (§3): *What are AI Agents?* (Dianas AI Agents Tips). המיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of AI_TYPES.md v1.0.0 —*
+— *End of AI_TYPES.md v1.1.0 —*

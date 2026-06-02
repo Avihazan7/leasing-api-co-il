@@ -1,7 +1,7 @@
 # ULease 🎯 — Playbook צד-הביקוש (Demand Generation)
 
 **Module:** `CASES/ULEASE_DEMAND_PLAYBOOK.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Playbook רכישת קונים (צד ביקוש). סוגר את ממצא **C4** בביקורת.
 **Integrates with:** `CASES/ULEASE.md` §3, `CASES/ULEASE_METHODOLOGY.md` (Big Five), `CASES/ULEASE_OUTBOUND_ENGINE.md`, `CASES/ULEASE_LAUNCH_CHECKLIST.md`, `marketing-strategy-framework.md`
@@ -57,7 +57,10 @@
 | 4 | 💬 **וואטסאפ + הפניות** | כפתור וואטסאפ באתר · "הבא חבר" (₪250 שובר דלק על עסקה) | ₪40–60 | ₪1,000 |
 | 5 | 🤝 **שותפויות** | פורומי רכב, קבוצות פייסבוק "רכב יד 1", אתרי השוואה — עמלת referral לליד | ₪50–80 | ₪2,000 |
 | 6 | 📰 **PR** (חינם) | פיץ' לכתבי רכב/כלכלה: "הסטארטאפ שחושף כמה באמת שווה רכב 0 ק"מ" | ₪0 | ₪0 (זמן A) |
+| 7 | 🤖 **GEO** (חינם) | להיות **מצוטטים בתשובות AI**: כשקונה שואל את Claude/ChatGPT/Perplexity "איך הכי משתלם לקנות רכב חדש בישראל?" — Leasing.co.il היא המקור. דורש: robots.txt שמתיר citation crawlers + עמודי SEO עם schema (אותם 10 עמודים מערוץ 1) | ~₪0 | ₪0 (זמן T, חד-פעמי) |
 | | | | **סה"כ** | **₪15,000** |
+
+> 💡 **למה GEO הוא הערוץ הכי אסימטרי:** אפס עלות שוטפת, ואף מתחרה רכב ישראלי לא עושה את זה ב-2026. עמודי ה-SEO (ערוץ 1) משרתים גם את גוגל וגם את מנועי ה-AI — אותה עבודה, שני ערוצים. הסכנה ההפוכה: robots.txt עם wildcard ישן חוסם את הכל בשקט (ראו פריט ה-GEO בצ'קליסט ההשקה §5).
 
 > ⚠️ **ציות (תיקון 40 לחוק התקשורת):** כל הערוצים הם **inbound** (הקונה פונה אלינו) — אין דיוור קר לצרכנים. טפסי הלידים כוללים הסכמה מפורשת לדיוור. ראו §7.
 
@@ -122,7 +125,8 @@
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | Playbook צד-ביקוש ראשוני: יחידת כלכלה, פרסונות Big Five, 6 ערוצים, משפך, ציות ו-KPIs — סוגר ממצא C4 | 2026-06-01 |
+| 1.1.0 | ערוץ 7 — **GEO** (D-035): ציטוט בתשובות AI כערוץ רכישה בעלות אפס; תלוי בפריט ה-robots.txt בצ'קליסט ההשקה | 2026-06-02 |
 
 **Confidentiality.** מסמך תפעולי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_DEMAND_PLAYBOOK.md v1.0.0 —*
+— *End of CASES/ULEASE_DEMAND_PLAYBOOK.md v1.1.0 —*

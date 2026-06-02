@@ -1,7 +1,7 @@
 # ULease 🎯 — צ'קליסט השקה (שבועיים)
 
 **Module:** `CASES/ULEASE_LAUNCH_CHECKLIST.md`
-**Version:** 1.2.0
+**Version:** 1.3.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — צ'קליסט השקה תפעולי.
 **Integrates with:** `CASES/ULEASE_SPEC.md` (Phase 0), `CASES/ULEASE_TECH_ONBOARDING.md`, `CASES/ULEASE_FINANCE_INSURANCE.md`, `CASES/ULEASE_OUTREACH_SCRIPTS.md`, `CASES/ULEASE_DEMAND_PLAYBOOK.md`, `CASES/ULEASE_PRICING_SLA.md`
@@ -48,6 +48,7 @@
 - [ ] קמפיין **Google Ads** דרוך (₪7K) + **Meta** (₪5K) (A)
 - [ ] טופס ליד עם **הסכמת דיוור ושיתוף** + כפתור וואטסאפ (A + T)
 - [ ] תוכנית הפניות ("הבא חבר") + פיץ' PR לכתבי רכב (A)
+- [ ] **GEO — robots.txt מתיר AI citation crawlers** (T, D-035): לוודא שאין wildcard שחוסם **GPTBot · ClaudeBot · PerplexityBot · GoogleExtendedBot · FacebookBot** — אחרת Leasing.co.il לא תצוטט אף פעם בתשובות AI. סקרייפרים (Bytespider וכד') נשארים חסומים. בדיקה: URL Inspection ב-GSC + בקשת recrawl ל-10 העמודים המובילים
 
 ## 6. Outreach היצע
 - [ ] סקריפטים מותאמים לכל סגמנט (`ULEASE_OUTREACH_SCRIPTS.md`) (A)
@@ -99,7 +100,8 @@
 | 1.0.0 | צ'קליסט השקה ראשוני — דומיין, משפטי, MVP, תוכן, outreach, QA, לוח שבועיים | 2026-05-31 |
 | 1.1.0 | יישום גל 2 של הביקורת: שערי Go-Live חוסמים (C3·C5·C6), סעיף ביקוש חדש (C4), פיצול משפטי + רישוי רכב + ביטולים (W8·W9·W10), תוכנית-מגירה ל-Tech Lead | 2026-06-01 |
 | 1.2.0 | פריט מיתוג (§1, D-024): פלטת מותג מכוונת לאתר הצרכני — לא ברירת-המחדל הוויזואלית של Claude | 2026-06-02 |
+| 1.3.0 | פריט GEO (§5, D-035): robots.txt מתיר AI citation crawlers — תנאי לציטוט Leasing.co.il בתשובות AI | 2026-06-02 |
 
 **Confidentiality.** מסמך תפעולי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_LAUNCH_CHECKLIST.md v1.2.0 —*
+— *End of CASES/ULEASE_LAUNCH_CHECKLIST.md v1.3.0 —*
