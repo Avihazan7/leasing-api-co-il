@@ -1,7 +1,7 @@
 # DECISION_LOG.md — יומן החלטות
 
 **Module:** `DECISION_LOG.md`
-**Version:** 1.18.0
+**Version:** 1.19.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — יומן append-only (Memory layer).
 **Integrates with:** `OPERATING_SYSTEM.md` §7, `MEMORY.md`, `CASES/ULEASE*.md`
@@ -45,6 +45,7 @@
 | D-029 | 2026-06-02 | **העשרת AI_CLAUDE_STACK_2026 ל-v1.1.0**: בלוק **Agent Teams** (ניסיוני, opt-in) בעמוד Claude Code — Team lead · Teammates · Shared tasks — וזיהויו כ**מסלול prototype ל-Ultra·Master·Max**: Team lead=Ultra · Teammates=Masters · Shared tasks=Event/AgentRun | לפי תקדים D-028 (תוכן דק → העשרה); הערך האמיתי: ה-Tech Lead יכול להוכיח את ארכיטקטורת הסוכנים של ULease עם יכולת קיימת של Claude Code לפני בניית תשתית ייעודית — מקצר את Phase 0 ומוריד סיכון | ✅ פעיל |
 | D-030 | 2026-06-02 | **העשרת AI_CLAUDE_STACK_2026 ל-v1.2.0**: **סולם 7 הרמות של Claude Code** (Prompt → Context → Tools → MCP → Skills → Subagents → Agent Teams) עם מיפוי סטטוס לכל רמה — הציון: **רמה 6/7** (חסרים רק MCP ייעודי ו-Agent Teams) | משלים את D-029 לאותו מקור (learn.nextwork.org); הסולם הוא מדד בשלות אובייקטיבי — "רוב האנשים עוצרים ב-3" — והוכחה שה-OS שתי רמות מעבר; רמה 7 = משימת ה-Tech Lead הראשונה | ✅ פעיל |
 | D-031 | 2026-06-02 | **העשרת AI_CLAUDE_TOOL_SELECTOR ל-v1.2.0** (מקור: "9 Ways to Use Claude"): עץ ההחלטה גדל **12 → 15 כלים** — נוספו **Claude in Excel** (גיליונות/תחזית) · **Computer Use** (ריבוי אפליקציות) · **Artifacts** (אפליקציות-בזק בצ'אט) + טיפים "Best for" ומיפוי ULease (Excel→FORECAST.csv · Artifacts→הדשבורד) | שלושת הכלים היו במילון (GLOSSARY) אך חסרו בעץ ההחלטה — סגירת פער בין שני המודולים; ל-ULease: Excel הוא כלי העבודה על המודל הפיננסי ו-Artifacts הוא איך הדשבורד נולד | ✅ פעיל |
+| D-032 | 2026-06-02 | רישום מודול **AI_DATA_BI** (Knowledge, שורה 22 ב-§3) — מודול הדאטה הראשון ב-OS: זיקוק קוריקולום Power BI שלם (10 נושאים) ליסודות BI ממופים ל-ULease — צינור BI, ETL, **ה-star schema של מודל הנתונים** (Deal=fact · Supplier/Vehicle/Customer/Date=dimensions), DAX, מדריך ויזואליזציה, והכרעת Power-BI-מול-custom | M9 (Data & Insights) הוא מוצר בתשלום — מנוי Ultra ₪4,500 כולל "מידע וניתוחים"; ה-star schema הוא התשתית של המוצר הזה בלי קשר לכלי; אושר ע"י המייסד שהקונספטים נכנסים כמודול (לא רק הערה ב-SPEC) | ✅ פעיל |
 
 ---
 
@@ -80,7 +81,8 @@
 | 1.16.0 | הוספת D-029 — העשרת `AI_CLAUDE_STACK_2026.md` ל-v1.1.0: Agent Teams כמסלול prototype ל-Ultra·Master·Max | 2026-06-02 |
 | 1.17.0 | הוספת D-030 — העשרת `AI_CLAUDE_STACK_2026.md` ל-v1.2.0: סולם 7 הרמות של Claude Code (רמה 6/7) | 2026-06-02 |
 | 1.18.0 | הוספת D-031 — העשרת `AI_CLAUDE_TOOL_SELECTOR.md` ל-v1.2.0: 15 כלים (נוספו Excel · Computer Use · Artifacts) | 2026-06-02 |
+| 1.19.0 | הוספת D-032 — רישום מודול `AI_DATA_BI.md` (יסודות BI ל-M9, Knowledge) | 2026-06-02 |
 
 **Confidentiality.** מסמך פנימי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of DECISION_LOG.md v1.18.0 —*
+— *End of DECISION_LOG.md v1.19.0 —*
