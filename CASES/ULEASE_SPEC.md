@@ -1,10 +1,10 @@
 # ULease 🎯 Leasing.co.il — איפיון מוצר ומערכת (End-to-End Spec)
 
 **Module:** `CASES/ULEASE_SPEC.md`
-**Version:** 1.3.0
+**Version:** 1.4.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — איפיון (Product & System Spec), נספח ל-`CASES/ULEASE.md`.
-**Integrates with:** `CASES/ULEASE.md`, `CASES/ULEASE_METHODOLOGY.md`, `INVESTOR_RELATIONS.md`, `OPERATING_SYSTEM.md`, `MEMORY.md`
+**Integrates with:** `CASES/ULEASE.md`, `CASES/ULEASE_METHODOLOGY.md`, `CASES/ULEASE_AUTOMATION_MAP.md`, `INVESTOR_RELATIONS.md`, `OPERATING_SYSTEM.md`, `MEMORY.md`
 **Confidentiality:** מנגנוני **Deal Score**, **Match** ו**תמחור** הם IP ליבה (§6). מסומן בהתאם.
 
 ---
@@ -132,6 +132,48 @@ SUPPLY  →   │  INGESTION APIs  (יבואן · ליסינג · מימון)   
 
 > שלב MVP: Ultra + 2 Masters (Match, Pricing) במצב **assist** (אדם מאשר) + **Guardian מינימלי** (audit-log · ניהול הסכמות · opt-out) — שער Go-Live. אוטומציה מלאה מתרחבת ב-V1/V2.
 
+### 7.1 שכבת הידע — RAG (Context Engineering) — D-022
+
+הסוכנים (§7) חכמים בדיוק כמו הידע שמוזרם להם. שכבת ה-RAG היא הצינור שמזין אותם — **בלי לאמן מודל** (ראו מדיניות D-022 למטה).
+
+**הצינור:**
+```
+מקורות ידע → Chunking → Embedding → Vector DB → Retrieval (top-k) → הזרקה לפרומפט הסוכן
+```
+
+**הקורפוס (מה נכנס ל-Vector DB):**
+
+| מקור | תוכן | קצב עדכון | משרת |
+|------|------|-----------|-------|
+| **קטלוג ומלאי** | מפרטים, רמות גימור, אבזור, זמינות | Real-time (event-driven מ-ingestion) | Match, Q&A Bot |
+| **מחירונים ושוק** | לוי יצחק, נתוני משרד התחבורה, מחירי עסקאות | יומי | Deal Score (comparables), Pricing Master |
+| **רגולציה וציות** | תיקון 40, הגנת הצרכן, רישוי תיווך, מדיניות ביטולים | בשינוי | Compliance Master, Guardian |
+| **Playbooks פנימיים** | סקריפטים, טיפול בהתנגדויות, SLA, מחירון | בשינוי | Negotiation Master, Content |
+| **היסטוריית עסקאות** | עסקאות סגורות, זמן-לסגירה, התאמות מוצלחות | יומי (batch, מצטבר מההשקה) | Deal Score, Match (שיפור מתמשך) |
+
+**בחירת תשתית:**
+
+| שלב | פתרון | רציונל |
+|------|--------|---------|
+| **MVP (Phase 0)** | **pgvector** — extension של PostgreSQL | אותו DB של מודל הנתונים (§8), אפס תשתית נוספת, חינם |
+| **V1 (Phase 1)** | pgvector מורחב או managed (Pinecone/Weaviate) | רק אם הביצועים דורשים — החלטת Tech Lead מבוססת מדידה |
+
+**כללי שליפה (token efficiency):** top-k = 5 צ'אנקים · ~2K tokens מקסימום להזרקה · סדר ופורמט נשמרים (metadata: מקור + תאריך) · cache לשאילתות חוזרות.
+
+**מי צורך את השכבה:**
+- **Master agents** (Match · Pricing · Negotiation · Compliance) — שולפים הקשר רלוונטי לפני כל החלטה.
+- **Knowledge-base Q&A Bot** — שאלות לקוחות על רכבים/תהליך/מימון (ראו `ULEASE_AUTOMATION_MAP.md`, V1).
+- **Deal Score** — שליפת עסקאות-השוואה (comparables) לדירוג.
+
+**🔒 מדיניות D-022 — RAG ולא Fine-Tuning:**
+
+| שיקול | המסקנה |
+|--------|---------|
+| מלאי ומחירים משתנים **יומית** | Fine-tuning מתיישן ביום ההשקה; RAG תמיד עדכני |
+| אין עדיין דאטה קניינית מתויגת (0 עסקאות) | אין על מה לאמן; הקורפוס נבנה מההשקה |
+| ה-stack מבוסס Claude | האופטימיזציה: Skills + RAG + הקשר (לא כוונון משקולות) |
+| **נקודת בחינה מחדש** | אחרי **~1,000 עסקאות סגורות** (צפי 2027) — מודל התאמה קנייני מאומן על דאטת העסקאות = חפיר תחרותי |
+
 ---
 
 ## 8. מודל נתונים
@@ -156,6 +198,7 @@ SUPPLY  →   │  INGESTION APIs  (יבואן · ליסינג · מימון)   
 | **Event** | id, type(lead/deal/auction/…), payload, ts, status | →AgentRun (מה שמניע את Ultra) |
 | **AgentRun** | id, eventId, agent(Ultra/Master/Max/Guardian), input, output, decision, ts | →AuditLog (state של כל ריצת סוכן) |
 | **Consent** | id, customerId, type(דיוור/שיתוף-ליד/נתוני-אשראי), granted_at, revoked_at | →Customer, →Lead (בסיס ה-opt-out של Guardian) |
+| **KnowledgeChunk** | id, source(catalog/pricing/regulation/playbook/deal-history), content, embedding(vector), updated_at | →AgentRun (שליפות RAG, §7.1) |
 
 ---
 
@@ -171,6 +214,7 @@ SUPPLY  →   │  INGESTION APIs  (יבואן · ליסינג · מימון)   
 | **Financing/Leasing** | handoff לחברות מימון/ליסינג | MVP→V1 |
 | **Insurance / Road** | שותפי פרסום/עמלה | V1 |
 | **Comms** | SMS, Email | MVP · WhatsApp Business — **V1** (דורש אישור WABA + עמידה בתיקון 40) |
+| **Knowledge/RAG** | pgvector (PostgreSQL) — embedding מלאי/מחירונים/רגולציה/playbooks (§7.1) | MVP (בסיסי) → V1 (Q&A Bot + comparables) |
 
 ---
 
@@ -204,7 +248,7 @@ SUPPLY  →   │  INGESTION APIs  (יבואן · ליסינג · מימון)   
 | שלב | יעד | תוכן | מיפוי לתחזית |
 |------|-----|------|--------------|
 | **Phase 0 — MVP** | ≤ שבועיים · חצי שני יוני 26 | M1·M2·M4·M5·M8·M11 + Ultra+2 Masters (assist) + **Guardian מינימלי** + CSV/API ingestion + e-sign + מקדמה | בסיס יוני: 26 עסקאות |
-| **Phase 1 — Scale** | Q3–Q4 2026 | מכרז מחיר-שני (M7), מנוי Max, Financing מלא (M6), Data/Insights (M9), Advertising (M10), הרחבת agents | ראמפ H2-2026 |
+| **Phase 1 — Scale** | Q3–Q4 2026 | מכרז מחיר-שני (M7), מנוי Max, Financing מלא (M6), Data/Insights (M9), Advertising (M10), הרחבת agents + שכבת RAG מלאה (§7.1: Q&A Bot, comparables) | ראמפ H2-2026 |
 | **Phase 2 — Automate** | 2027 | אוטומציה מלאה Multi-agent, Deal Score מתקדם, אינטגרציות נוספות, scale | צמיחת 2027 |
 
 ---
@@ -223,7 +267,8 @@ GMV · עסקאות/חודש · take-rate בפועל · **המרת פנייה→
 | 1.1.0 | יישום D-015: מנויי **Ultra/Max** (M8), עמלות מדורגות 1.1%–7.77% במודל הנתונים ובזרימת הספק | 2026-06-01 |
 | 1.2.0 | גל 2 של הביקורת: **Guardian מינימלי** ב-Phase 0 (C5) — audit-log, הסכמות, opt-out; "ארבע שכבות" (W12) | 2026-06-01 |
 | 1.3.0 | גל 3 (C8): ישויות Event/AgentRun/Consent/Inquiry, סביבות dev/staging/prod, בדיקות אוטומטיות, גיבוי/DR (RPO/RTO); הבהרת וריאנט המכרז (I3); KPI פנייה→עסקה (W16); WhatsApp נדחה ל-V1 (W17) | 2026-06-01 |
+| 1.4.0 | יישום D-022: שכבת ידע RAG (§7.1) — קורפוס, pgvector, כללי שליפה, צרכנים ומדיניות "RAG ולא Fine-Tuning"; ישות KnowledgeChunk (§8); שורת Knowledge/RAG באינטגרציות (§9) וב-roadmap (§12) | 2026-06-02 |
 
 **Confidentiality.** מסמך זה וכל מנגנוני הליבה (Deal Score, Match, Pricing, Auction) הם IP חסוי של ULease 🎯 — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_SPEC.md v1.3.0 —*
+— *End of CASES/ULEASE_SPEC.md v1.4.0 —*

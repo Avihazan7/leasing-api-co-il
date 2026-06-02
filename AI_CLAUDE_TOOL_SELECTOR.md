@@ -5,7 +5,7 @@
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — מודול ידע/רפרנס (Knowledge layer).
 **Source:** מבוסס על האינפוגרפיקה *"Which Claude Should You Use?"*.
-**Integrates with:** `COWORK_SETUP.md`, `COMMAND_API.md`, `AI_SKILL_MAP.md`, `CASES/ULEASE_SPEC.md`, `CASES/ULEASE_OUTBOUND_ENGINE.md`
+**Integrates with:** `AI_CLAUDE_STACK_2026.md` (מודול אחות — ה-build התפעולי), `COWORK_SETUP.md`, `COMMAND_API.md`, `AI_SKILL_MAP.md`, `CASES/ULEASE_SPEC.md`, `CASES/ULEASE_OUTBOUND_ENGINE.md`
 
 > דרך פשוטה לבחור את הכלי הנכון לכל משימה — עץ החלטה אחד, 12 כלים, והמיפוי שלהם לעבודה היומיומית שלך ב-OS וב-ULease 🎯.
 
