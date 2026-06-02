@@ -7,7 +7,7 @@
 **Source:** מבוסס על האינפוגרפיקה *"Most RAG Systems Break at Retrieval"* (Rushikesh Meharwade · Vidvatta).
 **Integrates with:** `AI_SKILL_MAP.md`, `AI_LEARNING_RESOURCES.md`, `AI_SKILLS_ACQUISITION.md`, `CASES/ULEASE_SPEC.md`, `CASES/ULEASE_HIRING.md`, `CASES/ULEASE_AUTOMATION_MAP.md`, `CASES/ULEASE_PRICING_SLA.md`
 
-> **רוב מערכות RAG לא נשברות ב-LLM — הן נשברות ב-Retrieval.** אם האחזור מביא את הקטע הלא-נכון, שום פרומפט לא יציל את התשובה. 15 הטעויות כאן הן צ'קליסט ה-design review שעובר מול ה-Tech Lead **לפני** שבונים את בסיס-הידע של Deal Score.
+> **רוב מערכות RAG לא נשברות ב-LLM — הן נשברות ב-Retrieval.** אם האחזור מביא את הקטע הלא-נכון, שום פרומפט לא יציל את התשובה. 15 הטעויות כאן הן צ'קליסט ה-design review שעובר מול ה-Tech Lead **לפני** שבונים את שכבת ה-RAG שאופיינה ב-`CASES/ULEASE_SPEC.md` §7.1 (D-022): ה-SPEC מגדיר *מה* בונים — המודול הזה מגדיר *איך לא לשבור את זה*.
 
 ---
 
@@ -52,6 +52,8 @@
 
 ## 2. איפה RAG חי ב-ULease 🎯
 
+> הקורפוס המלא, קצבי העדכון ובחירת התשתית (pgvector) מוגדרים ב-`CASES/ULEASE_SPEC.md` §7.1. הטבלה כאן ממפה כל צרכן אל הטעויות שהכי מסוכנות לו.
+
 | רכיב | מה יושב באינדקס | הטעויות הקריטיות עבורו |
 |------|------------------|--------------------------|
 | **בסיס-הידע של Deal Score** (M3, `ULEASE_SPEC.md` §5) | מחירון (לוי יצחק), נתוני משרד התחבורה, מלאי חי, היסטוריית עסקאות | #5 metadata · #11 טריות · #2 hybrid |
@@ -68,8 +70,8 @@
 
 | שלב | מה חייב להיות | טעויות שנסגרות |
 |------|----------------|------------------|
-| **MVP** (Phase 0) | תכנון retrieval-first · metadata על כל פריט (מחיר, זמינות, מקור, תאריך) · עדכון מלאי חי · חיפוש hybrid לדגמים | #9 · #5 · #11 · #2 |
-| **V1** (Phase 1) | מדדי הערכה (Precision@k) · reranking · תקציבי latency (חיפוש < 500ms — NFR ב-`ULEASE_SPEC.md` §10) · מעקב עלות-לשאילתה | #8 · #4 · #12 · #15 |
+| **MVP** (Phase 0) | תכנון retrieval-first על **pgvector** (§7.1) · metadata על כל פריט (מחיר, זמינות, מקור, תאריך) · עדכון מלאי חי · חיפוש hybrid לדגמים · **grounding checks** (§7.2 — תנאי Go-Live) | #9 · #5 · #11 · #2 · #8 |
+| **V1** (Phase 1) | מדדי הערכה רציפים (Precision@k + ניטור הזיות §7.2) · reranking · תקציבי latency (חיפוש < 500ms — NFR ב-`ULEASE_SPEC.md` §10) · מעקב עלות-לשאילתה | #8 · #4 · #12 · #15 |
 | **V2** (Phase 2) | Multi-hop / agentic retrieval (Ultra·Master·Max) · לולאת משוב · multi-embedding · chunking מתקדם · דחיסת הקשר | #13 · #10 · #6 · #1 · #7 · #3 · #14 |
 
 ---
@@ -88,10 +90,12 @@
 
 ---
 
-## 5. החיבור למסלול הלמידה
+## 5. החיבור למסלול הלמידה ול-OS
 
 | איפה | מה |
 |------|-----|
+| `CASES/ULEASE_SPEC.md` §7.1 (D-022) | האיפיון הרשמי של שכבת ה-RAG: pgvector, קורפוס, top-k=5, ~2K tokens — המודול הזה הוא ה-design review שלה |
+| `CASES/ULEASE_SPEC.md` §7.2 (D-023) | Guardrails & Evals: grounding 100% לעובדות כספיות + golden set — המדדים שסוגרים את טעות #8 |
 | `AI_SKILL_MAP.md` §4 (שלב 3 · Agentic) | RAG + Vector DBs הם מיומנויות ליבה של Agentic AI Systems |
 | `AI_SKILLS_ACQUISITION.md` §3 (שבוע 7) | "מפה איפה RAG נחוץ ב-Deal Score" — המודול הזה הוא תשתית המיפוי ושער-השליטה |
 | `AI_LEARNING_RESOURCES.md` §2 | קורס IBM Agentic AI & RAG (Coursera) — שם נלמדים המושגים שמאחורי הפתרונות |
