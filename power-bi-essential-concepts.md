@@ -91,6 +91,111 @@
 
 ---
 
+## דשבורדים ל-ULease — מהתיאוריה לפרקטיקה
+
+יישום 10 המושגים על נתוני ה-Leasing API (`stage-a`): Supabase/Postgres עם הטבלאות `vehicles`, `settlements`, `ledger_entries`, `payment_transfers` ו-`vehicle_read_model`.
+
+### 1. מקור הנתונים (Data Source)
+
+| מה | איך |
+|----|-----|
+| Supabase/Postgres (production) | Get Data → PostgreSQL database |
+| טבלאות לחיבור | `vehicle_read_model` (קטלוג) · `settlements` (עסקאות) · `ledger_entries` (עמלות) · `payment_transfers` (תשלומים) |
+| מצב רענון | Import + Scheduled Refresh (או DirectQuery לנתוני זמן-אמת) |
+
+### 2. Power Query — טרנספורמציות נדרשות
+
+- **המרת `amount_minor` (אגורות) לשקלים:** עמודה חדשה `Amount = amount_minor / 100`
+- **המרת `status` לעברית:** `DRAFT` → טיוטה, `AVAILABLE` → זמין, `RESERVED` → שמור, `SOLD` → נמכר, `IN_SERVICE` → בטיפול, `WITHDRAWN` → הוסר
+- **טיפוסי נתונים:** `created_at` / `updated_at` → Date/Time, `list_price` / `offer_price` → Decimal
+
+### 3. מודל הנתונים — Star Schema
+
+```
+                    ┌──────────────────┐
+                    │  DimDate (לוח)    │
+                    └────────┬─────────┘
+                             │
+┌─────────────────┐   ┌──────┴──────────┐   ┌──────────────────┐
+│ DimVehicle      │───│ FactSettlements │───│ DimDealer        │
+│ (vehicle_read_  │   │ (settlements)   │   │ (מתוך ledger:    │
+│  model)         │   │ deal_id, vin,   │   │  dealer account) │
+│ vin, status,    │   │ amount, date    │   └──────────────────┘
+│ list/offer price│   └──────┬──────────┘
+└─────────────────┘          │
+                    ┌────────┴─────────┐
+                    │ FactLedger       │
+                    │ (ledger_entries) │
+                    │ commission/payout│
+                    └──────────────────┘
+```
+
+- **Fact:** `settlements` + `ledger_entries`
+- **Dim:** `vehicle_read_model`, טבלת תאריכים, טבלת סוכנויות (dealers)
+- קשר אחד-לרבים: `vin` → עסקאות, `deal_id` → רישומי Ledger
+
+### 4. מדדי DAX מרכזיים
+
+```dax
+-- סך מכירות (₪)
+Total Sales = SUM(FactSettlements[Amount])
+
+-- הכנסות פלטפורמה מעמלות (5% ברירת מחדל)
+Platform Commission =
+CALCULATE(SUM(FactLedger[Amount]), FactLedger[type] = "commission", FactLedger[party] = "platform")
+
+-- שיעור המרה: RESERVED → SOLD
+Conversion Rate =
+DIVIDE(
+    CALCULATE(COUNTROWS(DimVehicle), DimVehicle[status] = "SOLD"),
+    CALCULATE(COUNTROWS(DimVehicle), DimVehicle[status] IN {"SOLD", "RESERVED", "AVAILABLE"})
+)
+
+-- מלאי זמין
+Available Inventory = CALCULATE(COUNTROWS(DimVehicle), DimVehicle[status] = "AVAILABLE")
+
+-- מכירות חודש קודם (להשוואה)
+Sales Previous Month = CALCULATE([Total Sales], DATEADD(DimDate[Date], -1, MONTH))
+
+-- ממוצע הנחה (Offer מול List)
+Avg Discount % = AVERAGEX(DimVehicle, DIVIDE(DimVehicle[list_price] - DimVehicle[offer_price], DimVehicle[list_price]))
+```
+
+### 5–6. Slicers וויזואליזציות מומלצות
+
+| ויזואל | שדות | מטרה |
+|--------|------|------|
+| **KPI Cards** | Total Sales · Platform Commission · Available Inventory · Conversion Rate | מבט-על ב-3 שניות |
+| **Line Chart** | Total Sales לפי חודש | מגמת מכירות |
+| **Funnel** | מספר רכבים לפי status (זמין → שמור → נמכר) | משפך ההמרה |
+| **Bar Chart** | עמלות לפי סוכנות (dealer account) | ביצועי סוכנויות |
+| **Matrix** | רכבים × סטטוס × חודש | תמונת מלאי |
+| **Slicers** | חודש/רבעון · סטטוס · סוכנות | סינון אינטראקטיבי |
+
+### 7–8. דוח מול דשבורד ב-ULease
+
+- **דוח (Report):** "ביצועי מכירות ULease" — 3 עמודים: מכירות · מלאי · עמלות וסליקה
+- **דשבורד (Dashboard):** הצמדת 4 ה-KPI Cards + מגמת המכירות — מסך אחד להנהלה (view-only)
+
+### 9. פרסום ושיתוף
+
+- Workspace ייעודי: **ULease Analytics**
+- Scheduled Refresh יומי מ-Supabase
+- שיתוף: הנהלה (Viewer) · אנליסטים (Contributor)
+
+### 10. RLS — אבטחה ברמת שורה
+
+```dax
+-- Role: Dealer — כל סוכנות רואה רק את העסקאות שלה
+[dealer_account] = USERPRINCIPALNAME()
+
+-- Role: Management — ללא סינון (רואים הכל)
+```
+
+> **קשר ל-AGENT_BLUEPRINT:** ה-Outbox events (`outbox` table) הם המקור האמין ביותר ל-Audit Trail — דשבורד תפעולי יכול לנטר גם `published_at IS NULL` (אירועים שטרם פורסמו) כמדד בריאות המערכת.
+
+---
+
 ## הרעיון הגדול
 
 > רבים מתמקדים רק ביצירת ויזואליזציות, אבל פתרונות Power BI מעולים נבנים על **דאטה נקי**, **מודל נתונים חזק**, **DAX יעיל** ו**הבנה ברורה של הדרישות העסקיות**.
