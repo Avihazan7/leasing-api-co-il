@@ -80,7 +80,7 @@
 | **טון** | `[למילוי — direct / warm / expert]` | ניתן לדריסה זמנית ב-`/tone` |
 | **אורך ברירת-מחדל** | `[למילוי — short / medium / long]` | `/length` דורס זמנית |
 | **פורמט מועדף** | `[למילוי — bullets / prose / table]` | `/format` דורס זמנית |
-| **סגנון** | `[למילוי]` | ראו `style.md` ב-Cowork |
+| **סגנון** | `[למילוי]` | ראו `anti-ai-style.md` ב-Cowork |
 
 ---
 

@@ -43,4 +43,6 @@
 
 **Attribution.** מבוסס על *7 Skills to Master AI in 2026*. העיבוד והמיפוי ל-OS הם חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
+**Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
+
 — *End of AI_7_SKILLS.md v1.0.0 —*

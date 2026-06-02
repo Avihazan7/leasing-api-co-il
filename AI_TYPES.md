@@ -103,4 +103,6 @@ AI (התחום)  ⊃  Machine Learning (שיטה: לומד מדאטה)  ⊃  Neu
 
 **Attribution.** מבנה הטקסונומיה: *How to Explain AI Types* + *AI Terminology* (AIForLeaders.com). ההבחנה צ'אטבוט/סוכן (§3): *What are AI Agents?* (Dianas AI Agents Tips). המיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
+**Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
+
 — *End of AI_TYPES.md v1.2.0 —*

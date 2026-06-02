@@ -1,7 +1,7 @@
 # ULease 🎯 — Playbook צד-הביקוש (Demand Generation)
 
 **Module:** `CASES/ULEASE_DEMAND_PLAYBOOK.md`
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Playbook רכישת קונים (צד ביקוש). סוגר את ממצא **C4** בביקורת.
 **Integrates with:** `CASES/ULEASE.md` §3, `CASES/ULEASE_METHODOLOGY.md` (Big Five), `CASES/ULEASE_OUTBOUND_ENGINE.md`, `CASES/ULEASE_LAUNCH_CHECKLIST.md`, `marketing-strategy-framework.md`
@@ -14,7 +14,7 @@
 
 | מדד | יוני 26 (חצי חודש) | מקור |
 |------|--------------------:|------|
-| פניות-קונים נדרשות | **146** (16 עסקאות + 130 לידים) | תחזית v1.3 |
+| פניות-קונים נדרשות | **146** (16 עסקאות + 130 לידים) | תחזית v1.4 |
 | תקציב שיווק | **₪15,000** | `ULEASE_FORECAST.py` (mkt_k) |
 | עלות לפנייה (CPL) מותרת | **≤ ₪103** | 15,000 ÷ 146 |
 | הכנסה מפנייה שנסגרה (B2B2C) | ₪3,330 | עמלה 2.22% (D-015) |
@@ -92,7 +92,7 @@
 
 ## 6. החיבור למנוע ולמערכת
 
-- **מנוע ה-n8n** (`ULEASE_OUTBOUND_ENGINE.md`): אותו שלד משמש גם ל-nurture של לידים נכנסים — ליד שלא השאיר טלפון מקבל רצף וואטסאפ/מייל אוטומטי (Haiku מסווג כוונה, Sonnet מנסח).
+- **מנוע ה-n8n** (`ULEASE_OUTBOUND_ENGINE.md`): אותו שלד משמש גם ל-nurture של לידים נכנסים — ליד שלא השאיר טלפון מקבל רצף **SMS/מייל** אוטומטי (Haiku מסווג כוונה, Sonnet מנסח). רצף וואטסאפ אוטומטי נכנס **ב-V1 בלבד** — דורש אישור WABA (`ULEASE_SPEC.md` §9); כפתור הוואטסאפ באתר (ערוץ 4) אינו דורש WABA ותקין מההשקה.
 - **Match + Big Five** (`ULEASE_METHODOLOGY.md`): טופס הליד כולל 3 שאלות העדפה → פרופיל ראשוני → הרכבים המתאימים מוצגים קודם → המרה גבוהה יותר.
 - **מסגרת השיווק** (`marketing-strategy-framework.md`): להריץ את 10 הפרומפטים על פרסונת "הצייד" — התוצר יהיה הקופי לקמפיינים.
 
@@ -126,7 +126,8 @@
 |------|--------|--------|
 | 1.0.0 | Playbook צד-ביקוש ראשוני: יחידת כלכלה, פרסונות Big Five, 6 ערוצים, משפך, ציות ו-KPIs — סוגר ממצא C4 | 2026-06-01 |
 | 1.1.0 | ערוץ 7 — **GEO** (D-035): ציטוט בתשובות AI כערוץ רכישה בעלות אפס; תלוי בפריט ה-robots.txt בצ'קליסט ההשקה | 2026-06-02 |
+| 1.2.0 | ביקורת-העל (D-042, ממצא Y1): רצף ה-nurture האוטומטי ב-Phase 0 הוא SMS/מייל בלבד — וואטסאפ אוטומטי נדחה ל-V1 (WABA) בהתאמה לאיפיון §9 + עדכון מצביע תחזית ל-v1.4 | 2026-06-02 |
 
 **Confidentiality.** מסמך תפעולי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_DEMAND_PLAYBOOK.md v1.1.0 —*
+— *End of CASES/ULEASE_DEMAND_PLAYBOOK.md v1.2.0 —*

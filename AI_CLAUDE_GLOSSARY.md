@@ -42,8 +42,8 @@
 | # | מונח | הגדרה | ✅ איפה אצלך |
 |---|------|--------|---------------|
 | 11 | **Skills** | פרומפטים ו-workflows שמורים שמפעילים עם `/` | `.claude/skills/` — os-module · os-decision · ulease-refresh · investor-update |
-| 13 | **Plugins** | חבילות של Skills + Connectors לעבודה ספציפית | שלב הבא אחרי ה-skills |
-| 14 | **Connectors** | חיבורים בין Claude לאפליקציות שלך | יומן Google (תזכורות D-020), n8n |
+| 13 | **Plugins** | חבילות של Skills + MCP + Hooks לעבודה ספציפית | חבילת 31 ה-Skills של Anthropic — מועמדת להתקנה (`CASES/ULEASE_AUTOMATION_MAP.md` §11) |
+| 14 | **Connectors** (= Connectors MCP) | חיבורים בין Claude לאפליקציות שלך | יומן Google (תזכורות D-020), n8n |
 
 ### ⚡ ד. יכולות
 

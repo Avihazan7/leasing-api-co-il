@@ -178,7 +178,7 @@
 | **Subagents** | WHO — מי מבצע | סוכני-משנה בהקשר מבודד: מודל משלהם, הרשאות משלהן, מחזירים סיכום | `os-auditor` |
 | **Hooks** | WHEN — מתי לאוטומט | סקריפטים **דטרמיניסטיים** מחוץ ללולאת ה-LLM: pre-tool, post-tool, on-edit | ה-CI שלנו (בדיקות עקביות על כל PR) הוא בדיוק זה |
 | **CLAUDE.md** | WHERE — איפה מעוגן | הקשר always-on שנטען בכל session | `CLAUDE.md` — נקודת הכניסה של ה-OS |
-| **Plugins** | SHIP — איך אורזים | אריזת הכל (Skills+Hooks+Subagents+MCP) ליחידה אחת ניתנת להתקנה | חבילת 31 ה-Skills (`ULEASE_AUTOMATION_MAP.md` §11) היא דוגמה |
+| **Plugins** | SHIP — איך אורזים | אריזת הכל (Skills+Hooks+Subagents+MCP) ליחידה אחת ניתנת להתקנה | חבילת 31 ה-Skills (`ULEASE_AUTOMATION_MAP.md` §11) — הדוגמה המוכנה להתקנה |
 
 **הכוח האמיתי הוא בשרשור:** `CLAUDE.md` טוען הקשר → Skill נותן מומחיות → MCP מתחבר למערכות → Subagent מבצע בבידוד → Hook מאוטמט את המסירה → Plugin אורז הכל לצוות.
 
@@ -257,5 +257,7 @@
 | 1.4.0 | §5.6 חדש (D-038): **סיכוני סוכנים** — Prompt Injection (קונה מנסה "לשכנע" את הסוכן), Hallucination, Tool Misuse, עלויות — ממופים ל-Hooks של Guardian + מפת frameworks (ההמלצה: Claude Agent SDK) | 2026-06-02 |
 
 **Attribution.** מבוסס על ה-cheat sheet *"How to use Claude in 2026"*; סולם 7 הרמות ובלוק Agent Teams (§5): סדרת *The 7 Levels of Claude Code* (learn.nextwork.org); ה-Extension Stack (§5.5): *Understanding Agent Skills* + *Make Claude 10x Smarter*. העיבוד, התרגום, ובעיקר ה-build התפעולי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+
+**Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
 — *End of AI_CLAUDE_STACK_2026.md v1.4.0 —*

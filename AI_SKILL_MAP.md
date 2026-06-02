@@ -137,4 +137,6 @@
 
 **Attribution.** מבנה המפה מבוסס על האינפוגרפיקה *The AI Skill Map* (AI Matt · Next Step Agents). העיבוד, התרגום והקישור ל-ULease הם חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
+**Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
+
 — *End of AI_SKILL_MAP.md v1.0.0 —*

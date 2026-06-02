@@ -110,4 +110,6 @@
 
 **Attribution.** מבוסס על האינפוגרפיקות *Which Claude Should You Use?* ו-*9 Ways to Use Claude*. העיבוד, התרגום והמיפוי ל-ULease הם חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
+**Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
+
 — *End of AI_CLAUDE_TOOL_SELECTOR.md v1.2.0 —*

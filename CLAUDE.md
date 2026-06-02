@@ -5,7 +5,7 @@
 ## Active Modules
 - `OPERATING_SYSTEM.md` v1.7.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.0.0 — שכבת זיכרון: schema, כרטיס זהות, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
-- `DECISION_LOG.md` v1.28.0 — יומן החלטות append-only: 41 החלטות (OS + ULease), רציונל וסטטוס.
+- `DECISION_LOG.md` v1.29.0 — יומן החלטות append-only: 42 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.2.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר, אינטגרציה עם ה-OS + ראש המטה (5 תפקידים מתוזמנים) — מיושם בפועל ב-`COWORK/`.
 - `PROJECTS_SETUP.md` v1.0.0 — Claude Projects: 3 פרויקטים (השקה 🎯 · גיוס ₪150K · Claude OS) — תוצר אחד לכל פרויקט, הוראות drop-in, רשימות העלאה ובדיקות קבלה.
 - `COMMAND_API.md` v1.2.0 — 89 slash commands, composition operators, prompting-frameworks library (כולל Opus 4.8 deltas §7.7), drop-in system prompt loaded.
@@ -25,7 +25,7 @@
 - `AI_ROLES_2026.md` v1.0.0 — תפקידי ה-AI של 2026: 21 תפקידים ממופים — המייסד (3), ה-Tech Lead (5 בכובע אחד), Guardian (2) — מאמת את הגדרת התפקיד ב-ULEASE_HIRING והופך אותה להצעת ערך לגיוס.
 - `AI_CLAUDE_ENGINEER_ROADMAP.md` v1.0.0 — רודמאפ Claude AI Engineer: 15 שלבים ממופים מול ה-OS — 11/15 כבר בנויים; הפער (12–14) = הגדרת ה-Tech Lead; שלב 15 = השקת ULease.
 - `AI_DATA_BI.md` v1.4.0 — יסודות BI ומידול נתונים (Power BI כמקרה לימוד, 20 נושאים): צינור BI + השוואת עננים (AWS/Azure/GCP), ETL, ה-star schema של ULease, DAX + Time Intelligence, ויזואליזציה, אינטראקטיביות, **RLS**, תפעול כשירות (התראות · מנויי דוחות · הרשאות) + מבחנים סטטיסטיים להחלטות — ממופה ל-M9 + הכרעת כלי ל-Tech Lead.
-- `AI_SYSTEM_DESIGN.md` v1.3.0 — יסודות System Design: שער כניסה (Gateway·Proxy·LB), 8 סגנונות API + 10 תקני איכות (versioning·Swagger·SLA), תורים (Idempotency·DLQ), JWT + מפת 24 הרכיבים (MVP/V1/V2) — ממופים לארכיטקטורת הפלטפורמה + צ'קליסט design review ל-Tech Lead.
+- `AI_SYSTEM_DESIGN.md` v1.3.0 — יסודות System Design: שער כניסה (Gateway·Proxy·LB), 8 סגנונות API + 10 תקני איכות (versioning·Swagger·SLA), תורים (Idempotency·DLQ), JWT + מפת רכיבי התשתית (MVP/V1/V2) — ממופים לארכיטקטורת הפלטפורמה + צ'קליסט design review ל-Tech Lead.
 - `INVESTOR_RELATIONS.md` v1.2.0 — IR: חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים.
 - `CASES/ULEASE.md` v1.5.0 — תיק ULease 🎯 Leasing.co.il: מודל Marketplace תלת-צדדי + תחזית פיננסית (יוני 26 → דצמ' 27) + Lean Canvas בעמוד אחד.
 - `CASES/ULEASE_SPEC.md` v1.5.0 — איפיון מוצר ומערכת מקצה-לקצה: שחקנים, ארכיטקטורה, Multi-agent (Ultra·Master·Max), שכבת ידע RAG (§7.1), Guardrails & Evals (§7.2), מודל נתונים, אינטגרציות ו-roadmap.
@@ -34,7 +34,7 @@
 - `CASES/ULEASE_HIRING.md` v1.0.0 — ערכת גיוס: מנהל מערכות טכנולוגיה (תיאור תפקיד, מודעת דרושים, שאלות ראיון, תהליך).
 - `CASES/ULEASE_IMPORTER_PLAYBOOK.md` v1.1.0 — Playbook מו"מ מול יבואני רכב: כאב, יתרונות, "שירות שלא היה כמותו", סקריפט, התנגדויות ופיילוט.
 - `CASES/ULEASE_LEASING_PLAYBOOK.md` v1.1.0 — Playbook מו"מ ליבואנים מקבילים (reach/מט"ח/אמון) וחברות ליסינג (disposal דו-כיווני + sourcing במכרז מחיר-שני).
-- `CASES/ULEASE_DEMAND_PLAYBOOK.md` v1.1.0 — Playbook צד-הביקוש: יחידת כלכלה (CPL ₪103, ROI ×4.9), 3 פרסונות Big Five, 7 ערוצי רכישה (כולל GEO — ציטוט בתשובות AI), משפך, ציות ו-KPIs — סוגר את ממצא C4.
+- `CASES/ULEASE_DEMAND_PLAYBOOK.md` v1.2.0 — Playbook צד-הביקוש: יחידת כלכלה (CPL ₪103, ROI ×4.9), 3 פרסונות Big Five, 7 ערוצי רכישה (כולל GEO — ציטוט בתשובות AI), משפך, ציות ו-KPIs — סוגר את ממצא C4.
 - `CASES/ULEASE_PRICING_SLA.md` v1.1.0 — מחירון רשמי + SLA ספקים: עמלות מדורגות, השוואת Ultra/Max, ו-11 התחייבויות שירות (ingestion, uptime, התחשבנות) — סוגר את ממצא W11.
 - `CASES/ULEASE_LEGAL_BRIEF.md` v1.0.0 — תדריך משפטי לעו"ד: 2 שאלות Go-Live (רישוי ניתוב מימון, הסכם ספק/SLA) + 6 נושאים, תוצרים מבוקשים ולוח זמנים — לשליחה לפני הפגישה.
 - `CASES/ULEASE_FINANCE_INSURANCE.md` v1.1.0 — מימון/ביטוח + חיתום דיגיטלי מקצה-לקצה: שותפים, זרימת חיתום, ניתוב רב-מלווה, התאמת Big Five, ודגלי רגולציה.

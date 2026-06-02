@@ -78,4 +78,6 @@
 
 **Attribution.** העוגן מבוסס על מודעת *Master Agentic AI* (Coursera · IBM). העיבוד, המיפוי ל-ULease ול-Learn-vs-Delegate הם חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
+**Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
+
 — *End of AI_LEARNING_RESOURCES.md v1.0.0 —*

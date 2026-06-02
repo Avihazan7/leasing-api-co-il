@@ -4,7 +4,7 @@
 **Version:** 1.3.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Knowledge layer (§3 שורה 23). מודול ההנדסה השני (אחרי `AI_PROJECT_STRUCTURE.md`) — שפת הארכיטקטורה מול ה-Tech Lead.
-**Source:** מבוסס על *"Reverse Proxy vs API Gateway vs Load Balancer"* (Level Up Coding) · *"Queues 101"* (Raul Junco) · *"How JWT Works"* (Amigoscode) · *"6 API Architecture Styles"* (James Code Lab) · *"System Design Cheatsheet"* (21 רכיבים).
+**Source:** מבוסס על *"Reverse Proxy vs API Gateway vs Load Balancer"* (Level Up Coding) · *"Queues 101"* (Raul Junco) · *"How JWT Works"* (Amigoscode) · *"6 API Architecture Styles"* (James Code Lab) · *"System Design Cheatsheet"*.
 **Integrates with:** `CASES/ULEASE_SPEC.md` (§3 · §8 · §9 · §10), `AI_PROJECT_STRUCTURE.md`, `AI_RAG_DESIGN.md`, `AI_DATA_BI.md`, `CASES/ULEASE_HIRING.md`, `CASES/ULEASE_PRICING_SLA.md`
 
 > ארבעה מושגי-יסוד של ארכיטקטורת backend — שער כניסה, סגנונות API, תורים ואימות — מתורגמים לרכיבי הפלטפורמה של ULease. המטרה: שאברהם יוכל לנהל design review מול ה-Tech Lead **בלי לכתוב שורת קוד**, ולזהות החלטה גרועה לפני שהיא נבנית.
@@ -23,7 +23,7 @@
 
 ---
 
-## 2. שישה סגנונות API — ומה ULease באמת צריכה
+## 2. שמונה סגנונות API — ומה ULease באמת צריכה
 
 | סגנון | מה זה | ההכרעה ל-ULease |
 |--------|--------|-------------------|
@@ -98,7 +98,7 @@ Producers                    Broker/Queue                  Consumers
 
 ---
 
-## 4.5 מפת 21 הרכיבים — מה נכנס מתי
+## 4.5 מפת רכיבי התשתית — מה נכנס מתי
 
 הצ'יטשיט המלא של רכיבי מערכת, ממוין לפי **מתי ULease באמת צריכה כל אחד**:
 
@@ -165,7 +165,7 @@ Producers                    Broker/Queue                  Consumers
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | ארבעה יסודות backend (שער כניסה · סגנונות API · תורים · JWT) ממופים לארכיטקטורת ULease + צ'קליסט design review | 2026-06-02 |
-| 1.1.0 | §4.5 חדש (D-037): מפת 21 הרכיבים מחולקת ל-MVP/V1/V2 — Redis לקטלוג, Elasticsearch לחיפוש רכב, Rate Limiter, Circuit Breaker + כלל נגד over-engineering | 2026-06-02 |
+| 1.1.0 | §4.5 חדש (D-037): מפת רכיבי התשתית מחולקת ל-MVP/V1/V2 — Redis לקטלוג, Elasticsearch לחיפוש רכב, Rate Limiter, Circuit Breaker + כלל נגד over-engineering | 2026-06-02 |
 | 1.2.0 | השלמות (D-038): Webhook (MVP — עדכוני מלאי) ו-AMQP ב-§2 · Auto Scaling, Service Discovery, Consistent Hashing ב-§4.5 | 2026-06-02 |
 | 1.3.0 | §2.1 חדש (D-040): עשרת תקני האיכות ל-API הספקים — versioning, pagination, validation, Swagger — והחיבור להבטחת ה-SLA (onboarding ≤ 48h) | 2026-06-02 |
 
