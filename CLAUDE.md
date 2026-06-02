@@ -5,7 +5,7 @@
 ## Active Modules
 - `OPERATING_SYSTEM.md` v1.5.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.0.0 — שכבת זיכרון: schema, כרטיס זהות, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
-- `DECISION_LOG.md` v1.15.0 — יומן החלטות append-only: 28 החלטות (OS + ULease), רציונל וסטטוס.
+- `DECISION_LOG.md` v1.16.0 — יומן החלטות append-only: 29 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.1.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר ואינטגרציה עם ה-OS — מיושם בפועל ב-`COWORK/`.
 - `PROJECTS_SETUP.md` v1.0.0 — Claude Projects: 3 פרויקטים (השקה 🎯 · גיוס ₪150K · Claude OS) — תוצר אחד לכל פרויקט, הוראות drop-in, רשימות העלאה ובדיקות קבלה.
 - `COMMAND_API.md` v1.1.0 — 89 slash commands, composition operators, prompting-frameworks library, drop-in system prompt loaded.
@@ -18,7 +18,7 @@
 - `AI_SKILLS_ACQUISITION.md` v1.0.0 — תוכנית רכישת מיומנויות hands-on (8 שבועות, Build-to-Learn): פרויקט אמיתי ב-ULease לכל מיומנות, שערי-שליטה.
 - `AI_TYPES.md` v1.1.0 — טקסונומיית סוגי AI (Traditional·Generative·Agentic, 3×9 יכולות) + מיפוי מלא ל-ULease ולמפת המיומנויות + ההסבר הפשוט (צ'אטבוט מול סוכן).
 - `AI_CLAUDE_TOOL_SELECTOR.md` v1.0.0 — "איזה Claude לבחור?": עץ החלטה ל-12 כלי Claude (Chat · Code · Cowork · Skills · Routines…), מודלים מומלצים, ומיפוי למשימות ה-OS ו-ULease.
-- `AI_CLAUDE_STACK_2026.md` v1.1.0 — Claude Stack 2026: 4 עמודי ה-cheat sheet (Cowork · Projects · Skills · Code), כלל הזהב, מיפוי ה-build התפעולי המלא בריפו + Agent Teams כמסלול prototype ל-Ultra·Master·Max.
+- `AI_CLAUDE_STACK_2026.md` v1.2.0 — Claude Stack 2026: 4 עמודי ה-cheat sheet (Cowork · Projects · Skills · Code), כלל הזהב, מיפוי ה-build התפעולי בריפו, סולם 7 הרמות של Claude Code (אתה ברמה 6/7) + Agent Teams כמסלול prototype ל-Ultra·Master·Max.
 - `AI_CLAUDE_GLOSSARY.md` v1.0.0 — מילון Claude: 30 מונחים בחמש קבוצות + מיפוי "איפה אצלך" (21/30 כבר מיושמים ב-OS) — האחות השלישית של Selector ו-Stack.
 - `AI_RAG_DESIGN.md` v1.0.0 — תכנון RAG: 15 הטעויות ששוברות מערכות RAG ב-Retrieval + פתרונות, ב-4 שכבות, ממופות לרכיבי ULease (Deal Score, Q&A Bot) עם צ'קליסט design review ל-Tech Lead — משלים את שכבת ה-RAG באיפיון (§7.1).
 - `AI_PROJECT_STRUCTURE.md` v1.0.0 — מבנה פרויקט AI: תקן 4 התיקיות (prompts · data · agents · evals) + מיפוי מלא לרכיבי האיפיון — השלד שריפו הפלטפורמה של ULease יקום עליו ביום 1 של ה-Tech Lead.

@@ -1,7 +1,7 @@
 # DECISION_LOG.md — יומן החלטות
 
 **Module:** `DECISION_LOG.md`
-**Version:** 1.15.0
+**Version:** 1.16.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — יומן append-only (Memory layer).
 **Integrates with:** `OPERATING_SYSTEM.md` §7, `MEMORY.md`, `CASES/ULEASE*.md`
@@ -42,6 +42,7 @@
 | D-026 | 2026-06-02 | רישום מודול **AI_CLAUDE_ENGINEER_ROADMAP** (Knowledge, שורה 21 ב-§3) — רודמאפ 15 השלבים ל-Claude AI Engineer ממופה מול ה-OS: 11/15 בנויים · הפער (12–14) = Tech Lead · שלב 15 = השקת ULease | סוגר את משפחת הלמידה (Skill Map → Progression → Resources → Acquisition → Roadmap); משמש כתעודת-שליטה רטרואקטיבית, פילטר גיוס (קורס+תעודה כיתרון למועמדים) וחומר onboarding ל-Tech Lead | ✅ פעיל |
 | D-027 | 2026-06-02 | **העשרת AI_TYPES ל-v1.1.0** (לא מודול חדש): סעיף "ההסבר הפשוט — צ'אטבוט מול סוכן" — *צ'אטבוט עונה על שאלה · סוכן AI מקדם משימה* + הגדרה לא-טכנית לפגישות | הכרעת ספרנות: תוכן מבוא דק נטמע במודול הטקסונומיה הקיים במקום לפתוח מודול 24 — שומר על OS דחוס; ההבחנה היא מסר מוצר ("ULease היא סוכן שסוגר עסקה, לא צ'אט שעונה") לשימוש מול לקוחות, ספקים ומשקיעים | ✅ פעיל |
 | D-028 | 2026-06-02 | **העשרת AI_CLAUDE_STACK_2026 ל-v1.1.0**: בלוק **Agent Teams** (ניסיוני, opt-in) בעמוד Claude Code — Team lead · Teammates · Shared tasks — וזיהויו כ**מסלול prototype ל-Ultra·Master·Max**: Team lead=Ultra · Teammates=Masters · Shared tasks=Event/AgentRun | לפי תקדים D-027 (תוכן דק → העשרה); הערך האמיתי: ה-Tech Lead יכול להוכיח את ארכיטקטורת הסוכנים של ULease עם יכולת קיימת של Claude Code לפני בניית תשתית ייעודית — מקצר את Phase 0 ומוריד סיכון | ✅ פעיל |
+| D-029 | 2026-06-02 | **העשרת AI_CLAUDE_STACK_2026 ל-v1.2.0**: **סולם 7 הרמות של Claude Code** (Prompt → Context → Tools → MCP → Skills → Subagents → Agent Teams) עם מיפוי סטטוס לכל רמה — הציון: **רמה 6/7** (חסרים רק MCP ייעודי ו-Agent Teams) | משלים את D-028 לאותו מקור (learn.nextwork.org); הסולם הוא מדד בשלות אובייקטיבי — "רוב האנשים עוצרים ב-3" — והוכחה שה-OS שתי רמות מעבר; רמה 7 = משימת ה-Tech Lead הראשונה | ✅ פעיל |
 
 ---
 
@@ -74,7 +75,8 @@
 | 1.13.0 | הוספת D-026 — רישום מודול `AI_CLAUDE_ENGINEER_ROADMAP.md` (רודמאפ 15 השלבים, Knowledge) | 2026-06-02 |
 | 1.14.0 | הוספת D-027 — העשרת `AI_TYPES.md` ל-v1.1.0: ההסבר הפשוט (צ'אטבוט מול סוכן) | 2026-06-02 |
 | 1.15.0 | הוספת D-028 — העשרת `AI_CLAUDE_STACK_2026.md` ל-v1.1.0: Agent Teams כמסלול prototype ל-Ultra·Master·Max | 2026-06-02 |
+| 1.16.0 | הוספת D-029 — העשרת `AI_CLAUDE_STACK_2026.md` ל-v1.2.0: סולם 7 הרמות של Claude Code (רמה 6/7) | 2026-06-02 |
 
 **Confidentiality.** מסמך פנימי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of DECISION_LOG.md v1.15.0 —*
+— *End of DECISION_LOG.md v1.16.0 —*

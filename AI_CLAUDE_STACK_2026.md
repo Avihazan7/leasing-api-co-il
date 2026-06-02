@@ -1,10 +1,10 @@
 # Claude Stack 2026 — How to use Claude in 2026
 
 **Module:** `AI_CLAUDE_STACK_2026.md`
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Knowledge layer (§3 שורה 16) + מפרט ה-build התפעולי של 4 העמודים.
-**Source:** מבוסס על ה-cheat sheet *"How to use Claude in 2026"* + *"Agent Teams"* (learn.nextwork.org, Lvl 7).
+**Source:** מבוסס על ה-cheat sheet *"How to use Claude in 2026"* + סדרת *"The 7 Levels of Claude Code"* (learn.nextwork.org).
 **Integrates with:** `AI_CLAUDE_TOOL_SELECTOR.md`, `AI_CLAUDE_GLOSSARY.md` (מודול אחות — המילון), `COWORK_SETUP.md`, `PROJECTS_SETUP.md`, `COMMAND_API.md`, `OPERATING_SYSTEM.md` §3.1, `COWORK/README.md`, `.claude/skills/`, `CASES/ULEASE.md`
 
 ---
@@ -135,7 +135,21 @@
 | `/clear` | בין משימות | מצב נקי, חוסך ~40% tokens |
 | sub-agent | משימות כבדות | סוכן טרי עושה את העבודה ומחזיר סיכום נקי — ההקשר נשאר רזה |
 
-**הרמה הבאה — Agent Teams (ניסיוני, opt-in):** צי של Claude sessions שמתקשרים זה עם זה ורצים על העבודה במקביל:
+**סולם 7 הרמות של Claude Code** — *"רוב האנשים עוצרים ברמה 3. הטובים מגיעים עד 7"*:
+
+| רמה | יכולת | ✅ איפה אצלך |
+|:----:|--------|---------------|
+| 1 | **Prompt** — פרומפטים אפקטיביים | `COMMAND_API.md` §7 — מסגרות פרומפט |
+| 2 | **Context** — קבצי הקשר קבועים | `CLAUDE.md` — נקודת הכניסה של כל ה-OS |
+| 3 | **Tools** — הכלים המובנים (קבצים, טרמינל, חיפוש) | כל הריפו נבנה איתם |
+| 4 | **MCP** — חיבור לשרתים חיצוניים | 🟡 GitHub MCP פעיל ב-sessions; שרתים ייעודיים (יומן, n8n) — בהמשך |
+| 5 | **Skills** — workflows קבועים ב-SKILL.md | `.claude/skills/` — 4 skills |
+| 6 | **Subagents** — האצלה לסוכני-משנה | `os-auditor` — רץ על כל שינוי OS |
+| 7 | **Agent Teams** — צי sessions במקביל (ניסיוני) | 🔜 נפתח עם ה-Tech Lead — ראו בלוק למטה |
+
+> **הציון שלך: רמה 6 מתוך 7.** רוב המשתמשים עוצרים ב-3 — ה-OS הזה כבר שתי רמות מעבר, ורמה 7 היא מסלול ה-prototype של ULease.
+
+**רמה 7 בפירוט — Agent Teams (ניסיוני, opt-in):** צי של Claude sessions שמתקשרים זה עם זה ורצים על העבודה במקביל:
 
 | רכיב | תפקיד |
 |------|--------|
@@ -203,7 +217,8 @@
 |------|--------|--------|
 | 1.0.0 | זיקוק ה-cheat sheet "How to use Claude in 2026" + תיעוד ה-build התפעולי המלא (COWORK/ · PROJECTS_SETUP.md · `.claude/skills/`) | 2026-06-02 |
 | 1.1.0 | נוסף ל-§5 בלוק **Agent Teams** (ניסיוני): Team lead · Teammates · Shared tasks + מסלול prototype ל-Ultra·Master·Max (D-028) | 2026-06-02 |
+| 1.2.0 | נוסף ל-§5 **סולם 7 הרמות של Claude Code** (Prompt→Context→Tools→MCP→Skills→Subagents→Agent Teams) + הציון: רמה 6/7 (D-029) | 2026-06-02 |
 
-**Attribution.** מבוסס על ה-cheat sheet *"How to use Claude in 2026"*; בלוק Agent Teams (§5): *learn.nextwork.org* (Lvl 7). העיבוד, התרגום, ובעיקר ה-build התפעולי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** מבוסס על ה-cheat sheet *"How to use Claude in 2026"*; סולם 7 הרמות ובלוק Agent Teams (§5): סדרת *The 7 Levels of Claude Code* (learn.nextwork.org). העיבוד, התרגום, ובעיקר ה-build התפעולי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of AI_CLAUDE_STACK_2026.md v1.1.0 —*
+— *End of AI_CLAUDE_STACK_2026.md v1.2.0 —*
