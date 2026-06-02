@@ -4,7 +4,7 @@
 ## Active Modules
 - [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.8.0 — Kernel: core doctrine, layered architecture, module registry (§3 + §3.1 working sets), the activation Boot Block, and the conflict-resolution hierarchy.
 - [`MEMORY.md`](./MEMORY.md) v1.1.0 — Persistent memory layer: schema, fully-populated identity card, active focus/projects, preferences, and the read/write protocol.
-- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.31.0 — Append-only decision log: 44 founding OS + ULease decisions with rationale and status.
+- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.32.0 — Append-only decision log: 45 founding OS + ULease decisions with rationale and status.
 - [`COWORK_SETUP.md`](./COWORK_SETUP.md) v1.2.0 — Claude Cowork onboarding: 7-step setup, the Global Instructions golden tip, context-file map, OS integration, and the Chief-of-Staff setup (5 scheduled roles) — now implemented as a real workspace in [`COWORK/`](./COWORK/).
 - [`PROJECTS_SETUP.md`](./PROJECTS_SETUP.md) v1.0.0 — Claude Projects setup: 3 projects (ULease Launch, the ₪150K raise, Claude OS), one deliverable each, with drop-in instruction blocks, upload lists, and acceptance tests.
 - [`COMMAND_API.md`](./COMMAND_API.md) v1.2.0 — CLAUDE Command API: 89 slash commands, composition operators, a prompting-frameworks library (incl. Opus 4.8 deltas §7.7), and drop-in system prompt for the Claude Operating System.
@@ -38,7 +38,7 @@
 - [`CASES/ULEASE_PRICING_SLA.md`](./CASES/ULEASE_PRICING_SLA.md) v1.1.0 — Official price book + supplier SLA: tiered fees, Ultra-vs-Max feature comparison, and 11 service commitments (ingestion, uptime, settlement) — closes audit finding W11.
 - [`CASES/ULEASE_LEGAL_BRIEF.md`](./CASES/ULEASE_LEGAL_BRIEF.md) v1.0.0 — Legal brief for counsel: the 2 Go-Live questions (financing-routing licensing, supplier/SLA agreements) + 6 supporting topics, requested deliverables, and timeline — to send ahead of the meeting.
 - [`CASES/ULEASE_FINANCE_INSURANCE.md`](./CASES/ULEASE_FINANCE_INSURANCE.md) v1.1.0 — Finance/insurance partners + end-to-end digital underwriting: KYC, multi-lender routing, Big Five matching, revenue model, and Israeli licensing flags.
-- [`CASES/ULEASE_OUTREACH_SCRIPTS.md`](./CASES/ULEASE_OUTREACH_SCRIPTS.md) v1.2.0 — Ready outreach scripts (call/email/WhatsApp) for all four supply segments, plus follow-ups.
+- [`CASES/ULEASE_OUTREACH_SCRIPTS.md`](./CASES/ULEASE_OUTREACH_SCRIPTS.md) v1.3.0 — Ready outreach scripts (call/email/WhatsApp) for all four supply segments, plus follow-ups and the white-glove onboarding promise (D-045: "I'll come with a laptop and enter everything myself").
 - [`CASES/ULEASE_OUTBOUND_ENGINE.md`](./CASES/ULEASE_OUTBOUND_ENGINE.md) v1.2.0 — Supply-acquisition outbound engine blueprint (n8n + Claude): 8 layers, Haiku/Sonnet roles, scripts integration, KPIs, and the graduation gate (§6.1): three HITL stages from assist to monitored autonomy.
 - [`CASES/ULEASE_DEMAND_ENGINE.md`](./CASES/ULEASE_DEMAND_ENGINE.md) v1.0.0 — Demand-side acquisition engine (n8n, 18 nodes): lead capture → Haiku scoring → Sonnet nurture → deal → the organic loop (anonymized deal content → SEO/GEO → ~ILS 0 CPL leads) — adapted to Israeli compliance (inbound only) with D-040 graduation gates; the execution engine of the demand playbook.
 - [`CASES/ULEASE_TECH_ONBOARDING.md`](./CASES/ULEASE_TECH_ONBOARDING.md) v1.2.0 — Tech Lead onboarding: day 0/1 access + OS reading list, a 30·60·90 plan, and founder-level SDLC transparency (Jira/GitHub from day 0, weekly process report, cycle time).
