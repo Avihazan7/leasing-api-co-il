@@ -4,7 +4,7 @@
 ## Active Modules
 - [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.5.0 — Kernel: core doctrine, layered architecture, module registry (§3 + §3.1 working sets), the activation Boot Block, and the conflict-resolution hierarchy.
 - [`MEMORY.md`](./MEMORY.md) v1.0.0 — Persistent memory layer: schema, identity card, active focus/projects, preferences, and the read/write protocol.
-- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.13.0 — Append-only decision log: 26 founding OS + ULease decisions with rationale and status.
+- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.14.0 — Append-only decision log: 27 founding OS + ULease decisions with rationale and status.
 - [`COWORK_SETUP.md`](./COWORK_SETUP.md) v1.1.0 — Claude Cowork onboarding: 7-step setup, the Global Instructions golden tip, context-file map, and OS integration — now implemented as a real workspace in [`COWORK/`](./COWORK/).
 - [`PROJECTS_SETUP.md`](./PROJECTS_SETUP.md) v1.0.0 — Claude Projects setup: 3 projects (ULease Launch, the ₪150K raise, Claude OS), one deliverable each, with drop-in instruction blocks, upload lists, and acceptance tests.
 - [`COMMAND_API.md`](./COMMAND_API.md) v1.1.0 — CLAUDE Command API: 89 slash commands, composition operators, a prompting-frameworks library, and drop-in system prompt for the Claude Operating System.
@@ -15,7 +15,7 @@
 - [`AI_LEARNING_RESOURCES.md`](./AI_LEARNING_RESOURCES.md) v1.0.0 — AI learning curriculum mapped to the Skill Map: resources per stage, anchored on IBM's Agentic AI & RAG (Coursera), with a personal learn-vs-delegate path.
 - [`AI_7_SKILLS.md`](./AI_7_SKILLS.md) v1.0.0 — The 7 skills to master AI in 2026, mapped to the modules already live in this OS.
 - [`AI_SKILLS_ACQUISITION.md`](./AI_SKILLS_ACQUISITION.md) v1.0.0 — Hands-on, build-to-learn skills acquisition plan (8 weeks): a real ULease project per skill (n8n, Claude agents, RAG, data) with mastery gates.
-- [`AI_TYPES.md`](./AI_TYPES.md) v1.0.0 — AI types taxonomy (Traditional · Generative · Agentic, 3×9 capabilities), each mapped to where it lives in ULease.
+- [`AI_TYPES.md`](./AI_TYPES.md) v1.1.0 — AI types taxonomy (Traditional · Generative · Agentic, 3×9 capabilities), each mapped to where it lives in ULease, plus the simple chatbot-vs-agent explainer.
 - [`AI_CLAUDE_TOOL_SELECTOR.md`](./AI_CLAUDE_TOOL_SELECTOR.md) v1.0.0 — "Which Claude should you use?": a decision tree over 12 Claude tools (Chat · Code · Cowork · Skills · Routines…), recommended models, and the mapping to OS/ULease workflows.
 - [`AI_CLAUDE_STACK_2026.md`](./AI_CLAUDE_STACK_2026.md) v1.0.0 — The 2026 Claude stack (Cowork · Projects · Skills · Code): each pillar distilled, the golden rule, and the full operational build mapped in this repo.
 - [`AI_CLAUDE_GLOSSARY.md`](./AI_CLAUDE_GLOSSARY.md) v1.0.0 — Claude glossary: 30 must-know terms in five groups, each mapped to where it already lives in this OS (21/30 implemented) — the third sister of Selector and Stack.

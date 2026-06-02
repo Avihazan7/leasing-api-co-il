@@ -1,7 +1,7 @@
 # DECISION_LOG.md — יומן החלטות
 
 **Module:** `DECISION_LOG.md`
-**Version:** 1.13.0
+**Version:** 1.14.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — יומן append-only (Memory layer).
 **Integrates with:** `OPERATING_SYSTEM.md` §7, `MEMORY.md`, `CASES/ULEASE*.md`
@@ -40,6 +40,7 @@
 | D-024 | 2026-06-02 | רישום מודול **AI_RAG_DESIGN** (Knowledge, שורה 18 ב-§3) — 15 טעויות תכנון ששוברות מערכות RAG ב-Retrieval + פתרונות, מקובצות ל-4 שכבות וממופות לרכיבי ULease | משלים את D-022: ה-SPEC §7.1 מגדיר *מה* בונים (pgvector, קורפוס, top-k) — המודול מגדיר *איך לא לשבור את זה*; צ'קליסט design review מול ה-Tech Lead (שבוע 7 ב-`AI_SKILLS_ACQUISITION.md`) + עיגון מדדי ה-eval של D-023 (Precision@k, grounding) | ✅ פעיל |
 | D-025 | 2026-06-02 | **גל ידע #2 — ארבעה מודולים חדשים**: (א) `COMMAND_API_TASKS.md` (Interface, שורה 7) — 98 פקודות משימה ב-9 קטגוריות (ב) `AI_CLAUDE_GLOSSARY.md` (Knowledge, שורה 17) — 30 מונחי Claude, 21/30 כבר מיושמים (ג) `AI_PROJECT_STRUCTURE.md` (Knowledge, שורה 19) — תקן 4 התיקיות (prompts·data·agents·evals) לריפו הפלטפורמה (ד) `AI_ROLES_2026.md` (Knowledge, שורה 20) — 21 תפקידי AI: מייסד 3 · Tech Lead 5-בכובע-אחד · Guardian 2 | ארבע אינפוגרפיקות → ידע מופעל: פקודות מוכנות לעבודה היומית (outreach, משקיעים, גיוס), שפה משותפת לכל כלי Claude, שלד מחייב לריפו שה-Tech Lead יקים ביום 1, והפיכת הגדרת התפקיד ב-`ULEASE_HIRING.md` להצעת ערך ("5 התפקידים החמים של 2026 במשרה אחת") | ✅ פעיל |
 | D-026 | 2026-06-02 | רישום מודול **AI_CLAUDE_ENGINEER_ROADMAP** (Knowledge, שורה 21 ב-§3) — רודמאפ 15 השלבים ל-Claude AI Engineer ממופה מול ה-OS: 11/15 בנויים · הפער (12–14) = Tech Lead · שלב 15 = השקת ULease | סוגר את משפחת הלמידה (Skill Map → Progression → Resources → Acquisition → Roadmap); משמש כתעודת-שליטה רטרואקטיבית, פילטר גיוס (קורס+תעודה כיתרון למועמדים) וחומר onboarding ל-Tech Lead | ✅ פעיל |
+| D-027 | 2026-06-02 | **העשרת AI_TYPES ל-v1.1.0** (לא מודול חדש): סעיף "ההסבר הפשוט — צ'אטבוט מול סוכן" — *צ'אטבוט עונה על שאלה · סוכן AI מקדם משימה* + הגדרה לא-טכנית לפגישות | הכרעת ספרנות: תוכן מבוא דק נטמע במודול הטקסונומיה הקיים במקום לפתוח מודול 24 — שומר על OS דחוס; ההבחנה היא מסר מוצר ("ULease היא סוכן שסוגר עסקה, לא צ'אט שעונה") לשימוש מול לקוחות, ספקים ומשקיעים | ✅ פעיל |
 
 ---
 
@@ -70,7 +71,8 @@
 | 1.11.0 | הוספת D-024 — רישום מודול `AI_RAG_DESIGN.md` (תכנון RAG, Knowledge) — משלים את D-022/D-023 | 2026-06-02 |
 | 1.12.0 | הוספת D-025 — גל ידע #2: `COMMAND_API_TASKS` · `AI_CLAUDE_GLOSSARY` · `AI_PROJECT_STRUCTURE` · `AI_ROLES_2026` | 2026-06-02 |
 | 1.13.0 | הוספת D-026 — רישום מודול `AI_CLAUDE_ENGINEER_ROADMAP.md` (רודמאפ 15 השלבים, Knowledge) | 2026-06-02 |
+| 1.14.0 | הוספת D-027 — העשרת `AI_TYPES.md` ל-v1.1.0: ההסבר הפשוט (צ'אטבוט מול סוכן) | 2026-06-02 |
 
 **Confidentiality.** מסמך פנימי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of DECISION_LOG.md v1.13.0 —*
+— *End of DECISION_LOG.md v1.14.0 —*
