@@ -1,10 +1,10 @@
 # סוגי AI — Traditional · Generative · Agentic
 
 **Module:** `AI_TYPES.md`
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — מודול ידע/טקסונומיה (Learning layer).
-**Source:** מבוסס על האינפוגרפיקה *"How to Explain AI Types"* (AIForLeaders.com) + *"What are AI Agents?"* (Dianas AI Agents Tips).
+**Source:** מבוסס על האינפוגרפיקות *"How to Explain AI Types"* + *"AI Terminology"* (AIForLeaders.com) + *"What are AI Agents?"* (Dianas AI Agents Tips).
 **Integrates with:** `AI_SKILL_MAP.md`, `CASES/ULEASE_SPEC.md`, `CASES/ULEASE_OUTBOUND_ENGINE.md`, `CASES/ULEASE_METHODOLOGY.md`
 
 > שלושה סוגי AI, תשע יכולות — וכל אחת מהן ממופה למקום שבו היא חיה (או תחיה) ב-**ULease 🎯**. השורה התחתונה: ULease היא מוצר **Agentic AI** שמשתמש בכל תשע היכולות.
@@ -65,6 +65,28 @@
 
 ---
 
+## 3.5 המפה האנכית — מ"AI" ועד Claude (דיוק בשפה)
+
+הטקסונומיה ב-§1 היא **אופקית** (סוגים לפי יכולת). זו המפה ה**אנכית** — כל שכבה מוכלת בקודמתה:
+
+```
+AI (התחום)  ⊃  Machine Learning (שיטה: לומד מדאטה)  ⊃  Neural Networks  ⊃  Deep Learning
+            ⊃  Transformers (הארכיטקטורה, 2017)  ⊃  Generative AI  ⊃  LLMs (מודלי שפה)
+            ⊃  משפחות מודלים (Claude · GPT · Gemini)  ⊃  המוצרים (Claude.ai · ChatGPT)
+```
+
+**למה הדיוק הזה שווה כסף:**
+
+| כשמישהו אומר… | מה לשאול | הרלוונטיות ל-ULease 🎯 |
+|----------------|-----------|--------------------------|
+| "יש לנו AI" | איזו עבודה בדיוק ה-AI עושה? | אנחנו לא אומרים "AI" — אומרים: Deal Score (ML חיזויי) · סוכני עסקה (LLM/Agentic) |
+| "המערכת לומדת" | ממה? יש דאטה נקייה? | ה-ML שלנו לומד מהיסטוריית עסקאות — שנבנית מההשקה (D-022) |
+| "מבוסס GPT" | משפחת מודלים או מוצר? | ULease בנויה על **Claude** (משפחת מודלים) דרך ה-API — לא על "צ'אטבוט" |
+
+> **השורה למשקיע:** *"AI זה התחום. ML זו שיטה. LLM זו מחלקת מודלים. Claude זה מוצר. ULease היא מערכת קבלת-החלטות שמשתמשת בכל השכבות האלה — כל אחת לעבודה שהיא הכי טובה בה."*
+
+---
+
 ## 4. איך להסביר את זה למשקיע (במשפט)
 
 > *"רוב הפלטפורמות משתמשות ב-AI אחד. ULease משתמשת בכל שלושת הסוגים: Traditional לחיזוי וניקוד, Generative לתוכן ולידע, ו-Agentic — סוכנים שסוגרים עסקה מקצה לקצה. זו לא תוספת AI למוצר; זה מוצר שבנוי מ-AI."*
@@ -77,7 +99,8 @@
 |------|--------|--------|
 | 1.0.0 | טקסונומיית סוגי AI (3×9) + מיפוי מלא ל-ULease + חיבור למפה | 2026-06-01 |
 | 1.1.0 | נוסף §3 "ההסבר הפשוט — צ'אטבוט מול סוכן" (D-028); סעיף המשקיע הוסט ל-§4 | 2026-06-02 |
+| 1.2.0 | נוסף §3.5 "המפה האנכית" (D-041): ההיררכיה AI→ML→DL→Transformers→LLM→מוצר + טבלת דיוק-בשפה לפגישות | 2026-06-02 |
 
-**Attribution.** מבנה הטקסונומיה: *How to Explain AI Types* (AIForLeaders.com). ההבחנה צ'אטבוט/סוכן (§3): *What are AI Agents?* (Dianas AI Agents Tips). המיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** מבנה הטקסונומיה: *How to Explain AI Types* + *AI Terminology* (AIForLeaders.com). ההבחנה צ'אטבוט/סוכן (§3): *What are AI Agents?* (Dianas AI Agents Tips). המיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of AI_TYPES.md v1.1.0 —*
+— *End of AI_TYPES.md v1.2.0 —*

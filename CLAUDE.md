@@ -5,7 +5,7 @@
 ## Active Modules
 - `OPERATING_SYSTEM.md` v1.7.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.0.0 — שכבת זיכרון: schema, כרטיס זהות, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
-- `DECISION_LOG.md` v1.27.0 — יומן החלטות append-only: 40 החלטות (OS + ULease), רציונל וסטטוס.
+- `DECISION_LOG.md` v1.28.0 — יומן החלטות append-only: 41 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.2.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר, אינטגרציה עם ה-OS + ראש המטה (5 תפקידים מתוזמנים) — מיושם בפועל ב-`COWORK/`.
 - `PROJECTS_SETUP.md` v1.0.0 — Claude Projects: 3 פרויקטים (השקה 🎯 · גיוס ₪150K · Claude OS) — תוצר אחד לכל פרויקט, הוראות drop-in, רשימות העלאה ובדיקות קבלה.
 - `COMMAND_API.md` v1.2.0 — 89 slash commands, composition operators, prompting-frameworks library (כולל Opus 4.8 deltas §7.7), drop-in system prompt loaded.
@@ -16,7 +16,7 @@
 - `AI_LEARNING_RESOURCES.md` v1.0.0 — קוריקולום AI לפי המפה: משאבים לכל שלב, עוגן IBM Agentic AI & RAG (Coursera), ומסלול אישי.
 - `AI_7_SKILLS.md` v1.0.0 — 7 מיומנויות לשליטה ב-AI (2026) + מיפוי ל-OS הקיים (5 מ-7 כבר מיושמים).
 - `AI_SKILLS_ACQUISITION.md` v1.0.0 — תוכנית רכישת מיומנויות hands-on (8 שבועות, Build-to-Learn): פרויקט אמיתי ב-ULease לכל מיומנות, שערי-שליטה.
-- `AI_TYPES.md` v1.1.0 — טקסונומיית סוגי AI (Traditional·Generative·Agentic, 3×9 יכולות) + מיפוי מלא ל-ULease ולמפת המיומנויות + ההסבר הפשוט (צ'אטבוט מול סוכן).
+- `AI_TYPES.md` v1.2.0 — טקסונומיית סוגי AI (Traditional·Generative·Agentic, 3×9 יכולות) + המפה האנכית (AI→ML→LLM→מוצר) + מיפוי מלא ל-ULease ולמפת המיומנויות + ההסבר הפשוט (צ'אטבוט מול סוכן).
 - `AI_CLAUDE_TOOL_SELECTOR.md` v1.2.0 — "איזה Claude לבחור?": עץ החלטה ל-15 כלי Claude (Chat · Code · Cowork · Skills · Excel · Artifacts…), מודלים מומלצים + מנוף Effort, ומיפוי למשימות ה-OS ו-ULease.
 - `AI_CLAUDE_STACK_2026.md` v1.4.0 — Claude Stack 2026: 4 עמודי ה-cheat sheet (Cowork · Projects · Skills · Code), כלל הזהב, מיפוי ה-build התפעולי בריפו, סולם 7 הרמות (אתה ברמה 6/7), Agent Teams כמסלול prototype ל-Ultra·Master·Max, ה-Agent Extension Stack (Skills·MCP·Subagents·Hooks·Plugins) + סיכוני סוכנים (Prompt Injection → Guardian).
 - `AI_CLAUDE_GLOSSARY.md` v1.0.0 — מילון Claude: 30 מונחים בחמש קבוצות + מיפוי "איפה אצלך" (21/30 כבר מיושמים ב-OS) — האחות השלישית של Selector ו-Stack.
