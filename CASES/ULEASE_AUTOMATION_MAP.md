@@ -1,10 +1,10 @@
 # ULease 🎯 — מפת אוטומציות AI לפי פונקציה עסקית
 
 **Module:** `CASES/ULEASE_AUTOMATION_MAP.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Backlog אוטומציות מתועדף (Business layer, תחת CASES).
-**Source:** מבוסס על מסגרת *"546 AI Automation Ideas"* (AI Matt · Next Step Agents) — מסונן ומותאם ל-ULease.
+**Source:** מבוסס על מסגרת *"546 AI Automation Ideas"* (AI Matt · Next Step Agents) + *"31 Claude Skills For Small Businesses"* (Anthropic plugin pack) — מסונן ומותאם ל-ULease.
 **Integrates with:** `CASES/ULEASE_SPEC.md`, `CASES/ULEASE_OUTBOUND_ENGINE.md`, `AI_TYPES.md`, `CASES/ULEASE_DASHBOARD.html`
 
 > **הפילוסופיה:** רוב האנשים עוצרים בפרומפטים. מעטים בונים את **המערכת שמריצה את העסק**. Build systems · Own value · **Owned, not rented** — זה בדיוק מה ש-ULease בונה.
@@ -113,6 +113,30 @@
 
 ---
 
+## 11. 🔌 קיצור הדרך: 31 ה-Skills המוכנים של Anthropic
+
+Anthropic שחררה חבילת **31 Claude Skills לעסקים קטנים** שמתחברת ל-12 כלים (Gmail · QuickBooks · HubSpot · Stripe · Slack · Calendar · Canva · PayPal · Drive · Microsoft 365 · DocuSign · Square). חלק מהאוטומציות שתוכננו כ-V1/V2 במפה **ניתנות להתקנה היום** — בלי לבנות:
+
+| אוטומציה מהמפה | סטטוס קודם | ה-Skill המוכן | מתחבר ל־ |
+|------------------|:-----------:|----------------|-----------|
+| Executive Briefing Bot (רוחבי) | V1 | `/business-pulse` · `/monday-brief` · `/friday-brief` | Gmail · Calendar · QuickBooks |
+| Cash Flow Monitor (כספים) | ✅ דשבורד | `/cash-flow-forecast` — תחזית 30/60/90 יום מהסליקה | Stripe · PayPal |
+| Payment Reconciliation (כספים) | V1 | `/month-end-prep` · `/close-month` | QuickBooks · Stripe |
+| Invoice Extraction (כספים) | V1 | `/invoice-chase` — מעקב חייבים ותזכורות | QuickBooks |
+| P&L Commentary (כספים) | V2 | `/close-month` — סוגר חודש וכותב נרטיב רווח/הפסד | QuickBooks |
+| Margin Analyser (תמחור) | 🔜 MVP | `/margin-analyser` · `/price-check` | Stripe |
+| CRM Cleanup + Lead Triage (מכירות) | ✅ n8n | `/lead-triage` · `/crm-cleanup` · `/sales-brief` | HubSpot |
+| Complaint Trend Analyzer (שירות) | V2 | `/customer-pulse` · `/handle-complaint` · `/ticket-deflector` | Gmail · Slack |
+| Job Description Generator (HR) | ✅ ערכה | `/job-post-builder` — מודעה + שאלות סינון | DocuSign |
+| Partner Contract / SLA Monitor (ספקים) | V2 | `/contract-review` — דגלים אדומים בחוזי ספקים | Drive · DocuSign |
+| קמפיינים (שיווק) | 🔜 | `/content-strategy` · `/run-campaign` | Canva · HubSpot |
+
+**המשמעות לרודמאפ:** לפחות **5 אוטומציות V1/V2 הופכות ל"התקן עכשיו"** — בעיקר בכספים ובחוזים. ההמלצה: שירי (Ops) מתקינה את חבילת ה-Briefings + Money בשבוע ההשקה; ה-Skills מגשרים עד שהפלטפורמה מחליפה אותם.
+
+> ⚠️ **הסתייגות:** ה-Skills רצים על הכלים העסקיים (QuickBooks, Stripe…) — הם פותרים את **התפעול של ULease כעסק**, לא את המוצר. את המוצר (Deal Score, מכרז, חדר-עסקה) בונה ה-Tech Lead.
+
+---
+
 ## סיכום: איפה אנחנו על המפה
 
 | | כמות |
@@ -134,7 +158,8 @@
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | מפת אוטומציות מסוננת ל-ULease — 10 פונקציות, 40 אוטומציות, סטטוס ועדיפות | 2026-06-01 |
+| 1.1.0 | §11 חדש (D-035): 31 ה-Skills של Anthropic ממופים למפה — לפחות 5 אוטומציות V1/V2 הופכות ל"התקן עכשיו" (כספים, חוזים, briefings) | 2026-06-02 |
 
-**Attribution.** המסגרת: *546 AI Automation Ideas* (AI Matt · Next Step Agents). הסינון, המיפוי והתעדוף ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** המסגרות: *546 AI Automation Ideas* (AI Matt · Next Step Agents) · *31 Claude Skills For Small Businesses* (Anthropic). הסינון, המיפוי והתעדוף ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_AUTOMATION_MAP.md v1.0.0 —*
+— *End of CASES/ULEASE_AUTOMATION_MAP.md v1.1.0 —*

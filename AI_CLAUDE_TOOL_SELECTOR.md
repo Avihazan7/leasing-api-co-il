@@ -1,13 +1,13 @@
 # איזה Claude לבחור? — Which Claude Should You Use?
 
 **Module:** `AI_CLAUDE_TOOL_SELECTOR.md`
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — מודול ידע/רפרנס (Knowledge layer).
-**Source:** מבוסס על האינפוגרפיקה *"Which Claude Should You Use?"*.
-**Integrates with:** `AI_CLAUDE_STACK_2026.md` (מודול אחות — ה-build התפעולי), `COWORK_SETUP.md`, `COMMAND_API.md`, `AI_SKILL_MAP.md`, `CASES/ULEASE_SPEC.md`, `CASES/ULEASE_OUTBOUND_ENGINE.md`
+**Source:** מבוסס על האינפוגרפיקות *"Which Claude Should You Use?"* + *"9 Ways to Use Claude"*.
+**Integrates with:** `AI_CLAUDE_STACK_2026.md` (מודול אחות — ה-build התפעולי), `AI_CLAUDE_GLOSSARY.md` (מודול אחות — המילון), `COWORK_SETUP.md`, `COMMAND_API.md`, `AI_SKILL_MAP.md`, `CASES/ULEASE_SPEC.md`, `CASES/ULEASE_OUTBOUND_ENGINE.md`
 
-> דרך פשוטה לבחור את הכלי הנכון לכל משימה — עץ החלטה אחד, 12 כלים, והמיפוי שלהם לעבודה היומיומית שלך ב-OS וב-ULease 🎯.
+> דרך פשוטה לבחור את הכלי הנכון לכל משימה — עץ החלטה אחד, 15 כלים, והמיפוי שלהם לעבודה היומיומית שלך ב-OS וב-ULease 🎯.
 
 ---
 
@@ -17,25 +17,27 @@
 
 | # | קטגוריה | השאלה | אם כן → | מודל מומלץ |
 |---|----------|--------|----------|-------------|
-| 1 | **TASK TYPE** | עובד בתוך אפליקציה ספציפית עכשיו? | בדפדפן → **Claude in Chrome** · בקבצים מקומיים → **Claude Cowork** | Sonnet · Opus למסמכים ארוכים |
+| 1 | **TASK TYPE** | עובד בתוך אפליקציה ספציפית עכשיו? | בדפדפן → **Claude in Chrome** · בקבצים מקומיים → **Claude Cowork** · בגיליון אלקטרוני → **Claude in Excel** · על פני כמה אפליקציות → **Computer Use** | Sonnet · Opus למסמכים ארוכים |
 | 2 | **CODING** | צריך ש-Claude יכתוב או יריץ קוד? | סוכן אחד → **Claude Code** · כמה סוכנים במקביל → **Agent Teams** | Sonnet ליום-יום · Opus לארכיטקטורה / סוכן מוביל |
 | 3 | **AUTOMATION** | חוזר על אותה משימה ורוצה טריגר במילה אחת? | **Claude Skills** (קובץ SKILL.md) | לפי צורכי המשימה |
 | 4 | **SCHEDULING** | משימה שצריכה לרוץ אוטומטית בטיימר? | המחשב יכול להיות כבוי → **Routines** (ענן) · המחשב דולק → **Cowork Tasks** | Sonnet |
 | 5 | **LIVE DATA** | צריך דאטה חי מהכלים האחרים שלך? | **Connectors MCP** (Gmail · Drive · Notion · Slack · GitHub…) | Sonnet |
-| 6 | **DESIGN** | יוצר משהו ויזואלי מאפס? | **Claude Design** (UI · מצגות · עמודי web) | Sonnet |
+| 6 | **DESIGN / OUTPUT** | יוצר משהו ויזואלי או אינטראקטיבי? | מאפס (UI · מצגות · עמודי web) → **Claude Design** · כלי חי בתוך הצ'אט (מחשבון/דשבורד/גרף) → **Artifacts** | Sonnet |
 | 7 | **PROJECTS** | חלק מפרויקט שנמשך על פני כמה sessions? | **Projects** (workspace קבוע עם זיכרון) | Sonnet |
 | 8 | **DEEP THINKING** | הבעיה דורשת חשיבה איטית, זהירה, צעד-אחר-צעד? | **Adaptive Thinking** (Extended reasoning) | **Opus** |
 | — | **ברירת מחדל** | שום דבר מהנ"ל | **Claude Chat** — נקודת ההתחלה לכל דבר מהיר | Sonnet · Haiku לתשובות מהירות |
 
 ---
 
-## 2. כרטיסי הכלים — 12 הכלים בקצרה
+## 2. כרטיסי הכלים — 15 הכלים בקצרה
 
 ### עבודה בתוך אפליקציה
 | כלי | מה הוא עושה | מודל |
 |-----|--------------|------|
 | **Claude in Chrome** | יושב בסרגל הצד של הדפדפן. קורא כל עמוד ומשחזר משימות שהקלטת. | Sonnet |
-| **Claude Cowork** | פותח, עורך ומסמן קבצים מקומיים ו-PDF — בלי copy-paste. | Sonnet · Opus למסמכים ארוכים |
+| **Claude Cowork** | פותח, עורך ומסמן קבצים מקומיים ו-PDF — בלי copy-paste. *Best for: תוצרים אמיתיים (Word/Excel/Slides), לא טקסט בצ'אט.* | Sonnet · Opus למסמכים ארוכים |
+| **Claude in Excel** | Copilot לגיליונות: מייצר נוסחאות, תופס טעויות, בונה pivot — רואה כל תא ויודע מה יושב ב-D14. *Best for: מי שחי בגיליונות.* | Sonnet |
+| **Computer Use** | Claude מקבל את העכבר: פותח אפליקציות, מקליק בתפריטים, ממלא טפסים וגולש בשמך. *Best for: עבודה על פני כמה אפליקציות שאין להן אינטגרציה.* | Sonnet |
 
 ### קוד
 | כלי | מה הוא עושה | מודל |
@@ -53,8 +55,9 @@
 ### דאטה, עיצוב ופרויקטים
 | כלי | מה הוא עושה | מודל |
 |-----|--------------|------|
-| **Connectors MCP** | מחבר את Claude ל-Notion, Gmail, Slack, Google Drive, GitHub ועוד — קריאה ופעולה על דאטה חי. | Sonnet |
+| **Connectors MCP** | מחבר את Claude ל-Notion, Gmail, Slack, Google Drive, GitHub ועוד — קריאה ופעולה על דאטה חי. *Setup בשניות: Settings → Connectors → Browse → Add.* | Sonnet |
 | **Claude Design** | בונה UI prototypes, מצגות ו-layouts מ-brief טקסטואלי פשוט. | Sonnet |
+| **Artifacts** | אפליקציות-בזק שנוצרות תוך כדי שיחה: דשבורדים, מחשבונים, גרפים חיים — רצים בתוך חלון הצ'אט, אפס התקנות. *Best for: פלט שמתקשרים איתו, לא רק קוראים.* | Sonnet |
 | **Projects** | workspace לכל פרויקט: קבצים, הוראות והיסטוריית שיחות נשמרים בין ביקורים. | Sonnet |
 
 ### חשיבה ושיחה
@@ -76,6 +79,8 @@
 | 89 הפקודות (`/command`) | **Claude Skills** | `COMMAND_API.md` הוא ספריית ה-skills שלך |
 | מצגת משקיעים, עמודי נחיתה, UI | **Claude Design** | `CASES/ULEASE_DECK.md` |
 | מייל, יומן, דרייב (IR · גיוס · follow-up) | **Connectors MCP** | Gmail · Calendar · Drive מחוברים ל-OS |
+| עבודה על התחזית והמודל הפיננסי (CSV) | **Claude in Excel** | `CASES/ULEASE_FORECAST.csv` · `ULEASE_SCENARIOS.csv` |
+| דשבורד, מחשבוני ROI, גרפים חיים | **Artifacts** | כך נולדו `ULEASE_DASHBOARD.html` והמצגת — לפני שהפכו לקוד |
 | החלטות אסטרטגיות: תמחור, מו"מ, גיוס | **Adaptive Thinking (Opus)** | תורת המשחקים ו-Big Five — `CASES/ULEASE_METHODOLOGY.md` |
 | שאלה מהירה, ניסוח הודעה, סיכום | **Claude Chat** | בלי overhead — פשוט לשאול |
 
@@ -101,7 +106,8 @@
 |------|--------|--------|
 | 1.0.0 | עץ החלטה לבחירת כלי Claude — 12 כלים + מיפוי למשימות ה-OS ו-ULease | 2026-06-01 |
 | 1.1.0 | מנוף ה-Effort של Opus 4.8 (§4) — low/high/xhigh לצד בחירת המודל (D-024) | 2026-06-02 |
+| 1.2.0 | הרחבה ל-15 כלים (D-031): נוספו **Claude in Excel · Computer Use · Artifacts** לעץ ההחלטה, לכרטיסים ולמיפוי ULease + טיפים "Best for" | 2026-06-02 |
 
-**Attribution.** מבוסס על האינפוגרפיקה *Which Claude Should You Use?*. העיבוד, התרגום והמיפוי ל-ULease הם חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** מבוסס על האינפוגרפיקות *Which Claude Should You Use?* ו-*9 Ways to Use Claude*. העיבוד, התרגום והמיפוי ל-ULease הם חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of AI_CLAUDE_TOOL_SELECTOR.md v1.1.0 —*
+— *End of AI_CLAUDE_TOOL_SELECTOR.md v1.2.0 —*
