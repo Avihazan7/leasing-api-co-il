@@ -16,7 +16,7 @@
 | שלב | נושא | ✅ ההוכחה בריפו | סטטוס |
 |:----:|------|-----------------|:------:|
 | 1 | **AI Basics** | `AI_TYPES.md` — 3 סוגי AI, 9 יכולות, ממופים ל-ULease | ✅ |
-| 2 | **Claude Interface & Features** | `AI_CLAUDE_GLOSSARY.md` (30 מונחים) + `AI_CLAUDE_TOOL_SELECTOR.md` (12 כלים) | ✅ |
+| 2 | **Claude Interface & Features** | `AI_CLAUDE_GLOSSARY.md` (30 מונחים) + `AI_CLAUDE_TOOL_SELECTOR.md` (15 כלים) | ✅ |
 | 3 | **Prompt Engineering Basics** | `COMMAND_API.md` §7 — מסגרות פרומפט (RAG · CoT · few-shot) | ✅ |
 | 4 | **Advanced Prompting Techniques** | 89 פקודות ליבה + composition (`COMMAND_API.md`) + 98 פקודות משימה (`COMMAND_API_TASKS.md`) | ✅ |
 | 5 | **Content Creation** | `marketing-strategy-framework.md` · `ULEASE_OUTREACH_SCRIPTS.md` · מצגת הפיץ' | ✅ |

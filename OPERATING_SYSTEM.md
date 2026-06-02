@@ -81,7 +81,7 @@
 | 12 | `AI_7_SKILLS.md` | Knowledge | ✅ פעיל | 7 מיומנויות לשליטה ב-AI (2026) + מיפוי ל-OS |
 | 13 | `AI_SKILLS_ACQUISITION.md` | Knowledge | ✅ פעיל | תוכנית רכישת מיומנויות hands-on (8 שבועות) |
 | 14 | `AI_TYPES.md` | Knowledge | ✅ פעיל | טקסונומיית סוגי AI (Traditional·Generative·Agentic, 3×9) + מיפוי ל-ULease |
-| 15 | `AI_CLAUDE_TOOL_SELECTOR.md` | Knowledge | ✅ פעיל | עץ החלטה לבחירת כלי Claude — 12 כלים + מיפוי ל-ULease |
+| 15 | `AI_CLAUDE_TOOL_SELECTOR.md` | Knowledge | ✅ פעיל | עץ החלטה לבחירת כלי Claude — 15 כלים + מיפוי ל-ULease |
 | 16 | `AI_CLAUDE_STACK_2026.md` | Knowledge | ✅ פעיל | 4 עמודי ה-stack של 2026 (Cowork · Projects · Skills · Code) + מיפוי ה-build התפעולי |
 | 17 | `AI_CLAUDE_GLOSSARY.md` | Knowledge | ✅ פעיל | מילון 30 מונחי Claude + מיפוי "איפה אצלך" (21/30 מיושמים) |
 | 18 | `AI_RAG_DESIGN.md` | Knowledge | ✅ פעיל | תכנון RAG — 15 טעויות Retrieval + פתרונות, ממופה ל-ULease (משלים את SPEC §7.1) |
