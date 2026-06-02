@@ -1,10 +1,10 @@
 # יסודות BI ומידול נתונים — Power BI כמקרה לימוד
 
 **Module:** `AI_DATA_BI.md`
-**Version:** 1.3.0
+**Version:** 1.4.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Knowledge layer (§3 שורה 22). מודול הדאטה הראשון — משרת את M9 (Data & Insights).
-**Source:** מבוסס על מחברת לימוד *"Power BI — Topics 1–20"* (יסודות · Power Query · מידול · DAX · ויזואליזציה · אינטראקטיביות · Dashboards · Service · Measures-vs-Columns · ניהול ושיתוף).
+**Source:** מבוסס על מחברת לימוד *"Power BI — Topics 1–20"* + *Statistical Tests Cheat Sheet* + *"Data Pipelines on AWS, Azure and GCP"*.
 **Integrates with:** `CASES/ULEASE_SPEC.md` (§8 מודל נתונים · M9), `CASES/ULEASE_DASHBOARD.html`, `AI_PROJECT_STRUCTURE.md`, `AI_CLAUDE_TOOL_SELECTOR.md`, `AI_SKILL_MAP.md`, `CASES/ULEASE_TECH_ONBOARDING.md`
 
 > **BI = להפוך דאטה גולמית להחלטות.** המודול מזקק קוריקולום Power BI שלם (10 נושאים) לקונספטים שמשרתים את **M9 — מוצר הדאטה למנויי Ultra/Max** — בלי קשר לכלי שייבחר בסוף. Power BI הוא מקרה הלימוד; star schema, ETL ו-measures הם הנכס.
@@ -26,6 +26,26 @@
 | **צריכה** | מובייל / web / שגרת בוקר | פורטל המפיץ + דוח ביקוש לספק |
 
 **רישוי Power BI** (אם ייבחר): Free (Desktop + שיתוף בסיסי) · Pro (שיתוף ושיתוף-פעולה) · Premium (ארגונים גדולים). MVP יכול לחיות על Free/Pro.
+
+### 1.1 באיזה ענן לבנות את הצינור — ההכרעה לפני הכל
+
+אותם חמישה שלבים קיימים בכל ענן; רק שמות השירותים משתנים:
+
+| שלב בצינור | AWS | Azure | GCP |
+|-------------|-----|-------|-----|
+| Ingestion (אירועים) | Kinesis · Lambda | Event Hub · Functions | Pub/Sub · Cloud Functions |
+| Data Lake (אחסון גולמי) | S3 | Data Lake Store | Cloud Storage |
+| עיבוד וטרנספורמציה | Glue ETL · EMR | Databricks · Stream Analytics | DataFlow · DataProc |
+| Warehouse (אנליטיקה) | Redshift · RDS · **Elasticsearch** | Azure SQL · Cosmos DB | **BigQuery** · Cloud SQL |
+| Presentation | QuickSight | **Power BI** (אינטגרציה מובנית) | Looker / Data Studio |
+
+**שיקולי ההכרעה ל-ULease** (החלטת Tech Lead, עם ההטיות הבאות):
+- **אם הולכים על Power BI** ל-BI הפנימי (§7) → **Azure** נותן את האינטגרציה הכי חלקה.
+- **אם דאטה-אנליטיקה היא הליבה** (M9 כמוצר) → **BigQuery של GCP** הוא ה-warehouse החזק ביותר ביחס עלות/ביצועים.
+- **ברירת המחדל הבטוחה** → **AWS**: האקוסיסטם הגדול ביותר, הכי קל לגייס אנשים שמכירים, ו-Elasticsearch מנוהל לחיפוש הרכב.
+- מה שלא משנה: PostgreSQL (+pgvector), Redis ו-queues קיימים כשירות מנוהל **בכל** השלושה — הארכיטקטורה שלנו (`AI_SYSTEM_DESIGN.md`) ניידת.
+
+> **כלל:** בוחרים ענן אחד ל-MVP ונשארים בו. Multi-cloud בשלב הזה = כפל עלויות ומורכבות בלי שום תועלת.
 
 ---
 
@@ -208,9 +228,10 @@
 | 1.1.0 | נושאים 11–15 (D-033): Time Intelligence + CALCULATE לפילוח KPIs, §6 חדש — אינטראקטיביות (Drill-through · Q&A Visual · Bookmarks) ו-**RLS** כדרישת חובה ל-M9, Dashboard-מול-Report | 2026-06-02 |
 | 1.2.0 | נושאים 16–20 (D-034): §6.ד תפעול ה-BI כשירות — התראות, מנויי דוחות, ספי KPI, מודל הרשאות (Viewer לספקים), Apps + כלל הזהב עמודות-מול-מדדים וטבלת תקלות | 2026-06-02 |
 | 1.3.0 | §6.ה חדש (D-036): איזה מבחן סטטיסטי לאיזו החלטה — A/B להודעות (Chi-Square), השוואת ערוצים (ANOVA), ולידציית Deal Score (Correlation) | 2026-06-02 |
+| 1.4.0 | §1.1 חדש (D-039): השוואת צינור הדאטה בשלושת העננים (AWS/Azure/GCP) + שיקולי ההכרעה ל-ULease וכלל ענן-אחד-ל-MVP | 2026-06-02 |
 
-**Attribution.** מבוסס על מחברת הלימוד *Power BI Topics 1–20* + *Statistical Tests Cheat Sheet* (ML). הזיקוק, התרגום והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** מבוסס על מחברת הלימוד *Power BI Topics 1–20* + *Statistical Tests Cheat Sheet* (ML) + *Data Pipelines on AWS, Azure and GCP*. הזיקוק, התרגום והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
 **Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of AI_DATA_BI.md v1.3.0 —*
+— *End of AI_DATA_BI.md v1.4.0 —*
