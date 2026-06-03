@@ -5,7 +5,7 @@
 ## Active Modules
 - `OPERATING_SYSTEM.md` v1.8.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.1.0 — שכבת זיכרון: schema, כרטיס זהות **מלא**, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
-- `DECISION_LOG.md` v1.32.0 — יומן החלטות append-only: 45 החלטות (OS + ULease), רציונל וסטטוס.
+- `DECISION_LOG.md` v1.33.0 — יומן החלטות append-only: 46 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.2.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר, אינטגרציה עם ה-OS + ראש המטה (5 תפקידים מתוזמנים) — מיושם בפועל ב-`COWORK/`.
 - `PROJECTS_SETUP.md` v1.0.0 — Claude Projects: 3 פרויקטים (השקה 🎯 · גיוס ₪150K · Claude OS) — תוצר אחד לכל פרויקט, הוראות drop-in, רשימות העלאה ובדיקות קבלה.
 - `COMMAND_API.md` v1.2.0 — 89 slash commands, composition operators, prompting-frameworks library (כולל Opus 4.8 deltas §7.7), drop-in system prompt loaded.
@@ -21,7 +21,7 @@
 - `AI_CLAUDE_STACK_2026.md` v1.4.0 — Claude Stack 2026: 4 עמודי ה-cheat sheet (Cowork · Projects · Skills · Code), כלל הזהב, מיפוי ה-build התפעולי בריפו, סולם 7 הרמות (אתה ברמה 6/7), Agent Teams כמסלול prototype ל-Ultra·Master·Max, ה-Agent Extension Stack (Skills·MCP·Subagents·Hooks·Plugins) + סיכוני סוכנים (Prompt Injection → Guardian).
 - `AI_CLAUDE_GLOSSARY.md` v1.0.0 — מילון Claude: 30 מונחים בחמש קבוצות + מיפוי "איפה אצלך" (21/30 כבר מיושמים ב-OS) — האחות השלישית של Selector ו-Stack.
 - `AI_RAG_DESIGN.md` v1.0.0 — תכנון RAG: 15 הטעויות ששוברות מערכות RAG ב-Retrieval + פתרונות, ב-4 שכבות, ממופות לרכיבי ULease (Deal Score, Q&A Bot) עם צ'קליסט design review ל-Tech Lead — משלים את שכבת ה-RAG באיפיון (§7.1).
-- `AI_PROJECT_STRUCTURE.md` v1.0.0 — מבנה פרויקט AI: תקן 4 התיקיות (prompts · data · agents · evals) + מיפוי מלא לרכיבי האיפיון — השלד שריפו הפלטפורמה של ULease יקום עליו ביום 1 של ה-Tech Lead.
+- `AI_PROJECT_STRUCTURE.md` v1.1.0 — מבנה פרויקט AI: תקן 4 התיקיות (prompts · data · agents · evals) + מבנה ה-Enterprise (§3: 10 תיקיות — orchestrator·specialists·tools·orchestration·api·governance·evals·tests·docs) עם מפת צמיחה MVP→Enterprise ושער מעבר + מיפוי מלא לרכיבי האיפיון (Ultra=orchestrator · Masters=specialists · Guardian=governance) — השלד שריפו הפלטפורמה של ULease יקום עליו ביום 1 של ה-Tech Lead וגדל איתו עד V2.
 - `AI_ROLES_2026.md` v1.0.0 — תפקידי ה-AI של 2026: 21 תפקידים ממופים — המייסד (3), ה-Tech Lead (5 בכובע אחד), Guardian (2) — מאמת את הגדרת התפקיד ב-ULEASE_HIRING והופך אותה להצעת ערך לגיוס.
 - `AI_CLAUDE_ENGINEER_ROADMAP.md` v1.0.0 — רודמאפ Claude AI Engineer: 15 שלבים ממופים מול ה-OS — 11/15 כבר בנויים; הפער (12–14) = הגדרת ה-Tech Lead; שלב 15 = השקת ULease.
 - `AI_DATA_BI.md` v1.5.0 — יסודות BI ומידול נתונים (Power BI כמקרה לימוד, 20 נושאים): צינור BI, ETL, ה-star schema של ULease, DAX + Time Intelligence + 16 הפונקציות הפיננסיות (PMT · IRR · פחת/ערך שייר — המתמטיקה של הליסינג), ויזואליזציה, אינטראקטיביות, **RLS**, תפעול כשירות (התראות · מנויי דוחות · הרשאות), BI לשיווק (§7: ROAS·CPA·CLV·Churn + דשבורדי ההשקה) + מבחנים סטטיסטיים להחלטות — ממופה ל-M9 + הכרעת כלי ל-Tech Lead.
