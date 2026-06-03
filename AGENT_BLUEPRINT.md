@@ -1,7 +1,7 @@
 # AGENT_BLUEPRINT.md — מ-Skill ל-Agent: דוקטרינת ה-System-First
 
 **Module:** `AGENT_BLUEPRINT.md`
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Doctrine. הגשר בין ה-Docs OS ל-Agent Runtime.
 **Integrates with:** `CLAUDE.md`, `COMMAND_API.md`, `DEV_ENVIRONMENTS.md`, `LAUNCH.md`, `stage-a/`
@@ -249,16 +249,103 @@ Roadmap אמר "מנהל + N עובדים מקבילים". ההגדרה החדה
 
 ---
 
+## 10. Coding Workflow Doctrine — Karpathy's CLAUDE.md
+
+§ 1–§ 9 עונים על *"איך בונים agent"*. הסעיף הזה עונה על *"איך agent עובד על קוד"* —
+מבוסס על ה-CLAUDE.md של Andrej Karpathy. התובנה המרכזית שלו היא **בדיוק** התזה של
+הקובץ הזה:
+
+> *LLMs לא משתפרים כשמנסחים להם prompt טוב יותר. הם משתפרים כשכופים עליהם
+> workflow ממושמע. CLAUDE.md הוא לא prompt — הוא operating system של ה-agent.*
+
+זה מה שהריפו הזה **הוא**. Karpathy נותן את השכבה שחסרה: הכללים שה-agent עצמו
+מציית להם כשהוא נוגע בקוד.
+
+### 10.1 ששת עקרונות ה-Workflow
+
+| # | עיקרון | הכלל האופרטיבי | למה זה קיים |
+|---|--------|------------------|--------------|
+| 1 | **Plan Mode First** | plan mode לכל משימה לא-טריוויאלית; spec לפני קוד; צמצום עמימות לפני כתיבה | מודלים **מניחים** במקום לשאול |
+| 2 | **Verify Relentlessly** | בדוק הנחות, הרץ טסטים, סקור diffs; אל תאשר בעיוורון — הישאר ב-loop | מודלים מסתירים בלבול |
+| 3 | **Keep It Simple** | העדף 100 שורות על 1,000; נקה dead code; שאל "יש דרך פשוטה יותר?" | מודלים עושים overengineering |
+| 4 | **Surgical Edits Only** | שנה רק מה שנדרש; אל תיגע בקוד לא קשור; אל "תשפר" מה שלא שבור | מודלים משכתבים קוד לא קשור |
+| 5 | **Goal-Driven Execution** | תן success criteria, כתוב טסטים, תן ל-agent לאיטרט עד שהיעד מושג | מודלים מייעלים ל-completion, לא ל-correctness |
+| 6 | **Parallelize with Subagents** | research/exploration/analysis ל-subagents; משימה אחת לכל subagent; מיזוג עם שיקול דעת | context אחד מתמלא — subagents שומרים אותו נקי |
+
+**3 עקרונות ליבה מעל הכול:** Simplicity First (קוד מינימלי שפותר את הבעיה, כלום
+ספקולטיבי) · No Laziness (root causes, לא תיקונים זמניים) · Minimal Impact (גע רק
+במה שנדרש, אפס side effects).
+
+### 10.2 מיפוי ל-Blueprint — הדוקטרינות מתלכדות
+
+| עיקרון Karpathy | איפה זה כבר אצלנו | מה זה מוסיף |
+|------------------|--------------------|--------------|
+| Plan Mode First (1) | § 9 patterns #8 (ReWOO) · #9 (Plan & Execute) | אותו עיקרון ברמת **משימת קוד בודדת**, לא רק topology |
+| Verify Relentlessly (2) | § 5 Evals (fleet-scale, שבועי) | Karpathy = אותו loop ברמת **ה-run הבודד**, בזמן אמת |
+| Keep It Simple (3) | § 9.5 "אם Skill מספיק, אל תבנה agent" | אותו כלל ברמת הקוד: אם פונקציה מספיקה, אל תבנה מערכת |
+| Surgical Edits (4) | `stage-a` governance — step ceiling, safe-stop | Minimal Impact כ-**doctrine**, לא רק כאכיפה בקוד |
+| Goal-Driven Execution (5) | § 9 patterns #4 (Evaluator) · #7 (Reflexion) | *"אל תגיד מה לעשות — תן success criteria ותן לו לאיטרט"* = ההגדרה התמציתית של שני ה-patterns |
+| Parallelize Subagents (6) | § 9 patterns #2 (Parallelization) · #3 (Orchestrator-Worker) · Stage-B | "צוות הנדסה של agents" = בדיוק Stage-B (מנהל + N עובדים) |
+
+**המסקנה:** Karpathy לא מוסיף מודול תשיעי ל-blueprint. הוא נותן את ה-**רזולוציה
+הנמוכה** — איך כל worker בודד מתנהג בתוך ה-orchestration שכבר הגדרנו. § 9 בוחר
+את ה-topology; § 10 קובע איך כל node בתוכה כותב קוד.
+
+### 10.3 The Shift — מ-Prompting ל-Systems
+
+> *"From: 'write this function' → To: 'here's the goal, constraints, tests, and
+> verification system — now iterate until correct.'"*
+
+| לפני | אחרי | אצלנו |
+|------|------|--------|
+| כותבים prompt | בונים workflow | `COMMAND_API` → `AGENT_BLUEPRINT` |
+| מבקשים פונקציה | נותנים success criteria | מודול 1 (mission + metric) + מודול 8 (evals) |
+| agent אחד עוזר | צוות agents מתוזמר | Stage-B (§ 9.4) |
+| בודקים את הפלט | בונים verification system | § 5 — 5 המטריקות |
+
+זה גם הטיעון העסקי של הקובץ: *"The highest leverage engineers won't be the best
+coders — they'll be the people who build the best systems around AI agents."*
+ה-Docs OS הזה הוא בדיוק ה-system הזה עבור ULease.
+
+### 10.4 Working Rules — הבלוק האופרטיבי
+
+הכללים האלה נטענים ב-`CLAUDE.md` של **שני הריפואים** (`leasing-api-co-il` +
+`leasing-api`) ומחייבים כל agent שעובד על הקוד:
+
+```
+1. PLAN FIRST    — משימה לא-טריוויאלית מתחילה ב-plan, לא בקוד.
+2. ASK, DON'T ASSUME — עמימות בדרישה? שאל. אל תנחש.
+3. SIMPLE        — הפתרון המינימלי שפותר את הבעיה. שום דבר ספקולטיבי.
+4. SURGICAL      — גע רק בקבצים שהמשימה דורשת. אל תשפץ מה שלא שבור.
+5. GOAL-DRIVEN   — הגדר success criteria (טסט/בדיקה) לפני הביצוע; איטרט עד שעובר.
+6. VERIFY        — הרץ את מה שכתבת. diff נסקר לפני commit. אין "אמור לעבוד".
+7. NO LAZINESS   — root cause, לא workaround. אם יש חוב — תעד אותו, אל תסתיר.
+8. SUBAGENTS     — exploration/research ב-subagent נפרד; שמור על context ראשי נקי.
+```
+
+### 10.5 Mindset — ארבע אזהרות
+
+| מושג | המשמעות ל-ULease |
+|------|-------------------|
+| **Tenacity** | agents לא מתעייפים — איטרציה חסרת-רחמים היא מכפיל כוח. בנה את ה-loop, לא את התשובה |
+| **Leverage** | Imperative → Declarative. הגדר *מה* נכון, לא *איך* לעשות |
+| **Atrophy** | כתיבה וקריאה של קוד הם שרירים — ה-Tech Lead חייב להמשיך לקרוא diffs בעצמו (ראה § 5, הטקס השבועי) |
+| **Slopacolypse** | 2026 = שיטפון של AI slop. ה-signal הוא **שיפוט אנושי** — בדיוק ה-human gates של § 4 ו-§ 6 |
+
+---
+
 ## גרסאות
 
 | גרסה | תאריך | שינוי |
 |------|--------|-------|
 | 1.0.0 | 2026-05-31 | Initial — 8-module doctrine, coverage map, stage-a bridge, evals layer |
 | 1.1.0 | 2026-05-31 | + § 9 Orchestration Patterns — 9 patterns, ULease Skills map, stage-a קלסיפיקציה (Plan & Execute), Stage-B חדד (= P&E + Replan) |
+| 1.2.0 | 2026-06-03 | + § 10 Coding Workflow Doctrine — עקרונות ה-CLAUDE.md של Karpathy: 6 עקרונות workflow, מיפוי ל-§ 1/§ 5/§ 9, Working Rules block לשני הריפואים, mindset |
 
 ---
 
 **Tie-back ל-OS:** הקובץ הזה הוא ה-**connective tissue**. `COMMAND_API` נותן את הפקודות,
 `DEV_ENVIRONMENTS` את הכלים, `LAUNCH` את ה-go-live — ו-`AGENT_BLUEPRINT` מסביר איך
-מרכיבים מהם **agent** שלא נשבר ב-production. הוא מצביע קדימה ל-`MEMORY.md` ול-Stage-B
-כצעדים הבאים. *Start with the SYSTEM first. Everything else scales from there.*
+מרכיבים מהם **agent** שלא נשבר ב-production. § 9 בוחר את ה-topology, § 10 קובע איך
+כל agent בתוכה כותב קוד. הוא מצביע קדימה ל-`MEMORY.md` ול-Stage-B כצעדים הבאים.
+*Start with the SYSTEM first. Everything else scales from there.*
