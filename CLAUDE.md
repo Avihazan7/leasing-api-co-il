@@ -5,10 +5,10 @@
 ## Active Modules
 - `OPERATING_SYSTEM.md` v1.9.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.1.0 — שכבת זיכרון: schema, כרטיס זהות **מלא**, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
-- `DECISION_LOG.md` v1.34.0 — יומן החלטות append-only: 47 החלטות (OS + ULease), רציונל וסטטוס.
+- `DECISION_LOG.md` v1.35.0 — יומן החלטות append-only: 48 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.2.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר, אינטגרציה עם ה-OS + ראש המטה (5 תפקידים מתוזמנים) — מיושם בפועל ב-`COWORK/`.
 - `PROJECTS_SETUP.md` v1.0.0 — Claude Projects: 3 פרויקטים (השקה 🎯 · גיוס ₪150K · Claude OS) — תוצר אחד לכל פרויקט, הוראות drop-in, רשימות העלאה ובדיקות קבלה.
-- `COMMAND_API.md` v1.2.1 — 89 slash commands, composition operators, prompting-frameworks library (כולל Opus 4.8 deltas §7.7), drop-in system prompt loaded.
+- `COMMAND_API.md` v1.3.0 — 89 slash commands, composition operators, prompting-frameworks library (כולל Opus 4.8 deltas §7.7), 32 קיצורי פתיחה ניידים (§6.3 Prompt Prefixes), drop-in system prompt loaded.
 - `COMMAND_API_TASKS.md` v1.1.0 — ספריית פקודות משימה: 98 פקודות ב-9 קטגוריות (99 Claude Commands) — אימייל, כתיבה, החלטות, למידה, תכנון, brainstorm, קריירה, תוכן, פגישות — ממופות לתרחישי ULease + 30 פרומפטי גיליונות (§4, Top 30 Spreadsheet Prompts) לעבודה על המודל הפיננסי ועדכוני משקיעים.
 - `marketing-strategy-framework.md` v1.0.0 — Business: מסגרת 10 פרומפטים לבניית אסטרטגיית שיווק מלאה (פסיכולוגיה → תוכנית עמוד).
 - `AI_SKILL_MAP.md` v1.0.0 — מפת מיומנויות AI: 4 שלבים (Tools → Workflows → Agentic → Architect), יישומים, ומיקום ULease על המפה.
@@ -18,7 +18,7 @@
 - `AI_SKILLS_ACQUISITION.md` v1.0.0 — תוכנית רכישת מיומנויות hands-on (8 שבועות, Build-to-Learn): פרויקט אמיתי ב-ULease לכל מיומנות, שערי-שליטה.
 - `AI_TYPES.md` v1.1.0 — טקסונומיית סוגי AI (Traditional·Generative·Agentic, 3×9 יכולות) + מיפוי מלא ל-ULease ולמפת המיומנויות + ההסבר הפשוט (צ'אטבוט מול סוכן).
 - `AI_CLAUDE_TOOL_SELECTOR.md` v1.2.0 — "איזה Claude לבחור?": עץ החלטה ל-15 כלי Claude (Chat · Code · Cowork · Skills · Excel · Artifacts…), מודלים מומלצים + מנוף Effort, ומיפוי למשימות ה-OS ו-ULease.
-- `AI_CLAUDE_STACK_2026.md` v1.4.0 — Claude Stack 2026: 4 עמודי ה-cheat sheet (Cowork · Projects · Skills · Code), כלל הזהב, מיפוי ה-build התפעולי בריפו, סולם 7 הרמות (אתה ברמה 6/7), Agent Teams כמסלול prototype ל-Ultra·Master·Max, ה-Agent Extension Stack (Skills·MCP·Subagents·Hooks·Plugins) + סיכוני סוכנים (Prompt Injection → Guardian).
+- `AI_CLAUDE_STACK_2026.md` v1.5.0 — Claude Stack 2026: 4 עמודי ה-cheat sheet (Cowork · Projects · Skills · Code), כלל הזהב, מיפוי ה-build התפעולי בריפו, סולם 7 הרמות (אתה ברמה 6/7), Agent Teams כמסלול prototype ל-Ultra·Master·Max, ה-Agent Extension Stack (Skills·MCP·Subagents·Hooks·Plugins), סיכוני סוכנים (Prompt Injection → Guardian) + דוקטרינת Karpathy (§5.7: מערכות סביב הסוכן, success criteria + loop, 7 כשלי הייצור) וקטלוג פקודות Claude Code (§5.8, 6 קטגוריות).
 - `AI_CLAUDE_GLOSSARY.md` v1.0.0 — מילון Claude: 30 מונחים בחמש קבוצות + מיפוי "איפה אצלך" (21/30 כבר מיושמים ב-OS) — האחות השלישית של Selector ו-Stack.
 - `AI_RAG_DESIGN.md` v1.0.0 — תכנון RAG: 15 הטעויות ששוברות מערכות RAG ב-Retrieval + פתרונות, ב-4 שכבות, ממופות לרכיבי ULease (Deal Score, Q&A Bot) עם צ'קליסט design review ל-Tech Lead — משלים את שכבת ה-RAG באיפיון (§7.1).
 - `AI_PROJECT_STRUCTURE.md` v1.1.0 — מבנה פרויקט AI: תקן 4 התיקיות (prompts · data · agents · evals) + מבנה ה-Enterprise (§3: 10 תיקיות — orchestrator·specialists·tools·orchestration·api·governance·evals·tests·docs) עם מפת צמיחה MVP→Enterprise ושער מעבר + מיפוי מלא לרכיבי האיפיון (Ultra=orchestrator · Masters=specialists · Guardian=governance) — השלד שריפו הפלטפורמה של ULease יקום עליו ביום 1 של ה-Tech Lead וגדל איתו עד V2.
