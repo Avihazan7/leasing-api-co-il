@@ -1,10 +1,10 @@
 # איזה Claude לבחור? — Which Claude Should You Use?
 
 **Module:** `AI_CLAUDE_TOOL_SELECTOR.md`
-**Version:** 1.2.0
+**Version:** 1.3.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — מודול ידע/רפרנס (Knowledge layer).
-**Source:** מבוסס על האינפוגרפיקות *"Which Claude Should You Use?"* + *"9 Ways to Use Claude"*.
+**Source:** מבוסס על האינפוגרפיקות *"Which Claude Should You Use?"* + *"9 Ways to Use Claude"* + *"12 Ways to Use Claude"*.
 **Integrates with:** `AI_CLAUDE_STACK_2026.md` (מודול אחות — ה-build התפעולי), `AI_CLAUDE_GLOSSARY.md` (מודול אחות — המילון), `COWORK_SETUP.md`, `COMMAND_API.md`, `AI_SKILL_MAP.md`, `CASES/ULEASE_SPEC.md`, `CASES/ULEASE_OUTBOUND_ENGINE.md`
 
 > דרך פשוטה לבחור את הכלי הנכון לכל משימה — עץ החלטה אחד, 15 כלים, והמיפוי שלהם לעבודה היומיומית שלך ב-OS וב-ULease 🎯.
@@ -66,6 +66,17 @@
 | **Adaptive Thinking** | מצב reasoning מורחב: Claude עובד על בעיות קשות ומראה כל שלב בחשיבה. | **Opus** |
 | **Claude Chat** | שאלות מהירות, משימות חד-פעמיות, מחקר קז'ואלי. בלי setup. **נקודת ההתחלה הכי טובה לכל דבר מהיר.** | Sonnet · Haiku לפשוט ומהיר |
 
+### 2.5 יכולות רוחב — לא כלים, אבל חלק מהבחירה
+
+ארבע יכולות שחוצות את כל 15 הכלים (מתוך *"12 Ways to Use Claude"*). הן לא "כלי" שבוחרים — הן סיבה לבחור ממשק מסוים:
+
+| יכולת | מה היא נותנת | איפה זמינה | Best practice |
+|--------|---------------|-------------|----------------|
+| **Long Document Analysis** | קריאת עד ‎1M tokens ב-session — חוזה, codebase, מחקר שלם | Chat · Projects · Cowork | לבקש פלט ספציפי, לא "סיכום כללי" |
+| **Vision / ניתוח תמונות** | צילומי מסך, גרפים, דיאגרמות, אינפוגרפיקות → ניתוח והסבר | כל הממשקים | **זה ה-workflow שמזין את ה-OS הזה**: אינפוגרפיקה → מודול רשום (D-013 ועד היום) |
+| **Web Search & Research** | חיפוש + סינתזה + ציטוט מקורות בזמן אמת | Chat · Code | יעד מחקר, לא שאילתת חיפוש (`/research`, לא `/search`) |
+| **Voice Mode** | שיחה קולית מסונכרנת עם הטקסט | iOS · Android · web | brainstorming בתנועה — בין פגישות ספקים, בדרך ליבואן |
+
 ---
 
 ## 3. המיפוי שלך — איזה Claude לכל משימה ב-OS וב-ULease 🎯
@@ -83,6 +94,29 @@
 | דשבורד, מחשבוני ROI, גרפים חיים | **Artifacts** | כך נולדו `ULEASE_DASHBOARD.html` והמצגת — לפני שהפכו לקוד |
 | החלטות אסטרטגיות: תמחור, מו"מ, גיוס | **Adaptive Thinking (Opus)** | תורת המשחקים ו-Big Five — `CASES/ULEASE_METHODOLOGY.md` |
 | שאלה מהירה, ניסוח הודעה, סיכום | **Claude Chat** | בלי overhead — פשוט לשאול |
+
+---
+
+## 3.5 מדד 12 הדרכים — כמה מהפלטפורמה אתה באמת מנצל
+
+הבנצ'מרק מ-*"12 Ways to Use Claude"*: רוב המשתמשים מנצלים 1–2 דרכים; *"המייסדים והמפעילים שבאמת מקדימים משתמשים ב-6 ומעלה"*. הציון שלך:
+
+| # | דרך | סטטוס אצלך |
+|---|------|-------------|
+| 1 | Long Document Analysis | ✅ תיק ULease, חוזי ספקים, דוח הביקורת |
+| 2 | Writing & Content | ✅ playbooks, סקריפטים, מודולים |
+| 3 | Claude Code | ✅ הריפו הזה + 4 גנרטורים |
+| 4 | Artifacts | ✅ כך נולד הדשבורד |
+| 5 | Projects | ✅ 3 פרויקטים (`PROJECTS_SETUP.md`) |
+| 6 | Extended Thinking | ✅ החלטות תמחור/מו"מ (Opus) |
+| 7 | MCP Connectors | 🟡 GitHub פעיל · Gmail/Drive/יומן בהמשך |
+| 8 | Cowork Desktop Agent | ✅ `COWORK/` מלא |
+| 9 | Web Search & Research | ✅ מחקר מתחרים ומחירונים |
+| 10 | Image & Vision | ✅ **ה-workflow המרכזי**: אינפוגרפיקה → מודול |
+| 11 | Multi-Agent Workflows | ✅ os-auditor · ביקורת 4 הסוכנים (D-019) |
+| 12 | Voice Mode | 🔜 לא בשימוש — הזדמנות: brainstorming בדרכים |
+
+> **הציון: 10✅ + 1🟡 מתוך 12** — כמעט כפול מרף ה"מקדימים" (6+). שתי ההשלמות הפתוחות (MCP ייעודי, Voice) הן בדיוק אותו פער כמו ברמה 7 בסולם (`AI_CLAUDE_STACK_2026.md` §5) — תשתית, לא ידע.
 
 ---
 
@@ -107,7 +141,8 @@
 | 1.0.0 | עץ החלטה לבחירת כלי Claude — 12 כלים + מיפוי למשימות ה-OS ו-ULease | 2026-06-01 |
 | 1.1.0 | מנוף ה-Effort של Opus 4.8 (§4) — low/high/xhigh לצד בחירת המודל (D-024) | 2026-06-02 |
 | 1.2.0 | הרחבה ל-15 כלים (D-031): נוספו **Claude in Excel · Computer Use · Artifacts** לעץ ההחלטה, לכרטיסים ולמיפוי ULease + טיפים "Best for" | 2026-06-02 |
+| 1.3.0 | §2.5 **יכולות רוחב** (D-049): Long-Doc 1M · Vision (ה-workflow של ה-OS) · Web Research · Voice Mode — יכולות, לא כלים (ספירת ה-15 לא משתנה) + §3.5 **מדד 12 הדרכים**: הציון 10✅+1🟡/12 מול רף ה"מקדימים" (6+) | 2026-06-03 |
 
-**Attribution.** מבוסס על האינפוגרפיקות *Which Claude Should You Use?* ו-*9 Ways to Use Claude*. העיבוד, התרגום והמיפוי ל-ULease הם חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** מבוסס על האינפוגרפיקות *Which Claude Should You Use?*, *9 Ways to Use Claude* ו-*12 Ways to Use Claude*. העיבוד, התרגום והמיפוי ל-ULease הם חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of AI_CLAUDE_TOOL_SELECTOR.md v1.2.0 —*
+— *End of AI_CLAUDE_TOOL_SELECTOR.md v1.3.0 —*
