@@ -14,12 +14,14 @@ Claude OS — בדיקות עקביות מכניות (CI)
   4. No Orphan Modules: כל מודול עם Version header — מצוטט ב-CLAUDE.md וב-README.md
   5. ציטוט-עצמי: מודול שמצטט את עצמו (דוגמת רישום, footer) — תואם ל-header שלו
   6. סמני פרוטוקול: באנרי "ENABLED — vX.Y" עוקבים אחרי major.minor של המודול
+  7. הפניית §3 שורה: "§3 שורה N" בכותרת מודול ↔ מספר השורה בפועל בטבלת §3
 
 הרצה מקומית:   python3 scripts/os_consistency_check.py
 חלוקת עבודה:   הסקריפט = בדיקות מכניות · os-auditor (סוכן) = בדיקות סמנטיות עמוקות
-(בדיקות 5–6 נוספו אחרי שביקורת os-auditor מצאה ממצאים מהסוגים האלה — כל ממצא ידני הופך לבדיקה אוטומטית.)
+(בדיקות 5–7 נוספו אחרי שביקורת os-auditor מצאה ממצאים מהסוגים האלה — כל ממצא ידני הופך לבדיקה אוטומטית; בדיקה 7 = תקדים W19, D-053.)
 """
 import re
+import fnmatch
 import sys
 import pathlib
 
@@ -135,6 +137,28 @@ for rel, pattern in PROTOCOL_BANNERS.items():
         major_minor = ".".join(modules[rel].split(".")[:2])
         if m.group(1) != major_minor:
             errors.append(f"{rel}: סמן פרוטוקול v{m.group(1)} ≠ major.minor של המודול ({major_minor})")
+
+# ---------- בדיקה 7: הפניית "§3 שורה N" בכותרת ↔ הטבלה הקנונית ----------
+# תקדים W19 (ULEASE_AUDIT) + D-053: כשמודול מוסט ב-§3, הפניית-השורה בשורת
+# **Status:** שלו נוטה להישכח ולהתיישן. כל ממצא ידני → בדיקה אוטומטית (כמו 5–6).
+os_text = read("OPERATING_SYSTEM.md")
+# שורה → דפוס-קובץ מטבלת §3 (תומך ב-glob כמו CASES/ULEASE*.md).
+row_of_glob = re.findall(r"^\|\s*(\d+)\s*\|\s*`([^`]+\.md)`", os_text, re.M)
+for rel in sorted(modules):
+    status = re.search(r"^\*\*Status:\*\*.*$", (ROOT / rel).read_text(encoding="utf-8"), re.M)
+    if not status:
+        continue
+    m = re.search(r"§3 שורה (\d+)", status.group(0))
+    if not m:
+        continue
+    checks += 1
+    claimed = m.group(1)
+    actual = next((row for row, glob in row_of_glob
+                   if rel == glob or fnmatch.fnmatch(rel, glob)), None)
+    if actual is None:
+        errors.append(f"{rel}: כותרת מצהירה §3 שורה {claimed} אך הקובץ אינו רשום בטבלת §3")
+    elif actual != claimed:
+        errors.append(f"{rel}: כותרת §3 שורה {claimed} ≠ השורה הקנונית בטבלת §3 ({actual})")
 
 # ---------- דוח ----------
 print(f"Claude OS consistency check · {len(modules)} מודולים · {checks} בדיקות")
