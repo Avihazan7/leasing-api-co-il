@@ -1,10 +1,10 @@
 # ULease 🎯 — Outbound Engine (בלופרינט n8n + Claude)
 
 **Module:** `CASES/ULEASE_OUTBOUND_ENGINE.md`
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — בלופרינט אוטומציה (Stage 2–3).
-**Integrates with:** `CASES/ULEASE_OUTREACH_SCRIPTS.md`, `CASES/ULEASE_IMPORTER_PLAYBOOK.md`, `CASES/ULEASE_LEASING_PLAYBOOK.md`, `CASES/ULEASE_SPEC.md`, `AI_PROGRESSION_PLAN.md`
+**Integrates with:** `CASES/ULEASE_OUTREACH_SCRIPTS.md`, `CASES/ULEASE_IMPORTER_PLAYBOOK.md`, `CASES/ULEASE_LEASING_PLAYBOOK.md`, `CASES/ULEASE_SPEC.md`, `AI_PROGRESSION_PLAN.md`, `AI_PROCESS_INTELLIGENCE.md`
 **Inspiration:** ארכיטקטורת *Outbound Engine* (Quortihm · Usama Tanveer).
 
 > מנוע אקווזיציה ל**צד ההיצע** — מאתר ומגייס את 4 הסגמנטים (יבואן רשמי · יבואן מקביל · חברת ליסינג · מימון/ביטוח, כמו ב-`ULEASE_OUTREACH_SCRIPTS.md`) ומזין את ה-Marketplace. משתמש בסקריפטים ובמודלי Claude.
@@ -74,11 +74,23 @@ Sourcing → Quality Gate → Intelligence(score) → Personalization(A/B) → S
 
 | שלב | מצב | מי |
 |-----|------|-----|
-| **MVP** | חצי-ידני: סוגרסינג + פנייה ב-assist (אדם מאשר שליחה) | אברהם (לומד n8n — שלב 2 במפה) |
-| **V1** | אוטומציה מלאה של שכבות 01–06 | Tech Lead (מימוש, deliverability) |
+| **MVP** | חצי-ידני: סורסינג + פנייה ב-assist — **HITL מלא**: כל שליחה עוצרת לאישור אדם (`sendAndWait`) | אברהם (לומד n8n — שלב 2 במפה) |
+| **V1** | אוטומציה מלאה של שכבות 01–06 — **בכפוף לשער הבגרות (§6.1)** | Tech Lead (מימוש, deliverability) |
 | **V2** | feedback loop אוטומטי + scale | Tech Lead |
 
 > תואם ל-`AI_PROGRESSION_PLAN.md`: זה **בדיוק** הפרויקט שבו אברהם לומד Stage 2 (n8n/Webhooks) ו-Stage 3 (סוכני Claude) — תוך כדי בנייה אמיתית.
+
+### 6.1 שער הבגרות — מ-assist לאוטונומיה (D-040)
+
+המעבר MVP→V1 הוא לא החלטת לוח-זמנים — הוא **שער שעוברים בהוכחה** (הדפוס המלא: `AI_PROCESS_INTELLIGENCE.md` §3.3):
+
+| שלב | מה מאושר ידנית | קריטריון מעבר לשלב הבא |
+|------|------------------|--------------------------|
+| **1 · HITL מלא** (MVP) | כל מייל/וואטסאפ — לפני שליחה | **20 אישורים רצופים ללא תיקון** (טקסט, נמען, סגמנט) |
+| **2 · HITL חלקי** | פניות ליבואנים רשמיים (הסגמנט הרגיש) + כל הודעה ראשונה לארגון חדש | חודש ללא תקרית: תלונה, טעות זיהוי או הפרת ציות |
+| **3 · אוטונומיה מנוטרת** (V1) | כלום — אך **10% מהשליחות נדגמות** לבדיקה שבועית | קבוע. הניטור לא יורד לעולם |
+
+> ⚠️ שכבה 06 (Reply Handling) כפופה לאותו שער: סיווג "הסרה→block" חייב **דיוק 100%** לפני אוטונומיה — טעות שם היא הפרת חוק הספאם, לא באג.
 
 ⚠️ **ציות:** outreach כפוף לחוק הספאם (תיקון 40) — opt-out, זיהוי שולח, ותדירות. לאמת לפני הפעלה בנפח.
 
@@ -106,7 +118,8 @@ Sourcing → Quality Gate → Intelligence(score) → Personalization(A/B) → S
 |------|--------|--------|
 | 1.0.0 | בלופרינט מנוע outbound — 8 שכבות, מודלי Claude, חיבור לסקריפטים, KPIs | 2026-05-31 |
 | 1.1.0 | גל 3 של הביקורת: יישור 4 הסגמנטים לסקריפטים (W6), היחס ל-Ultra·Master·Max (W13), מצב השלד 07–08 (W14), ספירת צמתים (W18), retry/ENV למודלים (I4·I5) | 2026-06-01 |
+| 1.2.0 | §6.1 חדש (D-040): שער הבגרות — שלושת שלבי HITL (`sendAndWait`) עם קריטריוני מעבר מדידים + דרישת דיוק 100% לסיווג הסרה | 2026-06-02 |
 
 **Confidentiality.** מסמך תפעולי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_OUTBOUND_ENGINE.md v1.1.0 —*
+— *End of CASES/ULEASE_OUTBOUND_ENGINE.md v1.2.0 —*

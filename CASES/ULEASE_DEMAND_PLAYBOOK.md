@@ -1,10 +1,10 @@
 # ULease 🎯 — Playbook צד-הביקוש (Demand Generation)
 
 **Module:** `CASES/ULEASE_DEMAND_PLAYBOOK.md`
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Playbook רכישת קונים (צד ביקוש). סוגר את ממצא **C4** בביקורת.
-**Integrates with:** `CASES/ULEASE.md` §3, `CASES/ULEASE_METHODOLOGY.md` (Big Five), `CASES/ULEASE_OUTBOUND_ENGINE.md`, `CASES/ULEASE_LAUNCH_CHECKLIST.md`, `marketing-strategy-framework.md`
+**Integrates with:** `CASES/ULEASE.md` §3, `CASES/ULEASE_METHODOLOGY.md` (Big Five), `CASES/ULEASE_DEMAND_ENGINE.md` (מנוע הביצוע), `CASES/ULEASE_OUTBOUND_ENGINE.md`, `CASES/ULEASE_LAUNCH_CHECKLIST.md`, `marketing-strategy-framework.md`
 
 > **הפער שזה סוגר:** התחזית דורשת **146 פניות-קונים ביוני** (16 עסקאות B2B2C + 130 לידים) — וכל ה-GTM עד כה היה צד-היצע בלבד. זה ה-playbook שמביא את הקונים.
 
@@ -92,7 +92,8 @@
 
 ## 6. החיבור למנוע ולמערכת
 
-- **מנוע ה-n8n** (`ULEASE_OUTBOUND_ENGINE.md`): אותו שלד משמש גם ל-nurture של לידים נכנסים — ליד שלא השאיר טלפון מקבל רצף וואטסאפ/מייל אוטומטי (Haiku מסווג כוונה, Sonnet מנסח).
+- **מנוע הביצוע של ה-playbook הזה** (`ULEASE_DEMAND_ENGINE.md`): 18 צמתים ב-3 פאזות שמממשים את הערוצים, המשפך וה-nurture — כולל הלופ האורגני (עסקה → תוכן → תנועה → ליד) שמשיג את יעד ה-25% אורגני. Haiku מנקד, Sonnet מנסח.
+- **מנוע ההיצע** (`ULEASE_OUTBOUND_ENGINE.md`): אותה תשתית n8n, כיוון הפוך (גיוס ספקים) — שני המנועים מזינים CRM ודשבורד משותפים.
 - **Match + Big Five** (`ULEASE_METHODOLOGY.md`): טופס הליד כולל 3 שאלות העדפה → פרופיל ראשוני → הרכבים המתאימים מוצגים קודם → המרה גבוהה יותר.
 - **מסגרת השיווק** (`marketing-strategy-framework.md`): להריץ את 10 הפרומפטים על פרסונת "הצייד" — התוצר יהיה הקופי לקמפיינים.
 
@@ -126,7 +127,8 @@
 |------|--------|--------|
 | 1.0.0 | Playbook צד-ביקוש ראשוני: יחידת כלכלה, פרסונות Big Five, 6 ערוצים, משפך, ציות ו-KPIs — סוגר ממצא C4 | 2026-06-01 |
 | 1.1.0 | ערוץ 7 — **GEO** (D-035): ציטוט בתשובות AI כערוץ רכישה בעלות אפס; תלוי בפריט ה-robots.txt בצ'קליסט ההשקה | 2026-06-02 |
+| 1.2.0 | חיבור דו-כיווני למנוע הביצוע (D-042): §6 מפנה ל-`ULEASE_DEMAND_ENGINE.md` — ה-nurture והלופ האורגני עברו למנוע הייעודי | 2026-06-02 |
 
 **Confidentiality.** מסמך תפעולי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_DEMAND_PLAYBOOK.md v1.1.0 —*
+— *End of CASES/ULEASE_DEMAND_PLAYBOOK.md v1.2.0 —*

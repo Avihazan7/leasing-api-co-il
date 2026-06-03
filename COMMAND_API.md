@@ -958,7 +958,7 @@ Claude OS Root/
 | 1.0.0 | Initial 89 commands + composition + system prompt | 2026-05-19 |
 | 1.1.0 | Prompting Frameworks (§7) — core techniques, advanced strategies, framework→command mapping, key terms | 2026-05-31 |
 | 1.2.0 | Opus 4.8 deltas (§7.7) — שש ההתאמות + מנוף ה-Effort (D-024); ריכוך scaffolding ישן ב-§8 | 2026-06-02 |
-| 1.2.1 | תיקון עקביות (ביקורת D-040): עץ §9.1 — רשימת ה-Knowledge המפורשת (שהתיישנה פעמיים) הוחלפה ב-`AI_*.md` עם הפניה ל-§3, לפי One Source of Truth | 2026-06-02 |
+| 1.2.1 | תיקון עקביות (ממצא os-auditor): עץ §9.1 — רשימת ה-Knowledge המפורשת (שהתיישנה פעמיים) הוחלפה ב-`AI_*.md` עם הפניה ל-§3, לפי One Source of Truth | 2026-06-02 |
 
 ### 11.2 Backward Compatibility
 
