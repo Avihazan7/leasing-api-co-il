@@ -1,7 +1,7 @@
 # DECISION_LOG.md — יומן החלטות
 
 **Module:** `DECISION_LOG.md`
-**Version:** 1.41.0
+**Version:** 1.42.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — יומן append-only (Memory layer).
 **Integrates with:** `OPERATING_SYSTEM.md` §7, `MEMORY.md`, `CASES/ULEASE*.md`
@@ -68,6 +68,7 @@
 | D-052 | 2026-06-03 | רישום מודול **AI_LINEAR_ALGEBRA** (Knowledge, שורה 26 ב-§3) — אינפוגרפיקת *"Linear Algebra Cheat Sheet"* (mltut, 12 מושגים) הומרה למודול **יסוד מתמטי**: כל מושג + עמודת "למה זה חשוב ל-ML", והגשר ל-ULease — **dot product (#8) חלקי נורמה L2 (#9) = דמיון קוסינוס = ליבת חיפוש RAG** ב-pgvector (`ULEASE_SPEC` §7.1, D-022/D-025); eigenvalues→PCA (דחיסת embeddings), rank→low-rank/LoRA (ה-fine-tuning הדחוי). הסטת שורות: IR 26→27 · CASES 27→28 | הכרעת ספרנות: **מודול נפרד ולא העשרה** — אין ב-OS בית למתמטיקת-יסוד (`AI_DATA_BI` הוא סטטיסטיקה/BI/DAX, ענף יישומי אחר; `AI_RAG_DESIGN` *משתמש* בווקטורים אך לא מלמד אותם); זהו מודול היסוד המתמטי הראשון, הקומה התחתונה של הקוריקולום (`AI_SKILL_MAP`). מסגור **אוריינות, לא יישום**: ה-Tech Lead מיישם, המייסד סוקר design review — עיקרון תאום ל"ה-BI מנתח, ה-API מחשב" (D-041) | ✅ פעיל |
 | D-053 | 2026-06-03 | **הקשחת ה-CI — בדיקה מכנית #7** (`scripts/os_consistency_check.py`, לינאז' D-023): כל הפניית `§3 שורה N` בשורת **Status:** של מודול חייבת להתאים למספר השורה בפועל בטבלת §3 (כולל התאמת glob ל-`CASES/ULEASE*.md`). בנוסף — תיקון 2 הפניות מתיישנות שזיהה ה-os-auditor אחרי הסטת D-052: `INVESTOR_RELATIONS.md` (26→27) ו-`CASES/ULEASE.md` (27→28) | ה-os-auditor מצא **דפוס חוזר** (תקדים W19): כשמודול מוסט ב-§3, הפניית-השורה בכותרתו מתיישנת בשקט — בדיקות 1–6 לא תפסו זאת (הן בודקות גרסאות וספירות, לא שורות). לפי הדוקטרינה המתועדת בסקריפט ("כל ממצא ידני → בדיקה אוטומטית", כמו 5–6) ועיקרון הקרנל **Fail Loud, Not Silent** — הממצא הופך לבדיקה דטרמיניסטית שתתפוס אותו בכל PR עתידי; אומת בבדיקת negative (שורה שגויה → exit 1) | ✅ פעיל |
 | D-054 | 2026-06-03 | **הכרעת ספרנות — סינון אינפוגרפיקת "Revenue Analysis Dashboard" (לא מודול)** (תקדים D-038/D-049): דשבורד BI לדוגמה (KPI cards · revenue trend · פילוח region/category/sales-rep/customer-type · pie/donut/combo · slicers) נסקר ונמצא **מכוסה במלואו** ב-`AI_DATA_BI.md` — §3 (star schema = הפילוח לפי dimensions) · §4 (מדדי KPI) · §5 (קטלוג הגרפים) · §6 (slicers · Q&A Visual · RLS) — ומומחש ב-`CASES/ULEASE_DASHBOARD.html` הבנוי. **לא נפתח מודול ולא בוצעה העשרה**: אין תוכן נטו-חדש | One Source of Truth + הרף העולה לתוכן חדש (D-049): אינפוגרפיקה שכל מרכיביה כבר מתועדים אינה מצדיקה מודול או העשרה; רישום ההכרעה מונע עיבוד-חוזר לרדבל מודול בסשן עתידי (תקדים הכפילות D-047). הכרעת מייסד מפורשת בשיחה | ✅ פעיל |
+| D-055 | 2026-06-03 | **העשרת `AI_SYSTEM_DESIGN` ל-v1.3.0** (אינפוגרפיקת *"Inventory Management System Backend Flow"*, codepathindia) — §1.5 חדש: **מסלול הבקשה השכבתי** (Client→Routes→Middleware→Controllers→Services→Repository/ORM→Database→JSON) ממופה ל-ULease, עם **כלל הזהב "חוקי עסק רק בשכבת ה-Service"** (לא Controller, לא ה-DB) + פריט design-review. שאר האינפוגרפיקה (data-model entities · DB relationships · best practices: RBAC/audit/pagination/SKU/timestamps) **סוננה כמכוסה** — `ULEASE_SPEC` §8 · `AI_DATA_BI` §3/§6 · §4 (JWT) · D-023 | הכרעת מייסד תחת הקפאת המודולים (כלל 4): **העשרה ולא מודול חדש** (תקדים D-051) — חפיפה כבדה מול 4 מודולי ההנדסה, אך ה-pipeline הפנים-אפליקטיבי היה **הפער היחיד שלא תועד** (SYSTEM_DESIGN כיסה רכיבי תשתית — gateway/תורים/JWT — לא את ה-layering בתוך האפליקציה); הבית הקנוני = `AI_SYSTEM_DESIGN`. סינון 5 מ-6 חלקי התמונה ממשיך את הרף העולה (D-049/D-054) | ✅ פעיל |
 
 ---
 
@@ -126,7 +127,8 @@
 | 1.39.0 | הוספת D-052 — רישום מודול `AI_LINEAR_ALGEBRA.md` (12 מושגי אלגברה לינארית → עמודת "למה זה חשוב ל-ML" + הגשר dot product → RAG/pgvector, Knowledge שורה 26) | 2026-06-03 |
 | 1.40.0 | הוספת D-053 — הקשחת CI: בדיקה מכנית #7 (`§3 שורה N` בכותרת ↔ טבלת §3) + תיקון 2 הפניות מתיישנות (IR 26→27, CASES 27→28) שזיהה ה-os-auditor אחרי D-052 | 2026-06-03 |
 | 1.41.0 | הוספת D-054 — הכרעת ספרנות: סינון אינפוגרפיקת "Revenue Analysis Dashboard" (מכוסה ב-`AI_DATA_BI` §3–§6 + `ULEASE_DASHBOARD.html` — לא מודול, לא העשרה) | 2026-06-03 |
+| 1.42.0 | הוספת D-055 — העשרת `AI_SYSTEM_DESIGN.md` ל-v1.3.0: §1.5 מסלול הבקשה השכבתי (Routes→Middleware→Controller→Service→Repository→ORM→DB, "חוקי עסק רק ב-Service") — סגירת הפער מול אינפוגרפיקת Inventory Backend Flow; שאר התמונה סוננה כמכוסה | 2026-06-03 |
 
 **Confidentiality.** מסמך פנימי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of DECISION_LOG.md v1.41.0 —*
+— *End of DECISION_LOG.md v1.42.0 —*

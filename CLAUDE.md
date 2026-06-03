@@ -5,7 +5,7 @@
 ## Active Modules
 - `OPERATING_SYSTEM.md` v1.11.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.1.0 — שכבת זיכרון: schema, כרטיס זהות **מלא**, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
-- `DECISION_LOG.md` v1.41.0 — יומן החלטות append-only: 54 החלטות (OS + ULease), רציונל וסטטוס.
+- `DECISION_LOG.md` v1.42.0 — יומן החלטות append-only: 55 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.2.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר, אינטגרציה עם ה-OS + ראש המטה (5 תפקידים מתוזמנים) — מיושם בפועל ב-`COWORK/`.
 - `PROJECTS_SETUP.md` v1.0.0 — Claude Projects: 3 פרויקטים (השקה 🎯 · גיוס ₪150K · Claude OS) — תוצר אחד לכל פרויקט, הוראות drop-in, רשימות העלאה ובדיקות קבלה.
 - `COMMAND_API.md` v1.3.0 — 89 slash commands, composition operators, prompting-frameworks library (כולל Opus 4.8 deltas §7.7), 32 קיצורי פתיחה ניידים (§6.3 Prompt Prefixes), drop-in system prompt loaded.
@@ -25,7 +25,7 @@
 - `AI_ROLES_2026.md` v1.0.0 — תפקידי ה-AI של 2026: 21 תפקידים ממופים — המייסד (3), ה-Tech Lead (5 בכובע אחד), Guardian (2) — מאמת את הגדרת התפקיד ב-ULEASE_HIRING והופך אותה להצעת ערך לגיוס.
 - `AI_CLAUDE_ENGINEER_ROADMAP.md` v1.0.0 — רודמאפ Claude AI Engineer: 15 שלבים ממופים מול ה-OS — 11/15 כבר בנויים; הפער (12–14) = הגדרת ה-Tech Lead; שלב 15 = השקת ULease.
 - `AI_DATA_BI.md` v1.5.0 — יסודות BI ומידול נתונים (Power BI כמקרה לימוד, 20 נושאים): צינור BI, ETL, ה-star schema של ULease, DAX + Time Intelligence + 16 הפונקציות הפיננסיות (PMT · IRR · פחת/ערך שייר — המתמטיקה של הליסינג), ויזואליזציה, אינטראקטיביות, **RLS**, תפעול כשירות (התראות · מנויי דוחות · הרשאות), BI לשיווק (§7: ROAS·CPA·CLV·Churn + דשבורדי ההשקה) + מבחנים סטטיסטיים להחלטות — ממופה ל-M9 + הכרעת כלי ל-Tech Lead.
-- `AI_SYSTEM_DESIGN.md` v1.2.0 — יסודות System Design: שער כניסה (Gateway·Proxy·LB), 8 סגנונות API (כולל Webhook ל-MVP), תורים (Idempotency·DLQ), JWT + מפת 24 הרכיבים (MVP/V1/V2) — ממופים לארכיטקטורת הפלטפורמה + צ'קליסט design review ל-Tech Lead.
+- `AI_SYSTEM_DESIGN.md` v1.3.0 — יסודות System Design: שער כניסה (Gateway·Proxy·LB), מסלול הבקשה השכבתי (§1.5: Routes→Middleware→Controller→Service→Repository→ORM→DB, "חוקי עסק רק ב-Service"), 8 סגנונות API (כולל Webhook ל-MVP), תורים (Idempotency·DLQ), JWT + מפת 24 הרכיבים (MVP/V1/V2) — ממופים לארכיטקטורת הפלטפורמה + צ'קליסט design review ל-Tech Lead.
 - `AI_PROCESS_INTELLIGENCE.md` v1.0.0 — מודיעין תהליכים ובקרת הטמעת AI: GenIQ (HatchWorks×Bloomfilter) — איפה להחיל Gen AI + מדידת ROI (מלכודת ה-56%), אנטומיית סוכן n8n + דפוס Human-in-the-Loop (sendAndWait) ושער בגרות — ממופה לשקיפות SDLC מול ה-Tech Lead, מפת האוטומציות ומנוע ה-outbound.
 - `AI_PROFICIENCIES_2026.md` v1.0.0 — מיומנויות ה-AI החיוניות ל-2026: 10 מיומנויות-על ארגוניות (אינפוגרפיקת aiplanetx) + כרטיס-ניקוד בגרות (**6✅+4🟡/10**, אפס נקודות עיוורות) ומיפוי תלת-שכבתי ל-ULease — שדרה (RAG · אוטונומי · governance) · צמיחה (GEO · workflows) · תשתית (prompting · ecosystem); מנדט ה-Tech Lead = להפוך את 4 ה-🟡 ל-✅. רביעי במשפחת מדדי-הבגרות (5/7 · 11/15 · 6/7 · 10✅+1🟡/12).
 - `AI_LINEAR_ALGEBRA.md` v1.0.0 — יסודות אלגברה לינארית (Cheat Sheet, mltut): 12 מושגים (סקלר/וקטור/מטריצה, כפל מטריצות, טרנספוז, דטרמיננטה, הופכית, dot product, נורמה L2, eigenvalues, rank, Ax=b) + עמודת "למה זה חשוב ל-ML"; הגשר ל-ULease — dot product = דמיון קוסינוס = ליבת חיפוש RAG ב-pgvector (`ULEASE_SPEC.md` §7.1). מודול היסוד המתמטי הראשון — הקומה התחתונה של הקוריקולום, אוריינות design review (ה-Tech Lead מיישם, המייסד סוקר).

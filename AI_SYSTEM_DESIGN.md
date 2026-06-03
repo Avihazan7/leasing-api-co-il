@@ -1,13 +1,13 @@
 # יסודות System Design — ארכיטקטורת הפלטפורמה
 
 **Module:** `AI_SYSTEM_DESIGN.md`
-**Version:** 1.2.0
+**Version:** 1.3.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Knowledge layer (§3 שורה 23). מודול ההנדסה השני (אחרי `AI_PROJECT_STRUCTURE.md`) — שפת הארכיטקטורה מול ה-Tech Lead.
-**Source:** מבוסס על *"Reverse Proxy vs API Gateway vs Load Balancer"* (Level Up Coding) · *"Queues 101"* (Raul Junco) · *"How JWT Works"* (Amigoscode) · *"6 API Architecture Styles"* (James Code Lab) · *"System Design Cheatsheet"* (21 רכיבים).
+**Source:** מבוסס על *"Reverse Proxy vs API Gateway vs Load Balancer"* (Level Up Coding) · *"Queues 101"* (Raul Junco) · *"How JWT Works"* (Amigoscode) · *"6 API Architecture Styles"* (James Code Lab) · *"System Design Cheatsheet"* (21 רכיבים) · *"Inventory Management System Backend Flow"* (codepathindia).
 **Integrates with:** `CASES/ULEASE_SPEC.md` (§3 · §8 · §9 · §10), `AI_PROJECT_STRUCTURE.md`, `AI_RAG_DESIGN.md`, `AI_DATA_BI.md`, `CASES/ULEASE_HIRING.md`, `CASES/ULEASE_PRICING_SLA.md`
 
-> ארבעה מושגי-יסוד של ארכיטקטורת backend — שער כניסה, סגנונות API, תורים ואימות — מתורגמים לרכיבי הפלטפורמה של ULease. המטרה: שאברהם יוכל לנהל design review מול ה-Tech Lead **בלי לכתוב שורת קוד**, ולזהות החלטה גרועה לפני שהיא נבנית.
+> מושגי-היסוד של ארכיטקטורת backend — שער כניסה ומסלול הבקשה השכבתי, סגנונות API, תורים ואימות — מתורגמים לרכיבי הפלטפורמה של ULease. המטרה: שאברהם יוכל לנהל design review מול ה-Tech Lead **בלי לכתוב שורת קוד**, ולזהות החלטה גרועה לפני שהיא נבנית.
 
 ---
 
@@ -20,6 +20,27 @@
 | **Load Balancer** (ALB/HAProxy) | מפזר עומס בין שרתים + בודק בריאות | מאחורי ה-SLA: uptime 99.5% (`ULEASE_PRICING_SLA.md` §4) ו-99.9% (NFR §10) |
 
 **הסדר בפועל:** לקוח → Load Balancer → API Gateway (אימות) → השירותים. ב-MVP על ספק ענן מנוהל — שלושתם שירות מדף, לא משהו שבונים.
+
+---
+
+## 1.5 מסלול הבקשה בתוך האפליקציה — השכבות
+
+§1 הביא את הבקשה עד "השירותים". מה קורה **בתוך** האפליקציה, מה-route ועד ה-DB וחזרה? זו אנטומיית בקשה אחת — ה-layering שמפריד ניתוב, אימות, לוגיקה וגישה-לדאטה. **למה זה חשוב ל-design review:** כשכל שכבה עושה דבר אחד, אפשר לבדוק, להחליף ולתחזק כל חלק לחוד — וברור איפה כל באג חי.
+
+| # | שכבה | תפקיד | 🎯 ב-ULease |
+|---|------|--------|--------------|
+| 1 | **Client / Admin Panel** | מקור הבקשה | פורטל הספק/לקוח + **קונסולת admin** להזנת מלאי (white-glove, D-045) |
+| 2 | **API Routes** | מיפוי endpoint → handler | `POST /inventory` · `GET /leads` — חוזה ה-REST של §2 |
+| 3 | **Middleware** | אימות · ולידציה · לוגים — *לפני* הלוגיקה | **ה-JWT של §4 נאכף כאן** + ולידציית קלט + הצמדת Correlation ID (§3) |
+| 4 | **Controllers** | מקבל בקשה ומחזיר תשובה — *בלי* לוגיקה עסקית | דק בכוונה: רק תרגום HTTP ↔ קריאה לשירות |
+| 5 | **Services / Business Logic** | **חוקי העסק** חיים כאן | "אין מלאי שלילי", ניקוד Deal Score, ניתוב מכרז — לא ב-Controller ולא ב-DB |
+| 6 | **Repository / ORM** | גישה לדאטה — מתרגם אובייקטים ↔ טבלאות | השכבה היחידה שמכירה SQL; מאפשרת להחליף/לבדוק DB בלי לגעת בלוגיקה |
+| 7 | **Database** | דאטה פרסיסטנטית | PostgreSQL — מודל §8 + pgvector (§4.5) |
+| → | **API Response** | התוצאה ללקוח | JSON אחיד (כולל pagination/filters לרשימות) |
+
+> **כלל הזהב — חוקי עסק רק ב-Service.** הטעות הנפוצה: לדחוס לוגיקה ב-Controller או ב-trigger של ה-DB. כשהיא בשכבת ה-Service, ה-eval suite (SPEC §7.2) ושערי Guardian בודקים אותה במקום אחד. **שאלת design review:** "איפה חי הכלל 'אין מלאי שלילי'?" — תשובה נכונה: Service, לא Controller, לא ה-DB.
+
+> **המסע המלא:** §1 (Gateway — תשתית) → **§1.5 (השכבות הפנים-אפליקטיביות)** → §3 (האירוע שנוצר זורם לתור). שלושתן יחד = מסע הבקשה מהקצה עד ה-DB וחזרה.
 
 ---
 
@@ -125,6 +146,7 @@ Producers                    Broker/Queue                  Consumers
 - [ ] **Idempotency:** מה קורה אם אותו אירוע תשלום מעובד פעמיים? (#3 — תשובה לא טובה = עצור הכל)
 - [ ] **Traceability:** האם כל אירוע נושא Correlation ID שמגיע עד ה-AuditLog? (SPEC §8)
 - [ ] **אימות:** JWT? איפה הטוקן נשמר בצד לקוח? כמה זמן הוא חי? (#4)
+- [ ] **שכבות:** איפה חיים חוקי העסק — Service ולא Controller/DB? איפה נאכפים JWT וולידציה — Middleware? (§1.5)
 - [ ] **ניטור:** אילו מדדי-תור מחוברים להתראות? (#3 + `AI_DATA_BI.md` §6.ד)
 
 ---
@@ -148,9 +170,10 @@ Producers                    Broker/Queue                  Consumers
 | 1.0.0 | ארבעה יסודות backend (שער כניסה · סגנונות API · תורים · JWT) ממופים לארכיטקטורת ULease + צ'קליסט design review | 2026-06-02 |
 | 1.1.0 | §4.5 חדש (D-037): מפת 21 הרכיבים מחולקת ל-MVP/V1/V2 — Redis לקטלוג, Elasticsearch לחיפוש רכב, Rate Limiter, Circuit Breaker + כלל נגד over-engineering | 2026-06-02 |
 | 1.2.0 | השלמות (D-038): Webhook (MVP — עדכוני מלאי) ו-AMQP ב-§2 · Auto Scaling, Service Discovery, Consistent Hashing ב-§4.5 | 2026-06-02 |
+| 1.3.0 | §1.5 חדש (D-055): מסלול הבקשה השכבתי (Routes→Middleware→Controller→Service→Repository→ORM→DB) — סוגר את הפער מול אינפוגרפיקת *Inventory Backend Flow*; כלל "חוקי עסק רק ב-Service" + פריט checklist | 2026-06-03 |
 
-**Attribution.** המקורות: *Reverse Proxy vs API Gateway vs Load Balancer* (Level Up Coding) · *Queues 101* (Raul Junco) · *How JWT Works* (Amigoscode) · *6 API Architecture Styles* (James Code Lab) · *System Design Cheatsheet*. העיבוד והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** המקורות: *Reverse Proxy vs API Gateway vs Load Balancer* (Level Up Coding) · *Queues 101* (Raul Junco) · *How JWT Works* (Amigoscode) · *6 API Architecture Styles* (James Code Lab) · *System Design Cheatsheet* · *Inventory Management System Backend Flow* (codepathindia). העיבוד והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
 **Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of AI_SYSTEM_DESIGN.md v1.2.0 —*
+— *End of AI_SYSTEM_DESIGN.md v1.3.0 —*
