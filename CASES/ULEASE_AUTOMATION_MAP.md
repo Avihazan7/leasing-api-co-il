@@ -1,7 +1,7 @@
 # ULease 🎯 — מפת אוטומציות AI לפי פונקציה עסקית
 
 **Module:** `CASES/ULEASE_AUTOMATION_MAP.md`
-**Version:** 1.2.0
+**Version:** 1.3.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Backlog אוטומציות מתועדף (Business layer, תחת CASES).
 **Source:** מבוסס על מסגרת *"546 AI Automation Ideas"* (AI Matt · Next Step Agents) + *"31 Claude Skills For Small Businesses"* (Anthropic plugin pack) — מסונן ומותאם ל-ULease.
@@ -27,6 +27,8 @@
 | Churn Prediction | חיזוי נטישת מנויים | V1 |
 | ROI Calculator for Prospects | מחשבון חיסכון לקונה (כמה חסכת מול מחירון) | V1 — כלי שיווקי חזק |
 | A/B Testing Recommendations | אופטימיזציית הודעות | ✅ מנוע n8n שכבה 04 |
+| Deal-to-Content Generator | עסקה סגורה → סיפור עסקה אנונימי (Sonnet) → SEO + GEO — הדלק של הלופ האורגני | V1 — מנוע הביקוש צמתים 10–12 |
+| SEO/GEO Rank Monitor | ניטור יומי: דירוגי גוגל + ציטוט בתשובות AI (Claude/ChatGPT/Perplexity) | V1 — מנוע הביקוש צומת 13 |
 
 ## 2. 🤝 קליטת לקוחות (Onboarding)
 
@@ -41,7 +43,7 @@
 
 | אוטומציה | ל-ULease | סטטוס |
 |-----------|----------|--------|
-| Knowledge-base Q&A Bot | שאלות על רכבים/תהליך/מימון | V1 (RAG) |
+| Knowledge-base Q&A Bot | שאלות על רכבים/תהליך/מימון; משמש גם כ-**AI Receptionist** במנוע הביקוש (צומת 16) — עונה, מסנן וקובע פגישה | V1 (RAG) |
 | Order Status Tracker | סטטוס עסקה ומסירה | 🔜 MVP (חדר-עסקה) |
 | Sentiment & Escalation Monitor | ניטור תגובות והסלמה | ✅ Reply Handling (שכבה 06) |
 | Complaint Trend Analyzer | מגמות תלונות | V2 |
@@ -165,7 +167,7 @@ Anthropic שחררה חבילת **31 Claude Skills לעסקים קטנים** ש�
 |---|------|
 | ✅ **כבר בנוי/מאופיין** | **18 אוטומציות** — בעיקר Sales, Onboarding, Finance, Cross |
 | 🔜 **MVP** (עד ההשקה) | 5 |
-| **V1** (Q3–Q4 26) | 12 |
+| **V1** (Q3–Q4 26) | 14 |
 | **V2** (2027) | 5 |
 
 **3 ההזדמנויות הבולטות הבאות:**
@@ -182,7 +184,8 @@ Anthropic שחררה חבילת **31 Claude Skills לעסקים קטנים** ש�
 | 1.0.0 | מפת אוטומציות מסוננת ל-ULease — 10 פונקציות, 40 אוטומציות, סטטוס ועדיפות | 2026-06-01 |
 | 1.1.0 | §11 חדש (D-035): 31 ה-Skills של Anthropic ממופים למפה — לפחות 5 אוטומציות V1/V2 הופכות ל"התקן עכשיו" (כספים, חוזים, briefings) | 2026-06-02 |
 | 1.2.0 | §12 חדש (D-040): שכבת המדידה — baseline חובה, עלות-מול-תשואה, כלל 90 הימים, ואומדן ROI כתוב כתנאי לבניית ההזדמנויות הבאות | 2026-06-02 |
+| 1.3.0 | שתי אוטומציות מהלופ האורגני (D-047): Deal-to-Content Generator + SEO/GEO Rank Monitor (§1, V1) + סימון ה-Q&A Bot כ-AI Receptionist (§3) — סה"כ 40→42 | 2026-06-03 |
 
 **Attribution.** המסגרות: *546 AI Automation Ideas* (AI Matt · Next Step Agents) · *31 Claude Skills For Small Businesses* (Anthropic). הסינון, המיפוי והתעדוף ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_AUTOMATION_MAP.md v1.2.0 —*
+— *End of CASES/ULEASE_AUTOMATION_MAP.md v1.3.0 —*

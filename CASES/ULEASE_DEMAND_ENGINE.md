@@ -1,7 +1,7 @@
 # ULease 🎯 — Demand Engine (בלופרינט n8n: אוטופיילוט צד-הביקוש)
 
 **Module:** `CASES/ULEASE_DEMAND_ENGINE.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — בלופרינט אוטומציה צד-ביקוש (Stage 2–3). המקבילה של `ULEASE_OUTBOUND_ENGINE.md` לצד הקונים.
 **Source:** n8n workflow *"One AI Agent for Local Business — Full Autopilot Customer Acquisition"* (18 צמתים, 3 פאזות + לופ אורגני) — מותאם לציות הישראלי ולמספרי ULease.
@@ -134,14 +134,28 @@
 
 ---
 
+## 8. צ'קליסט design review למייסד
+
+**לפני אישור מימוש הלופ** (משלים את הצ'קליסטים של `AI_RAG_DESIGN.md`, `AI_SYSTEM_DESIGN.md`, `AI_PROCESS_INTELLIGENCE.md` §5):
+
+- [ ] **הלולאה סגורה?** אירוע `deal.closed` (צומת 10) באמת מפעיל ייצור תוכן אוטומטית — או שתוכן נשאר משימה ידנית שנשכחת?
+- [ ] **אנונימיזציה:** סיפור עסקה מתפרסם רק באישור הקונה ובלי פרטים מזהים (חוק הגנת הפרטיות).
+- [ ] **Grounding:** כל מספר בתוכן (מחיר, חיסכון, Deal Score) מגיע מנתוני העסקה — לא מהמודל (SPEC §7.2: דיוק 100% לעובדות כספיות).
+- [ ] **HITL:** פרסום תוכן, שליחת הודעות וקביעת פגישות עוברים אישור אנושי עד שער הבגרות (§6).
+- [ ] **ציות inbound:** אף פעולה יוצאת לצרכן שלא ביקש אותה (תיקון 40) — כולל ה-callback של צומת 6.
+- [ ] **מדידה:** נתח הלידים האורגניים נמדד שבועית (KPI §7) — זה מדד ההצלחה של הלופ כולו.
+
+---
+
 ## Document Control
 
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | בלופרינט מנוע צד-ביקוש — 18 צמתים ב-3 פאזות + לופ אורגני, מותאם לציות ישראלי (inbound בלבד, תוכן אנונימי, שערי בגרות D-040), ממופה למספרי ה-playbook (146 לידים, ROI ×4.9, נתח אורגני ≥25%) | 2026-06-02 |
+| 1.1.0 | §8 חדש (D-047): צ'קליסט design review למייסד — 6 בדיקות לפני אישור מימוש הלופ (לולאה סגורה · אנונימיזציה · grounding · HITL · ציות inbound · מדידה) — הדלתא שנשמרה מיישוב הכפילות של ה-sessions המקבילים | 2026-06-03 |
 
 **Attribution.** המקור: n8n workflow *"One AI Agent for Local Business — Full Autopilot Customer Acquisition"*. ההתאמה, שכבת הציות והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
 **Confidentiality.** מסמך תפעולי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_DEMAND_ENGINE.md v1.0.0 —*
+— *End of CASES/ULEASE_DEMAND_ENGINE.md v1.1.0 —*
