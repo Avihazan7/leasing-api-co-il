@@ -2,7 +2,7 @@
 פלטפורמת מסחר, שיווק ומכירת רכבים חדשים — Leasing.co.il
 
 ## Active Modules
-- [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.8.0 — Kernel: core doctrine, layered architecture, module registry (§3 + §3.1 working sets), the activation Boot Block, and the conflict-resolution hierarchy.
+- [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.9.0 — Kernel: core doctrine, layered architecture, module registry (§3 + §3.1 working sets), the activation Boot Block, and the conflict-resolution hierarchy.
 - [`MEMORY.md`](./MEMORY.md) v1.1.0 — Persistent memory layer: schema, fully-populated identity card, active focus/projects, preferences, and the read/write protocol.
 - [`DECISION_LOG.md`](./DECISION_LOG.md) v1.34.0 — Append-only decision log: 47 founding OS + ULease decisions with rationale and status.
 - [`COWORK_SETUP.md`](./COWORK_SETUP.md) v1.2.0 — Claude Cowork onboarding: 7-step setup, the Global Instructions golden tip, context-file map, OS integration, and the Chief-of-Staff setup (5 scheduled roles) — now implemented as a real workspace in [`COWORK/`](./COWORK/).
