@@ -23,4 +23,4 @@
 
 | סניף | קובץ | ערוץ Slack | סטטוס |
 |------|------|------------|--------|
-| — | — | — | טרם נפתחו. הסניף הראשון נפתח ב-Week 1 של ה-rollout (`BRANCH_KNOWLEDGE § 7`) |
+| תל אביב / מרכז | [`tel-aviv.md`](./tel-aviv.md) | `#branch-tel-aviv-private` | 🚩 סניף דגל — pilot ראשון (Week 1). ממתין להשלמת onboarding ע"י Tech Lead (`tel-aviv.md § 7`) |
