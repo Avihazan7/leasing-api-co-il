@@ -1,7 +1,7 @@
 # LAUNCH.md — ULease Go-Live 🚀
 
 **Module:** `LAUNCH.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Master ignition file. אישור של זה = ULease באוויר.
 **Mission:** להפוך את Leasing.co.il לחברת ליסינג הראשונה בישראל שרצה מקצה-לקצה על Claude OS.
@@ -75,6 +75,24 @@
 | ו' | Retro: מה למדנו | רשימת 5 חיכוכים + 5 wins |
 
 **Go/No-Go ל-Week 2:** לפחות 70% מהצוות התחבר ל-Claude ובצע פעולה אחת מוצלחת.
+
+### 3.1 מסלול הדרכה — "Master Claude in a Week"
+
+במקביל ל-pilot התפעולי, כל משתמש חדש (כולל סוכני סניפים — `BRANCH_KNOWLEDGE § 7`)
+עובר מסלול 7-ימים מ-beginner ל-advanced. כל יום = deliverable נמדד, לא צפייה פסיבית.
+
+| יום | פוקוס | תוצר נמדד | קשר ל-OS |
+|-----|--------|------------|-----------|
+| **1 · Foundations** | מה זה Claude, אנטומיית prompt טוב (role/context/instructions/examples/format) | 5 prompts חזקים בסגנונות שונים | `DEV_ENV נספח ד'` (setup) |
+| **2 · Better Prompts** | Zero/Few-shot, CoT, system vs. user, הימנעות מעמימות | template לשימוש הנפוץ ביותר שלך | `COMMAND_API` (הפקודות = templates מוכנים) |
+| **3 · Deeper Use Cases** | סיכום, חילוץ דאטה, ניתוח, long-context | 3 משימות אמיתיות הושלמו | `/tldr`, `/deal-quote`, `/fleet-report` |
+| **4 · Advanced Control** | steering טון, constraining (format/length/rules), XML/JSON schemas, iteration | prompt מורכב שמייצר פלט מובנה מושלם | Karpathy doctrine (`AGENT_BLUEPRINT § 10`) |
+| **5 · Build Workflows** | chaining, tools & APIs, אינטגרציות, מתי לאוטמט מול מתי prompt | workflow שחוסך זמן | `N8N_AUTOMATION` (5 workflows מוכנים) |
+| **6 · Power Techniques** | meta-prompting, tree-of-thought, custom knowledge, long context, Artifacts | פתרון high-impact לבעיה מורכבת | `AGENT_BLUEPRINT § 9` (patterns) |
+| **7 · Optimize & Own** | הערכה ושיפור, ספריית prompts אישית, אמינות, ה-playbook שלך | playbook אישי + אוסף משאבים | `BRANCHES/<סניף>.md` (ה-playbook של הסניף) |
+
+**עיקרון:** *Practice daily. Build real things.* ההדרכה היא על משימות ULease אמיתיות —
+לא תרגילי צעצוע. ה-deliverable של יום 7 (playbook) הופך לחלק מספר הידע של הסניף.
 
 ---
 
@@ -225,6 +243,7 @@ git push --tags
 | גרסה | תאריך | שינוי |
 |------|--------|-------|
 | 1.0.0 | 2026-05-28 | Initial ignition — Go-Live master file |
+| 1.1.0 | 2026-06-03 | + § 3.1 מסלול הדרכה "Master Claude in a Week" — 7 ימים, deliverable יומי, ממופה למודולי ה-OS; משולב ב-onboarding סניפים |
 
 ---
 

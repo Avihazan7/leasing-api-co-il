@@ -929,11 +929,88 @@ claude -p "echo test" --no-interactive
 
 ---
 
+## נספח ג' — מפת ה-Anthropic Agentic Ecosystem (מיקום ULease)
+
+מפת המוצרים המלאה של Anthropic (research → reasoning → production), עם סימון מה
+ULease משתמש **היום**, מה ב-**roadmap**, ומה **לא רלוונטי**. מקור: Anthropic ecosystem map.
+
+| שכבה | רכיב | מה זה | סטטוס ב-ULease |
+|------|------|--------|-----------------|
+| **Core Models** | Opus 4.8 | שיפוט חד, agentic coding, computer use | ✅ ברירת מחדל ל-reasoning (`/model`, מודול 3) |
+| | Sonnet 4.6 | איזון מהירות⇄אינטליגנציה ל-business workflows | ✅ ברירת מחדל ל-throughput (drafts, `/deal-quote`) |
+| | Haiku 4.5 | מהיר וזול ל-high-volume | 🟡 roadmap — n8n batch (סיווג לידים בכמות) |
+| | Claude Mythos (preview) | מוגבל ל-security orgs נבחרים | ❌ לא רלוונטי כרגע |
+| **Framework & Tools** | Agent SDK | בניית agents אוטונומיים self-hosted | ✅ `stage-a/` בנוי על העיקרון הזה |
+| | API Core | הבסיס לכל אינטגרציה | ✅ כל קריאה ל-Claude עוברת דרכו |
+| | **MCP** | סטנדרט חיבור AI לכלים ודאטה | ✅ `DEV_ENV § 10` + n8n דו-כיווני (`N8N § 8`) |
+| | Managed Agents | sessions stateful מתארחים | 🟡 שוקלים מול self-hosted (חיסיון — `AGENT_BLUEPRINT § 6`) |
+| **Production & Workspace** | Claude Code | coding agent — עד מאות subagents מקבילים | ✅ Track F (`§ 9`) — זה מה שמריץ את ה-OS הזה |
+| | Cowork | agentic AI לעובדי ידע (Office) | ✅ `WINDOWS_DEPLOYMENT` — task pane |
+| | Claude Design | ויזואלים/מצגות ב-Opus | 🟡 חופף ל-`/board-deck` |
+| | Claude Security | identity · access · sandboxing | 🟡 roadmap — מתואם ל-Gartner (`AGENT_BLUEPRINT § 6.1`) |
+| **Memory & Storage** | Memory Store · Context Cache · Artifact Repo | זיכרון ארוך-טווח, יעילות tokens, אחסון תוצרים | 🟡 מודול 5 + `MEMORY.md` (roadmap) · `stage-a/shared-memory.js` הוא הגרעין |
+| **Security & Governance** | Constitutional AI Checker · RLHF Compliance · Adversarial Defense | אכיפת alignment, הגנה מ-prompt injection | ✅ עיקרון § 6 — אנחנו מקודדים guardrails, לא רק מבקשים |
+
+**מה זה נותן ל-ULease:** המפה מאשרת שאנחנו על ה-stack הנכון — Opus/Sonnet/Haiku
+לפי משימה, MCP כשכבת חיבור, Claude Code כ-runtime, ו-governance מובנה. הפערים
+היחידים (Memory Store, Claude Security) כבר ב-roadmap שלנו (`AGENT_BLUEPRINT § 7`).
+
+---
+
+## נספח ד' — Setup סטנדרטי: "Claude שנותן תשובות טובות"
+
+setup checklist לכל משתמש חדש ב-ULease (סוכן, אנליסט, מפתח). מבוסס על דוקטרינת
+ה-Cowork + folder-first. **הערך כאן:** משתמש מוגדר נכון פעם אחת = תשובות טובות לתמיד.
+
+### ד.1 לפני שמקלידים
+
+```
+□ Extended Thinking פעיל
+□ Opus 4.8 נבחר (reasoning) / Sonnet 4.6 (שוטף)
+□ Cowork פתוח — לא chat ריק
+□ הצבע על התיקייה לפני המשימה הראשונה
+```
+
+### ד.2 מבנה התיקייה — `Claude-Work/`
+
+| תת-תיקייה | תוכן |
+|------------|------|
+| `ABOUT-ME/` | מי אתה + איך אתה כותב |
+| `PROJECTS/` | אחת לכל פרויקט חי |
+| `TEMPLATES/` | העבודה הטובה ביותר שלך מהעבר |
+| `OUTPUTS/` | איפה Claude שומר קבצים |
+
+### ד.3 שלושת קבצי ה-`ABOUT-ME/`
+
+| קובץ | מה נכנס |
+|------|---------|
+| `about-me.md` | מה אתה עושה ביום-יום (לא קורות חיים) |
+| `my-voice.md` | טון, ביטויים שאתה שונא, 2–3 דוגמאות כתיבה |
+| `my-rules.md` | שאל קודם · הצג תוכנית · אל תמחק בלי אישור |
+
+> **קובץ אחד מצוין מנצח 50 העלאות אקראיות.**
+
+### ד.4 Set once — Global Instructions (Cowork → Edit)
+
+```
+"I'm [שם]. [תפקיד]. Read my files before every task.
+ Ask questions before executing. Show a plan first.
+ Never delete files without my explicit approval."
+```
+
+**הקשר ל-OS:** שלושת קבצי ה-`ABOUT-ME` הם הגרסה האישית של מה ש-`CLAUDE.md` עושה
+ברמת הריפו, ו-`my-rules.md` הוא בדיוק ה-Working Rules (`AGENT_BLUEPRINT § 10.4`)
+ברמת המשתמש. **לסניפים:** הקובץ הזה הוא חלק מערכת ה-onboarding של `BRANCH_KNOWLEDGE.md` —
+כל סוכן חדש מקים `Claude-Work/` כשהוא מצטרף לסניף.
+
+---
+
 ## גרסאות
 
 | גרסה | תאריך | שינוי |
 |------|--------|-------|
 | 1.0.0 | 2026-05-28 | Initial — 6 tracks + MCP + Computer Use + integration with COMMAND_API |
+| 1.1.0 | 2026-06-03 | + נספח ג' מפת Anthropic Ecosystem (מיקום ULease, present/roadmap/N-A) · + נספח ד' Setup סטנדרטי "Claude שנותן תשובות טובות" (Cowork folder-first, ABOUT-ME, Global Instructions) — מחובר ל-onboarding של BRANCH_KNOWLEDGE |
 
 ---
 

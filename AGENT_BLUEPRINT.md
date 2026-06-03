@@ -1,7 +1,7 @@
 # AGENT_BLUEPRINT.md — מ-Skill ל-Agent: דוקטרינת ה-System-First
 
 **Module:** `AGENT_BLUEPRINT.md`
-**Version:** 1.2.0
+**Version:** 1.3.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Doctrine. הגשר בין ה-Docs OS ל-Agent Runtime.
 **Integrates with:** `CLAUDE.md`, `COMMAND_API.md`, `DEV_ENVIRONMENTS.md`, `LAUNCH.md`, `stage-a/`
@@ -145,6 +145,22 @@ agent = כל ה-8.**
 **העיקרון:** ככל שהממשל נאכף ב-**קוד** ולא ב-prompt — הוא חזק יותר. `stage-a`
 מראה את הדרך; כל agent חדש מקודד את ה-guardrails שלו, לא רק מבקש אותם.
 
+### 6.1 חיזוק חיצוני — Gartner על אבטחת AI
+
+Gartner (webinar, יוני 2026) מפרק 5 תפיסות שגויות — וכל אחת מאשרת החלטה שכבר
+קיבלנו. זה החומר להציג ל-DPO ולמשקיעים כשנשאלים "על סמך מה הממשל שלכם":
+
+| ❌ התפיסה השגויה | ✅ המציאות (Gartner) | אצלנו |
+|-------------------|------------------------|--------|
+| כל AI מנוהל אותו דבר ברמת סיכון | ל-Traditional/GenAI/Agentic יש שיקולי אבטחה נפרדים + חופפים | בדיוק ההפרדה שלנו: Skill ≠ n8n Workflow ≠ stage-a Agent (`N8N § 11`) |
+| צריך ממשל סייבר חדש לגמרי ל-AI | מתאימים בקרות קיימות; גישות חדשות יתפתחו | ה-DPO מרחיב מסגרת קיימת — לא בונה מאפס (`WINDOWS § 13`) |
+| סיכוני AI דורשים פרקטיקות חדשות | AI בעיקר **מגביר** סיכונים קיימים; מטפלים בכלים קיימים | HMAC, kill-switch, audit — אותם כלים, היקף רחב יותר |
+| Agents בטוחים לשימוש אוטונומי | **לא** פורסים agents בלי פיקוח ו-safeguards | human gates (§ 4) + step ceiling + safe-stop — אכוף בקוד |
+| ערך מובטח — AI סייבר משפר יעילות | נדרשת גישה מובנית אך זריזה להערכת יכולות | Evals (§ 5) לפני כל הרחבה. אין פריסה בלי baseline |
+
+**שורה תחתונה:** הדוקטרינה שלנו עומדת בביקורת Gartner סעיף-סעיף. זה לא מקרה —
+זה מה שקורה כשבונים system-first.
+
 ---
 
 ## 7. Roadmap — השלבים הבאים
@@ -155,6 +171,9 @@ agent = כל ה-8.**
 | **Stage-B** | מנהל + N עובדים מקבילים; routing דינמי | stage-a |
 | **Stage-C** | MCP פנימי חי (`mcp-ulease`) כ-tool layer ל-agents | `DEV_ENV § 10.5` |
 | **Evals harness** | מדידה אוטומטית של 5 המטריקות (§ 5) ב-CI | Stage-B |
+| **A2A protocol** | פרוטוקול תקשורת מנהל⇄עובדים (מקור: Gulli ch.15, ראה § 9.6) | Stage-B |
+| **Exception & Recovery** | recovery doctrine — לא רק safe-stop (Gulli ch.12, § 9.6) | stage-a |
+| **Resource-Aware routing** | בחירת מודל דינמית לפי משימה (Gulli ch.16) — היום סטטי במודול 3 | Evals harness |
 | **OPERATING_SYSTEM.md** | מסמך-על — סוגר dangling ref אחרון ב-load order | כל המודולים |
 
 **שלוש הפניות מתות** ב-`CLAUDE.md` load order (`OPERATING_SYSTEM.md`, `MEMORY.md`,
@@ -247,9 +266,25 @@ Roadmap אמר "מנהל + N עובדים מקבילים". ההגדרה החדה
 **הכלל הראשון:** אם Skill מספיק, אל תבנה agent. agent מצדיק את עצמו רק כשמודול 6
 (orchestration) באמת נדרש.
 
----
+### 9.6 הקנון — *Agentic Design Patterns* (Antonio Gulli, 424 עמ')
 
-## 10. Coding Workflow Doctrine — Karpathy's CLAUDE.md
+הספר הוא ה-reference המלא של התחום — 21 פרקים + נספחים. מיפוי מול מה שיש לנו:
+
+| חלק בספר | פרקים | מכוסה אצלנו | פער |
+|-----------|--------|--------------|------|
+| **Part 1 · Patterns** | Chaining, Routing, Parallelization, Reflection, Tool Use, Planning, Multi-Agent | ✅ § 9.1 — כל 7 הפרקים ממופים ל-patterns 1–9 שלנו | — |
+| **Part 2 · תשתית** | Memory Management, Learning, **MCP**, Goal Setting | 🟡 מודול 5 (חלקי) · MCP ב-`DEV_ENV § 10` · מודול 1 | **Memory tiers** — מאשרר את `MEMORY.md` כ-priority |
+| **Part 3 · עמידות** | Exception Handling & Recovery, **Human-in-the-Loop**, RAG | 🟡 human gates (§ 4) · vector memory (מודול 5) | **Exception/Recovery doctrine** — אין לנו. נכנס ל-roadmap |
+| **Part 4 · מתקדם** | **A2A (Inter-Agent)**, Resource-Aware Optimization, Reasoning, **Guardrails**, **Evaluation & Monitoring**, Prioritization | ✅ Guardrails (§ 6) · Evals (§ 5) · cost (מודול 3) | **A2A protocol** — רלוונטי ל-Stage-B (תקשורת מנהל⇄עובדים) |
+
+**3 תוספות ל-roadmap (§ 7) מהספר:**
+
+1. **Exception Handling & Recovery** — מה agent עושה כשהוא נכשל באמצע (לא רק safe-stop — recovery).
+2. **A2A (Agent-to-Agent)** — פרוטוקול התקשורת בין מנהל לעובדים ב-Stage-B. הספר נותן את הסטנדרט.
+3. **Resource-Aware Optimization** — בחירת מודל דינמית לפי משימה (היום זה סטטי במודול 3).
+
+**אימות עצמי:** מתוך 21 פרקי הספר — 16 כבר ממופים למודול או pattern קיים אצלנו.
+ה-blueprint לא המציא כלום; הוא תמצת נכון.
 
 § 1–§ 9 עונים על *"איך בונים agent"*. הסעיף הזה עונה על *"איך agent עובד על קוד"* —
 מבוסס על ה-CLAUDE.md של Andrej Karpathy. התובנה המרכזית שלו היא **בדיוק** התזה של
@@ -341,6 +376,7 @@ coders — they'll be the people who build the best systems around AI agents."*
 | 1.0.0 | 2026-05-31 | Initial — 8-module doctrine, coverage map, stage-a bridge, evals layer |
 | 1.1.0 | 2026-05-31 | + § 9 Orchestration Patterns — 9 patterns, ULease Skills map, stage-a קלסיפיקציה (Plan & Execute), Stage-B חדד (= P&E + Replan) |
 | 1.2.0 | 2026-06-03 | + § 10 Coding Workflow Doctrine — עקרונות ה-CLAUDE.md של Karpathy: 6 עקרונות workflow, מיפוי ל-§ 1/§ 5/§ 9, Working Rules block לשני הריפואים, mindset |
+| 1.3.0 | 2026-06-03 | + § 6.1 חיזוק Gartner (5 misconceptions ⇄ הדוקטרינה) · + § 9.6 מיפוי הקנון *Agentic Design Patterns* (Gulli) · 3 פריטי roadmap חדשים (A2A · Exception&Recovery · Resource-Aware) |
 
 ---
 
