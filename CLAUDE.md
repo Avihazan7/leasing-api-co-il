@@ -13,6 +13,7 @@
 - `N8N_AUTOMATION.md` v1.1.0 — שכבת האוטומציה התפעולית: n8n כ-Glue Layer בין ה-Outbox של `leasing-api` לעולם העסקי. חיבור HMAC+Webhook, קטלוג אירועים→workflows, 5 workflows מוכנים, מיפוי ל-AGENT_BLUEPRINT § 9 (n8n=Hands · stage-a=Brain), **+ § 7.3 אנטומיית AI Agent** (Form→Tools Agent→Switch→Slack ⇒ Dealer Onboarding), MCP דו-כיווני, ממשל ו-kill-switch.
 - `BRANCH_KNOWLEDGE.md` v1.0.0 — תשתית הידע לסניפים: ערוץ Slack פרטי + ספר ידע (`BRANCHES/`) לכל סניף/סוכנות, צינור דו-כיווני Edge⇄Core (תובנות 💡/⚠️ → W6 זיקוק שבועי → OS), הפרדת סניפים (RLS doctrine), rollout משולב ב-LAUNCH.
 - `LEASE_JOURNEY.md` v1.0.0 — The Ultimate Lease Journey (ULJ): הארכיטקטורה ההתנהגותית של מסע הלקוח. 4 עקרונות-על (IE/פיירשטיין · Big Five · Game Theory/Nash · מו"מ מנצח), 5 שלבים (התעניינות → הפיכה → מו"מ → סגירה → מסירה) עם אקטים, מיפוי כל אקט ל-OS (COMMAND_API · n8n · Power BI · stage-a · BRANCHES), KPIs לכל שלב, ו-rollout דו-נתיבי **Manual-first** (עסקאות ידניות לפי ה-playbook לפני האוטומציה).
+- `DIGITAL_CORE.md` v1.0.0 — Multi-Agent Super Skill / Digital Core: השכבה הדיגיטלית שמריצה את ה-ULJ. 3 שכבות (**Salesforce** כמרכז עצבים · 4 סוכני AI: Profiler/Mediator/Strategist/Experience · pipeline דיגיטלי 6-שלבי כולל KYC ביומטרי + חיתום דינמי), מיפוי הסוכנים ל-ULJ ול-AGENT_BLUEPRINT § 9, תרחיש-קנון "אבי כהן" כ-eval, מודל נתונים (custom fields), § 6 החלטת CRM=Salesforce (צד-לצד עם leasing-api) + blueprint אינטגרציה, יעד סקייל 130+.
 
 ## Module Load Order
 1. `OPERATING_SYSTEM.md`      ← roadmap (ראה AGENT_BLUEPRINT § 7)
@@ -26,9 +27,10 @@
 9. `N8N_AUTOMATION.md`        ← אוטומציה תפעולית על אירועי ה-API
 10. `BRANCH_KNOWLEDGE.md`     ← תשתית הידע לסניפים (Edge⇄Core)
 11. `LEASE_JOURNEY.md`        ← מסע הלקוח (ULJ) — ה-spine ההתנהגותי על כל המודולים
-12. `INVESTOR_RELATIONS.md`   ← roadmap
-13. `CASES/*.md`
-14. `BRANCHES/*.md`           ← ספרי הידע של הסניפים
+12. `DIGITAL_CORE.md`         ← מימוש דיגיטלי של ה-ULJ (Salesforce + Multi-Agent)
+13. `INVESTOR_RELATIONS.md`   ← roadmap
+14. `CASES/*.md`
+15. `BRANCHES/*.md`           ← ספרי הידע של הסניפים
 
 ## Working Rules
 כללי עבודה מחייבים לכל agent שעובד על הריפו (מקור: `AGENT_BLUEPRINT.md § 10` — Karpathy doctrine):
