@@ -12,6 +12,7 @@
 - `power-bi-essential-concepts.md` v1.1.0 — 10 מושגי יסוד ב-Power BI + **§ דשבורדים ל-ULease**: חיבור ל-Supabase, מודל Star Schema על `settlements`/`ledger_entries`/`vehicle_read_model`, מדדי DAX (מכירות, עמלות, המרה), RLS לסוכנויות.
 - `N8N_AUTOMATION.md` v1.1.0 — שכבת האוטומציה התפעולית: n8n כ-Glue Layer בין ה-Outbox של `leasing-api` לעולם העסקי. חיבור HMAC+Webhook, קטלוג אירועים→workflows, 5 workflows מוכנים, מיפוי ל-AGENT_BLUEPRINT § 9 (n8n=Hands · stage-a=Brain), **+ § 7.3 אנטומיית AI Agent** (Form→Tools Agent→Switch→Slack ⇒ Dealer Onboarding), MCP דו-כיווני, ממשל ו-kill-switch.
 - `BRANCH_KNOWLEDGE.md` v1.0.0 — תשתית הידע לסניפים: ערוץ Slack פרטי + ספר ידע (`BRANCHES/`) לכל סניף/סוכנות, צינור דו-כיווני Edge⇄Core (תובנות 💡/⚠️ → W6 זיקוק שבועי → OS), הפרדת סניפים (RLS doctrine), rollout משולב ב-LAUNCH.
+- `LEASE_JOURNEY.md` v1.0.0 — The Ultimate Lease Journey (ULJ): הארכיטקטורה ההתנהגותית של מסע הלקוח. 4 עקרונות-על (IE/פיירשטיין · Big Five · Game Theory/Nash · מו"מ מנצח), 5 שלבים (התעניינות → הפיכה → מו"מ → סגירה → מסירה) עם אקטים, מיפוי כל אקט ל-OS (COMMAND_API · n8n · Power BI · stage-a · BRANCHES), KPIs לכל שלב, ו-rollout דו-נתיבי **Manual-first** (עסקאות ידניות לפי ה-playbook לפני האוטומציה).
 
 ## Module Load Order
 1. `OPERATING_SYSTEM.md`      ← roadmap (ראה AGENT_BLUEPRINT § 7)
@@ -24,9 +25,10 @@
 8. `power-bi-essential-concepts.md` ← BI ודשבורדים על נתוני ה-API
 9. `N8N_AUTOMATION.md`        ← אוטומציה תפעולית על אירועי ה-API
 10. `BRANCH_KNOWLEDGE.md`     ← תשתית הידע לסניפים (Edge⇄Core)
-11. `INVESTOR_RELATIONS.md`   ← roadmap
-12. `CASES/*.md`
-13. `BRANCHES/*.md`           ← ספרי הידע של הסניפים
+11. `LEASE_JOURNEY.md`        ← מסע הלקוח (ULJ) — ה-spine ההתנהגותי על כל המודולים
+12. `INVESTOR_RELATIONS.md`   ← roadmap
+13. `CASES/*.md`
+14. `BRANCHES/*.md`           ← ספרי הידע של הסניפים
 
 ## Working Rules
 כללי עבודה מחייבים לכל agent שעובד על הריפו (מקור: `AGENT_BLUEPRINT.md § 10` — Karpathy doctrine):
