@@ -151,7 +151,10 @@
 | **Claude ⇄ Salesforce** | Salesforce MCP server (חיבור ב-`DEV_ENVIRONMENTS`) | קריאה/כתיבת לידים, פרופילים, סטטוסים מתוך Skills |
 | **אימות** | OAuth 2.0 (JWT Bearer / Connected App) · secrets ב-vault | — |
 
-**מצב נוכחי:** ה-blueprint מתועד; אין חיבור חי עד שהאישורים יסופקו. ראה תשובה למשתמש.
+**מצב נוכחי:** ה-blueprint ממומש. סנכרון `leasing-api → Salesforce` כתוב ונבדק
+(`leasing-api/src/integrations/salesforce/`, רץ ב-mock עד שיסופקו credentials),
+ומודל הנתונים מוגדר כ-metadata-as-code פריס (`leasing-api/salesforce/`,
+`sf project deploy`). חסר רק org + credentials כדי לעבור ל-live.
 
 ---
 
