@@ -12,6 +12,7 @@
 - `power-bi-essential-concepts.md` v1.1.0 — 10 מושגי יסוד ב-Power BI + **§ דשבורדים ל-ULease**: חיבור ל-Supabase, מודל Star Schema על `settlements`/`ledger_entries`/`vehicle_read_model`, מדדי DAX (מכירות, עמלות, המרה), RLS לסוכנויות.
 - `N8N_AUTOMATION.md` v1.1.0 — שכבת האוטומציה התפעולית: n8n כ-Glue Layer בין ה-Outbox של `leasing-api` לעולם העסקי. חיבור HMAC+Webhook, קטלוג אירועים→workflows, 5 workflows מוכנים, מיפוי ל-AGENT_BLUEPRINT § 9 (n8n=Hands · stage-a=Brain), **+ § 7.3 אנטומיית AI Agent** (Form→Tools Agent→Switch→Slack ⇒ Dealer Onboarding), MCP דו-כיווני, ממשל ו-kill-switch.
 - `BRANCH_KNOWLEDGE.md` v1.0.0 — תשתית הידע לסניפים: ערוץ Slack פרטי + ספר ידע (`BRANCHES/`) לכל סניף/סוכנות, צינור דו-כיווני Edge⇄Core (תובנות 💡/⚠️ → W6 זיקוק שבועי → OS), הפרדת סניפים (RLS doctrine), rollout משולב ב-LAUNCH.
+- `CTO_REVIEW.md` v1.0.0 — ביקורת CTO על ULease v1.2, תגובה מבוססת-קוד. הצלבת 10 נקודות הביקורת מול הקוד ב-`leasing-api`: תיקון 3 טענות (Event Bus / Data Warehouse / RLS קיימים כ-seams), scorecard מתוקן, מפת דרכים P0–P7 ל-Platform v2.0, ותיעוד הצעד הראשון (Decision Engine seam, 55/55 טסטים, תואם-לאחור).
 
 ## Module Load Order
 1. `OPERATING_SYSTEM.md`      ← roadmap (ראה AGENT_BLUEPRINT § 7)
@@ -21,12 +22,13 @@
 5. `DEV_ENVIRONMENTS.md`      ← סביבות פיתוח מקצה לקצה
 6. `LAUNCH.md`                ← Master Switch — Go-Live
 7. `AGENT_BLUEPRINT.md`       ← Docs OS ⇄ Agent Runtime (stage-a/)
-8. `power-bi-essential-concepts.md` ← BI ודשבורדים על נתוני ה-API
-9. `N8N_AUTOMATION.md`        ← אוטומציה תפעולית על אירועי ה-API
-10. `BRANCH_KNOWLEDGE.md`     ← תשתית הידע לסניפים (Edge⇄Core)
-11. `INVESTOR_RELATIONS.md`   ← roadmap
-12. `CASES/*.md`
-13. `BRANCHES/*.md`           ← ספרי הידע של הסניפים
+8. `CTO_REVIEW.md`            ← ביקורת CTO ⇄ קוד + מפת דרכים Platform v2.0
+9. `power-bi-essential-concepts.md` ← BI ודשבורדים על נתוני ה-API
+10. `N8N_AUTOMATION.md`       ← אוטומציה תפעולית על אירועי ה-API
+11. `BRANCH_KNOWLEDGE.md`     ← תשתית הידע לסניפים (Edge⇄Core)
+12. `INVESTOR_RELATIONS.md`   ← roadmap
+13. `CASES/*.md`
+14. `BRANCHES/*.md`           ← ספרי הידע של הסניפים
 
 ## Working Rules
 כללי עבודה מחייבים לכל agent שעובד על הריפו (מקור: `AGENT_BLUEPRINT.md § 10` — Karpathy doctrine):

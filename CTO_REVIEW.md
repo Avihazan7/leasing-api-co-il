@@ -1,0 +1,111 @@
+# CTO_REVIEW.md — ביקורת CTO על ULease v1.2: תגובה מבוססת-קוד + מפת דרכים ל-Platform v2.0
+
+**גרסה:** v1.0.0
+**מקור הביקורת:** "ביקורת CTO מלאה – ULease v1.2" (ציון כולל 7.8/10)
+**מתודולוגיה:** כל טענה בביקורת הוצלבה מול הקוד בפועל ב-`leasing-api` (לא מול המסמך). היכן שהקוד סותר את הביקורת — מתועד כאן עם הפניית קובץ.
+
+---
+
+## 0. תקציר מנהלים (TL;DR)
+
+הביקורת **צודקת בתזה המרכזית**: ULease נבנתה כ-Application ולא כ-Platform, וה-gap הגדול הוא Multi-Tenancy ו-Domain Layer. **מאמצים את התזה.**
+
+אבל הביקורת **קוראת את המסמך ולא את הקוד**, ולכן שלוש מהטענות החריפות שלה כבר שגויות חלקית — התשתית קיימת כ-**seams** (נקודות הרחבה), לא כחוסר:
+
+| טענת הביקורת | מצב בפועל בקוד | מסקנה |
+|---|---|---|
+| "הכל Sync, אין Event Bus" | קיים **Transactional Outbox + Relay** (`src/events/outbox.ts`, `outboxRelay.ts`) ו-`EventSink` interface שמתועד מפורשות: *"Production wires Kafka/PubSub here"* (`src/events/sink.ts`) | ❌ לא מדויק — הגב כבר אסינכרוני. Kafka/NATS = **החלפת מימוש sink**, לא ארכיטקטורה חדשה |
+| "אין Data Warehouse / אין אנליטיקה" | קיימת סכמת `bi` עם **star-schema views** מלאות (`src/db/bi_views.sql`) — dims + facts, ללא ETL lag | ⚠️ חלקית — קיימת אנליטיקה ב-Postgres. ה-gap = OLAP store נפרד דרך CDC ל-**scale**, לא "אין אנליטיקה" |
+| "RLS — רוב הסטארטאפים לא מגיעים לזה" (שבח) | `schema.sql` הפורטבילי **אינו** מכיל RLS. ה-spec מציין: *"RLS בצד ה-DB (כיום RLS מוגדר בצד Power BI לפי `dealer_account`)"* (`docs/specs/bi-analytics-layer.md`) | ⚠️ השבח אספירציוני — RLS בצד ה-DB עדיין **חוב פתוח**, לא הישג |
+
+הטענות **שצודקות במלואן ודורשות פעולה**: אין `tenant_id` בשום מקום (#7), Deal Score הוא composite יחיד (#3), אין Domain Layer מפורש (#2), אין Matching/Fraud/Billing/Search (#8,9,10,6).
+
+**מה שכבר בוצע בתגובה לביקורת (code, לא slides):** נפתח seam ל-Decision Engine ב-`leasing-api` — ראו §4.
+
+---
+
+## 1. תיקון ה-Scorecard
+
+הביקורת נתנה ציונים על בסיס המסמך. לאחר הצלבה מול הקוד, שני ציונים עולים — לא כי המערכת "מוכנה ל-scale", אלא כי **נקודות ההרחבה כבר קיימות** וזה מקצר את המרחק:
+
+| תחום | ציון הביקורת | מתוקן | נימוק (מבוסס-קוד) |
+|---|---|---|---|
+| Scalability | 6/10 | **6.5/10** | Outbox+Relay+EventSink seam קיים; חסר broker אמיתי + tenant sharding |
+| Data Platform | 5/10 | **5.5/10** | סכמת `bi` star-schema קיימת; חסר OLAP + CDC + Feature Store |
+| Security | 8/10 | **7/10** | ⬇️ — RLS בצד ה-DB עדיין לא נאכף בקוד הפורטבילי; ה-8 היה על סמך הנחה |
+| AI Readiness | 4/10 | 4/10 | מאשרים — וזה **בכוונה** (ראו §5) |
+| Multi-Tenant | (לא דורג) | **2/10** | אין `tenant_id` בכלל — החוב היקר ביותר להחזר רטרואקטיבי |
+
+**Total מתוקן: ~7.6/10** — לא ירידה מהותית, אבל מבוסס-ראיות.
+
+---
+
+## 2. מפת דרכים מתועדפת ל-Platform v2.0
+
+תיעדוף לפי **cost-of-delay** (כמה יקר לדחות), לא לפי קושי. הכלל: דברים שקשה להחזיר רטרואקטיבית — קודם.
+
+### P0 · Multi-Tenancy (`tenant_id` + RLS בצד DB) — 🔴 הכי דחוף
+**למה ראשון:** זה היקר ביותר להחזר רטרואקטיבי. כל שורה ב-`vehicles`/`settlements`/`ledger_entries`/`vehicle_read_model`/`payment_transfers`/`outbox` תצטרך backfill, וכל RLS policy תיכתב מחדש. White-Label = "הכסף הגדול" (ביקורת #7) חסום בלי זה.
+**צעד ראשון כירורגי:** `tenant_id TEXT NOT NULL DEFAULT 'leasing-co-il'` על הטבלאות הליבה (additive, ברירת מחדל שומרת תאימות) → composite indexes → `tenant_id` ב-`outbox.payload` → resolver של API-key→tenant ב-`hmacAuth.ts` → RLS policies בצד Supabase. **חשוב:** לא לשחרר עמודה בלי אכיפה — זה חוב נסתר (Working Rule 7).
+
+### P1 · Decision Engine (החלפת ה-bottleneck של Deal Score) — 🟢 הותחל
+ביקורת #3 צודקת: `dealScore.ts` הוא composite יחיד. **ה-seam כבר נפתח** (§4). ההמשך: לרשום dimensions אמיתיים ככל שמגיעים נתונים — `supplier`, `risk`, `conversion`, `market` — ולהחליף את ה-route `/deal-score` ב-`/decision` כשיש יותר מ-dimension אחד.
+
+### P2 · Event Backbone (Outbox → Broker) — 🟡
+ביקורת #1 כמעט-צודקת. ה-Outbox קיים; מה שחסר זה sink חיצוני. **צעד ראשון:** מימוש `KafkaEventSink`/`NatsEventSink` כנגד ה-interface הקיים ב-`src/events/sink.ts` (השורה כבר מתועדת: *"Production wires Kafka/PubSub here"*). אפס שינוי ב-domain — רק dependency injection.
+
+### P3 · Data Platform (CDC → OLAP + Feature Store) — 🟡
+ביקורת #4,#5. סכמת `bi` נותנת מענה ל-Power BI היום, אבל לא ל-scale. **צעד:** Debezium/Supabase CDC → ClickHouse/BigQuery; `features/` כמודול שמנהל את האותות מ-`signals` (ביקורת #5) כ-source-of-truth ל-ML עתידי.
+
+### P4 · Matching Engine — 🟢 ההזדמנות התחרותית (ביקורת #8)
+`Customer → Intent → Matching → Top-3 Deals`. נבנה **מעל** ה-Decision Engine (P1): matching = הרצת ה-decision על מועמדים ודירוג. זו הסיבה ש-P1 קודם ל-P4.
+
+### P5 · Anti-Fraud Layer (ביקורת #9) — 🟡
+`Fraud Score` לליד/ספק/עסקה. נכנס כ-`Scorer` ב-Decision Engine (dimension `risk`) — שוב, P1 הוא ה-enabler.
+
+### P6 · Billing Engine (ביקורת #10) — ⚪
+מנויים/CPA/CPL. Domain נפרד `billing/`. נשען על ה-`ledger_entries` הקיים (append-only, money-conserving) — תשתית טובה כבר קיימת.
+
+### P7 · Search (ביקורת #6) — ⚪
+OpenSearch/Typesense מעל קטלוג. נדחה — Postgres FTS מספיק עד עשרות אלפי רכבים.
+
+---
+
+## 3. Domain Layer (ביקורת #2) — עמדה
+
+מאמצים את העיקרון (DDD: Application / Domain / Infrastructure) אבל **לא עושים Big-Bang refactor**. המבנה הנוכחי כבר חצי-שם: `inventory/` יש לו `service`/`repository`/`stateMachine` (הפרדה נקייה). הגישה: לחלץ Domain Layer **מודול-מודול** כשנוגעים בו ממילא (Strangler Fig), לא לשפץ קוד עובד (Working Rule 4).
+
+---
+
+## 4. הצעד שבוצע: Decision Engine seam (`leasing-api`)
+
+מענה ישיר לביקורת #3. נוסף `src/scoring/decisionEngine.ts` — primitive קומפוזיציה דטרמיניסטי שמרכיב כמה `Scorer` עצמאיים ל-`Decision` אחד, עם נרמול משקלים על-פני ה-dimensions הפעילים.
+
+- **תאימות לאחור מלאה:** עם ה-`dealScorer` היחיד שרשום כברירת מחדל, `evaluate(ctx).score` **זהה** ל-`scoreDeal(ctx.deal).score`. ה-route `/deal-score` ו-`dealScore.ts` לא שונו.
+- **לא ספקולטיבי:** dimensions עתידיים (`supplier`/`risk`/`conversion`/`market`) **לא** מומשו כ-stubs ריקים — הם דורשים נתונים שהסכמה עדיין לא נושאת, ו-stub ריק = חוב נסתר. נפתחה רק נקודת ההרחבה.
+- **מאומת:** `test/decisionEngine.test.ts` (5 טסטים) — שקילות לאחור, נרמול משקלים, מיזוג, abstention (scorer שמחזיר `null` לא מטה את התוצאה), רישום דינמי. **כלל הסוויטה: 55/55 ✅, build ✅, typecheck ✅.**
+
+מ-`deal-score/` (composite יחיד) → `decision-engine/` (mixture of scorers) — בדיוק כפי שהביקורת המליצה, אבל additive ולא rewrite.
+
+---
+
+## 5. מה שלא נעשה — ובכוונה
+
+הביקורת מסכמת: "אל תכניס כרגע Agents/LLM/RAG/Vector DB". **מסכימים לחלוטין** — וזו עמדת ה-OS כולו (ראו `AGENT_BLUEPRINT.md`: ULease = מערכת עסקית דטרמיניסטית). לכן:
+
+- ❌ **לא** Kafka עכשיו — premature. ה-Outbox+InMemorySink מספיק ל-MVP; ה-seam מוכן ליום שצריך.
+- ❌ **לא** GenAI ב-Deal/Decision Score — דטרמיניזם הוא feature (הסבר-יכולת, רגולציה, אמון).
+- ❌ **לא** stubs ל-Matching/Fraud/Billing — רק כשיש נתונים. תיעוד החוב במפת הדרכים ≠ הסתרתו.
+
+---
+
+## 6. סיכום
+
+הביקורת היא מסמך **חשיבה אסטרטגית מצוין** — התזה (App→Platform) נכונה והתיעדוף (Multi-Tenant → Data → Matching) חכם. התיקון היחיד: **לקרוא את הקוד לפני שמורידים ציון** — Event Backbone ו-BI כבר קיימים כ-seams, ו-RLS בצד DB הוא חוב פתוח ולא הישג. הצעד הראשון (Decision Engine) כבר נחת בקוד, מאומת ותואם-לאחור.
+
+> **הקצאת ההשקעה הבאה:** P0 Multi-Tenant → P2 Event Backbone (swap sink) → P3 Data Platform → P4 Matching. כל אחד נשען על seam קיים. זו הדרך מ-Application ל-**Operating System לענף הליסינג**.
+
+---
+
+### Changelog
+- **v1.0.0** — מסמך ראשוני. הצלבת 10 נקודות הביקורת מול הקוד ב-`leasing-api`; תיקון 3 טענות (Event Bus / Data Warehouse / RLS); scorecard מתוקן מבוסס-ראיות; מפת דרכים P0–P7; תיעוד צעד הקוד הראשון (Decision Engine seam, 55/55 טסטים).
