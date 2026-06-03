@@ -1,7 +1,7 @@
 # CLAUDE COMMAND API — Master Reference & Router
 
 **Module:** `COMMAND_API.md`
-**Version:** 1.2.1
+**Version:** 1.3.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Drop-in. Add to OS context to activate.
 **Integrates with:** כל המודולים הרשומים ב-`OPERATING_SYSTEM.md` §3 (קרנל, זיכרון, הקשר, Knowledge ו-Business).
@@ -687,6 +687,73 @@ macros:
 - ❌ פקודה אחרי בקשה ארוכה ("…תכין לי X, /shorten") — שים את הפקודה ראשונה
 - ❌ macro מרובד מדי — מעבר ל-3 רמות נכשל לרוב
 
+### 6.3 ספריית קיצורי הפתיחה — 32 Prompt Prefixes
+
+**מקור ושקיפות:** מתוך פוסט על הנדסה מבוססת-סוכנים (הדוקטרינה המלאה: `AI_CLAUDE_STACK_2026.md` §5.7). בניגוד ל-89 הפקודות — חוזי פלט מלאים שדורשים OS טעון — אלה **prefixes ניידים**: מילה בתחילת הפרומפט שעובדת בכל ממשק Claude, גם בלי ה-OS. לפי תקדים D-043 הם נרשמים כקיצורים ולא כפקודות — ספירת ה-89 לא משתנה.
+
+**איך משתמשים:** `ELI5: [נושא]` בתחילת הפרומפט. משתלב עם פקודות OS: `/focus ULease` ואז `ELI5: מה זה ערך שייר`.
+
+**מתי prefix ומתי פקודה:** prefix כשאתה מחוץ ל-OS (מובייל, חשבון אחר, מי שלא טען את ההקשר — למשל ה-Tech Lead ביום הראשון) או כשהקיצור אינטואיטיבי יותר; פקודה כשאתה בתוך ה-OS וצריך את החוזה המלא (פלט, התמדה, composition).
+
+#### א. תמצות והסבר (5)
+
+| Prefix | מה הוא עושה | מקבילה ב-API |
+|--------|--------------|---------------|
+| **ELI5** | הסבר כמו לילד בן 5 | — חדש |
+| **TLDR** | סיכום טקסט ארוך בכמה שורות | `/tldr` |
+| **BRIEFLY** | תשובה קצרה מאוד | `/shorten` |
+| **EXEC SUMMARY** | תקציר מנהלים | `/summarize` + `/key-points` |
+| **STEP-BY-STEP** | פריסת ההיגיון צעד-צעד | `/solve` · CoT (§7.2) |
+
+#### ב. תפקיד, קהל וטון (6)
+
+| Prefix | מה הוא עושה | מקבילה ב-API |
+|--------|--------------|---------------|
+| **ACT AS** | Claude מדבר בתפקיד ספציפי | `/style` · Role-Playing (§7.1) |
+| **AUDIENCE** | התאמת התשובה לקהל נבחר | — חדש |
+| **JARGON** | אוצר מילים טכני | — חדש |
+| **TONE** | שינוי טון (פורמלי, שנון, אמפתי) | `/tone` |
+| **DEV MODE** | סגנון מפתח טכני גולמי | — חדש |
+| **PM MODE** | פרספקטיבת ניהול פרויקטים | — חדש |
+
+#### ג. מבנה ופורמט (6)
+
+| Prefix | מה הוא עושה | מקבילה ב-API |
+|--------|--------------|---------------|
+| **CHECKLIST** | הפיכת התשובה לצ'קליסט | `/checklist` |
+| **FORMAT AS** | אכיפת פורמט (טבלה, XML, JSON) | `/format` |
+| **SCHEMA** | מתאר מובנה / מודל נתונים | `/outline` |
+| **ROLE: TASK: FORMAT** | הגדרה מפורשת של תפקיד·משימה·פורמט | מסגרת RTF (§7.3) |
+| **BEGIN WITH / END WITH** | כפיית פתיחה/סיום מסוימים | — חדש |
+| **REWRITE AS** | ניסוח מחדש בסגנון מבוקש | `/rewrite` |
+
+#### ד. ניתוח ונקודות מבט (7)
+
+| Prefix | מה הוא עושה | מקבילה ב-API |
+|--------|--------------|---------------|
+| **SWOT** | חוזקות / חולשות / הזדמנויות / איומים | `/analyze` (חלקי) |
+| **COMPARE** | השוואה זה-לצד-זה | `/compare` |
+| **MULTI-PERSPECTIVE** | כמה נקודות מבט | `/pros-cons` (חלקי) |
+| **PARALLEL LENSES** | בחינה מכמה זוויות במקביל | — חדש |
+| **FIRST PRINCIPLES** | בנייה מחדש מיסודות | — חדש |
+| **PITFALLS** | זיהוי מלכודות וטעויות אפשריות | `/challenge` (חלקי) |
+| **METRICS MODE** | תשובות במדדים ואינדיקטורים | `/stats` (חלקי) |
+
+#### ה. חשיבה, בקרה וגבולות (8)
+
+| Prefix | מה הוא עושה | מקבילה ב-API |
+|--------|--------------|---------------|
+| **CHAIN OF THOUGHT** | הצגת היגיון ביניים | CoT (§7.2) |
+| **DELIBERATE THINKING** | חשיבה איטית ומעמיקה יותר | Effort xhigh (§7.7) |
+| **REFLECTIVE MODE** | רפלקציה על התשובה של עצמו | Self-Critique (§7.2) |
+| **EVAL-SELF** | הערכה עצמית ביקורתית | `/challenge` · `/review` |
+| **SYSTEMATIC BIAS CHECK** | זיהוי הטיות | — חדש |
+| **NO AUTOPILOT** | איסור על תשובות שטחיות | — חדש |
+| **CONTEXT STACK** | החזקת כמה שכבות הקשר במקביל | `/context` (חלקי) |
+| **GUARDRAIL** | גבולות שאסור לחצות | `/constraints` (חלקי) |
+
+> **הכלל הספרני:** 8 מהקיצורים הם שמות נרדפים לפקודות קיימות (משתמשים בפקודה — היא החוזה המלא); 24 הם יכולות חדשות שזמינות כ-prefix נייד. אם prefix חוזר על עצמו יותר מ-3 פעמים בעבודה שלך — זה מועמד להפוך לפקודה רשמית בקטלוג (לפי §10).
+
 ---
 
 ## 7. Prompting Frameworks — מסגרות לכתיבת פרומפטים
@@ -806,7 +873,7 @@ Expectation: טבלה + bullet לכל הזדמנות, עד 200 מילה, בעב�
 זה הבלוק שדורש העתקה ל-`userPreferences` או ל-`CLAUDE.md` ראשי. **זה מה שגורם לכל המסמך הזה לעבוד.**
 
 ```
-COMMAND API ENABLED — v1.2
+COMMAND API ENABLED — v1.3
 
 When the user begins a message with /command syntax, parse and execute
 according to COMMAND_API.md (loaded in OS context).
@@ -872,7 +939,7 @@ Claude OS Root/
 
 ```markdown
 ## Active Modules
-- COMMAND_API.md v1.2.1 — 89 slash commands, composition, prompting frameworks (כולל Opus 4.8 deltas §7.7), system prompt loaded
+- COMMAND_API.md v1.3.0 — 89 slash commands, composition, prompting frameworks (כולל Opus 4.8 deltas §7.7), 32 prompt prefixes (§6.3), system prompt loaded
 - (כל שאר המודולים — ראו §3)
 
 ## Module Load Order (canonical, §3)
@@ -1055,7 +1122,8 @@ interface CommandContract {
 | System Prompt | this file + userPreferences | 2026-05-19 |
 | Integration | CLAUDE.md (root) | 2026-05-19 |
 | Prompting Frameworks | this file | 2026-05-31 |
+| Prompt Prefixes (§6.3) | this file | 2026-06-03 |
 
 **Confidentiality.** This file is part of the personal Claude Operating System of Avraham Bar Yochai Chazan. Commands referencing internal IP (Deal Score, Match API, legal automation) inherit the confidentiality of those sub-systems.
 
-— *End of COMMAND_API.md v1.2.1 —*
+— *End of COMMAND_API.md v1.3.0 —*

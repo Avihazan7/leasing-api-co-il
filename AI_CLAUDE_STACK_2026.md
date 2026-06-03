@@ -1,10 +1,10 @@
 # Claude Stack 2026 — How to use Claude in 2026
 
 **Module:** `AI_CLAUDE_STACK_2026.md`
-**Version:** 1.4.0
+**Version:** 1.5.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Knowledge layer (§3 שורה 16) + מפרט ה-build התפעולי של 4 העמודים.
-**Source:** מבוסס על ה-cheat sheet *"How to use Claude in 2026"* + סדרת *"The 7 Levels of Claude Code"* (learn.nextwork.org) + *"Understanding Agent Skills"* (Skills·MCP·Subagents·Hooks·Plugins).
+**Source:** מבוסס על ה-cheat sheet *"How to use Claude in 2026"* + סדרת *"The 7 Levels of Claude Code"* (learn.nextwork.org) + *"Understanding Agent Skills"* (Skills·MCP·Subagents·Hooks·Plugins) + פוסט תובנות Karpathy על הנדסה מבוססת-סוכנים ואינפוגרפיקות *"Every Claude Code Command"* / *"Why Most AI Projects Fail After Deployment"*.
 **Integrates with:** `AI_CLAUDE_TOOL_SELECTOR.md`, `AI_CLAUDE_GLOSSARY.md` (מודול אחות — המילון), `COWORK_SETUP.md`, `PROJECTS_SETUP.md`, `COMMAND_API.md`, `OPERATING_SYSTEM.md` §3.1, `COWORK/README.md`, `.claude/skills/`, `CASES/ULEASE.md`
 
 ---
@@ -202,6 +202,77 @@
 
 ---
 
+## 5.7 הדוקטרינה — לא כותבים פרומפטים, בונים מערכות סביב הסוכן
+
+התובנה של Andrej Karpathy על עבודה עם סוכני קוד: *"LLMs become dramatically better when you force them into disciplined workflows"* — המודל לא משתפר; **המערכת סביבו** משתפרת. המהנדסים בעלי המינוף הגבוה ביותר הם לא הקודרים הטובים ביותר — הם אלה שבונים את המערכות הטובות ביותר סביב הסוכנים.
+
+> *"That's why CLAUDE.md files are suddenly everywhere. Not because they're prompts. Because they behave like an operating system for the agent."*
+>
+> **זה בדיוק הריפו הזה.** ה-OS שבנית — kernel, memory, skills, decision log, CI — הוא יישום מלא של הדוקטרינה. הוולידציה החיצונית החזקה ביותר לארכיטקטורה שנבחרה ב-D-001.
+
+### חמשת כשלי הסוכנים — ואיך ה-OS כבר עונה על כל אחד
+
+| הכשל (Karpathy) | התשובה הבנויה ב-OS |
+|------------------|---------------------|
+| **מניחים במקום לשאול** | Fail Loud, Not Silent (קרנל §1): אי-בהירות → שאלת הבהרה אחת, לא ניחוש |
+| **Over-engineering של משימות פשוטות** | שער ה-anti-over-engineering (D-046) + "צר מנצח רחב" (§4) |
+| **מסתירים בלבול** | אותו Fail Loud + ביקורת `os-auditor` על כל שינוי OS |
+| **משכתבים מה שלא קשור** | עריכה כירורגית: חוקי ה-skills ("אסור למחוק רשומות קיימות") + יומן append-only |
+| **מייעלים להשלמה, לא לנכונות** | success criteria במקום הוראות: CI חוסם-merge (D-023) + eval suite חוסם-deploy (SPEC §7.2) |
+
+### השינוי המהותי: קריטריוני הצלחה במקום הוראות
+
+> *"Don't tell the model what to do. Give it success criteria and let it loop."*
+
+| מ... | ל... | איפה זה כבר חי אצלך |
+|------|------|----------------------|
+| "תכתוב את הפונקציה הזו" | "הנה המטרה, האילוצים, הבדיקות והאימות — תתכנס עד שנכון" | ה-CI: כל PR רץ מול בדיקות העקביות עד ירוק (D-023) |
+| הנחיית צעד-צעד לסוכן | יעד מדיד + לולאת תיקון | שערי הבגרות HITL (D-040): קריטריון מעבר, לא רשימת משימות |
+| בקרה על *איך* | בקרה על *מה* ("המטרה הושגה?") | ניהול ה-Tech Lead: design review + KPIs, לא code review (`AI_PROCESS_INTELLIGENCE.md` §4) |
+
+### תזמור מקביל — סוכנים כצוות הנדסה
+
+הדפוס המתקדם: לא סוכן אחד שעושה הכל, אלא **צוות סוכנים מקבילים** — אחד חוקר, אחד מדבג, אחד כותב בדיקות, אחד מייעל, אחד מאמת. זו לא "עזרה מ-AI"; זה תזמור. המספר מאחורי הדוקטרינה: מפתחים עברו מ-80% כתיבת קוד ידנית ל-80% עבודה מבוססת-סוכנים תוך חודשים.
+
+| הדפוס | ✅ איפה זה כבר קרה אצלך |
+|--------|--------------------------|
+| סוכן מאמת נפרד | `os-auditor` — סוכן ביקורת ייעודי, רץ על כל שינוי OS |
+| צוות חוקרים מקבילי | ביקורת 4 הסוכנים (D-019) — 41 ממצאים ביום אחד |
+| צוות מתוזמר מלא | Agent Teams (רמה 7 בסולם, §5) — מסלול ה-Tech Lead ל-Ultra·Master·Max |
+
+> **לגיוס ה-Tech Lead:** זה הפילטר. מועמד שמדבר על "פרומפטים טובים" נמצא ברמה 1; מועמד שמדבר על success criteria, לולאות אימות וצוותי סוכנים — חושב במערכות. השאלה לראיון: *"איך תגרום לסוכן לתקן את עצמו בלי שתגיד לו מה לתקן?"*
+
+### הצד התפעולי — למה פרויקטי AI נופלים אחרי deployment
+
+אותה תזה מהכיוון ההפוך (אינפוגרפיקת *Why Most AI Projects Fail After Deployment*): רוב פרויקטי ה-AI לא נכשלים כי המודל חלש — **הם נכשלים כי המערכת סביב המודל חלשה.** שבעת כשלי הייצור, מול הכיסוי הקיים באיפיון:
+
+| כשל ייצור | הכיסוי באיפיון ULease |
+|------------|------------------------|
+| Data & model drift | ניטור drift שבועי — SPEC §7.2 |
+| Observability חלשה (מנטרים רק CPU/uptime) | מדדי LLM ייעודיים: הזיות <1% · grounding · latency — SPEC §7.2 |
+| צינור RAG גרוע | `AI_RAG_DESIGN.md` — 15 הטעויות + צ'קליסט design review |
+| צווארי בקבוק בתשתית | `AI_SYSTEM_DESIGN.md` — מפת 24 הרכיבים, Circuit Breaker, scaling |
+| אין Guardrails / Governance | Guardian-as-Hooks (§5.5) + eval suite חוסם-deploy |
+| התפוצצות עלויות | תקרת עלות לשיחה + cost-per-query (§5.6) |
+| אמינות סוכנים (לולאות אינסופיות, retry storms) | שערי בגרות HITL (D-040) + הרשאות per-subagent (§5.5) |
+
+### 5.8 קטלוג הפקודות המובנות של Claude Code — 6 קטגוריות
+
+ל-Claude Code יש עשרות slash commands מובנים בטרמינל. **לא להתבלבל:** אלו תכונת מוצר אמיתית — בעוד 89 פקודות ה-OS (`COMMAND_API.md`) הן חוזה התנהגותי בצ'אט, ו-32 קיצורי הפתיחה (`COMMAND_API.md` §6.3) הם prefixes ניידים. שש הקטגוריות הן המפה המנטלית; `/help` בתוך session הוא מקור האמת לפקודות הזמינות בגרסה שלך.
+
+| # | קטגוריה | פקודות עיקריות | איפה זה פוגש אותך |
+|---|----------|------------------|---------------------|
+| 1 | **Start & Create** | `/init` · `/new` · `/clear` · `/model` · `/resume` | `/init` הוא מה שיצר את `CLAUDE.md`; `/clear` בין משימות (חוסך ~40% tokens, §8) |
+| 2 | **Manage Your Work** | `/plan` · `/memory` · `/permissions` · `/rename` · `/branch` | מצב תכנון לפני ביצוע = "Think before coding" מהדוקטרינה (§5.7) |
+| 3 | **Review & Ship** | `/review` · `/diff` · `/security-review` · `/rewind` | השכבה שרוב המשתמשים מדלגים עליה — אצלך היא חובה (os-auditor + CI על כל PR) |
+| 4 | **Automate & Run Agents** | `/agents` · `/tasks` · לולאות ו-batch | כאן חיים ה-skills וה-`os-auditor`; הבסיס ל-Agent Teams (רמה 7) |
+| 5 | **Get Insights** | `/usage` · `/context` · `/doctor` · `/debug` | ניהול תקציב ה-tokens — משלים את כללי התחזוקה (§8) |
+| 6 | **Shortcuts** | `/compact` · `/export` · `/help` · `/feedback` | `/compact` באמצע session ארוך — כבר בכללי התחזוקה (§8) |
+
+> **שלוש שכבות הפקודות של ה-OS:** ① פקודות Claude Code (כאן) — בטרמינל בלבד · ② 89 פקודות ה-OS (`COMMAND_API.md`) — בכל צ'אט עם OS טעון · ③ 32 ה-prefixes הניידים (`COMMAND_API.md` §6.3) — בכל מקום, גם בלי OS.
+
+---
+
 ## 6. ה-build בריפו — מה קיים איפה
 
 | עמוד | תשתית בריפו | איך מפעילים |
@@ -255,7 +326,8 @@
 | 1.2.0 | נוסף ל-§5 **סולם 7 הרמות של Claude Code** (Prompt→Context→Tools→MCP→Skills→Subagents→Agent Teams) + הציון: רמה 6/7 (D-030) | 2026-06-02 |
 | 1.3.0 | §5.5 חדש (D-037): **ה-Agent Extension Stack** — שש השכבות (Skills=WHAT · MCP=HOW · Subagents=WHO · Hooks=WHEN · CLAUDE.md=WHERE · Plugins=SHIP) + המיפוי ל-Ultra·Master·Max ו-Guardian-as-Hooks + Skills קהילתיים מומלצים | 2026-06-02 |
 | 1.4.0 | §5.6 חדש (D-038): **סיכוני סוכנים** — Prompt Injection (קונה מנסה "לשכנע" את הסוכן), Hallucination, Tool Misuse, עלויות — ממופים ל-Hooks של Guardian + מפת frameworks (ההמלצה: Claude Agent SDK) | 2026-06-02 |
+| 1.5.0 | §5.7 חדש (D-048): **דוקטרינת Karpathy** — "בונים מערכות סביב הסוכן, לא פרומפטים": 5 כשלי הסוכנים ממופים לתשובות ה-OS, success criteria + loop, תזמור מקביל, ו-7 כשלי הייצור ממופים לאיפיון + §5.8: **קטלוג פקודות Claude Code** (6 קטגוריות) ושלוש שכבות הפקודות | 2026-06-03 |
 
-**Attribution.** מבוסס על ה-cheat sheet *"How to use Claude in 2026"*; סולם 7 הרמות ובלוק Agent Teams (§5): סדרת *The 7 Levels of Claude Code* (learn.nextwork.org); ה-Extension Stack (§5.5): *Understanding Agent Skills* + *Make Claude 10x Smarter*. העיבוד, התרגום, ובעיקר ה-build התפעולי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** מבוסס על ה-cheat sheet *"How to use Claude in 2026"*; סולם 7 הרמות ובלוק Agent Teams (§5): סדרת *The 7 Levels of Claude Code* (learn.nextwork.org); ה-Extension Stack (§5.5): *Understanding Agent Skills* + *Make Claude 10x Smarter*; הדוקטרינה (§5.7): פוסט מבוסס תובנות Andrej Karpathy + *Why Most AI Projects Fail After Deployment*; קטלוג הפקודות (§5.8): *Every Claude Code Command To Save You 100+ Hours*. העיבוד, התרגום, ובעיקר ה-build התפעולי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of AI_CLAUDE_STACK_2026.md v1.4.0 —*
+— *End of AI_CLAUDE_STACK_2026.md v1.5.0 —*
