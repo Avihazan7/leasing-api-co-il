@@ -22,7 +22,7 @@
 | 5 | **Content Creation** | `marketing-strategy-framework.md` · `ULEASE_OUTREACH_SCRIPTS.md` · מצגת הפיץ' | ✅ |
 | 6 | **Research & Summarization** | `ULEASE_AUDIT.md` — 4 סוכני מחקר מקבילים, 41 ממצאים | ✅ |
 | 7 | **Coding with Claude** | הריפו הזה (Claude Code) + 4 גנרטורים (`FORECAST.py` · `DASHBOARD.py` · `DECK.py` · `SCENARIOS.py`) | ✅ |
-| 8 | **Workflow Automation** | `ULEASE_OUTBOUND_ENGINE.md` (n8n, 8 שכבות) + `ULEASE_AUTOMATION_MAP.md` (40 אוטומציות) | ✅ |
+| 8 | **Workflow Automation** | `ULEASE_OUTBOUND_ENGINE.md` (n8n, 8 שכבות) + `ULEASE_AUTOMATION_MAP.md` (42 אוטומציות) | ✅ |
 | 9 | **Data Handling & Analysis** | מודל פיננסי משוחזר-בית-בבית: CSV ↔ Python ↔ דשבורד אינטראקטיבי | ✅ |
 | 10 | **AI Productivity Systems** | **ה-Claude OS עצמו** — kernel, memory, skills, decision log, CI | ✅ |
 | 11 | **Real-world Use Cases** | **ULease 🎯** — תיק עסקי שלם: איפיון, playbooks, תחזית, מחירון | ✅ |

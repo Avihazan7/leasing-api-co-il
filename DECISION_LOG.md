@@ -1,7 +1,7 @@
 # DECISION_LOG.md — יומן החלטות
 
 **Module:** `DECISION_LOG.md`
-**Version:** 1.33.0
+**Version:** 1.34.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — יומן append-only (Memory layer).
 **Integrates with:** `OPERATING_SYSTEM.md` §7, `MEMORY.md`, `CASES/ULEASE*.md`
@@ -60,6 +60,7 @@
 | D-044 | 2026-06-02 | **העשרת AI_DATA_BI ל-v1.5.0** (שתי אינפוגרפיקות BI — Jalalelaji): §7 חדש — **BI לשיווק**: (א) מחזור דאטת השיווק — איחוד Ad APIs + אנליטיקת אתר + CRM למקום אחד **מיום ההשקה** כתנאי ל-ROAS פר-ערוץ ול-feedback loop של מנוע הביקוש (ב) **ששת ה-KPIs השיווקיים**: CPL ו-Conversion כבר נמדדים (playbook §8); **ROAS · CPA · CLV · Churn מסומנים 🆕 כחסרים** — CLV משנה את שיחת המשקיעים ("קונה שווה פי 2–3 מהעסקה הראשונה"), Churn קריטי למנויי Ultra/Max (ג) שני דשבורדי ההשקה: ביצועי קמפיין (חובה לפני הדלקת Ads) + ניתוח קהל (איזו פרסונה ממירה → מזין Big Five) (ד) הבחנת Lake/Warehouse ושמות השכבות נוספו ל-§1 — אינפוגרפיקת הארכיטקטורה **ברובה כבר מכוסה** (הכרעה ספרנית: לא סעיף חדש). בנוסף: עוגן ה-D-number בתוכנית הביצוע הוחלף ל"ה-ID הבא הפנוי" | אינפוגרפיקת השיווק משרתת ישירות את ביצוע ההשקה — הקמפיינים (₪12K) נדלקים ב-Go-Live ואסור להדליק אותם בלי דשבורד ROAS פר-ערוץ; ההבחנה נמדד/חסר הופכת את ה-KPIs מרשימה לתוכנית עבודה ל-Tech Lead | ✅ פעיל |
 | D-045 | 2026-06-02 | **אסטרטגיית onboarding היצע: Founder-led White-Glove** — כשהשלד באוויר, אברהם עובר **יבואן-יבואן פיזית, עם לפטופ**, ומזין מלאי + תמחור בעצמו במשרד הספק. הספק לא עושה כלום — אפס חיכוך. יושם מיידית: `OUTREACH_SCRIPTS` v1.3.0 — עיקרון White-Glove ב-§1 + שורת "אני מגיע עם לפטופ ומכניס בעצמי" בסקריפטים (יבואן רשמי, ליסינג). **עדכוני המשך**: (א) קונסולת admin ב-MVP חייבת מסך הזנת-מלאי ידני מהיר שעובד מלפטופ במשרד ספק — דרישה ל-Tech Lead (צ'קליסט §3) (ב) הצעת הביקור ב-`IMPORTER_PLAYBOOK` (ג) ניסוח התזה בשקף הבעיה ב-`DECK` | במילות המייסד: **"הפרה רוצה להניק יותר מאשר העגל רוצה לינוק"** — כאב ההיצע (0 ק"מ תקוע שמדמם ריבית, חניה וירידת ערך יומית) גדול מכאב הביקוש; היבואן צריך את הפלטפורמה יותר משהקונה צריך אותה. ה-white-glove הפיזי מסיר את חסם האימוץ האחרון (אפס מאמץ לספק), נותן לאברהם ידע-שטח על כל ספק ומלאי, ומאמת את תזת ה-marketplace בפיץ' למשקיעים | ✅ פעיל |
 | D-046 | 2026-06-03 | **העשרת AI_PROJECT_STRUCTURE ל-v1.1.0** (אינפוגרפיקת *Enterprise GenAI Project Folder Structure*): (א) §3 חדש — **מבנה ה-Enterprise**: עץ 10 התיקיות (agents: orchestrator+specialists · tools · orchestration · prompts · api · governance · evals · tests · docs + README·CLAUDE.md·.env.example) + טבלת עשר השכבות ("בלעדיה — ...") (ב) §3.2 — **מפת הצמיחה MVP→Enterprise**: איזו תיקייה גדלה לאן, שום דבר לא נזרק + **שער מעבר** נגד over-engineering (סוכן שני / API חיצוני / Guardian) (ג) §4.1 — **מיפוי Enterprise מלא ל-ULease**: Ultra=orchestrator · Masters+Max=specialists · Guardian=governance (Hooks, D-037) · MCP=tools/mcp_servers · API=`AI_SYSTEM_DESIGN` — האיפיון כבר ממלא את כל עשר התיקיות | לפי תקדים D-028/D-041 (אותו נושא → העשרת המודול הקיים, לא מודול חדש): האינפוגרפיקה היא הגרסה הבוגרת של תקן 4 התיקיות; המסר "מנצחים עם הארכיטקטורה הטובה ביותר, לא עם המודל הגדול ביותר" הוא נרטיב הפיץ' של ULease — הפלטפורמה היא הארכיטקטורה; ה-Tech Lead מקבל את מסלול הצמיחה של הריפו מראש — מיום 1 ועד V2, בלי לזרוק כלום בדרך | ✅ פעיל |
+| D-047 | 2026-06-03 | **יישוב כפילות sessions מקבילים + השלמות למנוע הביקוש**: (א) **הכרעת ספרנות** — אינפוגרפיקת *"One AI Agent for Local Business"* עובדה במקביל בשני sessions: כמודול Knowledge‏ (`AI_ACQUISITION_FLYWHEEL`, לא מוזג) וכמודול Business‏ (`ULEASE_DEMAND_ENGINE`, D-042, מוזג ראשון). הכפול הוסר לפי One Source of Truth — `ULEASE_DEMAND_ENGINE` הוא הבית הקנוני של התוכן (ב) `DEMAND_ENGINE` v1.1.0 — §8 חדש: **צ'קליסט design review למייסד** — 6 בדיקות לפני אישור מימוש הלופ (לולאה סגורה · אנונימיזציה · grounding · HITL · ציות inbound · מדידה) (ג) `AUTOMATION_MAP` v1.3.0 — **Deal-to-Content Generator** (צמתים 10–12) + **SEO/GEO Rank Monitor** (צומת 13) נרשמו במפה (§1, V1) + ה-Q&A Bot סומן כ-AI Receptionist (צומת 16); סה"כ 40→42 אוטומציות (ד) `COMMAND_API` v1.2.1 — תיקון ממצא os-auditor: רשימת ה-Knowledge המתיישנת ב-§9.1 הוחלפה ב-`AI_*.md` + הפניה ל-§3 (One Source of Truth — רישום מודול עתידי לא נוגע יותר בקובץ) | עבודה מקבילה על אותו תוכן היא סיכון מובנה של ריבוי sessions — ההכרעה (מודול אחד לתוכן אחד, בשכבת ה-Business הקרובה לביצוע) מתועדת כדי למנוע הישנות; ההעשרות אושרו ע"י המייסד (תקדים חריגת ההקפאה D-043) ומשרתות את בניית המנוע — משימת ה-MVP של אברהם | ✅ פעיל |
 
 ---
 
@@ -110,7 +111,8 @@
 | 1.31.0 | הוספת D-044 — העשרת `AI_DATA_BI.md` ל-v1.5.0: BI לשיווק (ROAS·CPA·CLV·Churn 🆕 + דשבורדי ההשקה); הכרעת Tech Lead = ה-ID הבא הפנוי | 2026-06-02 |
 | 1.32.0 | הוספת D-045 — הכרעת מייסד: onboarding היצע Founder-led White-Glove ("עם לפטופ, יבואן-יבואן") + יישום בסקריפטים v1.3.0 | 2026-06-02 |
 | 1.33.0 | הוספת D-046 — העשרת `AI_PROJECT_STRUCTURE.md` ל-v1.1.0: מבנה ה-Enterprise (10 תיקיות), מפת צמיחה MVP→Enterprise + מיפוי מלא ל-ULease | 2026-06-03 |
+| 1.34.0 | הוספת D-047 — יישוב כפילות sessions מקבילים (flywheel → `DEMAND_ENGINE`) + צ'קליסט מייסד (`DEMAND_ENGINE` v1.1.0) + 2 אוטומציות הלופ (`AUTOMATION_MAP` v1.3.0) + תיקון os-auditor (`COMMAND_API` v1.2.1) | 2026-06-03 |
 
 **Confidentiality.** מסמך פנימי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of DECISION_LOG.md v1.33.0 —*
+— *End of DECISION_LOG.md v1.34.0 —*

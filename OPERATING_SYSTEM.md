@@ -1,7 +1,7 @@
 # CLAUDE OPERATING SYSTEM — Kernel
 
 **Module:** `OPERATING_SYSTEM.md`
-**Version:** 1.8.0
+**Version:** 1.9.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Kernel — נטען ראשון. כל שאר המודולים תלויים בו.
 **Integrates with:** כל המודולים הרשומים ב-§3 — `CLAUDE.md`, `MEMORY.md`, `DECISION_LOG.md`, `COWORK_SETUP.md`, `PROJECTS_SETUP.md`, `COMMAND_API.md`, `marketing-strategy-framework.md`, `AI_*` (Knowledge), `INVESTOR_RELATIONS.md`, `CASES/*.md` + תשתית תפעולית ב-§3.1 (`COWORK/`, `.claude/`)
@@ -73,7 +73,7 @@
 | 4 | `COWORK_SETUP.md` | Context | ✅ פעיל | חיבור תיקייה, קבצי md, אונבורדינג |
 | 5 | `PROJECTS_SETUP.md` | Context | ✅ פעיל | Claude Projects — 3 פרויקטים, תוצר אחד לכל אחד, הוראות drop-in |
 | 6 | `COMMAND_API.md` | Interface | ✅ פעיל | 89 פקודות, composition, prompting frameworks, system prompt |
-| 7 | `COMMAND_API_TASKS.md` | Interface | ✅ פעיל | 98 פקודות משימה ב-9 קטגוריות (99 Claude Commands) + מיפוי לתרחישי ULease |
+| 7 | `COMMAND_API_TASKS.md` | Interface | ✅ פעיל | 98 פקודות משימה ב-9 קטגוריות (99 Claude Commands) + 30 פרומפטי גיליונות (§4) + מיפוי לתרחישי ULease |
 | 8 | `marketing-strategy-framework.md` | Business | ✅ פעיל | מסגרת 10-שלבית לאסטרטגיית שיווק |
 | 9 | `AI_SKILL_MAP.md` | Knowledge | ✅ פעיל | מפת מיומנויות AI — 4 שלבים ומיקום ULease |
 | 10 | `AI_PROGRESSION_PLAN.md` | Knowledge | ✅ פעיל | תוכנית התקדמות אישית — Learn-vs-Delegate, 90 יום |
@@ -92,7 +92,7 @@
 | 23 | `AI_SYSTEM_DESIGN.md` | Knowledge | ✅ פעיל | יסודות System Design — Gateway, סגנונות API, תורים, JWT — ממופה לארכיטקטורת הפלטפורמה |
 | 24 | `AI_PROCESS_INTELLIGENCE.md` | Knowledge | ✅ פעיל | מודיעין תהליכים ובקרת הטמעה — איפה להחיל Gen AI (GenIQ), HITL ושער בגרות, מדידת ROI |
 | 25 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
-| 26 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית, איפיון, מתודולוגיה, גיוס, playbooks, ביקורת ומחירון/SLA |
+| 26 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית, איפיון, מתודולוגיה, גיוס, playbooks, מנועי אקווזיציה (היצע + ביקוש), ביקורת ומחירון/SLA |
 
 > **הערה על שכבות:** מודולי `AI_*` הם שכבת **Knowledge** — ידע אישי/לימודי שיושב לוגית בין ה-INTERFACE ל-BUSINESS. הם פעילים אך נטענים on-demand, לא בכל turn.
 > כשמודול עובר מ-🔜 ל-✅ — מעדכנים את הסטטוס כאן ואת ה-Active Modules ב-`CLAUDE.md` ו-`README.md`.
@@ -115,7 +115,7 @@
 זה הבלוק שמפעיל את כל ה-OS. העתק אותו ל-`userPreferences` / system prompt / Cowork Global Instructions:
 
 ```
-CLAUDE OS ENABLED — Kernel v1.8
+CLAUDE OS ENABLED — Kernel v1.9
 
 On every turn, before responding:
 1. Load identity & context from MEMORY.md (and the Cowork "about-me" file if connected).
@@ -194,7 +194,8 @@ Doctrine:
 | 1.6.0 | רישום `AI_DATA_BI` (שורה 22, D-032) — מודול הדאטה הראשון: יסודות BI ל-M9. הסטת שורות: IR 22→23 · CASES 23→24 | 2026-06-02 |
 | 1.7.0 | רישום `AI_SYSTEM_DESIGN` (שורה 23, D-036) — יסודות backend לארכיטקטורת הפלטפורמה. הסטת שורות: IR 23→24 · CASES 24→25 | 2026-06-02 |
 | 1.8.0 | רישום `AI_PROCESS_INTELLIGENCE` (שורה 24, D-039) — מודיעין תהליכים (GenIQ) + Human-in-the-Loop (n8n). הסטת שורות: IR 24→25 · CASES 25→26 | 2026-06-02 |
+| 1.9.0 | יישור הקרנל אחרי גל D-040..D-047: `CASES/ULEASE_DEMAND_ENGINE` נרשם תחת גלוב שורה 26 (D-042) והכפיל `AI_ACQUISITION_FLYWHEEL` הוסר (D-047); עדכון תיאורי שורה 7 (+30 פרומפטי גיליונות, D-043) ושורה 26 (מנועי אקווזיציה) | 2026-06-03 |
 
 **Confidentiality.** קובץ זה הוא הליבה של ה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of OPERATING_SYSTEM.md v1.8.0 —*
+— *End of OPERATING_SYSTEM.md v1.9.0 —*

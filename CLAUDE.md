@@ -3,12 +3,12 @@
 נקודת הכניסה הראשית של ה-Claude Operating System עבור הריפו.
 
 ## Active Modules
-- `OPERATING_SYSTEM.md` v1.8.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
+- `OPERATING_SYSTEM.md` v1.9.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.1.0 — שכבת זיכרון: schema, כרטיס זהות **מלא**, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
-- `DECISION_LOG.md` v1.33.0 — יומן החלטות append-only: 46 החלטות (OS + ULease), רציונל וסטטוס.
+- `DECISION_LOG.md` v1.34.0 — יומן החלטות append-only: 47 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.2.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר, אינטגרציה עם ה-OS + ראש המטה (5 תפקידים מתוזמנים) — מיושם בפועל ב-`COWORK/`.
 - `PROJECTS_SETUP.md` v1.0.0 — Claude Projects: 3 פרויקטים (השקה 🎯 · גיוס ₪150K · Claude OS) — תוצר אחד לכל פרויקט, הוראות drop-in, רשימות העלאה ובדיקות קבלה.
-- `COMMAND_API.md` v1.2.0 — 89 slash commands, composition operators, prompting-frameworks library (כולל Opus 4.8 deltas §7.7), drop-in system prompt loaded.
+- `COMMAND_API.md` v1.2.1 — 89 slash commands, composition operators, prompting-frameworks library (כולל Opus 4.8 deltas §7.7), drop-in system prompt loaded.
 - `COMMAND_API_TASKS.md` v1.1.0 — ספריית פקודות משימה: 98 פקודות ב-9 קטגוריות (99 Claude Commands) — אימייל, כתיבה, החלטות, למידה, תכנון, brainstorm, קריירה, תוכן, פגישות — ממופות לתרחישי ULease + 30 פרומפטי גיליונות (§4, Top 30 Spreadsheet Prompts) לעבודה על המודל הפיננסי ועדכוני משקיעים.
 - `marketing-strategy-framework.md` v1.0.0 — Business: מסגרת 10 פרומפטים לבניית אסטרטגיית שיווק מלאה (פסיכולוגיה → תוכנית עמוד).
 - `AI_SKILL_MAP.md` v1.0.0 — מפת מיומנויות AI: 4 שלבים (Tools → Workflows → Agentic → Architect), יישומים, ומיקום ULease על המפה.
@@ -41,11 +41,11 @@
 - `CASES/ULEASE_FINANCE_INSURANCE.md` v1.1.0 — מימון/ביטוח + חיתום דיגיטלי מקצה-לקצה: שותפים, זרימת חיתום, ניתוב רב-מלווה, התאמת Big Five, ודגלי רגולציה.
 - `CASES/ULEASE_OUTREACH_SCRIPTS.md` v1.3.0 — סקריפטים לפנייה (שיחה/מייל/וואטסאפ) ל-4 סגמנטי היצע + follow-up + הבטחת ה-White-Glove (D-045: "אני מגיע עם לפטופ ומכניס בעצמי").
 - `CASES/ULEASE_OUTBOUND_ENGINE.md` v1.2.0 — בלופרינט מנוע outbound (n8n + Claude): 8 שכבות לאקווזיציית צד-היצע, מודלי Haiku/Sonnet, KPIs + שער הבגרות (§6.1): שלושה שלבי HITL מ-assist לאוטונומיה מנוטרת.
-- `CASES/ULEASE_DEMAND_ENGINE.md` v1.0.0 — מנוע צד-הביקוש (n8n, 18 צמתים): קליטת לידים → ניקוד Haiku → nurture Sonnet → עסקה → **לופ אורגני** (תוכן אנונימי → SEO/GEO → לידים ב-CPL ~₪0) — מותאם לציות ישראלי (inbound בלבד) + שערי בגרות D-040; מנוע הביצוע של ה-DEMAND_PLAYBOOK.
+- `CASES/ULEASE_DEMAND_ENGINE.md` v1.1.0 — מנוע צד-הביקוש (n8n, 18 צמתים): קליטת לידים → ניקוד Haiku → nurture Sonnet → עסקה → **לופ אורגני** (תוכן אנונימי → SEO/GEO → לידים ב-CPL ~₪0) — מותאם לציות ישראלי (inbound בלבד) + שערי בגרות D-040 + צ'קליסט design review למייסד (§8); מנוע הביצוע של ה-DEMAND_PLAYBOOK.
 - `CASES/ULEASE_TECH_ONBOARDING.md` v1.2.0 — Onboarding ל-Tech Lead: יום 0/1, רשימת קריאה ב-OS, תוכנית 30·60·90 + שקיפות SDLC (Jira/GitHub מיום 0, דוח תהליך שבועי, cycle time).
 - `CASES/ULEASE_LAUNCH_CHECKLIST.md` v1.3.0 — צ'קליסט השקה (שבועיים): דומיין, משפטי, MVP, תוכן, outreach, GEO, QA ולוח שבועי.
 - `CASES/ULEASE_DASHBOARD.html` v1.2.0 — דשבורד מנהלים אינטראקטיבי (RTL): KPIs, גרפים (הכנסה/מזומן/עסקאות/הוצאות/רווחיות), תמהילי הכנסה והוצאה, וצ'קליסט השקה חי; נוצר ע"י `CASES/ULEASE_DASHBOARD.py`.
-- `CASES/ULEASE_AUTOMATION_MAP.md` v1.2.0 — מפת אוטומציות AI לפי 10 פונקציות עסקיות: 40 אוטומציות מסוננות ל-ULease, סטטוס (18 כבר בנויות), עדיפות MVP/V1/V2 + 31 ה-Skills המוכנים של Anthropic כשכבת מימוש מדף + שכבת המדידה (§12): baseline, ROI וכלל 90 הימים.
+- `CASES/ULEASE_AUTOMATION_MAP.md` v1.3.0 — מפת אוטומציות AI לפי 10 פונקציות עסקיות: 42 אוטומציות מסוננות ל-ULease (כולל Deal-to-Content Generator ו-Rank Monitor מהלופ האורגני), סטטוס (18 כבר בנויות), עדיפות MVP/V1/V2 + 31 ה-Skills המוכנים של Anthropic כשכבת מימוש מדף + שכבת המדידה (§12): baseline, ROI וכלל 90 הימים.
 - `CASES/ULEASE_AUDIT.md` v1.4.0 — דוח ביקורת מקצה-לקצה (1.6.2026): 4 סוכני ביקורת מקבילים, 41 ממצאים (9🔴/21🟡/11🔵) — **כולם נסגרו** ב-3 גלי תיקון + מחירון/SLA.
 
 ## Module Load Order
