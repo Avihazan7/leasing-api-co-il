@@ -3,9 +3,9 @@
 נקודת הכניסה הראשית של ה-Claude Operating System עבור הריפו.
 
 ## Active Modules
-- `OPERATING_SYSTEM.md` v1.9.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
+- `OPERATING_SYSTEM.md` v1.10.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.1.0 — שכבת זיכרון: schema, כרטיס זהות **מלא**, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
-- `DECISION_LOG.md` v1.36.0 — יומן החלטות append-only: 49 החלטות (OS + ULease), רציונל וסטטוס.
+- `DECISION_LOG.md` v1.38.0 — יומן החלטות append-only: 51 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.2.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר, אינטגרציה עם ה-OS + ראש המטה (5 תפקידים מתוזמנים) — מיושם בפועל ב-`COWORK/`.
 - `PROJECTS_SETUP.md` v1.0.0 — Claude Projects: 3 פרויקטים (השקה 🎯 · גיוס ₪150K · Claude OS) — תוצר אחד לכל פרויקט, הוראות drop-in, רשימות העלאה ובדיקות קבלה.
 - `COMMAND_API.md` v1.3.0 — 89 slash commands, composition operators, prompting-frameworks library (כולל Opus 4.8 deltas §7.7), 32 קיצורי פתיחה ניידים (§6.3 Prompt Prefixes), drop-in system prompt loaded.
@@ -27,6 +27,7 @@
 - `AI_DATA_BI.md` v1.5.0 — יסודות BI ומידול נתונים (Power BI כמקרה לימוד, 20 נושאים): צינור BI, ETL, ה-star schema של ULease, DAX + Time Intelligence + 16 הפונקציות הפיננסיות (PMT · IRR · פחת/ערך שייר — המתמטיקה של הליסינג), ויזואליזציה, אינטראקטיביות, **RLS**, תפעול כשירות (התראות · מנויי דוחות · הרשאות), BI לשיווק (§7: ROAS·CPA·CLV·Churn + דשבורדי ההשקה) + מבחנים סטטיסטיים להחלטות — ממופה ל-M9 + הכרעת כלי ל-Tech Lead.
 - `AI_SYSTEM_DESIGN.md` v1.2.0 — יסודות System Design: שער כניסה (Gateway·Proxy·LB), 8 סגנונות API (כולל Webhook ל-MVP), תורים (Idempotency·DLQ), JWT + מפת 24 הרכיבים (MVP/V1/V2) — ממופים לארכיטקטורת הפלטפורמה + צ'קליסט design review ל-Tech Lead.
 - `AI_PROCESS_INTELLIGENCE.md` v1.0.0 — מודיעין תהליכים ובקרת הטמעת AI: GenIQ (HatchWorks×Bloomfilter) — איפה להחיל Gen AI + מדידת ROI (מלכודת ה-56%), אנטומיית סוכן n8n + דפוס Human-in-the-Loop (sendAndWait) ושער בגרות — ממופה לשקיפות SDLC מול ה-Tech Lead, מפת האוטומציות ומנוע ה-outbound.
+- `AI_PROFICIENCIES_2026.md` v1.0.0 — מיומנויות ה-AI החיוניות ל-2026: 10 מיומנויות-על ארגוניות (אינפוגרפיקת aiplanetx) + כרטיס-ניקוד בגרות (**6✅+4🟡/10**, אפס נקודות עיוורות) ומיפוי תלת-שכבתי ל-ULease — שדרה (RAG · אוטונומי · governance) · צמיחה (GEO · workflows) · תשתית (prompting · ecosystem); מנדט ה-Tech Lead = להפוך את 4 ה-🟡 ל-✅. רביעי במשפחת מדדי-הבגרות (5/7 · 11/15 · 6/7 · 10✅+1🟡/12).
 - `INVESTOR_RELATIONS.md` v1.2.0 — IR: חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים.
 - `CASES/ULEASE.md` v1.5.0 — תיק ULease 🎯 Leasing.co.il: מודל Marketplace תלת-צדדי + תחזית פיננסית (יוני 26 → דצמ' 27) + Lean Canvas בעמוד אחד.
 - `CASES/ULEASE_SPEC.md` v1.5.0 — איפיון מוצר ומערכת מקצה-לקצה: שחקנים, ארכיטקטורה, Multi-agent (Ultra·Master·Max), שכבת ידע RAG (§7.1), Guardrails & Evals (§7.2), מודל נתונים, אינטגרציות ו-roadmap.
@@ -45,7 +46,7 @@
 - `CASES/ULEASE_TECH_ONBOARDING.md` v1.2.0 — Onboarding ל-Tech Lead: יום 0/1, רשימת קריאה ב-OS, תוכנית 30·60·90 + שקיפות SDLC (Jira/GitHub מיום 0, דוח תהליך שבועי, cycle time).
 - `CASES/ULEASE_LAUNCH_CHECKLIST.md` v1.3.0 — צ'קליסט השקה (שבועיים): דומיין, משפטי, MVP, תוכן, outreach, GEO, QA ולוח שבועי.
 - `CASES/ULEASE_DASHBOARD.html` v1.2.0 — דשבורד מנהלים אינטראקטיבי (RTL): KPIs, גרפים (הכנסה/מזומן/עסקאות/הוצאות/רווחיות), תמהילי הכנסה והוצאה, וצ'קליסט השקה חי; נוצר ע"י `CASES/ULEASE_DASHBOARD.py`.
-- `CASES/ULEASE_AUTOMATION_MAP.md` v1.3.0 — מפת אוטומציות AI לפי 10 פונקציות עסקיות: 42 אוטומציות מסוננות ל-ULease (כולל Deal-to-Content Generator ו-Rank Monitor מהלופ האורגני), סטטוס (18 כבר בנויות), עדיפות MVP/V1/V2 + 31 ה-Skills המוכנים של Anthropic כשכבת מימוש מדף + שכבת המדידה (§12): baseline, ROI וכלל 90 הימים.
+- `CASES/ULEASE_AUTOMATION_MAP.md` v1.4.0 — מפת אוטומציות AI לפי 10 פונקציות עסקיות: 42 אוטומציות מסוננות ל-ULease (כולל Deal-to-Content Generator ו-Rank Monitor מהלופ האורגני), סטטוס (18 כבר בנויות), עדיפות MVP/V1/V2 + שתי חבילות ה-Skills המוכנות של Anthropic כשכבת מימוש מדף (§11: 31 לעסקים-קטנים · §11.1: 10 מקצועיים ל-authoring, ממופים לעבודות ההשקה) + שכבת המדידה (§12): baseline, ROI וכלל 90 הימים.
 - `CASES/ULEASE_AUDIT.md` v1.4.0 — דוח ביקורת מקצה-לקצה (1.6.2026): 4 סוכני ביקורת מקבילים, 41 ממצאים (9🔴/21🟡/11🔵) — **כולם נסגרו** ב-3 גלי תיקון + מחירון/SLA.
 
 ## Module Load Order
@@ -57,7 +58,7 @@
 6. `COMMAND_API.md`           ← לפני הקטגוריות העסקיות
 7. `COMMAND_API_TASKS.md`     ← ספריית פקודות המשימה (Interface)
 8. `marketing-strategy-framework.md`  ← Business: אסטרטגיית שיווק
-9. `AI_*` (SKILL_MAP · PROGRESSION_PLAN · LEARNING_RESOURCES · 7_SKILLS · SKILLS_ACQUISITION · TYPES · CLAUDE_TOOL_SELECTOR · CLAUDE_STACK_2026 · CLAUDE_GLOSSARY · RAG_DESIGN · PROJECT_STRUCTURE · ROLES_2026 · CLAUDE_ENGINEER_ROADMAP · DATA_BI · SYSTEM_DESIGN · PROCESS_INTELLIGENCE)  ← Knowledge (on-demand)
+9. `AI_*` (SKILL_MAP · PROGRESSION_PLAN · LEARNING_RESOURCES · 7_SKILLS · SKILLS_ACQUISITION · TYPES · CLAUDE_TOOL_SELECTOR · CLAUDE_STACK_2026 · CLAUDE_GLOSSARY · RAG_DESIGN · PROJECT_STRUCTURE · ROLES_2026 · CLAUDE_ENGINEER_ROADMAP · DATA_BI · SYSTEM_DESIGN · PROCESS_INTELLIGENCE · PROFICIENCIES_2026)  ← Knowledge (on-demand)
 10. `INVESTOR_RELATIONS.md`   ← שכבת עסק: משקיעים וגיוס
 11. `CASES/*.md`              ← תיקים פעילים (ULease 🎯)
 

@@ -1,7 +1,7 @@
 # CLAUDE OPERATING SYSTEM — Kernel
 
 **Module:** `OPERATING_SYSTEM.md`
-**Version:** 1.9.0
+**Version:** 1.10.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Kernel — נטען ראשון. כל שאר המודולים תלויים בו.
 **Integrates with:** כל המודולים הרשומים ב-§3 — `CLAUDE.md`, `MEMORY.md`, `DECISION_LOG.md`, `COWORK_SETUP.md`, `PROJECTS_SETUP.md`, `COMMAND_API.md`, `marketing-strategy-framework.md`, `AI_*` (Knowledge), `INVESTOR_RELATIONS.md`, `CASES/*.md` + תשתית תפעולית ב-§3.1 (`COWORK/`, `.claude/`)
@@ -53,7 +53,7 @@
 ├─ MEMORY ────── MEMORY.md · DECISION_LOG.md   מי אתה, מה זוכרים, focus/projects, החלטות
 ├─ CONTEXT ───── COWORK_SETUP.md · PROJECTS_SETUP.md · COWORK/   חיבור התיקייה, קבצי md, Global Instructions, פרויקטים
 ├─ INTERFACE ─── COMMAND_API.md · COMMAND_API_TASKS.md · .claude/ (skills · agents)   89 פקודות ליבה + 98 פקודות משימה + 4 Claude Code skills + os-auditor
-├─ KNOWLEDGE ─── AI_SKILL_MAP · AI_PROGRESSION_PLAN · AI_LEARNING_RESOURCES · AI_7_SKILLS · AI_SKILLS_ACQUISITION · AI_TYPES · AI_CLAUDE_TOOL_SELECTOR · AI_CLAUDE_STACK_2026 · AI_CLAUDE_GLOSSARY · AI_RAG_DESIGN · AI_PROJECT_STRUCTURE · AI_ROLES_2026 · AI_CLAUDE_ENGINEER_ROADMAP · AI_DATA_BI · AI_SYSTEM_DESIGN · AI_PROCESS_INTELLIGENCE   ידע אישי/לימודי (on-demand)
+├─ KNOWLEDGE ─── AI_SKILL_MAP · AI_PROGRESSION_PLAN · AI_LEARNING_RESOURCES · AI_7_SKILLS · AI_SKILLS_ACQUISITION · AI_TYPES · AI_CLAUDE_TOOL_SELECTOR · AI_CLAUDE_STACK_2026 · AI_CLAUDE_GLOSSARY · AI_RAG_DESIGN · AI_PROJECT_STRUCTURE · AI_ROLES_2026 · AI_CLAUDE_ENGINEER_ROADMAP · AI_DATA_BI · AI_SYSTEM_DESIGN · AI_PROCESS_INTELLIGENCE · AI_PROFICIENCIES_2026   ידע אישי/לימודי (on-demand)
 └─ BUSINESS ──── marketing-strategy-framework.md · INVESTOR_RELATIONS.md · CASES/*.md   הקשר עסקי נקודתי
 ```
 
@@ -91,8 +91,9 @@
 | 22 | `AI_DATA_BI.md` | Knowledge | ✅ פעיל | יסודות BI ומידול נתונים (Power BI) — star schema, ETL, DAX — ממופה ל-M9 |
 | 23 | `AI_SYSTEM_DESIGN.md` | Knowledge | ✅ פעיל | יסודות System Design — Gateway, סגנונות API, תורים, JWT — ממופה לארכיטקטורת הפלטפורמה |
 | 24 | `AI_PROCESS_INTELLIGENCE.md` | Knowledge | ✅ פעיל | מודיעין תהליכים ובקרת הטמעה — איפה להחיל Gen AI (GenIQ), HITL ושער בגרות, מדידת ROI |
-| 25 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
-| 26 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית, איפיון, מתודולוגיה, גיוס, playbooks, מנועי אקווזיציה (היצע + ביקוש), ביקורת ומחירון/SLA |
+| 25 | `AI_PROFICIENCIES_2026.md` | Knowledge | ✅ פעיל | 10 מיומנויות AI חיוניות ל-2026 + כרטיס-ניקוד (6✅+4🟡/10) ומיפוי תלת-שכבתי ל-ULease (שדרה · צמיחה · תשתית) |
+| 26 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
+| 27 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית, איפיון, מתודולוגיה, גיוס, playbooks, מנועי אקווזיציה (היצע + ביקוש), ביקורת ומחירון/SLA |
 
 > **הערה על שכבות:** מודולי `AI_*` הם שכבת **Knowledge** — ידע אישי/לימודי שיושב לוגית בין ה-INTERFACE ל-BUSINESS. הם פעילים אך נטענים on-demand, לא בכל turn.
 > כשמודול עובר מ-🔜 ל-✅ — מעדכנים את הסטטוס כאן ואת ה-Active Modules ב-`CLAUDE.md` ו-`README.md`.
@@ -115,7 +116,7 @@
 זה הבלוק שמפעיל את כל ה-OS. העתק אותו ל-`userPreferences` / system prompt / Cowork Global Instructions:
 
 ```
-CLAUDE OS ENABLED — Kernel v1.9
+CLAUDE OS ENABLED — Kernel v1.10
 
 On every turn, before responding:
 1. Load identity & context from MEMORY.md (and the Cowork "about-me" file if connected).
@@ -195,7 +196,8 @@ Doctrine:
 | 1.7.0 | רישום `AI_SYSTEM_DESIGN` (שורה 23, D-036) — יסודות backend לארכיטקטורת הפלטפורמה. הסטת שורות: IR 23→24 · CASES 24→25 | 2026-06-02 |
 | 1.8.0 | רישום `AI_PROCESS_INTELLIGENCE` (שורה 24, D-039) — מודיעין תהליכים (GenIQ) + Human-in-the-Loop (n8n). הסטת שורות: IR 24→25 · CASES 25→26 | 2026-06-02 |
 | 1.9.0 | יישור הקרנל אחרי גל D-040..D-047: `CASES/ULEASE_DEMAND_ENGINE` נרשם תחת גלוב שורה 26 (D-042) והכפיל `AI_ACQUISITION_FLYWHEEL` הוסר (D-047); עדכון תיאורי שורה 7 (+30 פרומפטי גיליונות, D-043) ושורה 26 (מנועי אקווזיציה) | 2026-06-03 |
+| 1.10.0 | רישום `AI_PROFICIENCIES_2026` (שורה 25, D-050) — 10 מיומנויות AI חיוניות ל-2026 (כרטיס-ניקוד 6✅+4🟡/10). הסטת שורות: IR 25→26 · CASES 26→27 | 2026-06-03 |
 
 **Confidentiality.** קובץ זה הוא הליבה של ה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of OPERATING_SYSTEM.md v1.9.0 —*
+— *End of OPERATING_SYSTEM.md v1.10.0 —*

@@ -3,7 +3,7 @@
 **Module:** `CASES/ULEASE.md`
 **Version:** 1.5.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
-**Status:** Active — תיק מרכזי (Business layer, §3 שורה 26).
+**Status:** Active — תיק מרכזי (Business layer, §3 שורה 27).
 **Integrates with:** `INVESTOR_RELATIONS.md`, `CASES/ULEASE_SPEC.md`, `CASES/ULEASE_FINANCE_INSURANCE.md`, `OPERATING_SYSTEM.md`, `MEMORY.md`, `CASES/ULEASE_FORECAST.py`, `CASES/ULEASE_FORECAST.csv`
 
 ---
