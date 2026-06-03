@@ -4,7 +4,7 @@
 ## Active Modules
 - [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.11.0 — Kernel: core doctrine, layered architecture, module registry (§3 + §3.1 working sets), the activation Boot Block, and the conflict-resolution hierarchy.
 - [`MEMORY.md`](./MEMORY.md) v1.1.0 — Persistent memory layer: schema, fully-populated identity card, active focus/projects, preferences, and the read/write protocol.
-- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.39.0 — Append-only decision log: 52 founding OS + ULease decisions with rationale and status.
+- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.40.0 — Append-only decision log: 53 founding OS + ULease decisions with rationale and status.
 - [`COWORK_SETUP.md`](./COWORK_SETUP.md) v1.2.0 — Claude Cowork onboarding: 7-step setup, the Global Instructions golden tip, context-file map, OS integration, and the Chief-of-Staff setup (5 scheduled roles) — now implemented as a real workspace in [`COWORK/`](./COWORK/).
 - [`PROJECTS_SETUP.md`](./PROJECTS_SETUP.md) v1.0.0 — Claude Projects setup: 3 projects (ULease Launch, the ₪150K raise, Claude OS), one deliverable each, with drop-in instruction blocks, upload lists, and acceptance tests.
 - [`COMMAND_API.md`](./COMMAND_API.md) v1.3.0 — CLAUDE Command API: 89 slash commands, composition operators, a prompting-frameworks library (incl. Opus 4.8 deltas §7.7), 32 portable prompt prefixes (§6.3), and drop-in system prompt for the Claude Operating System.

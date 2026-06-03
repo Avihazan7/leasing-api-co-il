@@ -1,7 +1,7 @@
 # DECISION_LOG.md — יומן החלטות
 
 **Module:** `DECISION_LOG.md`
-**Version:** 1.39.0
+**Version:** 1.40.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — יומן append-only (Memory layer).
 **Integrates with:** `OPERATING_SYSTEM.md` §7, `MEMORY.md`, `CASES/ULEASE*.md`
@@ -66,6 +66,7 @@
 | D-050 | 2026-06-03 | רישום מודול **AI_PROFICIENCIES_2026** (Knowledge, שורה 25 ב-§3) — אינפוגרפיקת *"Essential AI Proficiencies for the 2026 Landscape"* (aiplanetx, 10 מיומנויות) הומרה ל**כרטיס-ניקוד בגרות**: **6 פעילות במלואן** (Prompting · Workflows · Data-Grounded/RAG · AI-Search/GEO · Ecosystem · Governance&Ops) + **4 מאופיינות/חלקיות** (Autonomous · Cognitive · Multimodal · Media) — אפס נקודות עיוורות; מיפוי תלת-שכבתי ל-ULease (שדרה · מנוע צמיחה · תשתית) + נרטיב משקיע/גיוס. הסטת שורות: IR 25→26 · CASES 26→27 | הכרעת ספרנות (תקדים D-049): המקור **מכוסה ברובו** — הערך הוא *ולידציה ממופה*, לא תוכן חדש; נרשם כמודול נפרד (ולא העשרה) כי המסגרת — כרטיס-ניקוד יכולות **ארגוני** — מובחנת מ-`AI_7_SKILLS` (הרגלים *אישיים*) ומשלימה את משפחת מדדי-הבגרות (5/7 · 11/15 · 6/7 · 10✅+1🟡/12); 4 ה-🟡 = מנדט ה-Tech Lead (Phase 0) או out-of-scope מכוון, לא חוב טכני | ✅ פעיל |
 | D-051 | 2026-06-03 | **העשרת `ULEASE_AUTOMATION_MAP` ל-v1.4.0** (אינפוגרפיקת *"10 Claude Skills Every Professional Needs"*, Hamza Khalid) — §11.1 חדש: **חבילה שנייה של Skills מוכנים** (authoring) לצד חבילת ה-31 לעסקים-קטנים (D-035). 10 ה-Skills המקצועיים ממופים לעבודות ההשקה: `cold-outreach`→אקווזיציית היצע (D-045) · `weekly-report`→עדכון משקיעים שבועי (מגשר/משלים את ה-skill `investor-update`) · `brand-guidelines`→סגירת דגל המותג הצרכני (D-024) · `meeting-notes`→ראש המטה · `data-analyst`→QA למודל; + 4 stacks (combo) + עקרון **"skill אחד, job אחד"**. הכרעת מייסד תחת **הקפאת המודולים** (תוכנית הביצוע 2.6, כלל 4): **העשרה ל-§11** (הבית הקנוני של Anthropic Skills) — **לא מודול חדש** | המקור מכוסה ברובו ב-§11 (חבילת ה-31), אך 10 ה-Skills הם curation שונה (authoring על הקול/התבנית שלך, לא אינטגרציות) שכמה מהם נופלים ישירות על משימות ההשקה (היצע, משקיעים, מותג); רישום כ-§11.1 (ולא מודול `AI_CLAUDE_SKILLS` חדש) מונע בית-כפול (תקדים D-047) ומכבד את הקפאת המודולים; "skill אחד job אחד" מאמת רטרואקטיבית את התיחום הצר של 4 ה-skills של ה-OS | ✅ פעיל |
 | D-052 | 2026-06-03 | רישום מודול **AI_LINEAR_ALGEBRA** (Knowledge, שורה 26 ב-§3) — אינפוגרפיקת *"Linear Algebra Cheat Sheet"* (mltut, 12 מושגים) הומרה למודול **יסוד מתמטי**: כל מושג + עמודת "למה זה חשוב ל-ML", והגשר ל-ULease — **dot product (#8) חלקי נורמה L2 (#9) = דמיון קוסינוס = ליבת חיפוש RAG** ב-pgvector (`ULEASE_SPEC` §7.1, D-022/D-025); eigenvalues→PCA (דחיסת embeddings), rank→low-rank/LoRA (ה-fine-tuning הדחוי). הסטת שורות: IR 26→27 · CASES 27→28 | הכרעת ספרנות: **מודול נפרד ולא העשרה** — אין ב-OS בית למתמטיקת-יסוד (`AI_DATA_BI` הוא סטטיסטיקה/BI/DAX, ענף יישומי אחר; `AI_RAG_DESIGN` *משתמש* בווקטורים אך לא מלמד אותם); זהו מודול היסוד המתמטי הראשון, הקומה התחתונה של הקוריקולום (`AI_SKILL_MAP`). מסגור **אוריינות, לא יישום**: ה-Tech Lead מיישם, המייסד סוקר design review — עיקרון תאום ל"ה-BI מנתח, ה-API מחשב" (D-041) | ✅ פעיל |
+| D-053 | 2026-06-03 | **הקשחת ה-CI — בדיקה מכנית #7** (`scripts/os_consistency_check.py`, לינאז' D-023): כל הפניית `§3 שורה N` בשורת **Status:** של מודול חייבת להתאים למספר השורה בפועל בטבלת §3 (כולל התאמת glob ל-`CASES/ULEASE*.md`). בנוסף — תיקון 2 הפניות מתיישנות שזיהה ה-os-auditor אחרי הסטת D-052: `INVESTOR_RELATIONS.md` (26→27) ו-`CASES/ULEASE.md` (27→28) | ה-os-auditor מצא **דפוס חוזר** (תקדים W19): כשמודול מוסט ב-§3, הפניית-השורה בכותרתו מתיישנת בשקט — בדיקות 1–6 לא תפסו זאת (הן בודקות גרסאות וספירות, לא שורות). לפי הדוקטרינה המתועדת בסקריפט ("כל ממצא ידני → בדיקה אוטומטית", כמו 5–6) ועיקרון הקרנל **Fail Loud, Not Silent** — הממצא הופך לבדיקה דטרמיניסטית שתתפוס אותו בכל PR עתידי; אומת בבדיקת negative (שורה שגויה → exit 1) | ✅ פעיל |
 
 ---
 
@@ -122,7 +123,8 @@
 | 1.37.0 | הוספת D-050 — רישום מודול `AI_PROFICIENCIES_2026.md` (10 מיומנויות AI חיוניות ל-2026 → כרטיס-ניקוד 6✅+4🟡/10, Knowledge שורה 25) | 2026-06-03 |
 | 1.38.0 | הוספת D-051 — העשרת `ULEASE_AUTOMATION_MAP.md` ל-v1.4.0: §11.1 חבילה שנייה — 10 ה-Skills המקצועיים (authoring) ממופים לעבודות ההשקה + עקרון "skill אחד, job אחד" (העשרה תחת הקפאת המודולים, לא מודול חדש) | 2026-06-03 |
 | 1.39.0 | הוספת D-052 — רישום מודול `AI_LINEAR_ALGEBRA.md` (12 מושגי אלגברה לינארית → עמודת "למה זה חשוב ל-ML" + הגשר dot product → RAG/pgvector, Knowledge שורה 26) | 2026-06-03 |
+| 1.40.0 | הוספת D-053 — הקשחת CI: בדיקה מכנית #7 (`§3 שורה N` בכותרת ↔ טבלת §3) + תיקון 2 הפניות מתיישנות (IR 26→27, CASES 27→28) שזיהה ה-os-auditor אחרי D-052 | 2026-06-03 |
 
 **Confidentiality.** מסמך פנימי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of DECISION_LOG.md v1.39.0 —*
+— *End of DECISION_LOG.md v1.40.0 —*
