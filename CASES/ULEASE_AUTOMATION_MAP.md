@@ -1,10 +1,10 @@
 # ULease 🎯 — מפת אוטומציות AI לפי פונקציה עסקית
 
 **Module:** `CASES/ULEASE_AUTOMATION_MAP.md`
-**Version:** 1.3.0
+**Version:** 1.4.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Backlog אוטומציות מתועדף (Business layer, תחת CASES).
-**Source:** מבוסס על מסגרת *"546 AI Automation Ideas"* (AI Matt · Next Step Agents) + *"31 Claude Skills For Small Businesses"* (Anthropic plugin pack) — מסונן ומותאם ל-ULease.
+**Source:** מבוסס על מסגרת *"546 AI Automation Ideas"* (AI Matt · Next Step Agents) + *"31 Claude Skills For Small Businesses"* (Anthropic plugin pack) + *"10 Claude Skills Every Professional Needs"* (Hamza Khalid) — מסונן ומותאם ל-ULease.
 **Integrates with:** `CASES/ULEASE_SPEC.md`, `CASES/ULEASE_OUTBOUND_ENGINE.md`, `AI_TYPES.md`, `AI_PROCESS_INTELLIGENCE.md`, `CASES/ULEASE_DASHBOARD.html`
 
 > **הפילוסופיה:** רוב האנשים עוצרים בפרומפטים. מעטים בונים את **המערכת שמריצה את העסק**. Build systems · Own value · **Owned, not rented** — זה בדיוק מה ש-ULease בונה.
@@ -137,6 +137,33 @@ Anthropic שחררה חבילת **31 Claude Skills לעסקים קטנים** ש�
 
 > ⚠️ **הסתייגות:** ה-Skills רצים על הכלים העסקיים (QuickBooks, Stripe…) — הם פותרים את **התפעול של ULease כעסק**, לא את המוצר. את המוצר (Deal Score, מכרז, חדר-עסקה) בונה ה-Tech Lead.
 
+### 11.1 חבילה שנייה: 10 ה-Skills המקצועיים (authoring)
+
+לצד חבילת ה-31 לעסקים-קטנים (שמתחברת לכלים), Anthropic מציעה גם **Skills מקצועיים לעבודת-ידע** שרצים על **הקול, התבנית והסטנדרטים שלך** — לא על אינטגרציות חיצוניות. מותקנים בקליק מ-`github.com/anthropics/skills`. חלקם נופלים ישירות על עבודות ההשקה:
+
+| Skill | מה עושה | עבודת ULease שזה משרת | מתי |
+|-------|----------|------------------------|:---:|
+| `cold-outreach` | פנייה מותאמת בטון שלך (לא AI-copy) | **אקווזיציית היצע** — יבואנים/ליסינג (D-045 white-glove · `OUTREACH_SCRIPTS`); עובד הכי טוב עם `about-me.md` (כבר קיים ב-OS) | עכשיו |
+| `weekly-report` | ממלא תבנית דוח מ-notes גולמיים | **עדכון משקיעים שבועי** (תוכנית הביצוע, כלל 5) — מגשר/משלים את ה-skill `investor-update` | עכשיו |
+| `email-rewriter` | טיוטה גסה → מייל send-ready | תקשורת יומיומית + follow-ups (`OUTREACH_SCRIPTS`) | עכשיו |
+| `meeting-notes` | transcript → סיכום מובנה | ראש המטה "Meetings" (`COWORK_SETUP` §9) — פגישות ספקים/משקיעים | עכשיו |
+| `linkedin-post-writer` | פוסט בקול המדויק שלך | נוכחות מייסד + תוכן אורגני לצד-הביקוש (`DEMAND_ENGINE` פאזה 2) | השקה+ |
+| `brand-guidelines` | נועל צבעים/פונטים/טון | **מותג צרכני** — סוגר את דגל D-024 (האתר חייב פלטת מותג מכוונת) | השקה+ |
+| `data-analyst` | מחיל את מסגרת המדדים שלך על כל dataset | QA למודל הפיננסי (`ULEASE_FORECAST.csv`) + KPIs ל-M9 | V1 |
+| `research-summary` | מאמר צפוף → אנגלית פשוטה | מודיעין שוק/רגולציה + ניתוח מתחרים | V1 |
+| `docx-builder` | Word מעוצב בלי לחזור על הפורמט | one-pagers · טיוטות הסכמי ספק/SLA | לפי צורך |
+| `code-reviewer` | סקירת קוד מול סטנדרט הצוות | משימת ה-Tech Lead — סקירה עקבית | פוסט-גיוס |
+
+**ארבעה Stacks (combo) מהמקור → ל-ULease:**
+- `cold-outreach` + `about-me.md` → פנייה אישית להיצע (ה-`about-me.md` כבר בנוי).
+- `weekly-report` + `meeting-notes` → דיווח אוטומטי: פגישה → דוח.
+- `linkedin-post-writer` + `brand-guidelines` → פוסטים zero-edit בקול המותג.
+- `research-summary` + `data-analyst` → אנליסט מחקר אישי (מודיעין שוק).
+
+> 💡 **העיקרון — "skill אחד, job אחד · לעולם לא לשלב שני workflows":** בדיוק למה ארבעת ה-skills של ה-OS (`os-module` · `os-decision` · `ulease-refresh` · `investor-update`) מוגדרים צר. workflow מורכב? **לערום** skills (combo), לא לנפח אחד. בונים משלכם? **Skill Creator** — 5 דקות (כך נולדו ארבעת ה-skills שלנו).
+
+> ⚠️ **אותה הסתייגות, רובד אישי:** החבילה הזו פותרת **פרודוקטיביות מקצועית** (כתיבה, סיכום, ניתוח) — משלימה את חבילת התפעול, לא מחליפה את המוצר. שים לב לכפילות מכוונת: `weekly-report` ו-`cold-outreach` חופפים ל-skills/scripts קיימים (`investor-update`, `OUTREACH_SCRIPTS`) — הם **מגשרים** עד שהגרסה המותאמת שלנו בשלה.
+
 ---
 
 ## 12. 📏 שכבת המדידה — ROI לכל אוטומציה (D-040)
@@ -185,7 +212,8 @@ Anthropic שחררה חבילת **31 Claude Skills לעסקים קטנים** ש�
 | 1.1.0 | §11 חדש (D-035): 31 ה-Skills של Anthropic ממופים למפה — לפחות 5 אוטומציות V1/V2 הופכות ל"התקן עכשיו" (כספים, חוזים, briefings) | 2026-06-02 |
 | 1.2.0 | §12 חדש (D-040): שכבת המדידה — baseline חובה, עלות-מול-תשואה, כלל 90 הימים, ואומדן ROI כתוב כתנאי לבניית ההזדמנויות הבאות | 2026-06-02 |
 | 1.3.0 | שתי אוטומציות מהלופ האורגני (D-047): Deal-to-Content Generator + SEO/GEO Rank Monitor (§1, V1) + סימון ה-Q&A Bot כ-AI Receptionist (§3) — סה"כ 40→42 | 2026-06-03 |
+| 1.4.0 | §11.1 חדש (D-051): חבילה שנייה — 10 ה-Skills המקצועיים (authoring) ממופים לעבודות ההשקה (cold-outreach→היצע · weekly-report→משקיעים · brand→מותג) + 4 stacks + עקרון "skill אחד, job אחד" | 2026-06-03 |
 
-**Attribution.** המסגרות: *546 AI Automation Ideas* (AI Matt · Next Step Agents) · *31 Claude Skills For Small Businesses* (Anthropic). הסינון, המיפוי והתעדוף ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** המסגרות: *546 AI Automation Ideas* (AI Matt · Next Step Agents) · *31 Claude Skills For Small Businesses* (Anthropic) · *10 Claude Skills Every Professional Needs* (Hamza Khalid). הסינון, המיפוי והתעדוף ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_AUTOMATION_MAP.md v1.3.0 —*
+— *End of CASES/ULEASE_AUTOMATION_MAP.md v1.4.0 —*

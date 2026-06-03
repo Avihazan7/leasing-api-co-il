@@ -5,7 +5,7 @@
 ## Active Modules
 - `OPERATING_SYSTEM.md` v1.10.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.1.0 — שכבת זיכרון: schema, כרטיס זהות **מלא**, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
-- `DECISION_LOG.md` v1.37.0 — יומן החלטות append-only: 50 החלטות (OS + ULease), רציונל וסטטוס.
+- `DECISION_LOG.md` v1.38.0 — יומן החלטות append-only: 51 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.2.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר, אינטגרציה עם ה-OS + ראש המטה (5 תפקידים מתוזמנים) — מיושם בפועל ב-`COWORK/`.
 - `PROJECTS_SETUP.md` v1.0.0 — Claude Projects: 3 פרויקטים (השקה 🎯 · גיוס ₪150K · Claude OS) — תוצר אחד לכל פרויקט, הוראות drop-in, רשימות העלאה ובדיקות קבלה.
 - `COMMAND_API.md` v1.3.0 — 89 slash commands, composition operators, prompting-frameworks library (כולל Opus 4.8 deltas §7.7), 32 קיצורי פתיחה ניידים (§6.3 Prompt Prefixes), drop-in system prompt loaded.
@@ -46,7 +46,7 @@
 - `CASES/ULEASE_TECH_ONBOARDING.md` v1.2.0 — Onboarding ל-Tech Lead: יום 0/1, רשימת קריאה ב-OS, תוכנית 30·60·90 + שקיפות SDLC (Jira/GitHub מיום 0, דוח תהליך שבועי, cycle time).
 - `CASES/ULEASE_LAUNCH_CHECKLIST.md` v1.3.0 — צ'קליסט השקה (שבועיים): דומיין, משפטי, MVP, תוכן, outreach, GEO, QA ולוח שבועי.
 - `CASES/ULEASE_DASHBOARD.html` v1.2.0 — דשבורד מנהלים אינטראקטיבי (RTL): KPIs, גרפים (הכנסה/מזומן/עסקאות/הוצאות/רווחיות), תמהילי הכנסה והוצאה, וצ'קליסט השקה חי; נוצר ע"י `CASES/ULEASE_DASHBOARD.py`.
-- `CASES/ULEASE_AUTOMATION_MAP.md` v1.3.0 — מפת אוטומציות AI לפי 10 פונקציות עסקיות: 42 אוטומציות מסוננות ל-ULease (כולל Deal-to-Content Generator ו-Rank Monitor מהלופ האורגני), סטטוס (18 כבר בנויות), עדיפות MVP/V1/V2 + 31 ה-Skills המוכנים של Anthropic כשכבת מימוש מדף + שכבת המדידה (§12): baseline, ROI וכלל 90 הימים.
+- `CASES/ULEASE_AUTOMATION_MAP.md` v1.4.0 — מפת אוטומציות AI לפי 10 פונקציות עסקיות: 42 אוטומציות מסוננות ל-ULease (כולל Deal-to-Content Generator ו-Rank Monitor מהלופ האורגני), סטטוס (18 כבר בנויות), עדיפות MVP/V1/V2 + שתי חבילות ה-Skills המוכנות של Anthropic כשכבת מימוש מדף (§11: 31 לעסקים-קטנים · §11.1: 10 מקצועיים ל-authoring, ממופים לעבודות ההשקה) + שכבת המדידה (§12): baseline, ROI וכלל 90 הימים.
 - `CASES/ULEASE_AUDIT.md` v1.4.0 — דוח ביקורת מקצה-לקצה (1.6.2026): 4 סוכני ביקורת מקבילים, 41 ממצאים (9🔴/21🟡/11🔵) — **כולם נסגרו** ב-3 גלי תיקון + מחירון/SLA.
 
 ## Module Load Order
