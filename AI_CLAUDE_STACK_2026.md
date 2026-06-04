@@ -1,7 +1,7 @@
 # Claude Stack 2026 — How to use Claude in 2026
 
 **Module:** `AI_CLAUDE_STACK_2026.md`
-**Version:** 1.6.0
+**Version:** 1.7.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Knowledge layer (§3 שורה 16) + מפרט ה-build התפעולי של 4 העמודים.
 **Source:** מבוסס על ה-cheat sheet *"How to use Claude in 2026"* + סדרת *"The 7 Levels of Claude Code"* (learn.nextwork.org) + *"Understanding Agent Skills"* (Skills·MCP·Subagents·Hooks·Plugins) + פוסט תובנות Karpathy על הנדסה מבוססת-סוכנים ואינפוגרפיקות *"Every Claude Code Command"* / *"Why Most AI Projects Fail After Deployment"* + *"The Agent Development Kit"* (Brij Kishore Pandey — 5 השכבות, מזווית Claude Code) + *"How to Master Claude in One Week"* (GenAI.works — Connectors מול Plugins).
@@ -25,6 +25,7 @@
 6. [ה-build בריפו — מה קיים איפה](#6-ה-build-בריפו--מה-קיים-איפה)
 7. [הזרימה המשולבת — דוגמה מקצה לקצה](#7-הזרימה-המשולבת--דוגמה-מקצה-לקצה)
 8. [כללי תחזוקה](#8-כללי-תחזוקה)
+9. [לקחי הפעלה (Hard-Won) — הדלתא מ-26 Claude Lessons](#9-לקחי-הפעלה-hard-won--הדלתא-מ-26-claude-lessons)
 
 ---
 
@@ -319,6 +320,31 @@
 
 ---
 
+## 9. לקחי הפעלה (Hard-Won) — הדלתא מ-"26 Claude Lessons"
+
+> מקור: *"26 Claude Lessons I Learned The Hard Way"* (Ruben Hassid, how-to-ai.guide). **20 מ-26 כבר מכוסים** ב-OS: context bloat (§8 · §2) · model selector + adaptive thinking + effort lever (`AI_CLAUDE_TOOL_SELECTOR.md`) · Skills שמחליפים הקלדה חוזרת (§4) · קובץ about-me (`MEMORY.md`) · Cowork צריך תיקייה + Projects (§2–§3) · "Claude אינו ChatGPT" = דוקטרינת Karpathy (§5.7). למטה רק **6 הדלתות שלא היו כתובות** — אומתו ב-grep לפני הכתיבה (המשך הקפאת המודולים D-049/D-054).
+
+### 9.1 כלכלת ה-tokens — העלות היא מה ש-Claude קורא *מחדש*
+
+הסימפטום (שיחה ארוכה מתדרדרת) כבר ב-§8; כאן שורש-הסיבה והפעולות:
+
+| הלקח | המנגנון | הפעולה |
+|------|---------|--------|
+| **העלות האמיתית = re-read**, לא התשובה | כל turn קורא מחדש את כל ההקשר; prompt caching מוזיל חזרות אך השיחה מתייקרת ככל שגדלה | שיחה חדשה מוקדם (§8) · `/compact` · sub-agent להקשר כבד |
+| **`/rewind` חוסך יותר מכל טריק פרומפט** | עריכת הודעה קודמת מגלגלת את ההקשר אחורה במקום לערום עוד turn | תקן את ההודעה — אל תוסיף "עוד follow-up אחד" |
+| **קובץ טקסט > צילום מסך** | טקסט נקרא ישירות; screenshot עולה דרך Vision — יקר יותר ופחות מדויק לקוד/דאטה | הדבק טקסט/קובץ; שמור תמונה לדיאגרמות בלבד |
+| **המכסה נגמרת מהקלדה, לא מהתוכנית** | limit ≈ נפח הודעות × re-read, לא "כמות תשובות" | פחות turns, ממוקדים יותר |
+
+### 9.2 ניסוח — חיובי גובר על שלילי
+
+"אל תעשה X" נקרא כהמלצה רכה; הוראה חיובית ("עשה Y") מחייבת. נסח **מה כן**, לא רשימת איסורים — משלים את "תאר את הבעיה, לא את הפתרון" (§5) ואת Fail-Loud בקרנל (§5.7).
+
+### 9.3 הטלת ה-AI — מה מסגיר כתיבה כמכונה
+
+שני ה-tells הנפוצים: **em-dash** שמחליף פסיק/נקודה, ותבנית **"it's not X, it's Y"**. הם מה שגורם לקורא לזהות "נכתב ב-AI". הבית הקנוני לרשימה המלאה: `COWORK/ABOUT-ME/anti-ai-style.md` (+ `MEMORY.md` §4, "אפס ביטויי AI") — כאן רק שני המובילים, כי הם הנפוצים ביותר.
+
+---
+
 ## Document Control
 
 | גרסה | שינוי | תאריך |
@@ -330,7 +356,8 @@
 | 1.4.0 | §5.6 חדש (D-038): **סיכוני סוכנים** — Prompt Injection (קונה מנסה "לשכנע" את הסוכן), Hallucination, Tool Misuse, עלויות — ממופים ל-Hooks של Guardian + מפת frameworks (ההמלצה: Claude Agent SDK) | 2026-06-02 |
 | 1.5.0 | §5.7 חדש (D-048): **דוקטרינת Karpathy** — "בונים מערכות סביב הסוכן, לא פרומפטים": 5 כשלי הסוכנים ממופים לתשובות ה-OS, success criteria + loop, תזמור מקביל, ו-7 כשלי הייצור ממופים לאיפיון + §5.8: **קטלוג פקודות Claude Code** (6 קטגוריות) ושלוש שכבות הפקודות | 2026-06-03 |
 | 1.6.0 | §5.5 הועשר (D-058) מ-*The Agent Development Kit* (Brij Kishore Pandey) + *How to Master Claude in One Week*: **תיקון** ה-Hooks ל-5 ה-events הקנוניים (`PreToolUse`·`PostToolUse`·`SessionStart`·`Stop`·`SubagentStop`) + מנגנון Event→Matcher→Command (במקום "on-edit" השגוי); אילוץ **subagents ללא רקורסיה**; אנטומיית **Plugin** (`skills/·agents/·hooks/·commands/` + Marketplace); **Global/Project CLAUDE.md**; ובלוק **Connectors מול Plugins** | 2026-06-04 |
+| 1.7.0 | §9 חדש (D-060): **לקחי הפעלה (Hard-Won)** מ-*"26 Claude Lessons"* (Hassid) — 20/26 כבר מכוסים; נכתבו רק 6 הדלתות שאומתו ב-grep: כלכלת tokens (re-read/caching · `/rewind` · טקסט>צילום · מכסה=הקלדה), ניסוח חיובי>שלילי, ו-2 tells של כתיבת-AI (em-dash · "it's not X, it's Y"). אינפוגרפיקות "12 Things" (סוננה — מכוסה) ו-"Top 10 Models" (נדחתה — off-stack/לא-מאומת) באותה הכרעה | 2026-06-04 |
 
 **Attribution.** מבוסס על ה-cheat sheet *"How to use Claude in 2026"*; סולם 7 הרמות ובלוק Agent Teams (§5): סדרת *The 7 Levels of Claude Code* (learn.nextwork.org); ה-Extension Stack (§5.5): *Understanding Agent Skills* + *Make Claude 10x Smarter* + *The Agent Development Kit* (Brij Kishore Pandey) + *How to Master Claude in One Week* (GenAI.works); הדוקטרינה (§5.7): פוסט מבוסס תובנות Andrej Karpathy + *Why Most AI Projects Fail After Deployment*; קטלוג הפקודות (§5.8): *Every Claude Code Command To Save You 100+ Hours*. העיבוד, התרגום, ובעיקר ה-build התפעולי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of AI_CLAUDE_STACK_2026.md v1.6.0 —*
+— *End of AI_CLAUDE_STACK_2026.md v1.7.0 —*
