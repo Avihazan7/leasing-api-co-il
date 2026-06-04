@@ -1,7 +1,7 @@
 # יסודות BI ומידול נתונים — Power BI כמקרה לימוד
 
 **Module:** `AI_DATA_BI.md`
-**Version:** 1.5.0
+**Version:** 1.6.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Knowledge layer (§3 שורה 22). מודול הדאטה הראשון — משרת את M9 (Data & Insights).
 **Source:** מבוסס על מחברת לימוד *"Power BI — Topics 1–20"* (יסודות · Power Query · מידול · DAX · ויזואליזציה · אינטראקטיביות · Dashboards · Service · Measures-vs-Columns · ניהול ושיתוף) + *"Power BI DAX — Financial Functions"* (16 פונקציות) + *"Power BI for Marketing"* ו-*"BI Architecture"* (Jalalelaji).
@@ -256,6 +256,20 @@
 
 > **Learn-vs-Delegate:** את דשבורד הקמפיינים אברהם בונה בעצמו (Claude in Excel / Sheets על ייצוא ה-Ads — פרומפטי הגיליונות ‎#6, ‎#10 ב-`COMMAND_API_TASKS.md` §4); דשבורד הקהל נבנה ע"י ה-Tech Lead על דאטת ה-CRM.
 
+### 7.4 חמשת היתרונות — Why Power BI for Marketing
+
+המקור (Jalalelaji) פותח ב-5 היתרונות של BI לשיווק. שלושת הראשונים כבר מיושמים ב-§7.1–§7.3; **שניים ראויים למסגור מפורש** — הם קיימים ביכולות אחרות של המודול אך לא נקשרו עד כה לשיווק:
+
+| היתרון | מה זה | הבית ב-ULease | מצב |
+|--------|--------|----------------|------|
+| Track ROI Across Channels | תשואה פר-ערוץ | §7.2 (ROAS) · §7.1 (איחוד המקורות) | ✅ |
+| Optimize Campaign Spend | הסטת תקציב למנצח | §7.1 (feedback loop) · §7.3 (דשבורד קמפיין) | ✅ |
+| Deep Audience Segmentation | איזו פרסונה ממירה | §7.3 (דשבורד ניתוח קהל → Big Five) | ✅ |
+| **Predict Future Performance** | חיזוי ביצועי קמפיין/לקוח קדימה | §4 (Time Intelligence — תחזית-מול-ביצוע) + §7.2 (CLV/Churn = המספרים צופי-העתיד) | 🆕 מוסגר |
+| **Automate Reporting** | דיווח שיווקי ללא יד אדם | §6.ד (Subscriptions/Alerts) — עכשיו לשיווק: **דוח ROAS שבועי אוטומטי** + התראת "CPL > קו אדום" | 🆕 מוסגר |
+
+> **המסגור שנוסף:** "חיזוי" בשיווק אינו רכיב חדש — הוא ה-Time Intelligence של §4 מופנה קדימה (תחזית CPL/ROAS) יחד עם CLV/Churn (§7.2) כמדדים צופי-עתיד; ו"אוטומציית דיווח" היא ה-Subscriptions של §6.ד מיושמת על דוח ה-ROAS השבועי. שני היתרונות שסוגרים את חמשת ה-Why — בלי כפילות, בתוך הבית הקיים.
+
 ---
 
 ## 8. ההכרעה ל-M9: Power BI מול Custom — שאלה ל-Tech Lead
@@ -295,9 +309,10 @@
 | 1.3.0 | §6.ה חדש (D-036): איזה מבחן סטטיסטי לאיזו החלטה — A/B להודעות (Chi-Square), השוואת ערוצים (ANOVA), ולידציית Deal Score (Correlation) | 2026-06-02 |
 | 1.4.0 | §4.1 חדש (D-041): 16 הפונקציות הפיננסיות של DAX בשלוש קבוצות — לוח סילוקין (PMT·IPMT·CUMIPMT·RATE), כדאיות (PV·FV·IRR), פחת/ערך שייר (SLN·DDB·VDB) — ממופות ל-M6, Deal Score, Aging Predictor ו-M9 + הכרעת BI-מול-API לחישובי הלקוח | 2026-06-02 |
 | 1.5.0 | §7 חדש (D-044): BI לשיווק — מחזור דאטת השיווק, ששת ה-KPIs (ROAS·CPA·CLV·Churn מסומנים 🆕 כחסרים), ושני דשבורדי ההשקה + שמות שכבות הארכיטקטורה (Lake/Warehouse) ב-§1; ההכרעה ל-M9 → §8, מסלול הלמידה → §9 | 2026-06-02 |
+| 1.6.0 | §7.4 חדש (D-060): חמשת היתרונות (Why Power BI for Marketing) — מיפוי 5 היתרונות הנקובים מהאינפוגרפיקה לסטטוס ב-OS; מסגור מפורש ל-*Predict Future Performance* (Time Intelligence §4 + CLV/Churn §7.2) ול-*Automate Reporting* (Subscriptions §6.ד → דוח ROAS שבועי) שלא היו ממוסגרים לשיווק | 2026-06-04 |
 
 **Attribution.** מבוסס על מחברת הלימוד *Power BI Topics 1–20* + *Power BI DAX — Financial Functions* + *Power BI for Marketing* ו-*BI Architecture* (Jalalelaji.com) + *Statistical Tests Cheat Sheet* (ML). הזיקוק, התרגום והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
 **Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of AI_DATA_BI.md v1.5.0 —*
+— *End of AI_DATA_BI.md v1.6.0 —*
