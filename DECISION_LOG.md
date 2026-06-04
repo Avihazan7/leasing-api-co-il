@@ -1,7 +1,7 @@
 # DECISION_LOG.md — יומן החלטות
 
 **Module:** `DECISION_LOG.md`
-**Version:** 1.47.0
+**Version:** 1.48.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — יומן append-only (Memory layer).
 **Integrates with:** `OPERATING_SYSTEM.md` §7, `MEMORY.md`, `CASES/ULEASE*.md`
@@ -74,6 +74,7 @@
 | D-058 | 2026-06-04 | **העשרת `AI_CLAUDE_STACK_2026` ל-v1.6.0** (אינפוגרפיקות *The Agent Development Kit*, Brij Kishore Pandey + *How to Master Claude in One Week*, GenAI.works): §5.5 הועשר ב**פירוט הקנוני של השכבות התפעוליות** — (א) **Hooks**: 5 ה-events הקנוניים (`PreToolUse`·`PostToolUse`·`SessionStart`·`Stop`·`SubagentStop`) + מנגנון Event→Matcher→Command — **מתקן את "on-edit" השגוי** (ב) **Subagents**: אילוץ אי-הרקורסיה (לא יכולים להוליד subagents) (ג) **Plugins**: אנטומיית `skills/·agents/·hooks/·commands/` + Marketplace (ד) **CLAUDE.md**: שני מפלסים Global/Project + בלוק **Connectors מול Plugins**. **סינון 4 האינפוגרפיקות**: Cloud Architect (D-057) ו-Claude AI Engineer (D-027) מכוסות 1:1; Agent Dev Kit ו-Master-Claude-in-a-Week מכוסות ברובן — הדלתא היחידה היא הפירוט שנוסף כאן. הכרעת מייסד תחת הקפאת המודולים (כלל 4): **העשרה, לא מודול חדש** (תקדים D-051/D-055) | המקור מאשש את המודל 5-השכבתי הקיים (§5.5) אך מוסיף עובדות Claude Code מדויקות שחסרו ו**מתקן אי-דיוק** ("on-edit" אינו event אמיתי); אפס מודול חדש, אפס שינוי בספירות הקנוניות (89 פקודות · 30 שורות §3) — נאמן לרף העולה (D-049/D-054) | ✅ פעיל |
 | D-059 | 2026-06-04 | **העשרת `ULEASE_DEMAND_ENGINE` ל-v1.2.0 + ארטיפקט n8n** — בוט WhatsApp אמיתי (טקסט+קול, סוכן+כלים, Google Sheets: FAQ/INVENTORY/order) מופה ל**תת-זרם ה-AI Receptionist** (§9): זהו צומת 16 (Q&A Bot, SPEC §7.1) + קליטת עסקה — דלת-הכניסה של מנוע הביקוש, inbound. נוספו 11 שיפורים מול הדוקטרינה + שלד `CASES/ULEASE_DEMAND_ENGINE.n8n.json` וגנרטור `_n8n.py` (כמו במנוע ההיצע) — **מתוקן ל-Claude+HITL+grounding, לא OpenAI as-is** | המקור מתנגש ב-3 כללים כתובים: D-040 (HITL לכתיבות), SPEC §7.2 (דיוק 100% לעובדות), D-022 (Claude בלבד לסוכן). העשרה תחת הקפאת המודולים (תקדים D-051/D-055/D-058), לא מודול חדש — הבלופרינט קיים; זו דלת-הכניסה הקונקרטית שלו. ה-STT נשאר ספק נפרד (לא ה-agent) | ✅ פעיל |
 | D-060 | 2026-06-04 | **טריאז' ספרנות ל-3 אינפוגרפיקות Claude** — (1) *"26 Claude Lessons"* (Hassid): 20/26 מכוסים; **העשרת `AI_CLAUDE_STACK_2026` ל-v1.7.0** (§9) ב-6 הדלתות שאומתו ב-grep — כלכלת tokens (re-read/caching · `/rewind` · טקסט>צילום · מכסה=הקלדה), ניסוח חיובי>שלילי, ו-2 tells של כתיבת-AI (em-dash · "it's not X, it's Y"). (2) *"12 Insane Things"*: **סונן** — 11/12 מכוסים (Code·MCP·RAG·Subagents·Skills·Routines·browser), "Auto Mode" = לולאת §5.7. (3) *"Top 10 Cost-Efficient Models"*: **נדחה** — דאטה לא-מאומת/חסר-מקור ו**מחוץ ל-stack** (Claude-only, D-022); נכשל ברף ה-grounding (SPEC §7.2). | המשך הקפאת המודולים (D-049/D-054): אפס מודול חדש, רק הדלתא המאומתת נכתבת והשאר הפניות. דחיית #2 מחילה את דוקטרינת ה-grounding על ה-OS עצמו — לא מכניסים מספרים שאי אפשר לאמת. | ✅ פעיל |
+| D-061 | 2026-06-04 | רישום מודול **KUBERNETES_101** (Knowledge, שורה 29 ב-§3) — אינפוגרפיקת *"Kubernetes 101"* (Lawal Abdullateef A. · CloudNimbus) הומרה למודול **יסודות תשתית**: 10 אבני-הבניין (הבעיה ש-K8s פותר · Cluster/Node/Pod/Container · Control/Data Plane · Workloads · Networking · Config/Secrets · Scaling · Observability · Security · DevOps fit) + §11 **הכרעת design-review MVP/V1/V2** ושער אנטי-over-engineering (managed platform ל-MVP · managed K8s ל-V1 · full+service-mesh ל-V2) + §12 השורה התחתונה. הסטת שורות: IR 29→30 · CASES 30→31 | הכרעת ספרנות (תקדים D-052/D-057): **מודול נפרד ולא העשרה** — grep אישר פער אמיתי: `CLOUD_ARCHITECT_SKILLS` מזכיר את K8s כ**כלי** בתא אחד (שכבה 4) ו-`AI_SYSTEM_DESIGN` עוצר ברמת הרכיב (Auto Scaling/Service Discovery §4.5), אך **המנגנון** (Pod · Control Plane · HPA · desired-state reconcile) לא נלמד באף מודול; deep-dive ברמה אחת מתחת, תאום ל-D-052 (LINEAR_ALGEBRA הופרד מ-DATA_BI כ"ענף יישומי אחר"). הערך הכפול: אוריינות design-review למייסד (**מתי K8s = over-engineering**, כלל D-037) ושאלת ראיון ל-Tech Lead (שכבה 4, משלים `ULEASE_HIRING`/`CLOUD_ARCHITECT_SKILLS` §6). נאמן לרף העולה (D-049/D-054): אפס שכפול, הכל הפניות | ✅ פעיל |
 
 ---
 
@@ -138,7 +139,8 @@
 | 1.45.0 | הוספת D-058 — העשרת `AI_CLAUDE_STACK_2026.md` ל-v1.6.0: פירוט קנוני של §5.5 (5 ה-Hook events + Event→Matcher→Command · subagents ללא רקורסיה · אנטומיית Plugin · Global/Project CLAUDE.md · Connectors מול Plugins) מ-*The Agent Development Kit* + *Master Claude in a Week*; העשרה תחת הקפאת המודולים, לא מודול חדש | 2026-06-04 |
 | 1.46.0 | הוספת D-059 — העשרת `ULEASE_DEMAND_ENGINE` ל-v1.2.0 (§9 תת-זרם ה-AI Receptionist · WhatsApp) + ארטיפקט n8n (`ULEASE_DEMAND_ENGINE.n8n.json` + גנרטור) מתוקן ל-Claude+HITL+grounding | 2026-06-04 |
 | 1.47.0 | הוספת D-060 — טריאז' 3 אינפוגרפיקות Claude: העשרת `AI_CLAUDE_STACK_2026` ל-v1.7.0 (§9, 6 דלתות מ-"26 Lessons") · סינון "12 Things" (מכוסה) · דחיית טבלת המודלים (לא-מאומת, off-stack) | 2026-06-04 |
+| 1.48.0 | הוספת D-061 — רישום מודול `KUBERNETES_101.md` (יסודות Kubernetes: 10 אבני-בניין + §11 הכרעת design-review MVP/V1/V2 ושער אנטי-over-engineering, Knowledge שורה 29); ה-deep-dive מתחת לשכבה 4 של `CLOUD_ARCHITECT_SKILLS`. הסטת שורות: IR 29→30 · CASES 30→31 | 2026-06-04 |
 
 **Confidentiality.** מסמך פנימי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of DECISION_LOG.md v1.47.0 —*
+— *End of DECISION_LOG.md v1.48.0 —*
