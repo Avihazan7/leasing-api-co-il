@@ -1,10 +1,10 @@
 # Claude Stack 2026 — How to use Claude in 2026
 
 **Module:** `AI_CLAUDE_STACK_2026.md`
-**Version:** 1.5.0
+**Version:** 1.6.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Knowledge layer (§3 שורה 16) + מפרט ה-build התפעולי של 4 העמודים.
-**Source:** מבוסס על ה-cheat sheet *"How to use Claude in 2026"* + סדרת *"The 7 Levels of Claude Code"* (learn.nextwork.org) + *"Understanding Agent Skills"* (Skills·MCP·Subagents·Hooks·Plugins) + פוסט תובנות Karpathy על הנדסה מבוססת-סוכנים ואינפוגרפיקות *"Every Claude Code Command"* / *"Why Most AI Projects Fail After Deployment"*.
+**Source:** מבוסס על ה-cheat sheet *"How to use Claude in 2026"* + סדרת *"The 7 Levels of Claude Code"* (learn.nextwork.org) + *"Understanding Agent Skills"* (Skills·MCP·Subagents·Hooks·Plugins) + פוסט תובנות Karpathy על הנדסה מבוססת-סוכנים ואינפוגרפיקות *"Every Claude Code Command"* / *"Why Most AI Projects Fail After Deployment"* + *"The Agent Development Kit"* (Brij Kishore Pandey — 5 השכבות, מזווית Claude Code) + *"How to Master Claude in One Week"* (GenAI.works — Connectors מול Plugins).
 **Integrates with:** `AI_CLAUDE_TOOL_SELECTOR.md`, `AI_CLAUDE_GLOSSARY.md` (מודול אחות — המילון), `COWORK_SETUP.md`, `PROJECTS_SETUP.md`, `COMMAND_API.md`, `OPERATING_SYSTEM.md` §3.1, `COWORK/README.md`, `.claude/skills/`, `CASES/ULEASE.md`
 
 ---
@@ -175,14 +175,16 @@
 |-------|------------------------|-------|----------------|
 | **Skills** | WHAT — מה לדעת | מודולי ידע שנטענים on-demand (Progressive Disclosure: קודם metadata, תוכן מלא רק כשצריך) | `.claude/skills/` — 4 skills |
 | **MCP** | HOW — איך להתחבר | פרוטוקול חיבור אוניברסלי לעולם החיצון ("USB-C של AI", ‎10,000+ שרתים) | GitHub MCP פעיל; יומן/Gmail בהמשך |
-| **Subagents** | WHO — מי מבצע | סוכני-משנה בהקשר מבודד: מודל משלהם, הרשאות משלהן, מחזירים סיכום | `os-auditor` |
-| **Hooks** | WHEN — מתי לאוטומט | סקריפטים **דטרמיניסטיים** מחוץ ללולאת ה-LLM: pre-tool, post-tool, on-edit | ה-CI שלנו (בדיקות עקביות על כל PR) הוא בדיוק זה |
-| **CLAUDE.md** | WHERE — איפה מעוגן | הקשר always-on שנטען בכל session | `CLAUDE.md` — נקודת הכניסה של ה-OS |
-| **Plugins** | SHIP — איך אורזים | אריזת הכל (Skills+Hooks+Subagents+MCP) ליחידה אחת ניתנת להתקנה | חבילת 31 ה-Skills (`ULEASE_AUTOMATION_MAP.md` §11) היא דוגמה |
+| **Subagents** | WHO — מי מבצע | סוכני-משנה בהקשר מבודד: מודל·כלים·הרשאות משלהם, מחזירים סיכום — ו**אינם יכולים להוליד subagents** (אין רקורסיה אינסופית; ההקשר הראשי נשאר נקי) | `os-auditor` |
+| **Hooks** | WHEN — מתי לאוטומט | סקריפטים **דטרמיניסטיים** מחוץ ללולאת ה-LLM. 5 ה-events הקנוניים: `PreToolUse` · `PostToolUse` · `SessionStart` · `Stop` · `SubagentStop`; המנגנון: **Event fires → Matcher checks → Command runs** (Git hooks לסוכן) | ה-CI שלנו (בדיקות עקביות על כל PR) הוא בדיוק זה |
+| **CLAUDE.md** | WHERE — איפה מעוגן | הקשר always-on שנטען בכל session; שני מפלסים — **Global** (`~/.claude/CLAUDE.md`, חוצה-פרויקטים) ו-**Project** (`.claude/CLAUDE.md`, לריפו) | `CLAUDE.md` — נקודת הכניסה של ה-OS |
+| **Plugins** | SHIP — איך אורזים | אריזת הכל (`skills/` · `agents/` · `hooks/` · `commands/`) ליחידה אחת → התקנה דרך **Marketplace** / לצוות ("npm packages ליכולות סוכן") | חבילת 31 ה-Skills (`ULEASE_AUTOMATION_MAP.md` §11) היא דוגמה |
 
 **הכוח האמיתי הוא בשרשור:** `CLAUDE.md` טוען הקשר → Skill נותן מומחיות → MCP מתחבר למערכות → Subagent מבצע בבידוד → Hook מאוטמט את המסירה → Plugin אורז הכל לצוות.
 
 > **ל-ULease:** זו בדיוק הארכיטקטורה שה-Tech Lead ירכיב ב-Agent Teams (רמה 7): Ultra = הסוכן הראשי עם CLAUDE.md, ה-Masters = Subagents עם Skills תחומיים, החיבור לספקים/סולק = MCP, וה-Guardian רץ כ-Hooks דטרמיניסטיים (לא נתון לשיקול ה-LLM — בדיוק כמו שציות צריך להיות).
+
+> **Connectors מול Plugins** (הבחנה מ-*How to Master Claude in One Week*, GenAI.works): **Connector** = Claude פועל *בתוך* אפליקציה שלך (Gmail · Drive · Slack) — שכבת ה-MCP בלבוש צרכני; **Plugin** = חבילת יכולות שאתה מתקין (ה-SHIP בטבלה). כלל אצבע: צריך ש-Claude *יגע במערכת חיצונית* → Connector; צריך *יכולת ארוזה לשכפול* → Plugin. כל ששת השכבות יחד הן מסגרת *The Agent Development Kit* (Brij Kishore Pandey) — אותו מודל 5-שכבתי (CLAUDE.md · Skills · Hooks · Subagents · Plugins, + MCP בצד), מזווית Claude Code, שמאששת רטרואקטיבית את §5.5.
 
 **Skills קהילתיים ששווה להתקין** (מ-"Make Claude 10x Smarter"): `/brainstorming` · `/skill-creator` · `/writing-plans` + `/executing-plans` · `/frontend-design` (נגד AI-slop) · Brave Search / `/firecrawl` (דאטה חי מהרשת — רלוונטי למחקר מתחרים ומחירונים).
 
@@ -327,7 +329,8 @@
 | 1.3.0 | §5.5 חדש (D-037): **ה-Agent Extension Stack** — שש השכבות (Skills=WHAT · MCP=HOW · Subagents=WHO · Hooks=WHEN · CLAUDE.md=WHERE · Plugins=SHIP) + המיפוי ל-Ultra·Master·Max ו-Guardian-as-Hooks + Skills קהילתיים מומלצים | 2026-06-02 |
 | 1.4.0 | §5.6 חדש (D-038): **סיכוני סוכנים** — Prompt Injection (קונה מנסה "לשכנע" את הסוכן), Hallucination, Tool Misuse, עלויות — ממופים ל-Hooks של Guardian + מפת frameworks (ההמלצה: Claude Agent SDK) | 2026-06-02 |
 | 1.5.0 | §5.7 חדש (D-048): **דוקטרינת Karpathy** — "בונים מערכות סביב הסוכן, לא פרומפטים": 5 כשלי הסוכנים ממופים לתשובות ה-OS, success criteria + loop, תזמור מקביל, ו-7 כשלי הייצור ממופים לאיפיון + §5.8: **קטלוג פקודות Claude Code** (6 קטגוריות) ושלוש שכבות הפקודות | 2026-06-03 |
+| 1.6.0 | §5.5 הועשר (D-058) מ-*The Agent Development Kit* (Brij Kishore Pandey) + *How to Master Claude in One Week*: **תיקון** ה-Hooks ל-5 ה-events הקנוניים (`PreToolUse`·`PostToolUse`·`SessionStart`·`Stop`·`SubagentStop`) + מנגנון Event→Matcher→Command (במקום "on-edit" השגוי); אילוץ **subagents ללא רקורסיה**; אנטומיית **Plugin** (`skills/·agents/·hooks/·commands/` + Marketplace); **Global/Project CLAUDE.md**; ובלוק **Connectors מול Plugins** | 2026-06-04 |
 
-**Attribution.** מבוסס על ה-cheat sheet *"How to use Claude in 2026"*; סולם 7 הרמות ובלוק Agent Teams (§5): סדרת *The 7 Levels of Claude Code* (learn.nextwork.org); ה-Extension Stack (§5.5): *Understanding Agent Skills* + *Make Claude 10x Smarter*; הדוקטרינה (§5.7): פוסט מבוסס תובנות Andrej Karpathy + *Why Most AI Projects Fail After Deployment*; קטלוג הפקודות (§5.8): *Every Claude Code Command To Save You 100+ Hours*. העיבוד, התרגום, ובעיקר ה-build התפעולי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** מבוסס על ה-cheat sheet *"How to use Claude in 2026"*; סולם 7 הרמות ובלוק Agent Teams (§5): סדרת *The 7 Levels of Claude Code* (learn.nextwork.org); ה-Extension Stack (§5.5): *Understanding Agent Skills* + *Make Claude 10x Smarter* + *The Agent Development Kit* (Brij Kishore Pandey) + *How to Master Claude in One Week* (GenAI.works); הדוקטרינה (§5.7): פוסט מבוסס תובנות Andrej Karpathy + *Why Most AI Projects Fail After Deployment*; קטלוג הפקודות (§5.8): *Every Claude Code Command To Save You 100+ Hours*. העיבוד, התרגום, ובעיקר ה-build התפעולי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of AI_CLAUDE_STACK_2026.md v1.5.0 —*
+— *End of AI_CLAUDE_STACK_2026.md v1.6.0 —*
