@@ -3,6 +3,8 @@
 נקודת הכניסה הראשית של ה-Claude Operating System עבור הריפו.
 
 ## Active Modules
+- `OPERATING_SYSTEM.md` v1.0.0 — מסמך-העל. שכבות ה-OS, חוזה הטעינה, עקרון System-First. סוגר dangling ref #1.
+- `MEMORY.md` v1.0.0 — דוקטרינת 4 ה-tiers (working/episodic/vector/SQL) + לולאת השיפור-העצמי (Card 1 §6). סוגר dangling ref #2 + מודול 5 ב-AGENT_BLUEPRINT.
 - `COMMAND_API.md` v1.1.0 — 100 slash commands (12 categories, native ⚙️ + behavioral 💬), composition operators, drop-in system prompt loaded.
 - `WINDOWS_DEPLOYMENT.md` v1.0.0 — End-to-end Windows rollout for Claude in Microsoft 365 (Word/Excel/PowerPoint + Skills).
 - `DEV_ENVIRONMENTS.md` v1.1.0 — End-to-end Claude dev environments: Desktop, VS Code, JetBrains, Cursor, Windsurf, Claude Code CLI + MCP + Computer Use, **+ נספח ג'** מפת Anthropic Ecosystem (מיקום ULease) **+ נספח ד'** Setup סטנדרטי (Cowork folder-first, ABOUT-ME, Global Instructions).
@@ -13,22 +15,30 @@
 - `N8N_AUTOMATION.md` v1.1.0 — שכבת האוטומציה התפעולית: n8n כ-Glue Layer בין ה-Outbox של `leasing-api` לעולם העסקי. חיבור HMAC+Webhook, קטלוג אירועים→workflows, 5 workflows מוכנים, מיפוי ל-AGENT_BLUEPRINT § 9 (n8n=Hands · stage-a=Brain), **+ § 7.3 אנטומיית AI Agent** (Form→Tools Agent→Switch→Slack ⇒ Dealer Onboarding), MCP דו-כיווני, ממשל ו-kill-switch.
 - `BRANCH_KNOWLEDGE.md` v1.0.0 — תשתית הידע לסניפים: ערוץ Slack פרטי + ספר ידע (`BRANCHES/`) לכל סניף/סוכנות, צינור דו-כיווני Edge⇄Core (תובנות 💡/⚠️ → W6 זיקוק שבועי → OS), הפרדת סניפים (RLS doctrine), rollout משולב ב-LAUNCH.
 - `CTO_REVIEW.md` v1.0.0 — ביקורת CTO על ULease v1.2, תגובה מבוססת-קוד. הצלבת 10 נקודות הביקורת מול הקוד ב-`leasing-api`: תיקון 3 טענות (Event Bus / Data Warehouse / RLS קיימים כ-seams), scorecard מתוקן, מפת דרכים P0–P7 ל-Platform v2.0, ותיעוד הצעד הראשון (Decision Engine seam, 55/55 טסטים, תואם-לאחור).
+- `SYSTEM_DESIGN_PATTERNS.md` v1.0.0 — 8 patterns (Ambassador/Circuit-Breaker/CQRS/Sharding/Sidecar/Pub-Sub/Leader-Election/Event-Sourcing) ⇄ הקוד האמיתי ב-`leasing-api`: מה מיושם, איפה, ואילו invariants אסור לשבור. ה-bridge ל-`leasing-api/CLAUDE.md § 3`.
+- `AI_ENGINEER_STACK.md` v1.0.0 — 12 הכלים של AI Engineer (OpenAI/Claude/LangChain/LlamaIndex/CrewAI/vLLM/Ollama/Pinecone/Weaviate/W&B/FastAPI/Docker) ⇄ ה-tier וה-מצב ב-ULease (בשימוש/נשקל/roadmap).
+- `INVESTOR_RELATIONS.md` v1.0.0 — narrative למשקיעים מבוסס-evidence: כל טענה ⇄ artifact בקוד/OS. סוגר dangling ref #3.
+- `power-bi` ⬇ · `ai-product-strategy-framework.md` v1.0.0 — מסגרת אסטרטגיית מוצר-AI. · `marketing-strategy-framework.md` v1.0.0 — מסגרת אסטרטגיית שיווק.
+- `BRANCHES/*.md` — ספרי ידע לסניפים (`_TEMPLATE.md`, `tel-aviv.md`). · `stage-a/` — Agent Runtime (manager · worker · shared-memory).
 
 ## Module Load Order
-1. `OPERATING_SYSTEM.md`      ← roadmap (ראה AGENT_BLUEPRINT § 7)
-2. `MEMORY.md`                ← roadmap (ראה AGENT_BLUEPRINT § 7)
+1. `OPERATING_SYSTEM.md`      ← מסמך-העל: שכבות + חוזה טעינה
+2. `MEMORY.md`                ← 4 tiers + לולאת לקחים (קרא לפני עבודה חוזרת)
 3. `COMMAND_API.md`           ← לפני הקטגוריות העסקיות
 4. `WINDOWS_DEPLOYMENT.md`    ← הטמעת אופיס מקצה לקצה
 5. `DEV_ENVIRONMENTS.md`      ← סביבות פיתוח מקצה לקצה
 6. `LAUNCH.md`                ← Master Switch — Go-Live
 7. `AGENT_BLUEPRINT.md`       ← Docs OS ⇄ Agent Runtime (stage-a/)
-8. `CTO_REVIEW.md`            ← ביקורת CTO ⇄ קוד + מפת דרכים Platform v2.0
-9. `power-bi-essential-concepts.md` ← BI ודשבורדים על נתוני ה-API
-10. `N8N_AUTOMATION.md`       ← אוטומציה תפעולית על אירועי ה-API
-11. `BRANCH_KNOWLEDGE.md`     ← תשתית הידע לסניפים (Edge⇄Core)
-12. `INVESTOR_RELATIONS.md`   ← roadmap
-13. `CASES/*.md`
-14. `BRANCHES/*.md`           ← ספרי הידע של הסניפים
+8. `SYSTEM_DESIGN_PATTERNS.md` ← 8 patterns ⇄ הקוד (bridge ל-leasing-api § 3)
+9. `AI_ENGINEER_STACK.md`     ← 12 tools ⇄ tiers ULease
+10. `CTO_REVIEW.md`           ← ביקורת CTO ⇄ קוד + מפת דרכים Platform v2.0
+11. `power-bi-essential-concepts.md` ← BI ודשבורדים על נתוני ה-API
+12. `N8N_AUTOMATION.md`       ← אוטומציה תפעולית על אירועי ה-API
+13. `BRANCH_KNOWLEDGE.md`     ← תשתית הידע לסניפים (Edge⇄Core)
+14. `INVESTOR_RELATIONS.md`   ← narrative למשקיעים מבוסס-evidence
+15. `ai-product-strategy-framework.md` · `marketing-strategy-framework.md` ← מסגרות אסטרטגיה
+16. `CASES/*.md`              ← בנצ'מארקים (ROX_KEY)
+17. `BRANCHES/*.md`           ← ספרי הידע של הסניפים
 
 ## Working Rules
 כללי עבודה מחייבים לכל agent שעובד על הריפו (מקור: `AGENT_BLUEPRINT.md § 10` — Karpathy doctrine):
