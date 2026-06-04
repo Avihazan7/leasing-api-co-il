@@ -3,9 +3,9 @@
 נקודת הכניסה הראשית של ה-Claude Operating System עבור הריפו.
 
 ## Active Modules
-- `OPERATING_SYSTEM.md` v1.14.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
+- `OPERATING_SYSTEM.md` v1.15.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.1.0 — שכבת זיכרון: schema, כרטיס זהות **מלא**, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
-- `DECISION_LOG.md` v1.47.0 — יומן החלטות append-only: 60 החלטות (OS + ULease), רציונל וסטטוס.
+- `DECISION_LOG.md` v1.48.0 — יומן החלטות append-only: 61 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.2.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר, אינטגרציה עם ה-OS + ראש המטה (5 תפקידים מתוזמנים) — מיושם בפועל ב-`COWORK/`.
 - `PROJECTS_SETUP.md` v1.0.0 — Claude Projects: 3 פרויקטים (השקה 🎯 · גיוס ₪150K · Claude OS) — תוצר אחד לכל פרויקט, הוראות drop-in, רשימות העלאה ובדיקות קבלה.
 - `COMMAND_API.md` v1.3.0 — 89 slash commands, composition operators, prompting-frameworks library (כולל Opus 4.8 deltas §7.7), 32 קיצורי פתיחה ניידים (§6.3 Prompt Prefixes), drop-in system prompt loaded.
@@ -32,6 +32,7 @@
 - `AGENT_BLUEPRINT.md` v1.0.0 — בלופרינט סוכן AI (How to Build an AI Agent): 8 שלבים (Purpose → System Prompt → LLM → Tools → Memory → Orchestration → Interface → Testing) כשכבת ניווט שמאנדקסת את משפחת ה-`AI_*` (כל שלב → הבית הקנוני) + §9 טבלת ה-Ecosystem (Claude Agent SDK בלבד, D-022) + **§10 כללי העבודה (דוקטרינת Karpathy)** — המקור הקנוני שאליו מפנה `leasing-api/CLAUDE.md`, סוגר הפניה שבורה חוצת-ריפו.
 - `CLOUD_ARCHITECT_SKILLS.md` v1.0.0 — כישורי ארכיטקט ענן (The Key Cloud Architect Skills): 5 שכבות (Foundation → Infrastructure Design → Security & Governance → Cloud-Native → Reliability/Cost/Enterprise) עם מדרגת Beginner/Intermediate/Advanced + Tools + Time לכל תת-תחום, רובריקת כשירות/ראיון ל-Tech Lead (§6, משלימה את `ULEASE_HIRING`), תמונת בגרות ULease מול 5 השכבות (§7) ומיפוי לבית הקנוני בכל שכבה — הציר התשתיתי המשלים ל-`AI_SKILL_MAP` (ציר ה-AI).
 - `AI_10_SKILLS.md` v1.0.0 — 10 מיומנויות AI לשליטה ב-2026 (אינפוגרפיקה tool-centric): כל מיומנות → הכלים הקנוניים → הבית ב-OS/ULease (Prompting→COMMAND_API · Automation→מנועי n8n · Agents→AGENT_BLUEPRINT+Ultra·Master·Max · RAG→RAG_DESIGN/pgvector · Data→DATA_BI · Vision/Voice→שכבת היכולות · GEO→DEMAND_PLAYBOOK · Ethics→Guardian/evals) + כרטיס-ניקוד 6✅+4🟡/10 (אותה צורה כמו AI_PROFICIENCIES_2026) + עיקרון ה-Claude-first (Agent SDK · pgvector · n8n כבר עונים על הכלים הגנריים). העדשה הכלי-מוכוונת המשלימה ל-AI_7_SKILLS (הרגלים) ו-AI_PROFICIENCIES_2026 (ארגוני).
+- `KUBERNETES_101.md` v1.0.0 — קוברנטיס 101 (תזמור קונטיינרים): הבעיה ש-K8s פותר, מושגי הליבה (Cluster/Node/Pod), ארכיטקטורת Control Plane/Worker (API Server · etcd · Scheduler · kubelet · kube-proxy · CRI), Workloads (Deployment/StatefulSet/DaemonSet/Job), רשת (Service/Ingress), Config/Secrets, Scaling/Resilience (HPA/self-healing/rolling), Observability, Security (Namespaces/RBAC/NetworkPolicy) ו-DevOps (CI/CD/GitOps) — ממופים ל-ULease + §11 **ההכרעה מתי/אם K8s** (MVP על docker-compose, K8s = V1+) ודגל אנטי-over-engineering; ה-deep-dive של שכבת ה-Cloud-Native ב-`CLOUD_ARCHITECT_SKILLS` §4.
 - `INVESTOR_RELATIONS.md` v1.2.0 — IR: חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים.
 - `CASES/ULEASE.md` v1.5.0 — תיק ULease 🎯 Leasing.co.il: מודל Marketplace תלת-צדדי + תחזית פיננסית (יוני 26 → דצמ' 27) + Lean Canvas בעמוד אחד.
 - `CASES/ULEASE_SPEC.md` v1.5.0 — איפיון מוצר ומערכת מקצה-לקצה: שחקנים, ארכיטקטורה, Multi-agent (Ultra·Master·Max), שכבת ידע RAG (§7.1), Guardrails & Evals (§7.2), מודל נתונים, אינטגרציות ו-roadmap.
@@ -62,7 +63,7 @@
 6. `COMMAND_API.md`           ← לפני הקטגוריות העסקיות
 7. `COMMAND_API_TASKS.md`     ← ספריית פקודות המשימה (Interface)
 8. `marketing-strategy-framework.md`  ← Business: אסטרטגיית שיווק
-9. `AI_*` + `AGENT_BLUEPRINT` + `CLOUD_ARCHITECT_SKILLS` (SKILL_MAP · PROGRESSION_PLAN · LEARNING_RESOURCES · 7_SKILLS · SKILLS_ACQUISITION · TYPES · CLAUDE_TOOL_SELECTOR · CLAUDE_STACK_2026 · CLAUDE_GLOSSARY · RAG_DESIGN · PROJECT_STRUCTURE · ROLES_2026 · CLAUDE_ENGINEER_ROADMAP · DATA_BI · SYSTEM_DESIGN · PROCESS_INTELLIGENCE · PROFICIENCIES_2026 · LINEAR_ALGEBRA · AGENT_BLUEPRINT · CLOUD_ARCHITECT_SKILLS · 10_SKILLS)  ← Knowledge (on-demand)
+9. `AI_*` + `AGENT_BLUEPRINT` + `CLOUD_ARCHITECT_SKILLS` + `KUBERNETES_101` (SKILL_MAP · PROGRESSION_PLAN · LEARNING_RESOURCES · 7_SKILLS · SKILLS_ACQUISITION · TYPES · CLAUDE_TOOL_SELECTOR · CLAUDE_STACK_2026 · CLAUDE_GLOSSARY · RAG_DESIGN · PROJECT_STRUCTURE · ROLES_2026 · CLAUDE_ENGINEER_ROADMAP · DATA_BI · SYSTEM_DESIGN · PROCESS_INTELLIGENCE · PROFICIENCIES_2026 · LINEAR_ALGEBRA · AGENT_BLUEPRINT · CLOUD_ARCHITECT_SKILLS · 10_SKILLS · KUBERNETES_101)  ← Knowledge (on-demand)
 10. `INVESTOR_RELATIONS.md`   ← שכבת עסק: משקיעים וגיוס
 11. `CASES/*.md`              ← תיקים פעילים (ULease 🎯)
 
