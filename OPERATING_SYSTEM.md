@@ -1,10 +1,10 @@
 # CLAUDE OPERATING SYSTEM — Kernel
 
 **Module:** `OPERATING_SYSTEM.md`
-**Version:** 1.11.0
+**Version:** 1.13.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Kernel — נטען ראשון. כל שאר המודולים תלויים בו.
-**Integrates with:** כל המודולים הרשומים ב-§3 — `CLAUDE.md`, `MEMORY.md`, `DECISION_LOG.md`, `COWORK_SETUP.md`, `PROJECTS_SETUP.md`, `COMMAND_API.md`, `marketing-strategy-framework.md`, `AI_*` (Knowledge), `INVESTOR_RELATIONS.md`, `CASES/*.md` + תשתית תפעולית ב-§3.1 (`COWORK/`, `.claude/`)
+**Integrates with:** כל המודולים הרשומים ב-§3 — `CLAUDE.md`, `MEMORY.md`, `DECISION_LOG.md`, `COWORK_SETUP.md`, `PROJECTS_SETUP.md`, `COMMAND_API.md`, `marketing-strategy-framework.md`, `AI_*` + `AGENT_BLUEPRINT.md` + `CLOUD_ARCHITECT_SKILLS.md` (Knowledge), `INVESTOR_RELATIONS.md`, `CASES/*.md` + תשתית תפעולית ב-§3.1 (`COWORK/`, `.claude/`)
 
 ---
 
@@ -53,7 +53,7 @@
 ├─ MEMORY ────── MEMORY.md · DECISION_LOG.md   מי אתה, מה זוכרים, focus/projects, החלטות
 ├─ CONTEXT ───── COWORK_SETUP.md · PROJECTS_SETUP.md · COWORK/   חיבור התיקייה, קבצי md, Global Instructions, פרויקטים
 ├─ INTERFACE ─── COMMAND_API.md · COMMAND_API_TASKS.md · .claude/ (skills · agents)   89 פקודות ליבה + 98 פקודות משימה + 4 Claude Code skills + os-auditor
-├─ KNOWLEDGE ─── AI_SKILL_MAP · AI_PROGRESSION_PLAN · AI_LEARNING_RESOURCES · AI_7_SKILLS · AI_SKILLS_ACQUISITION · AI_TYPES · AI_CLAUDE_TOOL_SELECTOR · AI_CLAUDE_STACK_2026 · AI_CLAUDE_GLOSSARY · AI_RAG_DESIGN · AI_PROJECT_STRUCTURE · AI_ROLES_2026 · AI_CLAUDE_ENGINEER_ROADMAP · AI_DATA_BI · AI_SYSTEM_DESIGN · AI_PROCESS_INTELLIGENCE · AI_PROFICIENCIES_2026 · AI_LINEAR_ALGEBRA   ידע אישי/לימודי (on-demand)
+├─ KNOWLEDGE ─── AI_SKILL_MAP · AI_PROGRESSION_PLAN · AI_LEARNING_RESOURCES · AI_7_SKILLS · AI_SKILLS_ACQUISITION · AI_TYPES · AI_CLAUDE_TOOL_SELECTOR · AI_CLAUDE_STACK_2026 · AI_CLAUDE_GLOSSARY · AI_RAG_DESIGN · AI_PROJECT_STRUCTURE · AI_ROLES_2026 · AI_CLAUDE_ENGINEER_ROADMAP · AI_DATA_BI · AI_SYSTEM_DESIGN · AI_PROCESS_INTELLIGENCE · AI_PROFICIENCIES_2026 · AI_LINEAR_ALGEBRA · AGENT_BLUEPRINT · CLOUD_ARCHITECT_SKILLS   ידע אישי/לימודי (on-demand)
 └─ BUSINESS ──── marketing-strategy-framework.md · INVESTOR_RELATIONS.md · CASES/*.md   הקשר עסקי נקודתי
 ```
 
@@ -93,8 +93,10 @@
 | 24 | `AI_PROCESS_INTELLIGENCE.md` | Knowledge | ✅ פעיל | מודיעין תהליכים ובקרת הטמעה — איפה להחיל Gen AI (GenIQ), HITL ושער בגרות, מדידת ROI |
 | 25 | `AI_PROFICIENCIES_2026.md` | Knowledge | ✅ פעיל | 10 מיומנויות AI חיוניות ל-2026 + כרטיס-ניקוד (6✅+4🟡/10) ומיפוי תלת-שכבתי ל-ULease (שדרה · צמיחה · תשתית) |
 | 26 | `AI_LINEAR_ALGEBRA.md` | Knowledge | ✅ פעיל | יסודות אלגברה לינארית (12 מושגים) + עמודת "למה זה חשוב ל-ML" — הגשר ל-ULease: dot product → RAG/pgvector; מודול היסוד המתמטי הראשון |
-| 27 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
-| 28 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית, איפיון, מתודולוגיה, גיוס, playbooks, מנועי אקווזיציה (היצע + ביקוש), ביקורת ומחירון/SLA |
+| 27 | `AGENT_BLUEPRINT.md` | Knowledge | ✅ פעיל | בלופרינט 8 השלבים לבניית סוכן AI (Purpose→Testing) כשכבת ניווט מעל `AI_*` + טבלת Ecosystem + §10 כללי העבודה (דוקטרינת Karpathy) — המקור הקנוני שאליו מפנה `leasing-api` |
+| 28 | `CLOUD_ARCHITECT_SKILLS.md` | Knowledge | ✅ פעיל | 5 שכבות כישורי ארכיטקט ענן (Foundation→Enterprise) עם מדרגת Beginner/Intermediate/Advanced + רובריקת ראיון ל-Tech Lead ותמונת בגרות ULease — הציר התשתיתי המשלים ל-`AI_SKILL_MAP` |
+| 29 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
+| 30 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית, איפיון, מתודולוגיה, גיוס, playbooks, מנועי אקווזיציה (היצע + ביקוש), ביקורת ומחירון/SLA |
 
 > **הערה על שכבות:** מודולי `AI_*` הם שכבת **Knowledge** — ידע אישי/לימודי שיושב לוגית בין ה-INTERFACE ל-BUSINESS. הם פעילים אך נטענים on-demand, לא בכל turn.
 > כשמודול עובר מ-🔜 ל-✅ — מעדכנים את הסטטוס כאן ואת ה-Active Modules ב-`CLAUDE.md` ו-`README.md`.
@@ -117,7 +119,7 @@
 זה הבלוק שמפעיל את כל ה-OS. העתק אותו ל-`userPreferences` / system prompt / Cowork Global Instructions:
 
 ```
-CLAUDE OS ENABLED — Kernel v1.11
+CLAUDE OS ENABLED — Kernel v1.13
 
 On every turn, before responding:
 1. Load identity & context from MEMORY.md (and the Cowork "about-me" file if connected).
@@ -199,7 +201,9 @@ Doctrine:
 | 1.9.0 | יישור הקרנל אחרי גל D-040..D-047: `CASES/ULEASE_DEMAND_ENGINE` נרשם תחת גלוב שורה 26 (D-042) והכפיל `AI_ACQUISITION_FLYWHEEL` הוסר (D-047); עדכון תיאורי שורה 7 (+30 פרומפטי גיליונות, D-043) ושורה 26 (מנועי אקווזיציה) | 2026-06-03 |
 | 1.10.0 | רישום `AI_PROFICIENCIES_2026` (שורה 25, D-050) — 10 מיומנויות AI חיוניות ל-2026 (כרטיס-ניקוד 6✅+4🟡/10). הסטת שורות: IR 25→26 · CASES 26→27 | 2026-06-03 |
 | 1.11.0 | רישום `AI_LINEAR_ALGEBRA` (שורה 26, D-052) — מודול היסוד המתמטי הראשון: 12 מושגי אלגברה לינארית, הגשר dot product → RAG/pgvector. הסטת שורות: IR 26→27 · CASES 27→28 | 2026-06-03 |
+| 1.12.0 | רישום `AGENT_BLUEPRINT` (שורה 27, D-056) — בלופרינט 8 השלבים לבניית סוכן AI + §10 כללי העבודה (המקור הקנוני ל-`leasing-api`, סוגר הפניה שבורה חוצת-ריפו). הסטת שורות: IR 27→28 · CASES 28→29 | 2026-06-04 |
+| 1.13.0 | רישום `CLOUD_ARCHITECT_SKILLS` (שורה 28, D-057) — 5 שכבות כישורי ארכיטקט ענן (Foundation→Enterprise) + רובריקת ראיון ל-Tech Lead ותמונת בגרות ULease; הציר התשתיתי המשלים ל-`AI_SKILL_MAP`. הסטת שורות: IR 28→29 · CASES 29→30 | 2026-06-04 |
 
 **Confidentiality.** קובץ זה הוא הליבה של ה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of OPERATING_SYSTEM.md v1.11.0 —*
+— *End of OPERATING_SYSTEM.md v1.13.0 —*
