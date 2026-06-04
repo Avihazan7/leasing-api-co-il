@@ -3,7 +3,7 @@
 **Module:** `INVESTOR_RELATIONS.md`
 **Version:** 1.2.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
-**Status:** Active — Business layer (§3 שורה 28).
+**Status:** Active — Business layer (§3 שורה 29).
 **Integrates with:** `OPERATING_SYSTEM.md`, `MEMORY.md`, `CASES/ULEASE.md`, `CASES/ULEASE_FORECAST.csv`
 
 ---

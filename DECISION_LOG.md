@@ -1,7 +1,7 @@
 # DECISION_LOG.md — יומן החלטות
 
 **Module:** `DECISION_LOG.md`
-**Version:** 1.43.0
+**Version:** 1.44.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — יומן append-only (Memory layer).
 **Integrates with:** `OPERATING_SYSTEM.md` §7, `MEMORY.md`, `CASES/ULEASE*.md`
@@ -70,6 +70,7 @@
 | D-054 | 2026-06-03 | **הכרעת ספרנות — סינון אינפוגרפיקת "Revenue Analysis Dashboard" (לא מודול)** (תקדים D-038/D-049): דשבורד BI לדוגמה (KPI cards · revenue trend · פילוח region/category/sales-rep/customer-type · pie/donut/combo · slicers) נסקר ונמצא **מכוסה במלואו** ב-`AI_DATA_BI.md` — §3 (star schema = הפילוח לפי dimensions) · §4 (מדדי KPI) · §5 (קטלוג הגרפים) · §6 (slicers · Q&A Visual · RLS) — ומומחש ב-`CASES/ULEASE_DASHBOARD.html` הבנוי. **לא נפתח מודול ולא בוצעה העשרה**: אין תוכן נטו-חדש | One Source of Truth + הרף העולה לתוכן חדש (D-049): אינפוגרפיקה שכל מרכיביה כבר מתועדים אינה מצדיקה מודול או העשרה; רישום ההכרעה מונע עיבוד-חוזר לרדבל מודול בסשן עתידי (תקדים הכפילות D-047). הכרעת מייסד מפורשת בשיחה | ✅ פעיל |
 | D-055 | 2026-06-03 | **העשרת `AI_SYSTEM_DESIGN` ל-v1.3.0** (אינפוגרפיקת *"Inventory Management System Backend Flow"*, codepathindia) — §1.5 חדש: **מסלול הבקשה השכבתי** (Client→Routes→Middleware→Controllers→Services→Repository/ORM→Database→JSON) ממופה ל-ULease, עם **כלל הזהב "חוקי עסק רק בשכבת ה-Service"** (לא Controller, לא ה-DB) + פריט design-review. שאר האינפוגרפיקה (data-model entities · DB relationships · best practices: RBAC/audit/pagination/SKU/timestamps) **סוננה כמכוסה** — `ULEASE_SPEC` §8 · `AI_DATA_BI` §3/§6 · §4 (JWT) · D-023 | הכרעת מייסד תחת הקפאת המודולים (כלל 4): **העשרה ולא מודול חדש** (תקדים D-051) — חפיפה כבדה מול 4 מודולי ההנדסה, אך ה-pipeline הפנים-אפליקטיבי היה **הפער היחיד שלא תועד** (SYSTEM_DESIGN כיסה רכיבי תשתית — gateway/תורים/JWT — לא את ה-layering בתוך האפליקציה); הבית הקנוני = `AI_SYSTEM_DESIGN`. סינון 5 מ-6 חלקי התמונה ממשיך את הרף העולה (D-049/D-054) | ✅ פעיל |
 | D-056 | 2026-06-04 | רישום מודול **AGENT_BLUEPRINT** (Knowledge, שורה 27 ב-§3) — אינפוגרפיקת *"How to Build an AI Agent"* (8 שלבים: Purpose→System Prompt→LLM→Tools→Memory→Orchestration→Interface→Testing) הומרה ל**בלופרינט-שדרה** שמאנדקס את משפחת ה-`AI_*`: כל שלב מפנה לבית הקנוני (`SELECTOR` · `SYSTEM_DESIGN` · `RAG_DESIGN` · `PROJECT_STRUCTURE` · `STACK` · `SPEC` §7.1/§7.2) + §9 טבלת ה-Ecosystem (Claude Agent SDK בלבד, D-022) + **§10 כללי העבודה (דוקטרינת Karpathy)** — 8 הכללים. **סוגר הפניה שבורה חוצת-ריפו**: `leasing-api/CLAUDE.md` הפנה ל-`AGENT_BLUEPRINT.md § 10` כמקור כללי העבודה, אך הקובץ מעולם לא נוצר (הפרת No Dangling Modules בין הריפואים) | הכרעת ספרנות: **מודול נפרד ולא העשרה** — אף מודול קיים אינו בלופרינט מקצה-לקצה לבניית סוכן, וה-§10 חייב בית קנוני אמיתי שאליו `leasing-api` כבר מפנה; 8 השלבים אינם תוכן חדש אלא **שכבת ניווט** מעל הידע הקיים (הרף העולה D-049/D-054/D-055 נשמר — אפס שכפול, הכל הפניות), והמודול עצמו הוא ולידציה לדוקטרינת Karpathy (D-048): *"CLAUDE.md = מערכת הפעלה לסוכן"*. הסטת שורות: IR 27→28 · CASES 28→29 | ✅ פעיל |
+| D-057 | 2026-06-04 | רישום מודול **CLOUD_ARCHITECT_SKILLS** (Knowledge, שורה 28 ב-§3) — אינפוגרפיקת *"The Key Cloud Architect Skills"* (Alok Sharan) הומרה ל**מפת-כישורים תשתיתית**: 5 שכבות (Foundation→Infra→Security→Cloud-Native→Reliability/Cost/Enterprise), כל תת-תחום במדרגת Beginner/Intermediate/Advanced + Tools + Time, + §6 **רובריקת ראיון ל-Tech Lead** (משלימה את `ULEASE_HIRING` שיש בו תפקיד אך לא סולם מדורג) + §7 **תמונת בגרות ULease** מול 5 השכבות. הסטת שורות: IR 28→29 · CASES 29→30 | הכרעת ספרנות: **מודול נפרד ולא העשרה/סינון** — grep אישר פער אמיתי (IaC/Terraform · landing zones · zero trust · FinOps · SLOs לא מכוסים); זהו **ציר חדש** (תשתית ענן) המשלים את `AI_SKILL_MAP` (ציר AI), לא שכפול. הערך הכפול: רובריקת גיוס ל-#1 הפער (D-012) ואוריינות design-review למייסד; מאמת את 4 ה-🟡 ב-`AI_PROFICIENCIES_2026` כמנדט Tech Lead | ✅ פעיל |
 
 ---
 
@@ -130,7 +131,8 @@
 | 1.41.0 | הוספת D-054 — הכרעת ספרנות: סינון אינפוגרפיקת "Revenue Analysis Dashboard" (מכוסה ב-`AI_DATA_BI` §3–§6 + `ULEASE_DASHBOARD.html` — לא מודול, לא העשרה) | 2026-06-03 |
 | 1.42.0 | הוספת D-055 — העשרת `AI_SYSTEM_DESIGN.md` ל-v1.3.0: §1.5 מסלול הבקשה השכבתי (Routes→Middleware→Controller→Service→Repository→ORM→DB, "חוקי עסק רק ב-Service") — סגירת הפער מול אינפוגרפיקת Inventory Backend Flow; שאר התמונה סוננה כמכוסה | 2026-06-03 |
 | 1.43.0 | הוספת D-056 — רישום מודול `AGENT_BLUEPRINT.md` (בלופרינט 8 השלבים + §10 דוקטרינת Karpathy, Knowledge שורה 27); סוגר הפניה שבורה חוצת-ריפו מ-`leasing-api/CLAUDE.md`. הסטת שורות: IR 27→28 · CASES 28→29 | 2026-06-04 |
+| 1.44.0 | הוספת D-057 — רישום מודול `CLOUD_ARCHITECT_SKILLS.md` (5 שכבות כישורי ארכיטקט ענן + רובריקת ראיון ל-Tech Lead, Knowledge שורה 28); ציר תשתית משלים ל-`AI_SKILL_MAP`. הסטת שורות: IR 28→29 · CASES 29→30 | 2026-06-04 |
 
 **Confidentiality.** מסמך פנימי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of DECISION_LOG.md v1.43.0 —*
+— *End of DECISION_LOG.md v1.44.0 —*
