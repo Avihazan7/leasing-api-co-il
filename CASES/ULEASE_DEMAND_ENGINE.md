@@ -1,7 +1,7 @@
 # ULease 🎯 — Demand Engine (בלופרינט n8n: אוטופיילוט צד-הביקוש)
 
 **Module:** `CASES/ULEASE_DEMAND_ENGINE.md`
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — בלופרינט אוטומציה צד-ביקוש (Stage 2–3). המקבילה של `ULEASE_OUTBOUND_ENGINE.md` לצד הקונים.
 **Source:** n8n workflow *"One AI Agent for Local Business — Full Autopilot Customer Acquisition"* (18 צמתים, 3 פאזות + לופ אורגני) — מותאם לציות הישראלי ולמספרי ULease.
@@ -118,7 +118,7 @@
 
 **מי בונה:** MVP — אברהם (אותה תשתית n8n מהמנוע הקיים, Stage 2–3 במפה) · V1/V2 — Tech Lead.
 
-**הארטיפקט הבא:** כמו שלמנוע ההיצע יש `ULEASE_OUTBOUND_ENGINE.n8n.json` מוכן לייבוא — המנוע הזה יקבל קובץ `.n8n.json` + גנרטור משלו כשייבנה (משימת Tech Lead, V1).
+**הארטיפקט:** תת-זרם ה-AI Receptionist (§9) כבר ממומש כשלד לייבוא — `CASES/ULEASE_DEMAND_ENGINE.n8n.json` + הגנרטור `CASES/ULEASE_DEMAND_ENGINE_n8n.py` (כמו במנוע ההיצע, וכבר מתוקן ל-Claude+HITL). הרחבת הזרם למנוע הביקוש המלא (פאזות 1–3, §1) נשארת משימת Tech Lead ל-V1.
 
 ---
 
@@ -147,15 +147,60 @@
 
 ---
 
+## 9. תת-זרם ה-AI Receptionist (WhatsApp) — מהתמונה לבלופרינט
+
+מקור: workflow n8n אמיתי של בוט WhatsApp לשירות לקוחות + קליטת הזמנות (טקסט וקול, סוכן + כלים, גיבוי Google Sheets: FAQ · INVENTORY · order · Update order). זהו **הביטוי הקונקרטי של צומת 16** (AI Receptionist = ה-Q&A Bot, `ULEASE_SPEC.md` §7.1, RAG) **+ קליטת הזמנה** — דלת-הכניסה האמיתית של מנוע הביקוש. הוא **inbound, פונה-לצרכן** → שייך כאן ולא במנוע ההיצע (שם *אנחנו* פונים לספקים).
+
+### 9.1 מיפוי הצמתים מהמקור ל-ULease
+
+| צומת בתמונה | המקבילה ב-ULease 🎯 | הערה |
+|--------------|----------------------|------|
+| WhatsApp Trigger + Switch (סוג) | Intake — ניתוב טקסט/קול | כניסה inbound (§4) |
+| AI Agent + FAQ + INVENTORY | **צומת 16 — AI Receptionist / Q&A Bot** (SPEC §7.1) | לא רכיב חדש |
+| order / Update order | חדר-עסקה / קליטת עסקה (צמתים 2, 9) | פעולה **כותבת** → שער HITL |
+| Transcribe a recording | **אין מקבילה** בבלופרינט | תוספת אמיתית — מודאליות קולית |
+| Send message (nurture) | צומת 8 — Multi-Channel Follow-up | opt-out + חלון 24ש' |
+| Simple Memory | זיכרון מתמשך לפי טלפון (צומת 2/5) | לא ארעי — מחזור שיקול ארוך |
+| OpenAI Chat Model / Whisper | **Haiku** (סיווג) + **Sonnet** (ניסוח) | D-022 — Claude לסוכן |
+
+### 9.2 11 השיפורים מול הדוקטרינה
+
+המקור רץ על **OpenAI, בלי HITL וללא grounding מפורש** — מתנגש בשלושה כללים כתובים: D-040 (שער בגרות לכתיבות), SPEC §7.2 (דיוק 100% לעובדות כספיות), D-022 (Claude Agent SDK בלבד לסוכן).
+
+| # | שיפור | מקור הדוקטרינה | מתי |
+|---|--------|------------------|------|
+| 1 | **HITL לפני כל כתיבה** — `order`/`Update order` ומחיר מחייב עוצרים ל-`sendAndWait`; דגימת 10% באוטונומיה | D-040 · §6, §8 | **MVP** |
+| 2 | **Grounding קשיח** — עובדות רק מתוצאת-כלי; "לא יודע→אדם"; eval-set זהב לפני אוטונומיה | SPEC §7.2 · `AI_RAG_DESIGN.md` | **MVP** |
+| 3 | **OpenAI→Claude** — Haiku לסיווג · Sonnet לניסוח; שמות מודלים ב-ENV אחד | D-022 · `ULEASE_OUTBOUND_ENGINE.md` §7 (I5) | **MVP** |
+| 4 | **איחוד שני הסוכנים** — תמלול = pre-processing; סוכן יחיד עם memory+tools משותפים | SIMPLE/SURGICAL | **MVP** |
+| 5 | **Retry+fallback** לכל צומת LLM/HTTP — תמלול נכשל→"כתוב" · כלי נכשל→handoff | `ULEASE_OUTBOUND_ENGINE.md` §7 (I4) | **MVP** |
+| 6 | **זיכרון מתמשך לפי טלפון** — קושר את השיחה לרשומת הליד (מחזור שיקול ארוך) | צומת 2/5 | V1 |
+| 7 | **קליטת ליד לכל שיחה** — "אין ליד מבוזבז" (₪150 לספק); חיבור ללופ האורגני | §5 | V1 |
+| 8 | **Deal Score (Haiku) + סיווג כוונה** — חם→חדר-עסקה · קר→nurture · תלונה→escalate | צמתים 4, 7 · OUTBOUND 06 | V1 |
+| 9 | **Sheets→DB + Idempotency** — גיליון לא concurrency-safe ל-`Update order`; webhook חוזר ≠ הזמנה כפולה | `AI_SYSTEM_DESIGN.md` | V1 (Tech Lead) |
+| 10 | **⚠️ ציות WhatsApp** — חלון 24ש'/template-messages · opt-out בכל הודעה · סנכרון ל-`Consent` (Guardian) | תיקון 40 · OUTBOUND §2.5 | **MVP** |
+| 11 | **לוג תוצאות → Measurement** — answered/qualified/ordered/escalated/opt-out → ROI תחת כלל 90 הימים | `ULEASE_AUTOMATION_MAP.md` §12 | V1 |
+
+### 9.3 הארטיפקט (שלד n8n מתוקן)
+
+- **`CASES/ULEASE_DEMAND_ENGINE.n8n.json`** — workflow שלד (**18 צמתים + 5 sticky**) לייבוא ישיר (`Workflows → Import from File`). **כבר מתוקן** — לא המקור as-is: Claude במקום OpenAI, שער HITL על כתיבות, ניסוח מעוגן (Sonnet), טקסט+קול מתנקזים לסוכן יחיד, lead-upsert ולוג מדידה.
+- **`CASES/ULEASE_DEMAND_ENGINE_n8n.py`** — הגנרטור (מקור-אמת; משנים → מריצים → ה-JSON מתעדכן).
+- ה-STT (תמלול הקול) הוא ספק נפרד (Whisper/אחר), **לא ה-agent LLM** — D-022 חל על הסוכן, לא על שכבת ה-STT. לאישור מייסד.
+
+> זה השלד; הזרם המלא של מנוע הביקוש (פאזות 1–3, §1) נבנה מעליו ב-V1 (Tech Lead).
+
+---
+
 ## Document Control
 
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | בלופרינט מנוע צד-ביקוש — 18 צמתים ב-3 פאזות + לופ אורגני, מותאם לציות ישראלי (inbound בלבד, תוכן אנונימי, שערי בגרות D-040), ממופה למספרי ה-playbook (146 לידים, ROI ×4.9, נתח אורגני ≥25%) | 2026-06-02 |
 | 1.1.0 | §8 חדש (D-047): צ'קליסט design review למייסד — 6 בדיקות לפני אישור מימוש הלופ (לולאה סגורה · אנונימיזציה · grounding · HITL · ציות inbound · מדידה) — הדלתא שנשמרה מיישוב הכפילות של ה-sessions המקבילים | 2026-06-03 |
+| 1.2.0 | §9 חדש (D-059): תת-זרם ה-AI Receptionist (WhatsApp) — מיפוי בוט n8n אמיתי (טקסט+קול, FAQ/INVENTORY/order) לצומת 16 + 11 שיפורים מול הדוקטרינה (HITL/grounding/Claude) + ארטיפקט `ULEASE_DEMAND_ENGINE.n8n.json` וגנרטור — מתוקן ל-Claude+HITL, לא OpenAI as-is | 2026-06-04 |
 
 **Attribution.** המקור: n8n workflow *"One AI Agent for Local Business — Full Autopilot Customer Acquisition"*. ההתאמה, שכבת הציות והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
 **Confidentiality.** מסמך תפעולי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_DEMAND_ENGINE.md v1.1.0 —*
+— *End of CASES/ULEASE_DEMAND_ENGINE.md v1.2.0 —*

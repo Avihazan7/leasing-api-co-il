@@ -5,7 +5,7 @@
 ## Active Modules
 - `OPERATING_SYSTEM.md` v1.13.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.1.0 — שכבת זיכרון: schema, כרטיס זהות **מלא**, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
-- `DECISION_LOG.md` v1.45.0 — יומן החלטות append-only: 58 החלטות (OS + ULease), רציונל וסטטוס.
+- `DECISION_LOG.md` v1.46.0 — יומן החלטות append-only: 59 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.2.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר, אינטגרציה עם ה-OS + ראש המטה (5 תפקידים מתוזמנים) — מיושם בפועל ב-`COWORK/`.
 - `PROJECTS_SETUP.md` v1.0.0 — Claude Projects: 3 פרויקטים (השקה 🎯 · גיוס ₪150K · Claude OS) — תוצר אחד לכל פרויקט, הוראות drop-in, רשימות העלאה ובדיקות קבלה.
 - `COMMAND_API.md` v1.3.0 — 89 slash commands, composition operators, prompting-frameworks library (כולל Opus 4.8 deltas §7.7), 32 קיצורי פתיחה ניידים (§6.3 Prompt Prefixes), drop-in system prompt loaded.
@@ -45,7 +45,7 @@
 - `CASES/ULEASE_FINANCE_INSURANCE.md` v1.1.0 — מימון/ביטוח + חיתום דיגיטלי מקצה-לקצה: שותפים, זרימת חיתום, ניתוב רב-מלווה, התאמת Big Five, ודגלי רגולציה.
 - `CASES/ULEASE_OUTREACH_SCRIPTS.md` v1.3.0 — סקריפטים לפנייה (שיחה/מייל/וואטסאפ) ל-4 סגמנטי היצע + follow-up + הבטחת ה-White-Glove (D-045: "אני מגיע עם לפטופ ומכניס בעצמי").
 - `CASES/ULEASE_OUTBOUND_ENGINE.md` v1.2.0 — בלופרינט מנוע outbound (n8n + Claude): 8 שכבות לאקווזיציית צד-היצע, מודלי Haiku/Sonnet, KPIs + שער הבגרות (§6.1): שלושה שלבי HITL מ-assist לאוטונומיה מנוטרת.
-- `CASES/ULEASE_DEMAND_ENGINE.md` v1.1.0 — מנוע צד-הביקוש (n8n, 18 צמתים): קליטת לידים → ניקוד Haiku → nurture Sonnet → עסקה → **לופ אורגני** (תוכן אנונימי → SEO/GEO → לידים ב-CPL ~₪0) — מותאם לציות ישראלי (inbound בלבד) + שערי בגרות D-040 + צ'קליסט design review למייסד (§8); מנוע הביצוע של ה-DEMAND_PLAYBOOK.
+- `CASES/ULEASE_DEMAND_ENGINE.md` v1.2.0 — מנוע צד-הביקוש (n8n, 18 צמתים): קליטת לידים → ניקוד Haiku → nurture Sonnet → עסקה → **לופ אורגני** (תוכן אנונימי → SEO/GEO → לידים ב-CPL ~₪0) — מותאם לציות ישראלי (inbound בלבד) + שערי בגרות D-040 + צ'קליסט design review למייסד (§8) + **§9 תת-זרם ה-AI Receptionist (WhatsApp)**: מיפוי בוט n8n אמיתי לצומת 16 + 11 שיפורים + שלד `ULEASE_DEMAND_ENGINE.n8n.json` וגנרטור (Claude+HITL, לא OpenAI); מנוע הביצוע של ה-DEMAND_PLAYBOOK.
 - `CASES/ULEASE_TECH_ONBOARDING.md` v1.2.0 — Onboarding ל-Tech Lead: יום 0/1, רשימת קריאה ב-OS, תוכנית 30·60·90 + שקיפות SDLC (Jira/GitHub מיום 0, דוח תהליך שבועי, cycle time).
 - `CASES/ULEASE_LAUNCH_CHECKLIST.md` v1.3.0 — צ'קליסט השקה (שבועיים): דומיין, משפטי, MVP, תוכן, outreach, GEO, QA ולוח שבועי.
 - `CASES/ULEASE_DASHBOARD.html` v1.2.0 — דשבורד מנהלים אינטראקטיבי (RTL): KPIs, גרפים (הכנסה/מזומן/עסקאות/הוצאות/רווחיות), תמהילי הכנסה והוצאה, וצ'קליסט השקה חי; נוצר ע"י `CASES/ULEASE_DASHBOARD.py`.

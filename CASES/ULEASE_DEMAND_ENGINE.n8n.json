@@ -1,0 +1,623 @@
+{
+  "name": "ULease 🎯 — Demand Engine · AI Receptionist v1 (skeleton)",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ]
+      },
+      "id": "Intake-·-WhatsApp-Trigger-(inbound)",
+      "name": "Intake · WhatsApp Trigger (inbound)",
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -220,
+        300
+      ],
+      "webhookId": "ulease-wa-receptionist"
+    },
+    {
+      "parameters": {
+        "mode": "expression",
+        "numberOutputs": 2,
+        "output": "={{ $json.messages?.[0]?.type === 'audio' ? 1 : 0 }}",
+        "options": {}
+      },
+      "id": "Intake-·-Switch-—-Text-/-Audio",
+      "name": "Intake · Switch — Text / Audio",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        0,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $json.messages?.[0]?.audio?.url }}",
+        "options": {}
+      },
+      "id": "Audio-·-Download-Media",
+      "name": "Audio · Download Media",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://STT_PROVIDER/transcribe",
+        "options": {}
+      },
+      "id": "Audio-·-Transcribe-(STT-provider)",
+      "name": "Audio · Transcribe (STT provider)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        460,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "txt",
+              "name": "text",
+              "value": "={{ $json.messages?.[0]?.text?.body ?? $json.text ?? '' }}",
+              "type": "string"
+            },
+            {
+              "id": "wa",
+              "name": "wa_from",
+              "value": "={{ $json.messages?.[0]?.from ?? $json.wa_from }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "Normalize-·-Unify-Text-+-Phone",
+      "name": "Normalize · Unify Text + Phone",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        700,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "options": {}
+      },
+      "id": "Lead-·-Upsert-by-Phone-(Sheets/CRM)",
+      "name": "Lead · Upsert by Phone (Sheets/CRM)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        700,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "={{ $env.ANTHROPIC_API_KEY }}"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"model\": \"claude-haiku-4-5\", \"max_tokens\": 400, \"messages\": [{\"role\": \"user\", \"content\": \"You are the WhatsApp receptionist intent classifier for ULease 🎯 (car-leasing marketplace). Return ONLY JSON {\\\"intent\\\":\\\"faq|inventory|order|human\\\",\\\"intent_score\\\":0-100}. intent_score = buying intent. 'order' = place/change a leasing order (a WRITE action). Message: {{ $json.text }}\"}]}",
+        "options": {}
+      },
+      "id": "Classify-·-Intent-—-Claude-Haiku",
+      "name": "Classify · Intent — Claude Haiku",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        920,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// חילוץ intent + score מתשובת Claude (fallback בטוח: human)\nconst out=[];\nfor (const it of $input.all()){\n  const t = it.json?.content?.[0]?.text ?? '{}';\n  let intent='human', score=0;\n  try{const j=JSON.parse(t); intent=j.intent||'human'; score=j.intent_score??0;}catch(e){}\n  out.push({json:{...it.json, intent, intent_score:score}});\n}\nreturn out;"
+      },
+      "id": "Classify-·-Parse-Intent",
+      "name": "Classify · Parse Intent",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1140,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "expression",
+        "numberOutputs": 4,
+        "output": "={{ ({faq:0, inventory:1, order:2, human:3})[$json.intent] ?? 3 }}",
+        "options": {}
+      },
+      "id": "Route-·-Intent-(4-way)",
+      "name": "Route · Intent (4-way)",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        1360,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "options": {}
+      },
+      "id": "FAQ-·-Read-(Sheets)",
+      "name": "FAQ · Read (Sheets)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        1600,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "options": {}
+      },
+      "id": "INVENTORY-·-Read-(Sheets)",
+      "name": "INVENTORY · Read (Sheets)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        1600,
+        280
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "HITL-·-Approve-Order-(sendAndWait)",
+      "name": "HITL · Approve Order (sendAndWait)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "options": {}
+      },
+      "id": "Order-·-Create/Update-(Sheets)-—-after-approval",
+      "name": "Order · Create/Update (Sheets) — after approval",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        1820,
+        460
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "Human-·-Escalate",
+      "name": "Human · Escalate",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "h",
+              "name": "reply",
+              "value": "=קיבלנו 🙏 נציג/ה יחזרו אליך בהקדם.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "Human-·-Handoff-Message",
+      "name": "Human · Handoff Message",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1820,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "={{ $env.ANTHROPIC_API_KEY }}"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"model\": \"claude-sonnet-4-6\", \"max_tokens\": 400, \"messages\": [{\"role\": \"user\", \"content\": \"You are ULease's WhatsApp assistant. Answer the customer in Hebrew using ONLY the DATA below (prices, availability, FAQ). If the answer is NOT in DATA, say you'll check and a human will follow up — NEVER invent prices, availability, monthly payments or any number (grounding: 100% factual). Keep it short and WhatsApp-friendly. CUSTOMER: {{ $json.text }} | DATA: {{ JSON.stringify($json) }}\"}]}",
+        "options": {}
+      },
+      "id": "Reply-·-Grounded-—-Claude-Sonnet",
+      "name": "Reply · Grounded — Claude Sonnet",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1820,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "options": {}
+      },
+      "id": "Send-·-WhatsApp-Reply",
+      "name": "Send · WhatsApp Reply",
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        2060,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// לוג תוצאת השיחה לשכבת המדידה (answered/qualified/ordered/escalated/opt-out)\nconst j=$json; return [{json:{wa_from:j.wa_from, intent:j.intent, intent_score:j.intent_score, ts:new Date().toISOString()}}];"
+      },
+      "id": "Measurement-·-Log-Outcome",
+      "name": "Measurement · Log Outcome",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2280,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## ULease 🎯 — Demand Engine · AI Receptionist (WhatsApp)\nשלד n8n · דלת-הכניסה של מנוע הביקוש (DEMAND_ENGINE §9 · צומת 16).\n**הגדרות לפני הרצה:**\n- `ANTHROPIC_API_KEY` ב-Environment (או Credential ב-2 צמתי Claude).\n- WhatsApp Business Cloud + Google Sheets credentials.\n- ⚠️ ציות: inbound בלבד · חלון 24ש'/template-messages · opt-out בכל הודעה (תיקון 40).",
+        "height": 280,
+        "width": 470,
+        "color": 5
+      },
+      "id": "note-18",
+      "name": "Note 18",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -260,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Intake · טקסט + קול\nSwitch מנתב לפי סוג. קול → הורדת מדיה → STT → מתנקז ל-Normalize.\n**STT** = ספק תמלול נפרד (Whisper/אחר) — לא ה-agent LLM; D-022 חל על הסוכן, לא על ה-STT. לאישור.",
+        "height": 160,
+        "width": 420,
+        "color": 4
+      },
+      "id": "note-19",
+      "name": "Note 19",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Classify (Haiku) → Route\nסיווג כוונה + intent_score → ניתוב 4-כיווני: FAQ · INVENTORY · order · human.\n**Lead upsert** בכל שיחה — \"אין ליד מבוזבז\" (₪150 לספק).",
+        "height": 170,
+        "width": 420,
+        "color": 4
+      },
+      "id": "note-20",
+      "name": "Note 20",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        900,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Grounding (Sonnet · SPEC §7.2)\nתשובה מעובדות ה-Sheet בלבד; אין דאטה → \"אבדוק + אדם יחזור\".\nאסור להמציא מחיר/זמינות/החזר. Sheets = MVP; ל-V1 מעבר ל-DB + Idempotency (Tech Lead).",
+        "height": 180,
+        "width": 420,
+        "color": 4
+      },
+      "id": "note-21",
+      "name": "Note 21",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### HITL (D-040) · שער כתיבה\nכל `order` עוצר לאישור אדם (`sendAndWait`) לפני כתיבה.\nה-NoOp = placeholder — החלף ב-Send-and-Wait אמיתי. דגימת 10% באוטונומיה.",
+        "height": 160,
+        "width": 420,
+        "color": 4
+      },
+      "id": "note-22",
+      "name": "Note 22",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        640
+      ]
+    }
+  ],
+  "connections": {
+    "Intake · WhatsApp Trigger (inbound)": {
+      "main": [
+        [
+          {
+            "node": "Intake · Switch — Text / Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Intake · Switch — Text / Audio": {
+      "main": [
+        [
+          {
+            "node": "Normalize · Unify Text + Phone",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Audio · Download Media",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Audio · Download Media": {
+      "main": [
+        [
+          {
+            "node": "Audio · Transcribe (STT provider)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Audio · Transcribe (STT provider)": {
+      "main": [
+        [
+          {
+            "node": "Normalize · Unify Text + Phone",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize · Unify Text + Phone": {
+      "main": [
+        [
+          {
+            "node": "Lead · Upsert by Phone (Sheets/CRM)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Classify · Intent — Claude Haiku",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Classify · Intent — Claude Haiku": {
+      "main": [
+        [
+          {
+            "node": "Classify · Parse Intent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Classify · Parse Intent": {
+      "main": [
+        [
+          {
+            "node": "Route · Intent (4-way)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route · Intent (4-way)": {
+      "main": [
+        [
+          {
+            "node": "FAQ · Read (Sheets)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "INVENTORY · Read (Sheets)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HITL · Approve Order (sendAndWait)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Human · Escalate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HITL · Approve Order (sendAndWait)": {
+      "main": [
+        [
+          {
+            "node": "Order · Create/Update (Sheets) — after approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Human · Escalate": {
+      "main": [
+        [
+          {
+            "node": "Human · Handoff Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FAQ · Read (Sheets)": {
+      "main": [
+        [
+          {
+            "node": "Reply · Grounded — Claude Sonnet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "INVENTORY · Read (Sheets)": {
+      "main": [
+        [
+          {
+            "node": "Reply · Grounded — Claude Sonnet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Order · Create/Update (Sheets) — after approval": {
+      "main": [
+        [
+          {
+            "node": "Reply · Grounded — Claude Sonnet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reply · Grounded — Claude Sonnet": {
+      "main": [
+        [
+          {
+            "node": "Send · WhatsApp Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Human · Handoff Message": {
+      "main": [
+        [
+          {
+            "node": "Send · WhatsApp Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send · WhatsApp Reply": {
+      "main": [
+        [
+          {
+            "node": "Measurement · Log Outcome",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}
