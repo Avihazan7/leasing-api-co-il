@@ -160,7 +160,64 @@
 
 ## מ-15 המושגים אל הקוד — מיפוי ל-ULease (`leasing-api`)
 
-15 המושגים אינם תיאוריה מופשטת עבורנו — כל אחד מהם כבר נגזר (במלואו או כ-seam) בקוד של `leasing-api`. הטבלה מצליבה כל מושג מול **ראיה בקוד**, בהמשך ישיר ל-`CTO_REVIEW.md`:
+15 המושגים אינם תיאוריה מופשטת עבורנו — כל אחד מהם כבר נגזר (במלואו או כ-seam) בקוד של `leasing-api`. הטבלה מצליבה כל מושג מול **ראיה בקוד**, בהמשך ישיר ל-`CTO_REVIEW.md`.
+
+### הארכיטקטורה במבט-על (ASCII)
+
+המספרים בסוגריים `(#n)` מצביעים על מושג הליבה מהרשימה שכל רכיב מממש:
+
+```
+                          CLIENTS / DEALERS  (#12 UX — שכבה נפרדת)
+                                   │  HTTPS + HMAC  (#9 Security · hmacAuth.ts)
+                                   ▼
+        ┌───────────────────────────────────────────────────────────┐
+        │   API · Express  (src/server.ts, src/index.ts)             │  (#2 Architecture)
+        │   helmet · cors · zod validation (schemas.ts)              │  (#9 Security)
+        └───────────────┬───────────────────────────────────────────┘
+                        │  domain calls
+        ┌───────────────┴───────────────────────────────────────────┐
+        │                 DOMAIN MODULES  (#4 Domain Design)         │
+        │  ┌────────────┐ ┌──────────┐ ┌────────────┐ ┌───────────┐  │
+        │  │ inventory/ │ │ payments/│ │ commission/│ │ scoring/  │  │
+        │  │ service ·  │ │ Stripe   │ │ ledger     │ │ decision  │  │
+        │  │ repository·│ │          │ │ entries    │ │ Engine    │  │
+        │  │ stateMachine│ │          │ │ (append-   │ │ (mixture  │  │
+        │  │ (#11 tests)│ │          │ │  only,$-   │ │ of scorers)│ │
+        │  │            │ │          │ │  conserving│ │           │  │
+        │  └────────────┘ └──────────┘ └────────────┘ └───────────┘  │
+        └───────────────┬───────────────────────────┬───────────────┘
+            write (TX)   │                           │  same DB transaction
+                         ▼                           ▼
+        ┌────────────────────────────┐   ┌──────────────────────────┐
+        │  Postgres / Supabase       │   │  outbox  (Transactional  │
+        │  schema.sql (portable)     │   │  Outbox — #6 Reliability)│
+        │  (#3 Data · amount_minor)  │   │  src/events/outbox.ts    │
+        │  replication (#7 Avail.)   │   │  published_at IS NULL ⇒   │
+        │  RLS = open debt (#9 ⚠️)   │   │  pending event           │
+        └──────────┬─────────────────┘   └────────────┬─────────────┘
+                   │ projection (CQRS)                 │ poll
+                   ▼                                   ▼
+        ┌────────────────────────────┐   ┌──────────────────────────┐
+        │  vehicle_read_model        │   │  Outbox Relay  WORKER     │
+        │  (#8 Performance — read     │   │  src/worker.ts ·         │
+        │   side, fast queries)      │   │  outboxRelay.ts          │
+        │  bi_views.sql star-schema  │   │  (#6 Reliability)        │
+        │  (#14 Docs / analytics)    │   └────────────┬─────────────┘
+        └────────────────────────────┘                │  EventSink interface
+                                                       ▼  src/events/sink.ts
+                          ┌────────────────────────────────────────────┐
+                          │  EventSink  (#5 Scalability — seam)         │
+                          │  ─ InMemorySink            ← MVP today      │
+                          │  ─ Kafka/PubSub/NATS Sink  ← "wired here"   │
+                          │    in production (swap only, no rewrite)    │
+                          └───────────────┬────────────────────────────┘
+                                          ▼
+                          n8n / external consumers  (N8N_AUTOMATION.md)
+```
+
+**הקריאה של הדיאגרמה:** הכתיבה (write side) וה-`outbox` יושבים ב**אותה טרנזקציה** — מכאן ש-#6 Reliability היא תכונה מבנית (אפס אובדן אירועים), לא תוספת. ה-`Relay Worker` נפרד מה-API (#7 Availability — תהליכים עצמאיים `start:api` / `start:worker`), וה-`EventSink` הוא נקודת ההחלפה ל-#5 Scalability: מ-`InMemorySink` ל-Kafka בלי לגעת בדומיין. צד הקריאה (`vehicle_read_model` + `bi_views`) הוא CQRS שמשרת את #8 Performance. **שני החובות הפתוחים** מסומנים `⚠️`: RLS בצד DB ו-Multi-Tenancy (`tenant_id`) — שניהם P0 ב-`CTO_REVIEW.md`.
+
+### מיפוי מלא: מושג ⇄ ראיה בקוד
 
 | # | מושג | מימוש/Seam ב-`leasing-api` | סטטוס |
 |---|------|---------------------------|--------|
