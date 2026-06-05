@@ -12,6 +12,7 @@
 - [`CTO_REVIEW.md`](./CTO_REVIEW.md) v1.0.0 — **ביקורת CTO על ULease v1.2 — תגובה מבוססת-קוד.** הצלבת 10 נקודות הביקורת מול הקוד בפועל ב-`leasing-api`: תיקון 3 טענות (Event Bus / Data Warehouse / RLS — כולן כבר קיימות כ-seams), scorecard מתוקן מבוסס-ראיות, ומפת דרכים מתועדפת P0–P7 ל-Platform v2.0 (Multi-Tenant → Decision Engine → Event Backbone → Data Platform → Matching). הצעד הראשון (Decision Engine seam) כבר נחת בקוד, מאומת (55/55) ותואם-לאחור.
 
 ## Cheat Sheets & Concepts
+- [`BACKEND_ROADMAP.md`](./BACKEND_ROADMAP.md) v1.0.0 — **Backend Developer Roadmap ⇄ ULease.** האינפוגרפיקה הפופולרית של Shishir Pant, אבל לא גנרית: 6 שלבי המסלול (🟢 Foundations · 🔵 Backend Core · 🟣 Databases · 🟠 Performance · 🔴 Cloud/Deploy · ⭐ Advanced Engineering) מוצלבים **כל אחד מול ראיה בקוד** ב-`leasing-api` (state machine, HMAC auth, Outbox+ledger, CQRS read model, Docker/CI, domain modules), עם סטטוס STRONG/PARTIAL/GAP לכל שלב, ריכוז 5 החובות הפתוחים (Multi-Tenancy + RLS = P0) בהמשך ל-[`CTO_REVIEW.md`](./CTO_REVIEW.md), ו-§ "אם הייתי מתחיל מחדש היום".
 - [`system-design-cheatsheet.md`](./system-design-cheatsheet.md) v1.0.0 — **15 מושגי הליבה בעיצוב מערכות** ב-4 אשכולות (Design 🟧 · NFRs 🟦 · Build/Quality 🟩 · Ops/Lifecycle 🟪). לא תיאוריה: כל אחד מ-15 המושגים מוצלב מול **ראיה בקוד** ב-`leasing-api` (Outbox+EventSink, CQRS `vehicle_read_model`, `hmacAuth`, 55/55 טסטים), כולל שני חובות פתוחים מתועדים — RLS בצד DB ו-Multi-Tenancy — בהמשך ישיר ל-[`CTO_REVIEW.md`](./CTO_REVIEW.md).
 
 ## Strategic Benchmarks
