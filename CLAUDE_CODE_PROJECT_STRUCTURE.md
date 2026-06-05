@@ -1,6 +1,6 @@
 # Claude Code Project Structure — האנטומיה ⇄ ה-OS של ULease
 
-**מבנה פרויקט Claude Code סטנדרטי (Robbert van Vlijmen), מוצלב מול מבנה ה-OS בפועל של הריפו הזה.**
+**מבנה פרויקט Claude Code סטנדרטי (Robbert van Vlijmen) + האנטומיה המפורטת (Jamie AI Empire), מוצלבים מול מבנה ה-OS בפועל של הריפו הזה.**
 
 > הריפו הזה **הוא** פרויקט Claude Code — אבל בגרסה בוגרת: במקום `.claude/` רזה הוא הפך לשכבת-OS של מסמכים (`CLAUDE.md` כ-entry point + 14 מודולים). המודול הזה לוקח את 8 אבני-הבניין מהאינפוגרפיקה, מסביר כל אחת, ומראה **מה כבר קיים, מה ממופה למודול אחר, ומה חסר** (חוב מתועד).
 
@@ -66,4 +66,82 @@
 
 ---
 
-*תומלל מ-"Claude Code Project Structure" (Robbert van Vlijmen), ומופה למבנה ה-OS בפועל של `leasing-api-co-il` בהמשך ל-`AGENT_BLUEPRINT.md` ו-`COMMAND_API.md`.*
+## 5. האנטומיה המפורטת (Jamie AI Empire) — מ-doctrine ל-drop-in
+
+האינפוגרפיקה השנייה מפרקת את `.claude/` לרמת-הקובץ. כאן ה-§4 הופך מ"חוב" ל**קבצים קונקרטיים** המכוונים ל-ULease — בדיוק מה שצריך כדי לסגור את ה-P-Tooling.
+
+### 5.1 ששת סוגי ההרחבה — ומה כל אחד אצלנו
+
+| הרחבה | מתי | המקבילה ב-ULease |
+|-------|-----|------------------|
+| **Skill** | auto-activate לפי התאמת-משימה | `AGENT_BLUEPRINT § 11` (Learn/SOP) · `/code-review`, `/security-review` |
+| **Hook** | lifecycle event scripts | ⚠️ חוב — ראו 5.2 (drop-in מוכן) |
+| **MCP** | חיבורי כלים חיצוניים | `DEV_ENV § 10` · `N8N § 8` — ראו 5.3 |
+| **Subagent** | עבודה מקבילה מבודדת | Working Rule #8 · `stage-a/` |
+| **Agent Team** | תיאום רב-סוכנים | `AGENT_BLUEPRINT § 9.4` (Stage-B) |
+| **Plugin** | חבילה ניתנת-להפצה | 🟡 עתידי — אריזת ה-OS כ-plugin פנימי |
+
+### 5.2 Hook Events ⇄ Working Rules
+
+| Event | תפקיד | חיבור ל-OS |
+|-------|------|------------|
+| **PreToolUse** | חסימה לפני הרצה | governance (`AGENT_BLUEPRINT § 6`) — חסימת פקודות מסוכנות |
+| **PostToolUse** | auto-fix/lint/test אחרי כתיבה | **Working Rule #6 VERIFY** — `npm test`/`typecheck` |
+| **SessionStart** | טעינת context בעלייה | טעינת `CLAUDE.md` + Load Order |
+| **SessionStop / PreCompact** | שמירת session · זיהוי secrets | `MEMORY.md` · governance |
+| **Notification** | התראות (Slack) | `N8N_AUTOMATION` (alerting) · `BRANCH_KNOWLEDGE` (ערוץ Slack) |
+
+### 5.3 שני הקבצים שסוגרים את §4 — drop-in ל-ULease
+
+`.claude/settings.json` — permissions + hook שמריץ את ה-VERIFY של Working Rule #6:
+
+```jsonc
+{
+  "permissions": {
+    "allow": ["Bash(npm test)", "Bash(npm run typecheck)", "Bash(npm run build)"],
+    "deny": ["Bash(rm -rf*)", "Bash(git push --force*)"]
+  },
+  "hooks": {
+    "PostToolUse": [{
+      "matcher": "Edit|Write",
+      "hooks": [{ "type": "command", "command": "npm run typecheck" }]
+    }]
+  }
+}
+```
+
+`.mcp.json` — מעגן את שרתי ה-MCP מ-`DEV_ENV § 10` כקובץ ממשי (GitHub + Supabase/Postgres של ULease):
+
+```jsonc
+{
+  "mcpServers": {
+    "github":   { "command": "npx", "args": ["-y", "@anthropic/mcp-github"],
+                  "env": { "GITHUB_TOKEN": "${GITHUB_TOKEN}" } },
+    "postgres": { "command": "npx", "args": ["-y", "@anthropic/mcp-postgres"],
+                  "env": { "DATABASE_URL": "${DATABASE_URL}" } }
+  }
+}
+```
+
+> שני אלה + `hooks/` (סקריפט שמריץ `npm test` ב-PreToolUse של commit) הם **בדיוק** שלושת הפריטים ב-§4. ה-`DATABASE_URL` כבר חי ב-`leasing-api` (`config.ts`), וה-MCP של postgres ייתן ל-Claude שאילתות קריאה ישירות מול הסכמה — תחת RLS, אם מגדירים `app.current_tenant`.
+
+### 5.4 Context Management — ספי-עבודה
+
+האינפוגרפיקה נותנת ספים תפעוליים שמשלימים את Working Rule #8 (SUBAGENTS = שמירת context נקי):
+
+| ניצול חלון | פעולה |
+|-----------|-------|
+| 0–60% | עבודה חופשית |
+| 50–70% | ניטור |
+| 70–90% | `/compact` |
+| 80%+ | `/clear` (חובה) |
+
+---
+
+## 6. ה-takeaway
+
+> ULease חזק ב-**ידע** (מכלול המודולים) וב-**agents** (`stage-a`), אך שכבת ה-**אכיפה הניתנת-להרצה** (`.claude/settings.json` · `.mcp.json` · `hooks/`) עדיין doctrine. §5.3 נותן את ה-drop-in המדויק. זה הצעד הבא ב-P-Tooling — מ"כתוב מה לעשות" ל"הכלי אוכף את זה".
+
+---
+
+*תומלל מ-"Claude Code Project Structure" (Robbert van Vlijmen) ו-"Claude Code Project Architecture" (Jamie AI Empire), ומופה למבנה ה-OS בפועל של `leasing-api-co-il` בהמשך ל-`AGENT_BLUEPRINT.md` ו-`COMMAND_API.md`.*

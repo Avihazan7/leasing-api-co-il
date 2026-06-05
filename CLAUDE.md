@@ -16,9 +16,11 @@
 - `BRANCH_KNOWLEDGE.md` v1.0.0 — תשתית הידע לסניפים: ערוץ Slack פרטי + ספר ידע (`BRANCHES/`) לכל סניף/סוכנות, צינור דו-כיווני Edge⇄Core (תובנות 💡/⚠️ → W6 זיקוק שבועי → OS), הפרדת סניפים (RLS doctrine), rollout משולב ב-LAUNCH.
 - `CTO_REVIEW.md` v1.2.0 — ביקורת CTO על ULease, תגובה מבוססת-קוד. הצלבת 10 נקודות הביקורת מול הקוד ב-`leasing-api`: תיקון 3 טענות (Event Bus / Data Warehouse / BI קיימים כ-seams), scorecard מתוקן, מפת דרכים P0–P7 ל-Platform v2.0; **שני צעדי P0 נחתו** (Decision Engine seam + Multi-Tenancy/RLS **מחווט end-to-end**: request `X-Tenant-Id`→`asTenant`, worker `SYSTEM_TENANT`, מאומת ב-HTTP, **65/65 טסטים**), נותר action-level RBAC.
 - `AI_SDLC_ORCHESTRATION.md` v1.0.0 — מפת כלי ה-AI על פני ה-SDLC (Ashish Sahu) + הטענה *"orchestration of intent, not tools"*: 6 שלבי ה-SDLC ⇄ ראיה ב-`leasing-api`, שכבת-התזמור של ULease (Brain=`stage-a` · Backbone=Outbox+Relay+Sink · Hands=n8n), **+ § 4** אנטומיית Enterprise AI Agent (8 שכבות M-SoftTech: gate→core→MCP→guardrails→routing→isolation) ⇄ seams בקוד (`hmacAuth`, `decisionEngine`, RLS, 65/65 טסטים), בהמשך ל-`AGENT_BLUEPRINT § 9` ו-`CTO_REVIEW`.
-- `CLAUDE_CODE_PROJECT_STRUCTURE.md` v1.0.0 — מבנה פרויקט Claude Code סטנדרטי (Robbert van Vlijmen) ⇄ ה-OS בפועל: 8 אבני-בניין (`CLAUDE.md`/`.mcp.json`/`settings.json`/`rules`/`commands`/`skills`/`agents`/`hooks`) ממופות למקבילה בריפו (CLAUDE.md ✅ · COMMAND_API=commands · stage-a=agents · AGENT_BLUEPRINT § 11=skills/MCP), ההבחנה בין 4 הפרימיטיבים, **+ § 4** חוב P-Tooling (אין `hooks/`·`.claude/settings.json`·`.mcp.json` כקבצים ניתנים-להרצה).
+- `CLAUDE_CODE_PROJECT_STRUCTURE.md` v1.1.0 — מבנה פרויקט Claude Code (Robbert van Vlijmen) **+ אנטומיה מפורטת (Jamie AI Empire)** ⇄ ה-OS בפועל: 8 אבני-בניין ממופות למקבילה בריפו, ההבחנה בין 4 הפרימיטיבים, **§ 4** חוב P-Tooling, **+ § 5** drop-in קונקרטי שסוגר אותו (`.claude/settings.json` permissions+PostToolUse hook · `.mcp.json` github+postgres · Hook Events ⇄ Working Rules · Context Management thresholds).
 - `AUTH_CONCEPTS.md` v1.1.0 — Authentication vs Authorization (M-SoftTech) ⇄ שכבת האבטחה של `leasing-api`: AuthN חזק (`hmacAuth.ts` — HMAC-SHA256 + replay guard + constant-time → 401) · AuthZ ברמת-שורה **מחווט end-to-end** (`X-Tenant-Id`→`asTenant` · worker `SYSTEM_TENANT` · `rls.sql` fail-closed, מאומת ב-HTTP ב-`tenancy.test.ts`), **+ § 5** חוב פתוח (action-level RBAC/403 + hardening: per-tenant keys · `(tenant_id, vin)` PK), בהמשך ל-`system-design-cheatsheet § 9`.
 - `MASTER_CLAUDE_58.md` v1.0.0 — 58 Ways to Master Claude (@coder_surya): 8 אשכולות (SETUP·MODELS·PROMPTING·ASK·CONNECTORS·PROJECTS·ARTIFACTS·PRO LEVEL) כל אחד ⇄ המודול שמיישם ב-OS (ASK ⇄ Working Rule #2 · PROJECTS ⇄ ה-OS עצמו · PRO LEVEL ⇄ `stage-a`+`AGENT_BLUEPRINT § 9`), מיפוי ל-`LAUNCH § 3.1` (Master Claude in a Week), ו-self-audit בגרות.
+- `BUSINESS_PARTNER.md` v1.0.0 — Claude כשותף עסקי ב-9 צעדים: כל צעד (Role · Business Brain · Daily Briefing · Stress-Test · Sales Copy · Objections · Competition · SOPs · Monthly Review) ⇄ תשתית קיימת ב-OS (Business Brain ⇄ ה-OS עצמו · SOPs ⇄ Skills `§ 11` · Stress-Test ⇄ `CTO_REVIEW`+Working Rule #5/#7 · Review ⇄ Power BI), 8/9 כבר תשתית; חוב: ספריית objections + Monthly Review אוטומטי.
+- `CLAUDE_DESIGN.md` v1.0.0 — Claude Design (`claude.ai/design`) ב-8 צעדים ⇄ שכבת ה-UI של ULease: format · `DESIGN.md` · prompt (Goal/layout/content/constraints) · video→slides · iterate · WCAG validate · export → `public/index.html`+`dashboard.html` (מוגש מ-`/ui` ב-`server.ts`); חוב: אין `DESIGN.md` ו-WCAG validation.
 
 ## Module Load Order
 1. `OPERATING_SYSTEM.md`      ← roadmap (ראה AGENT_BLUEPRINT § 7)
@@ -33,6 +35,8 @@
 8b. `CLAUDE_CODE_PROJECT_STRUCTURE.md` ← מבנה Claude Code סטנדרטי ⇄ ה-OS בפועל
 8c. `AUTH_CONCEPTS.md`        ← AuthN vs AuthZ ⇄ hmacAuth + RLS
 8d. `MASTER_CLAUDE_58.md`     ← 58 Ways ⇄ מודולי ה-OS + LAUNCH § 3.1
+8e. `BUSINESS_PARTNER.md`     ← Claude כשותף עסקי (9 צעדים) ⇄ תשתית ה-OS
+8f. `CLAUDE_DESIGN.md`        ← Claude Design (8 צעדים) ⇄ שכבת ה-UI (`public/`)
 9. `power-bi-essential-concepts.md` ← BI ודשבורדים על נתוני ה-API
 9a. `system-design-cheatsheet.md` ← 15 מושגי עיצוב מערכות ⇄ מיפוי ל-codebase
 9b. `BACKEND_ROADMAP.md`       ← Backend Developer Roadmap ⇄ ULease (6 שלבים, ראיות בקוד, חובות)
