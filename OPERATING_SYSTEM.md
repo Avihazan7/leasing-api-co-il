@@ -1,7 +1,7 @@
 # CLAUDE OPERATING SYSTEM — Kernel
 
 **Module:** `OPERATING_SYSTEM.md`
-**Version:** 1.14.0
+**Version:** 1.15.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Kernel — נטען ראשון. כל שאר המודולים תלויים בו.
 **Integrates with:** כל המודולים הרשומים ב-§3 — `CLAUDE.md`, `MEMORY.md`, `DECISION_LOG.md`, `COWORK_SETUP.md`, `PROJECTS_SETUP.md`, `COMMAND_API.md`, `marketing-strategy-framework.md`, `AI_*` + `AGENT_BLUEPRINT.md` + `CLOUD_ARCHITECT_SKILLS.md` + `KUBERNETES_101.md` (Knowledge), `INVESTOR_RELATIONS.md`, `CASES/*.md` + תשתית תפעולית ב-§3.1 (`COWORK/`, `.claude/`)
@@ -53,7 +53,7 @@
 ├─ MEMORY ────── MEMORY.md · DECISION_LOG.md   מי אתה, מה זוכרים, focus/projects, החלטות
 ├─ CONTEXT ───── COWORK_SETUP.md · PROJECTS_SETUP.md · COWORK/   חיבור התיקייה, קבצי md, Global Instructions, פרויקטים
 ├─ INTERFACE ─── COMMAND_API.md · COMMAND_API_TASKS.md · .claude/ (skills · agents)   89 פקודות ליבה + 98 פקודות משימה + 4 Claude Code skills + os-auditor
-├─ KNOWLEDGE ─── AI_SKILL_MAP · AI_PROGRESSION_PLAN · AI_LEARNING_RESOURCES · AI_7_SKILLS · AI_SKILLS_ACQUISITION · AI_TYPES · AI_CLAUDE_TOOL_SELECTOR · AI_CLAUDE_STACK_2026 · AI_CLAUDE_GLOSSARY · AI_RAG_DESIGN · AI_PROJECT_STRUCTURE · AI_ROLES_2026 · AI_CLAUDE_ENGINEER_ROADMAP · AI_DATA_BI · AI_SYSTEM_DESIGN · AI_PROCESS_INTELLIGENCE · AI_PROFICIENCIES_2026 · AI_LINEAR_ALGEBRA · AGENT_BLUEPRINT · CLOUD_ARCHITECT_SKILLS · KUBERNETES_101   ידע אישי/לימודי (on-demand)
+├─ KNOWLEDGE ─── AI_SKILL_MAP · AI_PROGRESSION_PLAN · AI_LEARNING_RESOURCES · AI_7_SKILLS · AI_SKILLS_ACQUISITION · AI_TYPES · AI_CLAUDE_TOOL_SELECTOR · AI_CLAUDE_STACK_2026 · AI_CLAUDE_GLOSSARY · AI_RAG_DESIGN · AI_PROJECT_STRUCTURE · AI_ROLES_2026 · AI_CLAUDE_ENGINEER_ROADMAP · AI_DATA_BI · AI_SYSTEM_DESIGN · AI_PROCESS_INTELLIGENCE · AI_PROFICIENCIES_2026 · AI_LINEAR_ALGEBRA · AGENT_BLUEPRINT · CLOUD_ARCHITECT_SKILLS · KUBERNETES_101 · AI_MICROSERVICES   ידע אישי/לימודי (on-demand)
 └─ BUSINESS ──── marketing-strategy-framework.md · INVESTOR_RELATIONS.md · CASES/*.md   הקשר עסקי נקודתי
 ```
 
@@ -96,8 +96,9 @@
 | 27 | `AGENT_BLUEPRINT.md` | Knowledge | ✅ פעיל | בלופרינט 8 השלבים לבניית סוכן AI (Purpose→Testing) כשכבת ניווט מעל `AI_*` + טבלת Ecosystem + §10 כללי העבודה (דוקטרינת Karpathy) — המקור הקנוני שאליו מפנה `leasing-api` |
 | 28 | `CLOUD_ARCHITECT_SKILLS.md` | Knowledge | ✅ פעיל | 5 שכבות כישורי ארכיטקט ענן (Foundation→Enterprise) עם מדרגת Beginner/Intermediate/Advanced + רובריקת ראיון ל-Tech Lead ותמונת בגרות ULease — הציר התשתיתי המשלים ל-`AI_SKILL_MAP` |
 | 29 | `KUBERNETES_101.md` | Knowledge | ✅ פעיל | יסודות Kubernetes (K8s) — 10 אבני-הבניין (Pod · Control Plane · Deployment · Service · HPA…) + §11 הכרעת design-review MVP/V1/V2 ושער אנטי-over-engineering; ה-deep-dive מתחת לשכבה 4 של `CLOUD_ARCHITECT_SKILLS` |
-| 30 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
-| 31 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית, איפיון, מתודולוגיה, גיוס, playbooks, מנועי אקווזיציה (היצע + ביקוש), ביקורת ומחירון/SLA |
+| 30 | `AI_MICROSERVICES.md` | Knowledge | ✅ פעיל | איך שירות מתחבר לאחר (REST · gRPC · Message Broker · Service Discovery · LB), sync מול async + ההכרעה **Modular-Monolith-first** ל-ULease (microservices = V2) + צ'קליסט design review |
+| 31 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
+| 32 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית, איפיון, מתודולוגיה, גיוס, playbooks, מנועי אקווזיציה (היצע + ביקוש), ביקורת ומחירון/SLA |
 
 > **הערה על שכבות:** מודולי `AI_*` הם שכבת **Knowledge** — ידע אישי/לימודי שיושב לוגית בין ה-INTERFACE ל-BUSINESS. הם פעילים אך נטענים on-demand, לא בכל turn.
 > כשמודול עובר מ-🔜 ל-✅ — מעדכנים את הסטטוס כאן ואת ה-Active Modules ב-`CLAUDE.md` ו-`README.md`.
@@ -120,7 +121,7 @@
 זה הבלוק שמפעיל את כל ה-OS. העתק אותו ל-`userPreferences` / system prompt / Cowork Global Instructions:
 
 ```
-CLAUDE OS ENABLED — Kernel v1.14
+CLAUDE OS ENABLED — Kernel v1.15
 
 On every turn, before responding:
 1. Load identity & context from MEMORY.md (and the Cowork "about-me" file if connected).
@@ -205,7 +206,8 @@ Doctrine:
 | 1.12.0 | רישום `AGENT_BLUEPRINT` (שורה 27, D-056) — בלופרינט 8 השלבים לבניית סוכן AI + §10 כללי העבודה (המקור הקנוני ל-`leasing-api`, סוגר הפניה שבורה חוצת-ריפו). הסטת שורות: IR 27→28 · CASES 28→29 | 2026-06-04 |
 | 1.13.0 | רישום `CLOUD_ARCHITECT_SKILLS` (שורה 28, D-057) — 5 שכבות כישורי ארכיטקט ענן (Foundation→Enterprise) + רובריקת ראיון ל-Tech Lead ותמונת בגרות ULease; הציר התשתיתי המשלים ל-`AI_SKILL_MAP`. הסטת שורות: IR 28→29 · CASES 29→30 | 2026-06-04 |
 | 1.14.0 | רישום `KUBERNETES_101` (שורה 29, D-061) — יסודות Kubernetes: 10 אבני-הבניין + §11 הכרעת design-review MVP/V1/V2 ושער אנטי-over-engineering; ה-deep-dive מתחת לשכבה 4 של `CLOUD_ARCHITECT_SKILLS`. הסטת שורות: IR 29→30 · CASES 30→31 | 2026-06-04 |
+| 1.15.0 | רישום `AI_MICROSERVICES` (שורה 30, D-062) — איך שירות מתחבר לאחר (REST · gRPC · Message Broker · Service Discovery · LB), sync מול async + ההכרעה **Modular-Monolith-first** ל-ULease (microservices = V2). הסטת שורות: IR 30→31 · CASES 31→32 | 2026-06-04 |
 
 **Confidentiality.** קובץ זה הוא הליבה של ה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of OPERATING_SYSTEM.md v1.14.0 —*
+— *End of OPERATING_SYSTEM.md v1.15.0 —*
