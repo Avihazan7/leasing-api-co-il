@@ -1,7 +1,7 @@
 # AGENT_BLUEPRINT.md — מ-Skill ל-Agent: דוקטרינת ה-System-First
 
 **Module:** `AGENT_BLUEPRINT.md`
-**Version:** 1.3.0
+**Version:** 1.4.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Doctrine. הגשר בין ה-Docs OS ל-Agent Runtime.
 **Integrates with:** `CLAUDE.md`, `COMMAND_API.md`, `DEV_ENVIRONMENTS.md`, `LAUNCH.md`, `stage-a/`
@@ -369,6 +369,68 @@ coders — they'll be the people who build the best systems around AI agents."*
 
 ---
 
+## 11. MCP vs. Agent Skills — Connect ⇄ Learn
+
+מודול 4 (`§ 1`) קורא ל-tools "MCP, API, DB, functions" — ולאורך הקובץ אנחנו קוראים
+ל-`/deal-quote` ולחבריו "Skills". אלה **שתי שכבות שונות**, וקל לבלבל ביניהן. ההבחנה
+הזו (מקור: אינפוגרפיקה *MCP vs. Agent Skills*, ByteByteGo) היא הציר שמסדר את כל מודול 4.
+
+> **השאלה הלא-נכונה:** "MCP או Skills?" — הן לא מתחרות.
+> **השאלה הנכונה:** *איך ה-agent יתחבר למערכות?* (MCP) · *איך ה-agent ילמד workflows?* (Skills)
+
+**שני מודלים מנטליים:**
+- 👉 **MCP = AI-native APIs** — מערכת העצבים. מלמד agent **איך לתקשר עם מערכות**.
+- 👉 **Skills = AI-native SOPs** — ספר הנהלים. מלמד agent **איך לבצע משימה** באופן עקבי.
+
+### 11.1 חמשת הממדים — ומיפוי ל-ULease
+
+| # | ממד | 🟢 MCP | 🔵 Agent Skills | העוגן אצלנו |
+|---|------|---------|------------------|--------------|
+| 1 | **Integration** | client ⇄ server; N agents × M backends; חיבור תמידי | `SKILL.md` (name + description) **always loaded** → הוראות מלאות on-trigger | MCP: `DEV_ENV § 10` · `N8N § 8` / Skills: `COMMAND_API` |
+| 2 | **Architecture** | תהליך נפרד, runtime משלו (JSON-RPC) | תיקייה: `SKILL.md` + `scripts/` + `references/` + `assets/` | `mcp-ulease` (Stage-C) / הגדרת Skill ב-`COMMAND_API` |
+| 3 | **Invocation** | params → schema validation → tool A → tool B (chained) | agent מריץ `bash`/`python`/`curl` מתוך `SKILL.md` → output | tool schemas / `§ 9.1` Chaining |
+| 4 | **Runtime** | MCP server בתוך container | רץ ב-env של ה-agent (bash · python · curl/node) | `docker-compose` (n8n/api) / סביבת Claude Code |
+| 5 | **Where it fits** | DB · Queue · OAuth · SaaS (Slack · GitHub · Postgres · Stripe) — high-frequency, low-latency | know-how · conventions · CLI recipes · templates — lightweight, **no infra** | backends של `leasing-api` / מודולי הידע של ה-OS |
+
+### 11.2 הבהרת מינוח — "Skill" בריפו הזה
+
+`§ 0` אמר *"Skill הוא prompt, לא agent"*. זה היה מדויק לרזולוציה הישנה. ב-Anthropic
+**Agent Skill** הוא יותר מ-prompt: תיקייה עם `SKILL.md` + scripts + references + assets —
+SOP ארוז. ההבחנה המעודכנת:
+
+| השכבה | מה זה | אצלנו |
+|--------|--------|--------|
+| **slash command** | טריגר/קיצור | תחביר `/command` ב-`COMMAND_API` |
+| **Agent Skill** | ה-SOP הארוז (`SKILL.md` + scripts/references/assets) | התוכן וההוראות מאחורי הפקודה |
+| **MCP tool** | חיבור למערכת חיצונית | `DEV_ENV § 10` · `N8N § 8` |
+| **Agent** | מרכיב את כולם דרך מודול 6 | `stage-a/` |
+
+### 11.3 הדוקטרינה — Use Both
+
+MCP ו-Skills **משלימים**, לא מתחרים. ה-agent הכי חזק משתמש בשניהם:
+
+```
+Agent = Skill (איך מבצעים את המשימה — SOP) ⊕ MCP (איך מגיעים למערכות — tools) ⊕ Orchestration (§6)
+```
+
+זה בדיוק build order של `§ 4`: **מודול 4 = MCP** (חיבור ל-pricing-quote/deal-lookup),
+ואילו ה-Skill עצמו (`/deal-quote`) הוא ה-**SOP** שאומר *מתי* ובאיזה סדר לקרוא להם. הסר
+אחד מהם וה-agent שבור: MCP בלי Skill = ידיים בלי ספר-נהלים; Skill בלי MCP = נהלים
+בלי ידיים.
+
+> **כלל ברזל:** לפני שמוסיפים MCP server חדש, שאל *"זו בעיית חיבור או בעיית workflow?"*.
+> בעיית חיבור (DB/SaaS/queue) → MCP. בעיית ידע-תהליכי (איך מפיקים דוח, באיזה פורמט,
+> לפי איזה policy) → Skill. הוספת MCP לבעיית-workflow היא over-engineering; הוספת Skill
+> לבעיית-חיבור היא reinvention. ראה כלל הבחירה המלא ב-`N8N § 11`.
+
+### 11.4 חיבור ל-§ 9.6 (הקנון)
+
+הספר *Agentic Design Patterns* (Gulli) מקדיש פרק נפרד ל-**MCP** ב-Part 2 (תשתית) —
+שם, ולא ב-Part 1 (Patterns). זה מאשר את ההבחנה: MCP הוא **שכבת תשתית/חיבור**, בעוד
+ה-patterns (chaining, routing…) הם שכבת ה-**workflow/Skill**. אותה הפרדה, מקור אחר.
+
+---
+
 ## גרסאות
 
 | גרסה | תאריך | שינוי |
@@ -377,11 +439,13 @@ coders — they'll be the people who build the best systems around AI agents."*
 | 1.1.0 | 2026-05-31 | + § 9 Orchestration Patterns — 9 patterns, ULease Skills map, stage-a קלסיפיקציה (Plan & Execute), Stage-B חדד (= P&E + Replan) |
 | 1.2.0 | 2026-06-03 | + § 10 Coding Workflow Doctrine — עקרונות ה-CLAUDE.md של Karpathy: 6 עקרונות workflow, מיפוי ל-§ 1/§ 5/§ 9, Working Rules block לשני הריפואים, mindset |
 | 1.3.0 | 2026-06-03 | + § 6.1 חיזוק Gartner (5 misconceptions ⇄ הדוקטרינה) · + § 9.6 מיפוי הקנון *Agentic Design Patterns* (Gulli) · 3 פריטי roadmap חדשים (A2A · Exception&Recovery · Resource-Aware) |
+| 1.4.0 | 2026-06-05 | + § 11 MCP vs. Agent Skills — Connect⇄Learn: 5 ממדים ממופים ל-ULease, הבהרת מינוח (slash command / Agent Skill / MCP tool / Agent), דוקטרינת Use-Both, וחיבור ל-§ 9.6 |
 
 ---
 
 **Tie-back ל-OS:** הקובץ הזה הוא ה-**connective tissue**. `COMMAND_API` נותן את הפקודות,
 `DEV_ENVIRONMENTS` את הכלים, `LAUNCH` את ה-go-live — ו-`AGENT_BLUEPRINT` מסביר איך
 מרכיבים מהם **agent** שלא נשבר ב-production. § 9 בוחר את ה-topology, § 10 קובע איך
-כל agent בתוכה כותב קוד. הוא מצביע קדימה ל-`MEMORY.md` ול-Stage-B כצעדים הבאים.
+כל agent בתוכה כותב קוד, ו-§ 11 מפריד בין ה-**חיבור** (MCP) ל-**ידע התהליכי** (Skill).
+הוא מצביע קדימה ל-`MEMORY.md` ול-Stage-B כצעדים הבאים.
 *Start with the SYSTEM first. Everything else scales from there.*
