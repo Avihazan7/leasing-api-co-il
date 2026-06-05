@@ -11,5 +11,8 @@
 
 - [`CTO_REVIEW.md`](./CTO_REVIEW.md) v1.0.0 — **ביקורת CTO על ULease v1.2 — תגובה מבוססת-קוד.** הצלבת 10 נקודות הביקורת מול הקוד בפועל ב-`leasing-api`: תיקון 3 טענות (Event Bus / Data Warehouse / RLS — כולן כבר קיימות כ-seams), scorecard מתוקן מבוסס-ראיות, ומפת דרכים מתועדפת P0–P7 ל-Platform v2.0 (Multi-Tenant → Decision Engine → Event Backbone → Data Platform → Matching). הצעד הראשון (Decision Engine seam) כבר נחת בקוד, מאומת (55/55) ותואם-לאחור.
 
+## Cheat Sheets & Concepts
+- [`system-design-cheatsheet.md`](./system-design-cheatsheet.md) v1.0.0 — **15 מושגי הליבה בעיצוב מערכות** ב-4 אשכולות (Design 🟧 · NFRs 🟦 · Build/Quality 🟩 · Ops/Lifecycle 🟪). לא תיאוריה: כל אחד מ-15 המושגים מוצלב מול **ראיה בקוד** ב-`leasing-api` (Outbox+EventSink, CQRS `vehicle_read_model`, `hmacAuth`, 55/55 טסטים), כולל שני חובות פתוחים מתועדים — RLS בצד DB ו-Multi-Tenancy — בהמשך ישיר ל-[`CTO_REVIEW.md`](./CTO_REVIEW.md).
+
 ## Strategic Benchmarks
 - [`CASES/ROX_KEY.md`](./CASES/ROX_KEY.md) v1.0.0 — Case study וייטנאמי: ROX Key, קונגלומרט שעבר טרנספורמציה דיגיטלית מבוססת-נתונים בענף ניהול הנכסים. **Direct parallel ל-ULease.** 5 לקחים אופרטיביים + 6 action items שכבר משולבים ב-`LAUNCH.md` וב-`DEV_ENVIRONMENTS.md`.
