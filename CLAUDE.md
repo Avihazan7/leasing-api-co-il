@@ -10,6 +10,7 @@
 - `AGENT_BLUEPRINT.md` v1.3.0 — System-first doctrine. הגשר בין ה-Docs OS ל-Agent Runtime (`stage-a/`): 8-module blueprint, coverage map, evals layer, governance-in-code, **+ § 6.1 חיזוק Gartner** (5 misconceptions ⇄ הדוקטרינה), **+ § 9 Orchestration Patterns** (9 topologies · ULease Skills map · **§ 9.6 מיפוי הקנון** *Agentic Design Patterns*/Gulli), **+ § 10 Coding Workflow Doctrine** (Karpathy's CLAUDE.md: 6 עקרונות workflow · Working Rules · mindset).
 - `CASES/ROX_KEY.md` v1.0.0 — Vietnamese benchmark — ROX Key digital transformation. Direct parallel to ULease positioning; 5 operational lessons + 6 action items woven into LAUNCH and DEV_ENVIRONMENTS.
 - `system-design-cheatsheet.md` v1.0.0 — 15 מושגי הליבה בעיצוב מערכות (4 אשכולות: Design 🟧 · NFRs 🟦 · Build/Quality 🟩 · Ops/Lifecycle 🟪) + **§ מיפוי ל-ULease**: כל מושג מוצלב מול ראיה בקוד ב-`leasing-api` (Outbox+EventSink, `vehicle_read_model`, `hmacAuth`, 55/55 טסטים) ושני חובות פתוחים (RLS בצד DB · Multi-Tenancy) בהמשך ל-`CTO_REVIEW.md`.
+- `BACKEND_ROADMAP.md` v1.0.0 — Backend Developer Roadmap (Shishir Pant) מוצלב מול ULease: 6 שלבי המסלול (🟢 Foundations · 🔵 Backend Core · 🟣 Databases · 🟠 Performance · 🔴 Cloud/Deploy · ⭐ Advanced) כל אחד ⇄ ראיה בקוד (`stateMachine.ts`, `hmacAuth.ts`, `schema.sql`+ledger, Outbox/EventSink, Dockerfile/CI, domain modules) עם סטטוס STRONG/PARTIAL/GAP, ריכוז 5 החובות הפתוחים (Multi-Tenancy/RLS P0 · Event Backbone P2 · Data Platform P3 · Rate-limit/Redis) בהמשך ל-`CTO_REVIEW.md`, ו-§8 "אם הייתי מתחיל מחדש".
 - `power-bi-essential-concepts.md` v1.1.0 — 10 מושגי יסוד ב-Power BI + **§ דשבורדים ל-ULease**: חיבור ל-Supabase, מודל Star Schema על `settlements`/`ledger_entries`/`vehicle_read_model`, מדדי DAX (מכירות, עמלות, המרה), RLS לסוכנויות.
 - `N8N_AUTOMATION.md` v1.1.0 — שכבת האוטומציה התפעולית: n8n כ-Glue Layer בין ה-Outbox של `leasing-api` לעולם העסקי. חיבור HMAC+Webhook, קטלוג אירועים→workflows, 5 workflows מוכנים, מיפוי ל-AGENT_BLUEPRINT § 9 (n8n=Hands · stage-a=Brain), **+ § 7.3 אנטומיית AI Agent** (Form→Tools Agent→Switch→Slack ⇒ Dealer Onboarding), MCP דו-כיווני, ממשל ו-kill-switch.
 - `BRANCH_KNOWLEDGE.md` v1.0.0 — תשתית הידע לסניפים: ערוץ Slack פרטי + ספר ידע (`BRANCHES/`) לכל סניף/סוכנות, צינור דו-כיווני Edge⇄Core (תובנות 💡/⚠️ → W6 זיקוק שבועי → OS), הפרדת סניפים (RLS doctrine), rollout משולב ב-LAUNCH.
@@ -26,6 +27,7 @@
 8. `CTO_REVIEW.md`            ← ביקורת CTO ⇄ קוד + מפת דרכים Platform v2.0
 9. `power-bi-essential-concepts.md` ← BI ודשבורדים על נתוני ה-API
 9a. `system-design-cheatsheet.md` ← 15 מושגי עיצוב מערכות ⇄ מיפוי ל-codebase
+9b. `BACKEND_ROADMAP.md`       ← Backend Developer Roadmap ⇄ ULease (6 שלבים, ראיות בקוד, חובות)
 10. `N8N_AUTOMATION.md`       ← אוטומציה תפעולית על אירועי ה-API
 11. `BRANCH_KNOWLEDGE.md`     ← תשתית הידע לסניפים (Edge⇄Core)
 12. `INVESTOR_RELATIONS.md`   ← roadmap
