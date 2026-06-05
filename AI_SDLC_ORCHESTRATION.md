@@ -32,7 +32,7 @@ ULease אינו "צרכן כלים" — הוא **המערכת שמתוזמרת**
 | Requirement Gathering | `docs/specs/*.md` (spec לפני קוד: `deal-score-engine.md`, `commission-and-settlement.md`…) | `system-design-cheatsheet § 1` · Working Rules #1 PLAN FIRST | ✅ |
 | UI / UX | Demo storefront + ops dashboard ב-`public/` (`/ui`, CSP נפרד ב-`server.ts`) | שכבה נפרדת מה-API | 🟡 demo |
 | Coding & Development | Claude Code CLI + MCP על הריפו; `tsx`, `typecheck` (tsc) | `DEV_ENVIRONMENTS.md` · `AGENT_BLUEPRINT § 10` | ✅ |
-| Quality & Testing | `vitest` — **63/63 ✅** ב-14 קבצים (api/inventory/settlement/commission/decisionEngine/projection/biViews/**tenancy**) | `BACKEND_ROADMAP § Testing` · Working Rules #6 VERIFY | ✅ |
+| Quality & Testing | `vitest` — **65/65 ✅** ב-14 קבצים (api/inventory/settlement/commission/decisionEngine/projection/biViews/**tenancy**) | `BACKEND_ROADMAP § Testing` · Working Rules #6 VERIFY | ✅ |
 | Project Planning | `LAUNCH.md` playbook (Day 0→Quarter 1, RACI) · `COMMAND_API` slash commands | `LAUNCH.md` · `COMMAND_API.md` | ✅ |
 | Monitoring & Maintenance | `/health` (liveness) · `/ready` (DB check→503) · `logger.ts` structured logs · `sweeperRunner` (self-healing reservations) | `system-design-cheatsheet § 6-7` · `N8N_AUTOMATION` (alerting) | 🟡 חלקי |
 
@@ -85,7 +85,7 @@ ULease אינו "צרכן כלים" — הוא **המערכת שמתוזמרת**
 | 5 | **Response with Confidence Guardrails** | generate→score confidence→retry; אין failures שקטים | `scoring/decisionEngine.ts` — normalized weights, abstain=null, `Decision.score` 0..100 |
 | 6 | **Specialized LLM Routing** | route לפי task: domain/external/local-privacy | `AGENT_BLUEPRINT § 9` Router pattern (#5) · model selection ב-`DEV_ENV` |
 | 7 | **External Data Isolation** | משימות web רצות בנפרד, מוזנות דרך MCP; core נשאר טהור | RLS tenant isolation (`rls.sql`, fail-closed) · `setTenantContext` · `EventSink` decoupling |
-| 8 | **MVP Reality Check** | אל תדלג על logging, human oversight, data pipelines | `logger.ts` · kill-switch (`LAUNCH`/`N8N § ממשל`) · 63/63 tests · `bi_views.sql` |
+| 8 | **MVP Reality Check** | אל תדלג על logging, human oversight, data pipelines | `logger.ts` · kill-switch (`LAUNCH`/`N8N § ממשל`) · 65/65 tests · `bi_views.sql` |
 
 > **המסר המאוחד:** *"AI agents are distributed control systems. Miss the layers, face chaos."* — ULease בנוי בדיוק כך: gate (#1) → core (#2) → backbone → tools (#4) → guardrails (#5). השכבה שהכי קל "להזניח" — #8 (logging/oversight/tests) — היא בדיוק ה-Working Rule #6 VERIFY ו-#7 NO LAZINESS שאוכפים ב-`CLAUDE.md`.
 
@@ -98,7 +98,7 @@ ULease אינו "צרכן כלים" — הוא **המערכת שמתוזמרת**
 1. **Observability מלא (#8 / Monitoring)** — קיימים `/health`, `/ready`, ו-structured `logger`, אך **אין APM/anomaly-detection** (Datadog/Sentry מהמפה). חוב P-Ops.
 2. **LLM Routing חי (#6)** — ה-Router pattern מתועד ב-`AGENT_BLUEPRINT § 9` אך טרם מיושם כ-runtime ב-`stage-a`. חוב Stage-B.
 
-> שאר ה-backbone (Outbox/Relay/Sink), ה-gate (hmacAuth/zod), וה-guardrails (decisionEngine) — **קיימים ומאומתים (63/63)**.
+> שאר ה-backbone (Outbox/Relay/Sink), ה-gate (hmacAuth/zod), וה-guardrails (decisionEngine) — **קיימים ומאומתים (65/65)**.
 
 ---
 
