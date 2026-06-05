@@ -15,6 +15,10 @@
 - `N8N_AUTOMATION.md` v1.2.0 — שכבת האוטומציה התפעולית: n8n כ-Glue Layer בין ה-Outbox של `leasing-api` לעולם העסקי. חיבור HMAC+Webhook, קטלוג אירועים→workflows, 5 workflows מוכנים, מיפוי ל-AGENT_BLUEPRINT § 9 (n8n=Hands · stage-a=Brain), **+ § 7.3 אנטומיית AI Agent** (Form→Tools Agent→Switch→Slack ⇒ Dealer Onboarding), MCP דו-כיווני, **+ § 8.4 MCP ≠ Skill** (MCP=שכבת חיבור · מצביע ל-AGENT_BLUEPRINT § 11), ממשל ו-kill-switch.
 - `BRANCH_KNOWLEDGE.md` v1.0.0 — תשתית הידע לסניפים: ערוץ Slack פרטי + ספר ידע (`BRANCHES/`) לכל סניף/סוכנות, צינור דו-כיווני Edge⇄Core (תובנות 💡/⚠️ → W6 זיקוק שבועי → OS), הפרדת סניפים (RLS doctrine), rollout משולב ב-LAUNCH.
 - `CTO_REVIEW.md` v1.0.0 — ביקורת CTO על ULease v1.2, תגובה מבוססת-קוד. הצלבת 10 נקודות הביקורת מול הקוד ב-`leasing-api`: תיקון 3 טענות (Event Bus / Data Warehouse / RLS קיימים כ-seams), scorecard מתוקן, מפת דרכים P0–P7 ל-Platform v2.0, ותיעוד הצעד הראשון (Decision Engine seam, 55/55 טסטים, תואם-לאחור).
+- `AI_SDLC_ORCHESTRATION.md` v1.0.0 — מפת כלי ה-AI על פני ה-SDLC (Ashish Sahu) + הטענה *"orchestration of intent, not tools"*: 6 שלבי ה-SDLC ⇄ ראיה ב-`leasing-api`, שכבת-התזמור של ULease (Brain=`stage-a` · Backbone=Outbox+Relay+Sink · Hands=n8n), **+ § 4** אנטומיית Enterprise AI Agent (8 שכבות M-SoftTech: gate→core→MCP→guardrails→routing→isolation) ⇄ seams בקוד (`hmacAuth`, `decisionEngine`, RLS, 63/63 טסטים), בהמשך ל-`AGENT_BLUEPRINT § 9` ו-`CTO_REVIEW`.
+- `CLAUDE_CODE_PROJECT_STRUCTURE.md` v1.0.0 — מבנה פרויקט Claude Code סטנדרטי (Robbert van Vlijmen) ⇄ ה-OS בפועל: 8 אבני-בניין (`CLAUDE.md`/`.mcp.json`/`settings.json`/`rules`/`commands`/`skills`/`agents`/`hooks`) ממופות למקבילה בריפו (CLAUDE.md ✅ · COMMAND_API=commands · stage-a=agents · AGENT_BLUEPRINT § 11=skills/MCP), ההבחנה בין 4 הפרימיטיבים, **+ § 4** חוב P-Tooling (אין `hooks/`·`.claude/settings.json`·`.mcp.json` כקבצים ניתנים-להרצה).
+- `AUTH_CONCEPTS.md` v1.0.0 — Authentication vs Authorization (M-SoftTech) ⇄ שכבת האבטחה של `leasing-api`: AuthN חזק (`hmacAuth.ts` — HMAC-SHA256 + replay guard + constant-time → 401) · AuthZ ברמת-שורה (`rls.sql` tenant_isolation, fail-closed, מאומת ב-`tenancy.test.ts`), **+ § 5** חוב פתוח (action-level RBAC/403 · חיווט RLS end-to-end), בהמשך ל-`system-design-cheatsheet § 9`.
+- `MASTER_CLAUDE_58.md` v1.0.0 — 58 Ways to Master Claude (@coder_surya): 8 אשכולות (SETUP·MODELS·PROMPTING·ASK·CONNECTORS·PROJECTS·ARTIFACTS·PRO LEVEL) כל אחד ⇄ המודול שמיישם ב-OS (ASK ⇄ Working Rule #2 · PROJECTS ⇄ ה-OS עצמו · PRO LEVEL ⇄ `stage-a`+`AGENT_BLUEPRINT § 9`), מיפוי ל-`LAUNCH § 3.1` (Master Claude in a Week), ו-self-audit בגרות.
 
 ## Module Load Order
 1. `OPERATING_SYSTEM.md`      ← roadmap (ראה AGENT_BLUEPRINT § 7)
@@ -25,6 +29,10 @@
 6. `LAUNCH.md`                ← Master Switch — Go-Live
 7. `AGENT_BLUEPRINT.md`       ← Docs OS ⇄ Agent Runtime (stage-a/)
 8. `CTO_REVIEW.md`            ← ביקורת CTO ⇄ קוד + מפת דרכים Platform v2.0
+8a. `AI_SDLC_ORCHESTRATION.md` ← מפת SDLC ⇄ שכבת-התזמור (Brain/Backbone/Hands) + אנטומיית Agent
+8b. `CLAUDE_CODE_PROJECT_STRUCTURE.md` ← מבנה Claude Code סטנדרטי ⇄ ה-OS בפועל
+8c. `AUTH_CONCEPTS.md`        ← AuthN vs AuthZ ⇄ hmacAuth + RLS
+8d. `MASTER_CLAUDE_58.md`     ← 58 Ways ⇄ מודולי ה-OS + LAUNCH § 3.1
 9. `power-bi-essential-concepts.md` ← BI ודשבורדים על נתוני ה-API
 9a. `system-design-cheatsheet.md` ← 15 מושגי עיצוב מערכות ⇄ מיפוי ל-codebase
 9b. `BACKEND_ROADMAP.md`       ← Backend Developer Roadmap ⇄ ULease (6 שלבים, ראיות בקוד, חובות)
