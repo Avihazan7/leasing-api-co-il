@@ -193,7 +193,7 @@
         │  schema.sql (portable)     │   │  Outbox — #6 Reliability)│
         │  (#3 Data · amount_minor)  │   │  src/events/outbox.ts    │
         │  replication (#7 Avail.)   │   │  published_at IS NULL ⇒   │
-        │  RLS = open debt (#9 ⚠️)   │   │  pending event           │
+        │  RLS = flag-gated (#9)     │   │  pending event           │
         └──────────┬─────────────────┘   └────────────┬─────────────┘
                    │ projection (CQRS)                 │ poll
                    ▼                                   ▼
@@ -215,7 +215,7 @@
                           n8n / external consumers  (N8N_AUTOMATION.md)
 ```
 
-**הקריאה של הדיאגרמה:** הכתיבה (write side) וה-`outbox` יושבים ב**אותה טרנזקציה** — מכאן ש-#6 Reliability היא תכונה מבנית (אפס אובדן אירועים), לא תוספת. ה-`Relay Worker` נפרד מה-API (#7 Availability — תהליכים עצמאיים `start:api` / `start:worker`), וה-`EventSink` הוא נקודת ההחלפה ל-#5 Scalability: מ-`InMemorySink` ל-Kafka בלי לגעת בדומיין. צד הקריאה (`vehicle_read_model` + `bi_views`) הוא CQRS שמשרת את #8 Performance. **שני החובות הפתוחים** מסומנים `⚠️`: RLS בצד DB ו-Multi-Tenancy (`tenant_id`) — שניהם P0 ב-`CTO_REVIEW.md`.
+**הקריאה של הדיאגרמה:** הכתיבה (write side) וה-`outbox` יושבים ב**אותה טרנזקציה** — מכאן ש-#6 Reliability היא תכונה מבנית (אפס אובדן אירועים), לא תוספת. ה-`Relay Worker` נפרד מה-API (#7 Availability — תהליכים עצמאיים `start:api` / `start:worker`), וה-`EventSink` הוא נקודת ההחלפה ל-#5 Scalability: מ-`InMemorySink` ל-Kafka בלי לגעת בדומיין. צד הקריאה (`vehicle_read_model` + `bi_views`) הוא CQRS שמשרת את #8 Performance. **P0 Multi-Tenancy/RLS נחת כ-first increment** (`tenant_id` additive + `rls.sql` `flag-gated`, fail-closed): מסומן `flag-gated` בדיאגרמה; החוב שנותר הוא חיווט end-to-end + action-level RBAC (#9).
 
 ### מיפוי מלא: מושג ⇄ ראיה בקוד
 
@@ -225,19 +225,19 @@
 | 2 | System Architecture | Event-driven: Transactional **Outbox + Relay** (`src/events/outbox.ts`, `outboxRelay.ts`) + `EventSink` (`src/events/sink.ts`); מודולים `inventory`/`payments`/`commission`/`scoring` | ✅ seam |
 | 3 | Data Design | `src/db/schema.sql` (פורטבילי) · כסף ב-`amount_minor` (יחידות מינור, ללא float) · `ledger_entries` append-only ושומר-כסף | ✅ |
 | 4 | Domain Design | Bounded contexts: `inventory/` עם `service`/`repository`/`stateMachine` נקיים; חילוץ הדרגתי (Strangler Fig, CTO_REVIEW §3) | ✅ חלקי |
-| 5 | Scalability | `EventSink` seam מתועד *"Production wires Kafka/PubSub here"*; חסר broker אמיתי + `tenant_id` sharding | 🟡 seam (P0/P2) |
+| 5 | Scalability | `EventSink` seam מתועד *"Production wires Kafka/PubSub here"*; `tenant_id` כבר קיים (sharding-ready); חסר broker אמיתי | 🟡 seam (P2) |
 | 6 | Reliability | Transactional Outbox = אפס אובדן אירועים; `worker.ts` relay; idempotency; `inventory.concurrency.test.ts` | ✅ |
 | 7 | Availability | Supabase/Postgres עם replication; relay worker נפרד מה-API (`start:api` / `start:worker`) | ✅ |
 | 8 | Performance | CQRS read-model `vehicle_read_model` (projection) · composite indexes · Postgres FTS (מספיק עד עשרות אלפי רכבים, CTO_REVIEW P7) | ✅ |
-| 9 | Security | `hmacAuth.ts` (HMAC על webhooks) · `helmet` · **RLS בצד DB = חוב פתוח** (כיום RLS בצד Power BI לפי `dealer_account`) | ⚠️ חוב מתועד (P0) |
+| 9 | Security | `hmacAuth.ts` (HMAC + replay guard → 401) · `helmet` · **RLS בצד DB נחת**: `rls.sql` `tenant_isolation` (fail-closed) מאחורי `RLS_ENABLED`, מאומת ב-`tenancy.test.ts`; נותר action-level RBAC (ראה `AUTH_CONCEPTS.md`) | ✅ first increment · 🟡 RBAC חוב |
 | 10 | Maintainability | `typecheck` (tsc) · מודולריות · `Working Rules` ב-`CLAUDE.md`; Decision Engine נוסף **additive** ולא rewrite | ✅ |
-| 11 | Testing | `vitest`: `api`/`inventory.lifecycle`/`inventory.concurrency`/`settlement`/`commission`/`decisionEngine`/`projection`/`biViews` — **55/55 ✅** | ✅ |
+| 11 | Testing | `vitest`: `api`/`inventory.lifecycle`/`inventory.concurrency`/`settlement`/`commission`/`decisionEngine`/`projection`/`biViews`/**`tenancy`** — **63/63 ✅** | ✅ |
 | 12 | UX Design | מחוץ ל-scope של ה-API; חי בשכבת ה-frontend וב-Dealer Onboarding (ראו `N8N_AUTOMATION.md` §7.3) | ↗️ שכבה אחרת |
 | 13 | Cost Estimation | Serverless deploy (`vercel.json`) · Supabase — עלות נשלטת; scale-cost ממופה במפת הדרכים (CTO_REVIEW P2–P3) | ✅ |
 | 14 | Documentation | `docs/specs/` · `COMMAND_API.md` · ה-OS docs כולו · README כחוזה API | ✅ |
-| 15 | Migration Plan | `schema.sql` פורטבילי · `tenant_id TEXT NOT NULL DEFAULT 'leasing-co-il'` (additive, תואם-לאחור) · backfill ל-P0 (CTO_REVIEW §2) | 🟡 מתוכנן (P0) |
+| 15 | Migration Plan | `schema.sql` פורטבילי · `tenant_id TEXT NOT NULL DEFAULT 'leasing-co-il'` נחת (additive, תואם-לאחור) · `RLS_ENABLED` flag לגלגול הדרגתי | ✅ first increment |
 
-> **הקריאה החשובה:** מתוך 15 המושגים, ULease חזקה ב-🟧 (Design) וב-🟩 (Build/Quality), בעלת seams מוכנים ל-🟦 (NFRs), ועם **שני חובות פתוחים מתועדים** — RLS בצד DB (#9) ו-Multi-Tenancy (#5/#15). זה בדיוק מה ש-`CTO_REVIEW.md` ממפה כ-P0. המושגים האלה הם המסגרת; מפת הדרכים היא הביצוע.
+> **הקריאה החשובה:** מתוך 15 המושגים, ULease חזקה ב-🟧 (Design) וב-🟩 (Build/Quality), בעלת seams מוכנים ל-🟦 (NFRs). **מאז `CTO_REVIEW.md` נחת הצעד הראשון של P0** — RLS בצד DB (#9) ו-Multi-Tenancy (#5/#15) קיימים כעת כ-first increment (`tenant_id` additive + `rls.sql` fail-closed מאחורי flag, מאומת ב-`tenancy.test.ts`). החוב שנותר ממוקד: חיווט RLS end-to-end + action-level RBAC (#9). המושגים הם המסגרת; מפת הדרכים היא הביצוע.
 
 ---
 

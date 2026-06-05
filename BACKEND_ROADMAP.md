@@ -13,13 +13,13 @@
 | שלב | מהות | סטטוס ב-ULease | ראיה מרכזית |
 |-----|------|----------------|-------------|
 | 🟢 **Foundations** | Programming · DS&A · Git/GitHub | ✅ STRONG | `AGENT_BLUEPRINT.md §10` · `tsconfig.json` (strict) · `stateMachine.ts` · `.github/workflows/ci.yml` |
-| 🔵 **Backend Core** | HTTP/S · REST · AuthN · AuthZ | ✅ STRONG (AuthZ = חוב) | `src/routes/api.ts` · `src/middleware/hmacAuth.ts` · `helmet`/`cors`/`zod` |
+| 🔵 **Backend Core** | HTTP/S · REST · AuthN · AuthZ | ✅ STRONG (AuthZ: RLS ברמת-שורה נחת מאחורי flag · action-level = חוב) | `src/routes/api.ts` · `src/middleware/hmacAuth.ts` · `src/db/rls.sql` · `helmet`/`cors`/`zod` |
 | 🟣 **Databases** | SQL · NoSQL · DB Design · Migrations | ✅ STRONG | `src/db/schema.sql` · `src/db/migrate.ts` · `src/db/bi_views.sql` |
 | 🟠 **Performance** | Caching · Redis · Jobs · Queues · Rate-limit | 🟡 PARTIAL | `src/events/outbox.ts` · `src/events/sink.ts` · `src/inventory/sweeperRunner.ts` |
 | 🔴 **Cloud & Deploy** | Docker · CI/CD · Cloud | ✅ STRONG | `Dockerfile` · `docker-compose.yml` · `vercel.json` · health checks |
 | ⭐ **Advanced Eng** | Monitoring · Logging · System Design · Scale · Microservices | ✅ STRONG (+roadmap) | `system-design-cheatsheet.md` · `CTO_REVIEW.md` P0–P7 · domain modules |
 
-**ספירת אמת:** 55/55 טסטים (`vitest run`, 12 קבצי טסט), build ✅, typecheck ✅ — נכון ל-v1.2.
+**ספירת אמת:** 63/63 טסטים (`vitest run`, 14 קבצי טסט), build ✅, typecheck ✅ — נכון ל-v1.3 (כולל `tenancy.test.ts` — Multi-Tenancy/RLS, ראה §7).
 
 ---
 
@@ -47,10 +47,10 @@
 - **Authentication:** `src/middleware/hmacAuth.ts` — `X-Signature = HMAC-SHA256(\`${timestamp}.${rawBody}\`, secret)`, השוואה timing-safe (`timingSafeEqual`), הגנת replay דרך `X-Timestamp` עם סבילות ±5 דקות. (אם `HMAC_SECRET` לא מוגדר → no-op ל-dev מקומי.)
 - **Input validation:** סכמות Zod ב-`src/schemas.ts`, אכיפה דרך `parseBody()` בכל handler.
 
-**חוב פתוח — Authorization:**
-> **RLS בצד ה-DB** עדיין לא נאכף בסכמה הפורטבילית — כיום ה-RLS קיים רק בשכבת ה-BI/Power BI (`dealer_account` filter), לא ב-Postgres. ראה [`CTO_REVIEW.md` §1](./CTO_REVIEW.md) (P0) ו-[`system-design-cheatsheet.md`](./system-design-cheatsheet.md) (מושג #9, מסומן ⚠️).
+**Authorization — נחת הצעד הראשון:**
+> **RLS בצד ה-DB נחת** כ-first increment: `src/db/rls.sql` מגדיר `tenant_isolation` policy (FORCE ROW LEVEL SECURITY) על כל טבלאות הליבה, נאכף דרך ה-GUC `app.current_tenant` (`setTenantContext` ב-`src/db/client.ts`), **fail-closed** (חיבור לא-scoped רואה 0 שורות). מאומת ב-`test/tenancy.test.ts` (4 טסטים: בידוד קריאה · WITH CHECK חוצה-tenant · fail-closed · additive). כבוי כברירת-מחדל מאחורי `RLS_ENABLED`. **נותר:** חיווט request→tenant end-to-end + **AuthZ ברמת-פעולה** (RBAC→403). ראה [`AUTH_CONCEPTS.md` §5](./AUTH_CONCEPTS.md) ו-[`CTO_REVIEW.md` §1](./CTO_REVIEW.md).
 
-**סטטוס: ✅ STRONG** ל-AuthN ול-API; 🟡 **AuthZ ברמת ה-DB = חוב P0**.
+**סטטוס: ✅ STRONG** ל-AuthN ול-API; ✅ **RLS ברמת-שורה נחת (מאחורי flag)** · 🟡 **action-level RBAC = חוב**.
 
 ---
 
@@ -100,7 +100,7 @@
 **איפה ULease מכסה:**
 - **Docker:** `Dockerfile` multi-stage (build → deps → runtime, Node 22-slim). תמונה אחת ל-API ול-worker; פקודת ההרצה בוחרת מי.
 - **Topology:** `docker-compose.yml` — Postgres 16 (health checks) + API + worker, כל אחד scalable בנפרד. משקף את טופולוגיית הפרודקשן.
-- **CI/CD:** `.github/workflows/ci.yml` — על PR ו-push ל-main: typecheck + 55 טסטים, בלי DB ענן (pglite מוטמע).
+- **CI/CD:** `.github/workflows/ci.yml` — על PR ו-push ל-main: typecheck + 63 טסטים, בלי DB ענן (pglite מוטמע).
 - **Cloud (agnostic):** `api/index.ts` + `vercel.json` ל-serverless; Supabase כ-DB פרודקשן בספקים. הקוד עומד מול Postgres סטנדרטי — נייד לכל ענן (אין דוגמת AWS/Azure/GCP ייעודית, וזה במכוון).
 - **Config:** `src/config.ts` — env vars מאומתי-Zod, fail-fast על חוסר (`DATABASE_URL` חובה).
 - **Dev environments:** [`DEV_ENVIRONMENTS.md`](./DEV_ENVIRONMENTS.md) + playbook ה-Go-Live ב-[`LAUNCH.md`](./LAUNCH.md).
@@ -132,8 +132,8 @@
 
 | # | חוב | עדיפות | מקור | תיקון מתוכנן |
 |---|-----|--------|------|--------------|
-| 1 | **Multi-Tenancy** — אין `tenant_id` באף טבלה | **P0** | `CTO_REVIEW.md` §P0 | `tenant_id TEXT NOT NULL DEFAULT 'leasing-co-il'` additive + composite indexes + API-key→tenant resolver |
-| 2 | **RLS בצד DB** — כיום רק ב-Power BI | **P0** | cheatsheet #9 ⚠️ | policies על כל הטבלאות, אחרי Multi-Tenancy |
+| 1 | **Multi-Tenancy** — ✅ נחת: `tenant_id` additive (default `leasing-co-il`) + composite indexes ב-`schema.sql`. נותר: API-key→tenant resolver ב-`hmacAuth.ts` | P0→🟡 | `CTO_REVIEW.md` §P0 · `tenancy.test.ts` | חיווט resolver end-to-end |
+| 2 | **RLS בצד DB** — ✅ נחת: `rls.sql` `tenant_isolation` (fail-closed) מאחורי `RLS_ENABLED`. נותר: הפעלה end-to-end + action-level RBAC/403 | P0→🟡 | `AUTH_CONCEPTS.md` §5 · cheatsheet #9 | חיווט `setTenantContext` בכל handler/worker |
 | 3 | **Event Backbone** — broker אמיתי | **P2** | `CTO_REVIEW.md` §P2 | `KafkaEventSink`/`NatsEventSink` כנגד `src/events/sink.ts` |
 | 4 | **Data Platform** — CDC→OLAP + Feature Store | **P3** | `CTO_REVIEW.md` §P3 | Debezium/CDC → BigQuery/ClickHouse |
 | 5 | **Rate Limiting + Redis** | post-P2 | מודול זה §4 | middleware / reverse proxy + cache חיצוני |
