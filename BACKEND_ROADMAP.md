@@ -19,7 +19,7 @@
 | 🔴 **Cloud & Deploy** | Docker · CI/CD · Cloud | ✅ STRONG | `Dockerfile` · `docker-compose.yml` · `vercel.json` · health checks |
 | ⭐ **Advanced Eng** | Monitoring · Logging · System Design · Scale · Microservices | ✅ STRONG (+roadmap) | `system-design-cheatsheet.md` · `CTO_REVIEW.md` P0–P7 · domain modules |
 
-**ספירת אמת:** 63/63 טסטים (`vitest run`, 14 קבצי טסט), build ✅, typecheck ✅ — נכון ל-v1.3 (כולל `tenancy.test.ts` — Multi-Tenancy/RLS, ראה §7).
+**ספירת אמת:** 65/65 טסטים (`vitest run`, 14 קבצי טסט), build ✅, typecheck ✅ — נכון ל-v1.3 (כולל `tenancy.test.ts` — Multi-Tenancy/RLS, ראה §7).
 
 ---
 
@@ -47,10 +47,10 @@
 - **Authentication:** `src/middleware/hmacAuth.ts` — `X-Signature = HMAC-SHA256(\`${timestamp}.${rawBody}\`, secret)`, השוואה timing-safe (`timingSafeEqual`), הגנת replay דרך `X-Timestamp` עם סבילות ±5 דקות. (אם `HMAC_SECRET` לא מוגדר → no-op ל-dev מקומי.)
 - **Input validation:** סכמות Zod ב-`src/schemas.ts`, אכיפה דרך `parseBody()` בכל handler.
 
-**Authorization — נחת הצעד הראשון:**
-> **RLS בצד ה-DB נחת** כ-first increment: `src/db/rls.sql` מגדיר `tenant_isolation` policy (FORCE ROW LEVEL SECURITY) על כל טבלאות הליבה, נאכף דרך ה-GUC `app.current_tenant` (`setTenantContext` ב-`src/db/client.ts`), **fail-closed** (חיבור לא-scoped רואה 0 שורות). מאומת ב-`test/tenancy.test.ts` (4 טסטים: בידוד קריאה · WITH CHECK חוצה-tenant · fail-closed · additive). כבוי כברירת-מחדל מאחורי `RLS_ENABLED`. **נותר:** חיווט request→tenant end-to-end + **AuthZ ברמת-פעולה** (RBAC→403). ראה [`AUTH_CONCEPTS.md` §5](./AUTH_CONCEPTS.md) ו-[`CTO_REVIEW.md` §1](./CTO_REVIEW.md).
+**Authorization — RLS מחווט end-to-end:**
+> **RLS בצד ה-DB מחווט מקצה-לקצה**: `src/db/rls.sql` מגדיר `tenant_isolation` (FORCE ROW LEVEL SECURITY) על טבלאות הליבה, נאכף דרך GUC `app.current_tenant`. בקשה: `X-Tenant-Id` → `resolveTenant` → `db.asTenant` (`src/routes/api.ts`, `src/db/client.ts`); worker: `db.asTenant(SYSTEM_TENANT)` (`src/worker.ts`) עם `tenant_id` המתפשט outbox→relay→projection; **fail-closed**. מאומת ב-`test/tenancy.test.ts` — בידוד ברמת-SQL **+ דרך HTTP** (tenant-b → 404 על רכב של tenant-a). כבוי כברירת-מחדל מאחורי `RLS_ENABLED` (rollout). **נותר:** **AuthZ ברמת-פעולה** (RBAC→403) + hardening (per-tenant API keys · `(tenant_id, vin)` PK). ראה [`AUTH_CONCEPTS.md` §5](./AUTH_CONCEPTS.md).
 
-**סטטוס: ✅ STRONG** ל-AuthN ול-API; ✅ **RLS ברמת-שורה נחת (מאחורי flag)** · 🟡 **action-level RBAC = חוב**.
+**סטטוס: ✅ STRONG** ל-AuthN ול-API; ✅ **RLS ברמת-שורה מחווט end-to-end (מאחורי flag)** · 🟡 **action-level RBAC = חוב**.
 
 ---
 
@@ -100,7 +100,7 @@
 **איפה ULease מכסה:**
 - **Docker:** `Dockerfile` multi-stage (build → deps → runtime, Node 22-slim). תמונה אחת ל-API ול-worker; פקודת ההרצה בוחרת מי.
 - **Topology:** `docker-compose.yml` — Postgres 16 (health checks) + API + worker, כל אחד scalable בנפרד. משקף את טופולוגיית הפרודקשן.
-- **CI/CD:** `.github/workflows/ci.yml` — על PR ו-push ל-main: typecheck + 63 טסטים, בלי DB ענן (pglite מוטמע).
+- **CI/CD:** `.github/workflows/ci.yml` — על PR ו-push ל-main: typecheck + 65 טסטים, בלי DB ענן (pglite מוטמע).
 - **Cloud (agnostic):** `api/index.ts` + `vercel.json` ל-serverless; Supabase כ-DB פרודקשן בספקים. הקוד עומד מול Postgres סטנדרטי — נייד לכל ענן (אין דוגמת AWS/Azure/GCP ייעודית, וזה במכוון).
 - **Config:** `src/config.ts` — env vars מאומתי-Zod, fail-fast על חוסר (`DATABASE_URL` חובה).
 - **Dev environments:** [`DEV_ENVIRONMENTS.md`](./DEV_ENVIRONMENTS.md) + playbook ה-Go-Live ב-[`LAUNCH.md`](./LAUNCH.md).
@@ -132,8 +132,9 @@
 
 | # | חוב | עדיפות | מקור | תיקון מתוכנן |
 |---|-----|--------|------|--------------|
-| 1 | **Multi-Tenancy** — ✅ נחת: `tenant_id` additive (default `leasing-co-il`) + composite indexes ב-`schema.sql`. נותר: API-key→tenant resolver ב-`hmacAuth.ts` | P0→🟡 | `CTO_REVIEW.md` §P0 · `tenancy.test.ts` | חיווט resolver end-to-end |
-| 2 | **RLS בצד DB** — ✅ נחת: `rls.sql` `tenant_isolation` (fail-closed) מאחורי `RLS_ENABLED`. נותר: הפעלה end-to-end + action-level RBAC/403 | P0→🟡 | `AUTH_CONCEPTS.md` §5 · cheatsheet #9 | חיווט `setTenantContext` בכל handler/worker |
+| 1 | **Multi-Tenancy / RLS** — ✅ מחווט end-to-end: `tenant_id` auto-scoped, בקשה `X-Tenant-Id`→`asTenant`, worker `SYSTEM_TENANT`, fail-closed מאחורי `RLS_ENABLED`; מאומת ב-HTTP | ✅ נסגר | `AUTH_CONCEPTS.md` §5 · `tenancy.test.ts` | — (הפעל `RLS_ENABLED=true` ב-rollout) |
+| 2 | **Action-level RBAC/403** — אין מיפוי role→endpoint | **P1** | `AUTH_CONCEPTS.md` §5 | middleware הרשאות → 403 |
+| 2b | **Hardening** — `X-Tenant-Id` מהימן-בלבד · `vin` ייחודי גלובלית | post-P1 | `AUTH_CONCEPTS.md` §5 | per-tenant API keys · `(tenant_id, vin)` PK |
 | 3 | **Event Backbone** — broker אמיתי | **P2** | `CTO_REVIEW.md` §P2 | `KafkaEventSink`/`NatsEventSink` כנגד `src/events/sink.ts` |
 | 4 | **Data Platform** — CDC→OLAP + Feature Store | **P3** | `CTO_REVIEW.md` §P3 | Debezium/CDC → BigQuery/ClickHouse |
 | 5 | **Rate Limiting + Redis** | post-P2 | מודול זה §4 | middleware / reverse proxy + cache חיצוני |

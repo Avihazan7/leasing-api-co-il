@@ -229,15 +229,15 @@
 | 6 | Reliability | Transactional Outbox = אפס אובדן אירועים; `worker.ts` relay; idempotency; `inventory.concurrency.test.ts` | ✅ |
 | 7 | Availability | Supabase/Postgres עם replication; relay worker נפרד מה-API (`start:api` / `start:worker`) | ✅ |
 | 8 | Performance | CQRS read-model `vehicle_read_model` (projection) · composite indexes · Postgres FTS (מספיק עד עשרות אלפי רכבים, CTO_REVIEW P7) | ✅ |
-| 9 | Security | `hmacAuth.ts` (HMAC + replay guard → 401) · `helmet` · **RLS בצד DB נחת**: `rls.sql` `tenant_isolation` (fail-closed) מאחורי `RLS_ENABLED`, מאומת ב-`tenancy.test.ts`; נותר action-level RBAC (ראה `AUTH_CONCEPTS.md`) | ✅ first increment · 🟡 RBAC חוב |
+| 9 | Security | `hmacAuth.ts` (HMAC + replay guard → 401) · `helmet` · **RLS מחווט end-to-end**: `X-Tenant-Id`→`asTenant` (request) · `SYSTEM_TENANT` (worker) · `rls.sql` fail-closed מאחורי `RLS_ENABLED`, מאומת ב-HTTP ב-`tenancy.test.ts`; נותר action-level RBAC (ראה `AUTH_CONCEPTS.md`) | ✅ e2e · 🟡 RBAC חוב |
 | 10 | Maintainability | `typecheck` (tsc) · מודולריות · `Working Rules` ב-`CLAUDE.md`; Decision Engine נוסף **additive** ולא rewrite | ✅ |
-| 11 | Testing | `vitest`: `api`/`inventory.lifecycle`/`inventory.concurrency`/`settlement`/`commission`/`decisionEngine`/`projection`/`biViews`/**`tenancy`** — **63/63 ✅** | ✅ |
+| 11 | Testing | `vitest`: `api`/`inventory.lifecycle`/`inventory.concurrency`/`settlement`/`commission`/`decisionEngine`/`projection`/`biViews`/**`tenancy`** — **65/65 ✅** | ✅ |
 | 12 | UX Design | מחוץ ל-scope של ה-API; חי בשכבת ה-frontend וב-Dealer Onboarding (ראו `N8N_AUTOMATION.md` §7.3) | ↗️ שכבה אחרת |
 | 13 | Cost Estimation | Serverless deploy (`vercel.json`) · Supabase — עלות נשלטת; scale-cost ממופה במפת הדרכים (CTO_REVIEW P2–P3) | ✅ |
 | 14 | Documentation | `docs/specs/` · `COMMAND_API.md` · ה-OS docs כולו · README כחוזה API | ✅ |
 | 15 | Migration Plan | `schema.sql` פורטבילי · `tenant_id TEXT NOT NULL DEFAULT 'leasing-co-il'` נחת (additive, תואם-לאחור) · `RLS_ENABLED` flag לגלגול הדרגתי | ✅ first increment |
 
-> **הקריאה החשובה:** מתוך 15 המושגים, ULease חזקה ב-🟧 (Design) וב-🟩 (Build/Quality), בעלת seams מוכנים ל-🟦 (NFRs). **מאז `CTO_REVIEW.md` נחת הצעד הראשון של P0** — RLS בצד DB (#9) ו-Multi-Tenancy (#5/#15) קיימים כעת כ-first increment (`tenant_id` additive + `rls.sql` fail-closed מאחורי flag, מאומת ב-`tenancy.test.ts`). החוב שנותר ממוקד: חיווט RLS end-to-end + action-level RBAC (#9). המושגים הם המסגרת; מפת הדרכים היא הביצוע.
+> **הקריאה החשובה:** מתוך 15 המושגים, ULease חזקה ב-🟧 (Design) וב-🟩 (Build/Quality), בעלת seams מוכנים ל-🟦 (NFRs). **P0 Multi-Tenancy/RLS מחווט כעת end-to-end** — RLS בצד DB (#9) ו-Multi-Tenancy (#5/#15): `tenant_id` auto-scoped, בקשה `X-Tenant-Id`→`asTenant`, worker `SYSTEM_TENANT`, fail-closed מאחורי flag, מאומת ב-HTTP. החוב שנותר ממוקד: **action-level RBAC** (#9). המושגים הם המסגרת; מפת הדרכים היא הביצוע.
 
 ---
 

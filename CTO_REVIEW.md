@@ -16,7 +16,7 @@
 |---|---|---|
 | "הכל Sync, אין Event Bus" | קיים **Transactional Outbox + Relay** (`src/events/outbox.ts`, `outboxRelay.ts`) ו-`EventSink` interface שמתועד מפורשות: *"Production wires Kafka/PubSub here"* (`src/events/sink.ts`) | ❌ לא מדויק — הגב כבר אסינכרוני. Kafka/NATS = **החלפת מימוש sink**, לא ארכיטקטורה חדשה |
 | "אין Data Warehouse / אין אנליטיקה" | קיימת סכמת `bi` עם **star-schema views** מלאות (`src/db/bi_views.sql`) — dims + facts, ללא ETL lag | ⚠️ חלקית — קיימת אנליטיקה ב-Postgres. ה-gap = OLAP store נפרד דרך CDC ל-**scale**, לא "אין אנליטיקה" |
-| "RLS — רוב הסטארטאפים לא מגיעים לזה" (שבח) | בזמן הביקורת `schema.sql` לא הכיל RLS. **מאז נחת הצעד הראשון:** `src/db/rls.sql` (`tenant_isolation`, fail-closed, מאחורי `RLS_ENABLED`) + `tenant_id` additive ב-`schema.sql`, מאומת ב-`test/tenancy.test.ts` | ✅ נחת כ-first increment — נותר חיווט end-to-end + action-level RBAC (ראה §1 ו-[`AUTH_CONCEPTS.md`](./AUTH_CONCEPTS.md)) |
+| "RLS — רוב הסטארטאפים לא מגיעים לזה" (שבח) | בזמן הביקורת `schema.sql` לא הכיל RLS. **מאז נחת ומחווט end-to-end:** `src/db/rls.sql` (`tenant_isolation`, fail-closed, מאחורי `RLS_ENABLED`) + `tenant_id` auto-scoped, בקשה `X-Tenant-Id`→`asTenant`, worker `SYSTEM_TENANT`, מאומת ב-HTTP ב-`tenancy.test.ts` | ✅ מחווט end-to-end — נותר action-level RBAC (ראה §1 ו-[`AUTH_CONCEPTS.md`](./AUTH_CONCEPTS.md)) |
 
 הטענות **שצדקו בזמן הביקורת**: לא היה `tenant_id` (#7) ולא RLS בצד DB — **שניהם נחתו מאז** כ-first increment (`tenant_id` additive + `rls.sql`, ראה §1). עדיין פתוחים: Deal Score כ-composite יחיד (#3 — seam נפתח, §4), אין Domain Layer מפורש (#2), אין Matching/Fraud/Billing/Search (#8,9,10,6).
 
@@ -32,11 +32,11 @@
 |---|---|---|---|
 | Scalability | 6/10 | **6.5/10** | Outbox+Relay+EventSink seam קיים; חסר broker אמיתי + tenant sharding |
 | Data Platform | 5/10 | **5.5/10** | סכמת `bi` star-schema קיימת; חסר OLAP + CDC + Feature Store |
-| Security | 8/10 | **7.5/10** | RLS בצד ה-DB נחת כ-first increment (`rls.sql`, fail-closed, מאחורי flag); נותר action-level RBAC |
+| Security | 8/10 | **8/10** | RLS מחווט end-to-end (request+worker), fail-closed, מאומת ב-HTTP; נותר action-level RBAC |
 | AI Readiness | 4/10 | 4/10 | מאשרים — וזה **בכוונה** (ראו §5) |
-| Multi-Tenant | (לא דורג) | **4/10** | ⬆️ מ-2/10: `tenant_id` additive + RLS policies נחתו; נותר חיווט resolver end-to-end |
+| Multi-Tenant | (לא דורג) | **6/10** | ⬆️ מ-2/10: RLS מחווט end-to-end (request+worker), מאומת ב-HTTP; נותר RBAC + per-tenant keys |
 
-**Total מתוקן: ~7.8/10** — מבוסס-ראיות; עלה מאז ש-Multi-Tenancy/RLS נחתו (§4).
+**Total מתוקן: ~8.1/10** — מבוסס-ראיות; עלה מאז ש-Multi-Tenancy/RLS חוּוט end-to-end (§4).
 
 ---
 
@@ -44,10 +44,10 @@
 
 תיעדוף לפי **cost-of-delay** (כמה יקר לדחות), לא לפי קושי. הכלל: דברים שקשה להחזיר רטרואקטיבית — קודם.
 
-### P0 · Multi-Tenancy (`tenant_id` + RLS בצד DB) — 🟡 הצעד הראשון נחת
+### P0 · Multi-Tenancy (`tenant_id` + RLS בצד DB) — ✅ מחווט end-to-end
 **למה ראשון:** זה היקר ביותר להחזר רטרואקטיבי. White-Label = "הכסף הגדול" (ביקורת #7) חסום בלי זה.
-**✅ מה שנחת (first increment):** `tenant_id TEXT NOT NULL DEFAULT 'leasing-co-il'` על כל טבלאות הליבה (`schema.sql`, additive ושומר-תאימות) → composite indexes → `src/db/rls.sql` (`tenant_isolation` policy, FORCE RLS, fail-closed) מאחורי `RLS_ENABLED` → `setTenantContext` (`db/client.ts`) → מאומת ב-`test/tenancy.test.ts` (4 טסטים). **קריטי — לא שוחררה עמודה בלי אכיפה:** ה-RLS נחת *יחד* עם העמודה (Working Rule 7).
-**🟡 מה שנותר:** resolver של API-key→tenant ב-`hmacAuth.ts` וחיווט `setTenantContext` בכל handler/worker (הפעלת `RLS_ENABLED` end-to-end) + AuthZ ברמת-פעולה (RBAC→403).
+**✅ מה שנחת:** `tenant_id` על כל טבלאות הליבה (`schema.sql`, additive; ברירת-המחדל נגזרת מ-`app.current_tenant` כך שכל INSERT מתויג-טננט אוטומטית) → `src/db/rls.sql` (`tenant_isolation`, FORCE RLS, fail-closed, + bypass `__system__` ל-workers) → **חיווט מלא**: בקשה `X-Tenant-Id`→`resolveTenant`→`db.asTenant` (`routes/api.ts`, `db/client.ts`), worker `db.asTenant(SYSTEM_TENANT)` (`worker.ts`) עם `tenant_id` המתפשט outbox→relay→projection → מאומת ב-`test/tenancy.test.ts` **גם דרך HTTP** (tenant-b → 404 על רכב של tenant-a). כבוי כברירת-מחדל מאחורי `RLS_ENABLED` (rollout). **קריטי — לא שוחררה עמודה בלי אכיפה** (Working Rule 7).
+**🟡 מה שנותר:** AuthZ ברמת-פעולה (RBAC→403) + hardening: per-tenant API keys (`X-Tenant-Id` מהימן-בלבד כיום), `(tenant_id, vin)` PK.
 
 ### P1 · Decision Engine (החלפת ה-bottleneck של Deal Score) — 🟢 הותחל
 ביקורת #3 צודקת: `dealScore.ts` הוא composite יחיד. **ה-seam כבר נפתח** (§4). ההמשך: לרשום dimensions אמיתיים ככל שמגיעים נתונים — `supplier`, `risk`, `conversion`, `market` — ולהחליף את ה-route `/deal-score` ב-`/decision` כשיש יותר מ-dimension אחד.
@@ -84,7 +84,7 @@ OpenSearch/Typesense מעל קטלוג. נדחה — Postgres FTS מספיק ע�
 
 - **תאימות לאחור מלאה:** עם ה-`dealScorer` היחיד שרשום כברירת מחדל, `evaluate(ctx).score` **זהה** ל-`scoreDeal(ctx.deal).score`. ה-route `/deal-score` ו-`dealScore.ts` לא שונו.
 - **לא ספקולטיבי:** dimensions עתידיים (`supplier`/`risk`/`conversion`/`market`) **לא** מומשו כ-stubs ריקים — הם דורשים נתונים שהסכמה עדיין לא נושאת, ו-stub ריק = חוב נסתר. נפתחה רק נקודת ההרחבה.
-- **מאומת:** `test/decisionEngine.test.ts` (5 טסטים) — שקילות לאחור, נרמול משקלים, מיזוג, abstention (scorer שמחזיר `null` לא מטה את התוצאה), רישום דינמי. **כלל הסוויטה: 63/63 ✅, build ✅, typecheck ✅.**
+- **מאומת:** `test/decisionEngine.test.ts` (5 טסטים) — שקילות לאחור, נרמול משקלים, מיזוג, abstention (scorer שמחזיר `null` לא מטה את התוצאה), רישום דינמי. **כלל הסוויטה: 65/65 ✅, build ✅, typecheck ✅.**
 
 מ-`deal-score/` (composite יחיד) → `decision-engine/` (mixture of scorers) — בדיוק כפי שהביקורת המליצה, אבל additive ולא rewrite.
 
@@ -102,12 +102,13 @@ OpenSearch/Typesense מעל קטלוג. נדחה — Postgres FTS מספיק ע�
 
 ## 6. סיכום
 
-הביקורת היא מסמך **חשיבה אסטרטגית מצוין** — התזה (App→Platform) נכונה והתיעדוף (Multi-Tenant → Data → Matching) חכם. התיקון היחיד: **לקרוא את הקוד לפני שמורידים ציון** — Event Backbone ו-BI כבר קיימים כ-seams. מאז הביקורת נחתו **שני הצעדים הראשונים**: Decision Engine seam (§4) ו-Multi-Tenancy/RLS first increment (`tenant_id` additive + `rls.sql` fail-closed, מאומת ב-`tenancy.test.ts`) — שניהם additive ותואמי-לאחור. נותר חיווט ה-RLS end-to-end ו-action-level RBAC.
+הביקורת היא מסמך **חשיבה אסטרטגית מצוין** — התזה (App→Platform) נכונה והתיעדוף (Multi-Tenant → Data → Matching) חכם. התיקון היחיד: **לקרוא את הקוד לפני שמורידים ציון** — Event Backbone ו-BI כבר קיימים כ-seams. מאז הביקורת נחתו **שני צעדי P0**: Decision Engine seam (§4) ו-Multi-Tenancy/RLS **מחווט end-to-end** (request `X-Tenant-Id`→`asTenant`, worker `SYSTEM_TENANT`, מאומת ב-HTTP) — שניהם additive ותואמי-לאחור. נותר action-level RBAC.
 
 > **הקצאת ההשקעה הבאה:** P0 Multi-Tenant → P2 Event Backbone (swap sink) → P3 Data Platform → P4 Matching. כל אחד נשען על seam קיים. זו הדרך מ-Application ל-**Operating System לענף הליסינג**.
 
 ---
 
 ### Changelog
+- **v1.2.0** (2026-06-05) — **P0 מחווט end-to-end**: RLS חוּוט לאורך כל נתיב הבקשה (`X-Tenant-Id`→`resolveTenant`→`db.asTenant`) וה-worker (`SYSTEM_TENANT`), עם `tenant_id` המתפשט outbox→relay→projection ו-default-עמודה נגזר-GUC. מאומת **דרך HTTP** ב-`tenancy.test.ts` (**65/65**). עודכנו: scorecard (Security 7.5→8, Multi-Tenant 4→6, Total ~8.1), §1, §P0 (🟡→✅ e2e), §6. החוב שנותר: action-level RBAC + hardening (per-tenant keys · `(tenant_id, vin)` PK).
 - **v1.1.0** (2026-06-05) — עדכון לאחר נחיתת **P0 first increment**: `tenant_id` additive + `src/db/rls.sql` (`tenant_isolation`, fail-closed, מאחורי `RLS_ENABLED`), מאומת ב-`test/tenancy.test.ts`. עודכנו: scorecard (Security 7→7.5, Multi-Tenant 2→4, Total ~7.8), §1 (RLS נחת ולא "חוב/הישג"), §P0 (🔴→🟡), ספירת אמת 55/55→**63/63**. החוב שנותר: חיווט RLS end-to-end + action-level RBAC.
 - **v1.0.0** — מסמך ראשוני. הצלבת 10 נקודות הביקורת מול הקוד ב-`leasing-api`; תיקון 3 טענות (Event Bus / Data Warehouse / RLS); scorecard מתוקן מבוסס-ראיות; מפת דרכים P0–P7; תיעוד צעד הקוד הראשון (Decision Engine seam, 55/55 טסטים).

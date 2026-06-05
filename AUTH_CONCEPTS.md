@@ -28,8 +28,8 @@
 | **Provider signature** | `/webhooks/stripe` מאומת ב-Stripe signature על raw body (לא HMAC הפנימי) | ✅ |
 | **Input validation** | `zod` (`schemas.ts`) → `400 VALIDATION_ERROR` (לפני authZ) | ✅ |
 | **Authorization (RBAC/ABAC)** | — אין מודל role/permission ברמת ה-actor; ה-`actor` הוא string, לא נבדק מול הרשאות | ⚠️ חוב |
-| **Row-level access (ABAC)** | `rls.sql` — `tenant_isolation` policy על `app.current_tenant` GUC; `setTenantContext` (`db/client.ts`); **fail-closed** | ✅ AuthZ (tenant-level) |
-| **403 Forbidden** | — אין endpoint שמחזיר 403; AuthZ כיום הוא row-level (RLS מסתיר שורות), לא action-level | ⚠️ חוב |
+| **Row-level access (ABAC)** | `rls.sql` — `tenant_isolation` על `app.current_tenant`, **מחווט end-to-end**: בקשה (`X-Tenant-Id` → `resolveTenant` → `db.asTenant`) ו-worker (`SYSTEM_TENANT`); **fail-closed** | ✅ AuthZ (tenant-level, e2e) |
+| **403 Forbidden** | — אין endpoint שמחזיר 403; AuthZ הוא row-level (RLS מסתיר שורות), לא action-level | ⚠️ חוב |
 
 ---
 
@@ -49,38 +49,42 @@
    │ zod parseBody           │  fail → 400 VALIDATION_ERROR
    └────────────┬────────────┘
             │ valid
-            ▼  ③ AUTHORIZATION (row-level)
-   ┌─────────────────────────┐
-   │ setTenantContext        │  app.current_tenant → RLS
+            ▼  ③ AUTHORIZATION (row-level, request-scoped)
+   ┌──────────────────────────┐
+   │ X-Tenant-Id → asTenant   │  app.current_tenant per request
    │ rls.sql tenant_isolation │  WITH CHECK + USING; fail-closed
-   │ cross-tenant write → ✗   │
-   └────────────┬────────────┘
+   │ cross-tenant read/write→✗│
+   └────────────┬─────────────┘
             │ authorized rows only
             ▼
         domain logic
 ```
 
-> **הקריאה:** ULease מיישם **AuthN חזק** (HMAC עם replay-guard + constant-time compare) ו-**AuthZ ברמת-שורה** (RLS tenant isolation, fail-closed, מאומת ב-4 טסטי `tenancy.test.ts`). מה שחסר הוא **AuthZ ברמת-פעולה** (role→action, ה-403 הקלאסי). זה תואם את `system-design-cheatsheet § 9` (Security) ואת חוב ה-Multi-Tenancy שנסגר חלקית ב-`CTO_REVIEW.md`.
+> **הקריאה:** ULease מיישם **AuthN חזק** (HMAC עם replay-guard + constant-time compare) ו-**AuthZ ברמת-שורה מחווט end-to-end** — הטננט של הבקשה (`X-Tenant-Id`) נקשר ל-connection דרך `db.asTenant`, וה-RLS אוכף בידוד (מאומת גם ברמת-SQL וגם דרך HTTP ב-`tenancy.test.ts`). מה שחסר הוא **AuthZ ברמת-פעולה** (role→action, ה-403 הקלאסי). זה תואם את `system-design-cheatsheet § 9` (Security).
 
 ---
 
 ## 4. למה זה לא תאוריה — ה-RLS כבר עובד
 
-`tenancy.test.ts` מוכיח את שני חצאי ה-AuthZ ברמת-שורה (63/63 ירוקים):
+`tenancy.test.ts` מוכיח את שני חצאי ה-AuthZ ברמת-שורה (65/65 ירוקים):
 
 1. **בידוד קריאה** — tenant-a רואה רק שורות tenant-a; tenant-b רק שלו.
 2. **WITH CHECK** — כתיבה חוצת-tenant נדחית (`INSERT ... tenant_id='tenant-b'` תחת context של tenant-a → throws).
 3. **Fail-closed** — חיבור ללא `app.current_tenant` רואה **0 שורות** (לא שגיאה — בטוח-כברירת-מחדל).
-4. **Additive** — `tenant_id` ברירת-מחדל `'leasing-co-il'`, תואם-לאחור; RLS מאחורי flag `RLS_ENABLED`.
+4. **Additive** — `tenant_id` ברירת-מחדל נגזרת מ-GUC, תואם-לאחור; RLS מאחורי flag `RLS_ENABLED`.
+5. **End-to-end (HTTP)** — בקשה עם `X-Tenant-Id: tenant-a` שיוצרת רכב; בקשת `tenant-b` מקבלת **404** על אותו רכב (RLS מסתיר, לא דליפה). זה מוכיח שהחיווט עובד מקצה-לקצה, לא רק ברמת-SQL.
 
-> זו בדיוק ה-**ABAC** (Attribute-Based Access Control) מהמדריך, ברמת ה-DB. ה-attribute הוא `tenant_id`; ה-policy אוכף ב-Postgres, לא באפליקציה — `FORCE ROW LEVEL SECURITY` כי האפליקציה מתחברת כ-owner.
+> זו בדיוק ה-**ABAC** (Attribute-Based Access Control) מהמדריך, ברמת ה-DB. ה-attribute הוא `tenant_id`; ה-policy אוכף ב-Postgres, לא באפליקציה — `FORCE ROW LEVEL SECURITY` כי האפליקציה מתחברת כ-owner. ה-worker רץ תחת `__system__` (bypass מבוקר) כדי לעבד אירועים על-פני כל הטננטים.
 
 ---
 
 ## 5. חוב פתוח (כנה)
 
+> **נסגר:** חיווט RLS end-to-end (request `X-Tenant-Id` → `asTenant`, worker `SYSTEM_TENANT`, מאומת ב-HTTP). `RLS_ENABLED` נשאר כבוי כברירת-מחדל ל-rollout מבוקר — הפעלתו אוכפת בידוד ללא שינוי קוד.
+
 1. **Action-level AuthZ (RBAC)** — אין מיפוי role→endpoint; כל בקשה מאומתת (HMAC) מורשית לכל פעולה. הצעד: middleware הרשאות שמחזיר **403** לפי role של ה-actor.
-2. **חיווט RLS end-to-end** — `setTenantContext` קיים אך `RLS_ENABLED` כבוי כברירת-מחדל; חיבור request→tenant בכל handler/worker הוא Stage הבא (`CTO_REVIEW` P0).
+2. **Tenant authenticity (hardening)** — כיום `X-Tenant-Id` מהימן-בלבד (תחת secret משותף יחיד הוא ניתן-לזיוף). הקשחה: per-tenant API keys (key-id → tenant+secret) ב-`hmacAuth.ts`.
+3. **ייחוד `vin` per-tenant** — ה-`vin` ייחודי גלובלית; שני טננטים לא יכולים לחלוק VIN. תיקון: PK מורכב `(tenant_id, vin)`.
 
 ---
 
