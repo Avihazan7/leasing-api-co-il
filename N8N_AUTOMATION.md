@@ -302,6 +302,21 @@ Claude Code / Desktop ──(MCP client)──► n8n MCP Server Trigger ──�
 
 הסוכן מדבר, n8n מבצעת, ה-API שומר על האמת. **שלוש שכבות, אחריות אחת לכל שכבה.**
 
+### 8.4 MCP ≠ Skill — מה ה-MCP הזה כן ומה הוא לא
+
+ה-MCP בסעיף הזה הוא שכבת ה-**חיבור** בלבד (Connect), לא שכבת ה-**workflow** (Learn).
+ההבחנה המלאה ב-`AGENT_BLUEPRINT § 11`, וכאן בקצרה כי קל לבלבל:
+
+| | 🟢 MCP (מה שיש כאן) | 🔵 Agent Skill |
+|---|---------------------|------------------|
+| **התפקיד** | חושף את workflows W1–W5 כ-tools; מחבר ל-DB/Stripe/Slack | מלמד *מתי* ובאיזה סדר לקרוא להם, באיזה פורמט, לפי איזה policy |
+| **מודל מנטלי** | AI-native API — מערכת העצבים | AI-native SOP — ספר הנהלים |
+| **אצלנו** | `MCP Server Trigger` (§ 8.1) + ה-Webhook/Postgres nodes | פקודות `COMMAND_API` שמתזמרות את הקריאות |
+
+**המסקנה התפעולית:** חשיפת workflow כ-MCP tool **לא** מייתרת Skill. ה-tool נותן ל-Claude
+את הידיים (`send-inventory-report`); ה-Skill נותן לו את הנוהל (למי, מתי, עם איזה אישור).
+שניהם נדרשים — ראה כלל הבחירה ב-§ 11.
+
 ---
 
 ## 9. טופולוגיית פריסה
@@ -375,6 +390,7 @@ Claude Code / Desktop ──(MCP client)──► n8n MCP Server Trigger ──�
 |------|--------|-------|
 | 1.0.0 | 2026-06-02 | Initial — מושגי יסוד, חיבור ל-Leasing API (HMAC + Outbox→Webhook), קטלוג אירועים, 5 workflows, מיפוי ל-AGENT_BLUEPRINT § 9, MCP דו-כיווני, טופולוגיית פריסה, ממשל |
 | 1.1.0 | 2026-06-02 | + § 7.3 אנטומיה של AI Agent על הקנבס — פירוק ה-workflow הרשמי (Form → Tools Agent → Switch → Slack) והתאמתו ל-Dealer Onboarding של ULease |
+| 1.2.0 | 2026-06-05 | + § 8.4 MCP ≠ Skill — הבהרה שה-MCP כאן הוא שכבת חיבור (Connect) בלבד; חשיפת workflow כ-tool לא מייתרת Skill. מצביע ל-`AGENT_BLUEPRINT § 11` |
 
 ---
 
