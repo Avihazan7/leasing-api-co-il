@@ -1,7 +1,7 @@
 # AGENT_BLUEPRINT.md — מ-Skill ל-Agent: דוקטרינת ה-System-First
 
 **Module:** `AGENT_BLUEPRINT.md`
-**Version:** 1.4.0
+**Version:** 1.5.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Doctrine. הגשר בין ה-Docs OS ל-Agent Runtime.
 **Integrates with:** `CLAUDE.md`, `COMMAND_API.md`, `DEV_ENVIRONMENTS.md`, `LAUNCH.md`, `stage-a/`
@@ -431,6 +431,92 @@ Agent = Skill (איך מבצעים את המשימה — SOP) ⊕ MCP (איך מ
 
 ---
 
+## 12. אימות חיצוני — "How to Actually Build an AI Agent" (7-step framework)
+
+עוד אינפוגרפיקה מהשדה (*"From goal setting, choosing models to testing"*), באותו תפקיד
+כמו Gartner (§ 6.1), Gulli (§ 9.6) ו-Karpathy (§ 10): מקור חיצוני שמאמת את התזה. שורת
+המחץ שלה היא **בדיוק** הדוקטרינה של הקובץ:
+
+> *"The best AI agents aren't the smartest — they're the best engineered."*
+
+7 הצעדים שלה הם וריאציה דקה יותר על 8 המודולים שלנו (§ 1). המיפוי מאשר שלא המצאנו —
+תמצתנו נכון; ושלושה פריטים בה **מחדדים** החלטות שאצלנו היו מרומזות.
+
+### 12.1 מיפוי 7 הצעדים ⇄ 8 המודולים
+
+| # | הצעד באינפוגרפיקה | המודול אצלנו (§ 1) | מצב |
+|---|---------------------|----------------------|------|
+| 1 | **Start with a Goal** (outcome, metrics, constraints) | 1 · Purpose & Scope + 8 · Evals (metrics) | ✅ § 4 build order + § 5 |
+| 2 | **Pick the Right Model** (LRM/LLM/SLM) | 3 · Choose LLM | 🟡 קיים, אבל בינארי opus/sonnet/haiku — ראה § 12.2(a) |
+| 3 | **Choose the Right Framework** (n8n/Smol ↔ LangChain/CrewAI/LlamaIndex/ADK/OpenAI SDK) | — *(אין מודול)* | ⚠️ החלטה מרומזת — ראה § 12.2(b) |
+| 4 | **Connect Tools** (REST/GraphQL/MCP, function calling, vector DB) | 4 · Tools & Integrations | ✅ `DEV_ENV § 10` · ההבחנה MCP⇄Skill ב-§ 11 |
+| 5 | **Manage Memory** (short / episodic / long-term) | 5 · Memory Systems | 🟡 `stage-a` append-only — ראה § 12.2(c) |
+| 6 | **Test & Evaluate** (accuracy, latency, cost, edge cases, red-team) | 8 · Testing & Evals | ✅ § 5 — 5 המטריקות |
+| 7 | **Deploy, Monitor & Improve** (guardrails, rate limits, iterate) | 6 · Orchestration + 8 · Evals + governance | ✅ § 6 + § 5 הטקס השבועי + `LAUNCH.md` |
+
+**6 מתוך 7 צעדים כבר מכוסים.** הצעד היחיד בלי בית אצלנו הוא **#3 (Framework)** — וזו לא
+השמטה, זו החלטה שלא תיעדנו (§ 12.2b).
+
+### 12.2 מה האינפוגרפיקה מחדדת — שלושה deltas אמיתיים
+
+**(a) טקסונומיית המודלים LRM / LLM / SLM** — מודול 3 שלנו מדבר opus/sonnet/haiku. האינפוגרפיקה
+נותנת את ה-**קטגוריה** מעל ה-מותג:
+
+| קטגוריה | מתי | אצלנו |
+|---------|-----|--------|
+| **LRM** (Large Reasoning) | reasoning מורכב, planning, multi-step | Opus + extended thinking — `/board-deck`, manager planning |
+| **LLM** (General) | משימות כלליות, יחס token סביר | Sonnet — רוב ה-Skills, worker execution |
+| **SLM** (Small) | latency נמוך, routing, classification, edge | Haiku — triage, `/fleet-report` ETL, classifiers |
+
+זה **מחזק את פריט ה-roadmap "Resource-Aware routing"** (§ 7): המעבר מ-מודל סטטי לבחירה
+דינמית הוא מעבר מ-"בחר מותג" ל-"בחר קטגוריה לפי דרישת המשימה".
+
+**(b) בחירת Framework — ההחלטה שלא תיעדנו.** האינפוגרפיקה מפרידה *Simple Workflows*
+(n8n, Smol) מ-*Production-Grade* (LangChain, CrewAI, LlamaIndex, Google ADK, OpenAI Agent SDK).
+אצלנו ההחלטה כבר נפלה אבל מעולם לא נכתבה כ-decision:
+
+> **ULease = build, not buy.** `stage-a/` הוא runtime מותאם על ה-Anthropic stack
+> (Claude Agent SDK), לא framework חיצוני. n8n משמש כ-Glue Layer בלבד (`N8N § 11`),
+> לא כ-agent runtime. LangChain/CrewAI **לא** אומצו — בכוונה: שליטה מלאה ב-governance
+> שנאכף בקוד (§ 6) שווה יותר מ-time-to-market של framework.
+
+זו לא המלצה להחליף — זו הפיכת החלטה מרומזת למפורשת, כפי שהדוקטרינה דורשת (Working
+Rule: *NO LAZINESS — תעד חוב/החלטה, אל תסתיר*).
+
+**(c) שלוש שכבות זיכרון ⇄ ארבע ה-tiers שלנו.** האינפוגרפיקה: short-term (context window) /
+episodic (session) / long-term (vector DB). ה-roadmap שלנו (§ 7, `MEMORY.md`) מדבר על 4
+tiers. הפיוס:
+
+| אינפוגרפיקה | ה-tier שלנו | מימוש |
+|--------------|--------------|--------|
+| Short-term (context) | working | context window הנוכחי של ה-run |
+| Episodic (session) | episodic | `stage-a/shared-memory.js` (append-only) |
+| Long-term (persistent) | vector + SQL | RAG (vector) + state עסקי (SQL/Supabase) |
+
+האינפוגרפיקה מאחדת vector+SQL ל-"long-term" אחד; אנחנו מפצלים כי ב-ULease יש הבחנה
+תפעולית (policy docs ב-vector ≠ ledger ב-SQL). **המודל שלנו עשיר יותר, לא סותר.**
+
+### 12.3 חמשת עקרונות ההצלחה ⇄ הדוקטרינה
+
+| Key Principle (אינפוגרפיקה) | איפה זה אצלנו |
+|------------------------------|----------------|
+| Start simple, iterate fast | § 9.5 *"אם Skill מספיק, אל תבנה agent"* + Karpathy *Keep It Simple* (§ 10.1) |
+| Balance quality / latency / cost | § 5 (3 מתוך 5 המטריקות) + טקסונומיית המודלים (§ 12.2a) |
+| Security, privacy & safety non-negotiable | § 6 governance-in-code + § 6.1 Gartner |
+| Modular design scales | 8-module blueprint (§ 1) + § 9 patterns |
+| Measure everything, improve continuously | § 5 Evals + הטקס השבועי (§ 10.5 *Atrophy*) |
+
+5/5 העקרונות כבר מקודדים בדוקטרינה. אין כאן עיקרון חדש — יש אישור.
+
+### 12.4 שורה תחתונה
+
+האינפוגרפיקה לא משנה את ה-blueprint — היא מאמתת אותו (6/7 צעדים מכוסים, 5/5 עקרונות
+מקודדים) ותורמת **שלושה חידודים**: טקסונומיית LRM/LLM/SLM (מחזקת Resource-Aware ב-§ 7),
+תיעוד מפורש של החלטת build-not-buy (§ 12.2b), ופיוס מודל הזיכרון 3⇄4 tiers. כמו Gartner
+ו-Gulli — *system-first עומד בביקורת חיצונית, סעיף-סעיף.*
+
+---
+
 ## גרסאות
 
 | גרסה | תאריך | שינוי |
@@ -440,12 +526,14 @@ Agent = Skill (איך מבצעים את המשימה — SOP) ⊕ MCP (איך מ
 | 1.2.0 | 2026-06-03 | + § 10 Coding Workflow Doctrine — עקרונות ה-CLAUDE.md של Karpathy: 6 עקרונות workflow, מיפוי ל-§ 1/§ 5/§ 9, Working Rules block לשני הריפואים, mindset |
 | 1.3.0 | 2026-06-03 | + § 6.1 חיזוק Gartner (5 misconceptions ⇄ הדוקטרינה) · + § 9.6 מיפוי הקנון *Agentic Design Patterns* (Gulli) · 3 פריטי roadmap חדשים (A2A · Exception&Recovery · Resource-Aware) |
 | 1.4.0 | 2026-06-05 | + § 11 MCP vs. Agent Skills — Connect⇄Learn: 5 ממדים ממופים ל-ULease, הבהרת מינוח (slash command / Agent Skill / MCP tool / Agent), דוקטרינת Use-Both, וחיבור ל-§ 9.6 |
+| 1.5.0 | 2026-06-07 | + § 12 אימות חיצוני — "How to Actually Build an AI Agent" (7-step framework): מיפוי 7 הצעדים ⇄ 8 המודולים, 3 חידודים (טקסונומיית LRM/LLM/SLM · תיעוד build-not-buy · פיוס זיכרון 3⇄4 tiers), 5 עקרונות ההצלחה ⇄ הדוקטרינה |
 
 ---
 
 **Tie-back ל-OS:** הקובץ הזה הוא ה-**connective tissue**. `COMMAND_API` נותן את הפקודות,
 `DEV_ENVIRONMENTS` את הכלים, `LAUNCH` את ה-go-live — ו-`AGENT_BLUEPRINT` מסביר איך
 מרכיבים מהם **agent** שלא נשבר ב-production. § 9 בוחר את ה-topology, § 10 קובע איך
-כל agent בתוכה כותב קוד, ו-§ 11 מפריד בין ה-**חיבור** (MCP) ל-**ידע התהליכי** (Skill).
-הוא מצביע קדימה ל-`MEMORY.md` ול-Stage-B כצעדים הבאים.
+כל agent בתוכה כותב קוד, § 11 מפריד בין ה-**חיבור** (MCP) ל-**ידע התהליכי** (Skill),
+ו-§ 12 מאמת את הדוקטרינה מול ה-7-step framework החיצוני. הוא מצביע קדימה ל-`MEMORY.md`
+ול-Stage-B כצעדים הבאים.
 *Start with the SYSTEM first. Everything else scales from there.*
