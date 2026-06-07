@@ -21,6 +21,7 @@
 - `MASTER_CLAUDE_58.md` v1.0.0 — 58 Ways to Master Claude (@coder_surya): 8 אשכולות (SETUP·MODELS·PROMPTING·ASK·CONNECTORS·PROJECTS·ARTIFACTS·PRO LEVEL) כל אחד ⇄ המודול שמיישם ב-OS (ASK ⇄ Working Rule #2 · PROJECTS ⇄ ה-OS עצמו · PRO LEVEL ⇄ `stage-a`+`AGENT_BLUEPRINT § 9`), מיפוי ל-`LAUNCH § 3.1` (Master Claude in a Week), ו-self-audit בגרות.
 - `BUSINESS_PARTNER.md` v1.0.0 — Claude כשותף עסקי ב-9 צעדים: כל צעד (Role · Business Brain · Daily Briefing · Stress-Test · Sales Copy · Objections · Competition · SOPs · Monthly Review) ⇄ תשתית קיימת ב-OS (Business Brain ⇄ ה-OS עצמו · SOPs ⇄ Skills `§ 11` · Stress-Test ⇄ `CTO_REVIEW`+Working Rule #5/#7 · Review ⇄ Power BI), 8/9 כבר תשתית; חוב: ספריית objections + Monthly Review אוטומטי.
 - `CLAUDE_DESIGN.md` v1.0.0 — Claude Design (`claude.ai/design`) ב-8 צעדים ⇄ שכבת ה-UI של ULease: format · `DESIGN.md` · prompt (Goal/layout/content/constraints) · video→slides · iterate · WCAG validate · export → `public/index.html`+`dashboard.html` (מוגש מ-`/ui` ב-`server.ts`); חוב: אין `DESIGN.md` ו-WCAG validation.
+- `CLAUDE_4_LEVELS.md` v1.0.0 — 4 רמות הבגרות של Claude (Beginner→Context Builder→Operator→Architect) ⇄ היכן ULease עומדת: כבר **Level 4** (`leasing-api` רץ + `stage-a` agents + Outbox backbone), פער ב-Level 3 (Operator/Cowork). אח מושגי ל-`AI_SKILL_MAP`/`AI_CLAUDE_STACK_2026` (ב-OS המלא), **+ חוב סנכרון OS↔גיט** (~50 מודולים ב-Cowork מול 21 בגיט).
 
 ## Module Load Order
 1. `OPERATING_SYSTEM.md`      ← roadmap (ראה AGENT_BLUEPRINT § 7)
@@ -37,6 +38,7 @@
 8d. `MASTER_CLAUDE_58.md`     ← 58 Ways ⇄ מודולי ה-OS + LAUNCH § 3.1
 8e. `BUSINESS_PARTNER.md`     ← Claude כשותף עסקי (9 צעדים) ⇄ תשתית ה-OS
 8f. `CLAUDE_DESIGN.md`        ← Claude Design (8 צעדים) ⇄ שכבת ה-UI (`public/`)
+8g. `CLAUDE_4_LEVELS.md`      ← 4 רמות Claude ⇄ ULease ב-Level 4 + חוב סנכרון OS↔גיט
 9. `power-bi-essential-concepts.md` ← BI ודשבורדים על נתוני ה-API
 9a. `system-design-cheatsheet.md` ← 15 מושגי עיצוב מערכות ⇄ מיפוי ל-codebase
 9b. `BACKEND_ROADMAP.md`       ← Backend Developer Roadmap ⇄ ULease (6 שלבים, ראיות בקוד, חובות)
