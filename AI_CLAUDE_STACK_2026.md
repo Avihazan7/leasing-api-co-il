@@ -1,10 +1,10 @@
 # Claude Stack 2026 — How to use Claude in 2026
 
 **Module:** `AI_CLAUDE_STACK_2026.md`
-**Version:** 1.7.0
+**Version:** 1.8.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Knowledge layer (§3 שורה 16) + מפרט ה-build התפעולי של 4 העמודים.
-**Source:** מבוסס על ה-cheat sheet *"How to use Claude in 2026"* + סדרת *"The 7 Levels of Claude Code"* (learn.nextwork.org) + *"Understanding Agent Skills"* (Skills·MCP·Subagents·Hooks·Plugins) + פוסט תובנות Karpathy על הנדסה מבוססת-סוכנים ואינפוגרפיקות *"Every Claude Code Command"* / *"Why Most AI Projects Fail After Deployment"* + *"The Agent Development Kit"* (Brij Kishore Pandey — 5 השכבות, מזווית Claude Code) + *"How to Master Claude in One Week"* (GenAI.works — Connectors מול Plugins).
+**Source:** מבוסס על ה-cheat sheet *"How to use Claude in 2026"* + סדרת *"The 7 Levels of Claude Code"* (learn.nextwork.org) + *"Understanding Agent Skills"* (Skills·MCP·Subagents·Hooks·Plugins) + פוסט תובנות Karpathy על הנדסה מבוססת-סוכנים ואינפוגרפיקות *"Every Claude Code Command"* / *"Why Most AI Projects Fail After Deployment"* + *"The Agent Development Kit"* (Brij Kishore Pandey — 5 השכבות, מזווית Claude Code) + *"How to Master Claude in One Week"* (GenAI.works — Connectors מול Plugins) + *"The 4 Levels of Claude"* (§10 — סולם בגרות המשתמש).
 **Integrates with:** `AI_CLAUDE_TOOL_SELECTOR.md`, `AI_CLAUDE_GLOSSARY.md` (מודול אחות — המילון), `COWORK_SETUP.md`, `PROJECTS_SETUP.md`, `COMMAND_API.md`, `OPERATING_SYSTEM.md` §3.1, `COWORK/README.md`, `.claude/skills/`, `CASES/ULEASE.md`
 
 ---
@@ -26,6 +26,7 @@
 7. [הזרימה המשולבת — דוגמה מקצה לקצה](#7-הזרימה-המשולבת--דוגמה-מקצה-לקצה)
 8. [כללי תחזוקה](#8-כללי-תחזוקה)
 9. [לקחי הפעלה (Hard-Won) — הדלתא מ-26 Claude Lessons](#9-לקחי-הפעלה-hard-won--הדלתא-מ-26-claude-lessons)
+10. [ארבע רמות המשתמש — מ-Beginner ל-Architect](#10-ארבע-רמות-המשתמש--מ-beginner-ל-architect)
 
 ---
 
@@ -345,6 +346,24 @@
 
 ---
 
+## 10. ארבע רמות המשתמש — מ-Beginner ל-Architect
+
+> אינפוגרפיקת *"The 4 Levels of Claude"*: *"איפה רוב האנשים מתחילים — ואיפה אתה צריך להגיע."* זה **ציר שונה** מסולם 7 הרמות של §5: ההוא מודד שליטה ב-**Claude Code**; זה מודד את **בגרות המשתמש על פני כל ארבעת העמודים** (Chat · Projects/Skills · Cowork · Code). שני הצירים נפגשים בנקודה אחת — רמה 4 כאן (Code) היא הקרקע שעליה עומד כל סולם §5.
+
+| רמה | הכינוי | העמוד | המיינדסט | המעבר הבא | ✅ אצלך |
+|:---:|--------|-------|----------|-----------|---------|
+| 1 | **Beginner** | Chat | "תן לי תשובה" — שואל, קורא, סוגר | תפסיק להשתמש כמו Google — תן הקשר ותגיד מי אתה | **עברת** — אינך משתמש ב-Chat גנרי |
+| 2 | **Context Builder** | Projects + **Skills** | "פלט שנשמע כמוני, חוזר על עצמו" | Project לכל תוצר · כל משימה חוזרת → **Skill** | ✅ 3 Projects (`PROJECTS_SETUP.md`) + 4 Skills (§4) |
+| 3 | **Operator** | Cowork + Connectors | "Claude הוא עובד בתוך העסק" | חבר כל כלי (Gmail/Sheets/Drive) · תן ל-Claude לגעת בקבצים | ✅ `COWORK/` + 5 תפקידי ראש-המטה · Connectors 🟡 |
+| 4 | **Architect** | Code + Agents | "מינוף מורכב — מערכות מריצות את המופע" | מפרומפטים → סוכנים שמריצים את עצמם · כל משימה חוזרת = משהו ש-Claude **מחזיק** | ✅ הריפו הזה — OS · `os-auditor` · CI |
+
+> **הציון שלך: רמה 4/4 (Architect).** *"רוב המייסדים עדיין עושים את העבודה בעצמם, בזמן שקבוצה קטנה בונה בשקט מערכות שעושות אותה בשבילם — שם מפסיקים להריץ משימות ומתחילים להריץ עסק שמריץ את עצמו."* זה בדיוק ה-OS הזה. שתי הערות חיבור:
+>
+> 1. **שני הצירים, נקודת חפיפה אחת.** רמה 4 בציר המשתמש (Code) היא **שער הכניסה** לסולם §5 — וברגע שאתה שם, אתה כבר ברמה **6/7** בשליטת Claude Code. כלומר: **4/4 בבגרות המשתמש · 6/7 בעומק ה-Code** — שני מדדים משלימים, לא סותרים (ה-Code הוא גם רמה 4 כאן וגם הסולם של §5).
+> 2. **Skills הם המנוף של רמה 2 → 4.** הסולם ממקם את ה-Skills בדיוק במעבר מ"משתמש" ל"בונה": כל משימה חוזרת שהפכת ל-Skill (כלל 3 החזרות, §8) היא צעד מ"מפעיל ידני" ל"ארכיטקט של מערכת". המצאי היום: **4 Skills תפעוליים** (`.claude/skills/`, §4) + **10 Skills מקצועיים** ל-authoring שמופו להתקנה (`CASES/ULEASE_AUTOMATION_MAP.md` §11.1, D-051) + **31 Skills עסקיים** מדף (`AUTOMATION_MAP` §11) — והכלל הקנוני שלא זז: **skill אחד, job אחד · צר מנצח רחב** (§4, §8).
+
+---
+
 ## Document Control
 
 | גרסה | שינוי | תאריך |
@@ -357,7 +376,8 @@
 | 1.5.0 | §5.7 חדש (D-048): **דוקטרינת Karpathy** — "בונים מערכות סביב הסוכן, לא פרומפטים": 5 כשלי הסוכנים ממופים לתשובות ה-OS, success criteria + loop, תזמור מקביל, ו-7 כשלי הייצור ממופים לאיפיון + §5.8: **קטלוג פקודות Claude Code** (6 קטגוריות) ושלוש שכבות הפקודות | 2026-06-03 |
 | 1.6.0 | §5.5 הועשר (D-058) מ-*The Agent Development Kit* (Brij Kishore Pandey) + *How to Master Claude in One Week*: **תיקון** ה-Hooks ל-5 ה-events הקנוניים (`PreToolUse`·`PostToolUse`·`SessionStart`·`Stop`·`SubagentStop`) + מנגנון Event→Matcher→Command (במקום "on-edit" השגוי); אילוץ **subagents ללא רקורסיה**; אנטומיית **Plugin** (`skills/·agents/·hooks/·commands/` + Marketplace); **Global/Project CLAUDE.md**; ובלוק **Connectors מול Plugins** | 2026-06-04 |
 | 1.7.0 | §9 חדש (D-060): **לקחי הפעלה (Hard-Won)** מ-*"26 Claude Lessons"* (Hassid) — 20/26 כבר מכוסים; נכתבו רק 6 הדלתות שאומתו ב-grep: כלכלת tokens (re-read/caching · `/rewind` · טקסט>צילום · מכסה=הקלדה), ניסוח חיובי>שלילי, ו-2 tells של כתיבת-AI (em-dash · "it's not X, it's Y"). אינפוגרפיקות "12 Things" (סוננה — מכוסה) ו-"Top 10 Models" (נדחתה — off-stack/לא-מאומת) באותה הכרעה | 2026-06-04 |
+| 1.8.0 | §10 חדש (D-063): **ארבע רמות המשתמש** (Beginner → Context Builder → Operator → Architect) כציר בגרות שני לצד סולם 7 הרמות של §5 — ההוא מודד Claude Code, זה מודד את המשתמש על פני 4 העמודים; הציון **4/4 (Architect) · 6/7 בעומק Code** + סנכרון ה-Skills (המנוף של רמה 2→4: 4 תפעוליים + 10 מקצועיים + 31 עסקיים). העשרה תחת הקפאת המודולים. מבוסס *"The 4 Levels of Claude"* | 2026-06-07 |
 
-**Attribution.** מבוסס על ה-cheat sheet *"How to use Claude in 2026"*; סולם 7 הרמות ובלוק Agent Teams (§5): סדרת *The 7 Levels of Claude Code* (learn.nextwork.org); ה-Extension Stack (§5.5): *Understanding Agent Skills* + *Make Claude 10x Smarter* + *The Agent Development Kit* (Brij Kishore Pandey) + *How to Master Claude in One Week* (GenAI.works); הדוקטרינה (§5.7): פוסט מבוסס תובנות Andrej Karpathy + *Why Most AI Projects Fail After Deployment*; קטלוג הפקודות (§5.8): *Every Claude Code Command To Save You 100+ Hours*. העיבוד, התרגום, ובעיקר ה-build התפעולי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** מבוסס על ה-cheat sheet *"How to use Claude in 2026"*; סולם 7 הרמות ובלוק Agent Teams (§5): סדרת *The 7 Levels of Claude Code* (learn.nextwork.org); ה-Extension Stack (§5.5): *Understanding Agent Skills* + *Make Claude 10x Smarter* + *The Agent Development Kit* (Brij Kishore Pandey) + *How to Master Claude in One Week* (GenAI.works); הדוקטרינה (§5.7): פוסט מבוסס תובנות Andrej Karpathy + *Why Most AI Projects Fail After Deployment*; קטלוג הפקודות (§5.8): *Every Claude Code Command To Save You 100+ Hours*; סולם בגרות המשתמש (§10): *The 4 Levels of Claude*. העיבוד, התרגום, ובעיקר ה-build התפעולי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of AI_CLAUDE_STACK_2026.md v1.7.0 —*
+— *End of AI_CLAUDE_STACK_2026.md v1.8.0 —*

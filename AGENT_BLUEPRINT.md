@@ -1,10 +1,10 @@
 # בלופרינט סוכן AI — How to Build an AI Agent
 
 **Module:** `AGENT_BLUEPRINT.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — מודול ידע/בלופרינט (Knowledge layer).
-**Source:** מבוסס על האינפוגרפיקה *"How to Build an AI Agent — A step-by-step blueprint to design, build and scale intelligent agents"* + הפוסט הנלווה (code231).
+**Source:** מבוסס על האינפוגרפיקה *"How to Build an AI Agent — A step-by-step blueprint to design, build and scale intelligent agents"* + הפוסט הנלווה (code231) + *"12 Must-Know Agentic AI Terms"* (AI Matt · Next Step Agents) — §11.
 **Integrates with:** `OPERATING_SYSTEM.md` §4, `COMMAND_API.md` §8, `AI_CLAUDE_TOOL_SELECTOR.md`, `AI_SYSTEM_DESIGN.md`, `AI_RAG_DESIGN.md`, `AI_PROJECT_STRUCTURE.md`, `AI_CLAUDE_STACK_2026.md` §5.7, `CASES/ULEASE_SPEC.md` §7.1–§7.2 — ו-`leasing-api/CLAUDE.md` (צורך את §10 ככללי עבודה מחייבים).
 
 ---
@@ -70,6 +70,42 @@
 
 ---
 
+## §11 — שנים-עשר מונחי ה-Agentic (מילון מהיר → הבית הקנוני)
+
+> אם §9 הוא **אבני הבניין** של סוכן (8 השלבים) ו-§10 הם **כללי העבודה**, §11 הוא **אוצר המילים** — 12 המונחים שחוזרים בכל שיחה על סוכנים, ב-4 הקבוצות של המקור. אחות ל-`AI_CLAUDE_GLOSSARY.md` (מונחי **מוצר Claude**); כאן — מונחי **מערכות agentic** (vendor-neutral). כל מונח ממופה לבית הקנוני שלו ולגלגול שלו ב-ULease — אותו עיקרון של הגלוסרי: לא הגדרה לשמה, אלא **איפה זה כבר חי אצלך**.
+
+### 🧱 יסודות (Foundations)
+| # | מונח | מה זה | 📍 הבית הקנוני | 🎯 ב-ULease |
+|---|------|--------|----------------|-------------|
+| 1 | **MCP** | פרוטוקול חיבור אחד לכלים/דאטה ("USB-C של AI") | `AI_CLAUDE_STACK_2026.md` §5.5 (HOW) | GitHub MCP פעיל; סולק/ספקים/יומן בהמשך |
+| 2 | **Memory** | זיכרון קצר-טווח (session) וארוך-טווח (vector) | שלב 5 (Memory) לעיל · `AI_RAG_DESIGN.md` · `MEMORY.md` | pgvector: מלאי · מחירונים · היסטוריית עסקאות |
+| 3 | **Context Window** | תקרת ה"זיכרון העובד" — כמה נקרא ונשקל בבת אחת | `AI_CLAUDE_STACK_2026.md` §8 · §9.1 (כלכלת tokens) | `/compact` + sub-agent לשמירת הקשר רזה |
+
+### 🔄 חשיבה וביצוע (Reasoning & Execution)
+| # | מונח | מה זה | 📍 הבית הקנוני | 🎯 ב-ULease |
+|---|------|--------|----------------|-------------|
+| 4 | **Agent Loop** | Perceive → Plan → Act → Observe — מחזור הפעולה | `AI_CLAUDE_STACK_2026.md` §5.7 (success-criteria + loop) · שלב 6 (Orchestration) לעיל | Ultra: התאמה → הצעה → חוזה → מימון |
+| 5 | **Tool Use** | קריאה ל-APIs / כלים / קוד | שלב 4 (Tools) לעיל · `AI_TYPES.md` #7 | Max: הצעה · חוזה · מימון · חיוב דרך APIs |
+| 6 | **Sandboxing** | סביבה מבודדת להרצה בטוחה בלי לפגוע במארח | `AI_CLAUDE_STACK_2026.md` §5.5 (בידוד subagent) · `KUBERNETES_101.md` §9 | בידוד per-subagent + הרצת קוד/בדיקות מבודדת |
+
+### 🛡️ בטיחות ואמינות (Safety & Reliability)
+| # | מונח | מה זה | 📍 הבית הקנוני | 🎯 ב-ULease |
+|---|------|--------|----------------|-------------|
+| 7 | **Grounding** | עיגון כל טענה בעובדה מאומתת (נגד הזיות) | `AI_RAG_DESIGN.md` · `CASES/ULEASE_SPEC.md` §7.2 | grounding 100% לעובדות כספיות — כל מספר עם מקור |
+| 8 | **Guardrails** | חוקים שחוסמים פעולה מזיקה/מחוץ-לתחום | `AI_CLAUDE_STACK_2026.md` §5.6 · `CASES/ULEASE_SPEC.md` §7.2 | Guardian-as-Hook מול המחירון (D-015), דטרמיניסטי |
+| 9 | **Human-in-the-Loop** | אישור אדם לפני פעולה רגישה (Approval Gate) | `AI_PROCESS_INTELLIGENCE.md` · D-040 | `sendAndWait` + שער בגרות 3-שלבי (assist→אוטונומיה) |
+
+### 🧩 תיאום וסקייל (Coordination & Scale)
+| # | מונח | מה זה | 📍 הבית הקנוני | 🎯 ב-ULease |
+|---|------|--------|----------------|-------------|
+| 10 | **Orchestrator** | סוכן-על שמפרק מטרה ומאציל למומחים | שלב 6 (Orchestration) לעיל · `AI_MICROSERVICES.md` §6 (orchestration מול choreography) | **Ultra** |
+| 11 | **Subagent** | סוכן ממוקד למשימה אחת, הקשר מבודד, ללא רקורסיה | `AI_CLAUDE_STACK_2026.md` §5.5 (WHO) | `os-auditor` (היום) · ה-**Masters** (ULease) |
+| 12 | **Multi-Agent** | מערכת סוכנים שמשתפת פעולה לפתרון מטרה מורכבת | `CASES/ULEASE_SPEC.md` §7 · `AI_TYPES.md` #8 | **Ultra · Master · Max** — הארכיטקטורה כולה |
+
+> **השורה התחתונה של §11: 12/12 כבר חיים ב-OS.** המונחים לא היו חסרים — הם היו **מפוזרים** על פני STACK · RAG · TYPES · SPEC · PROCESS. הטבלה הזו היא ה-**אינדקס** (אפס שכפול, נאמן לרף D-049/D-054): מי שמכיר את 12 המונחים האלה מדבר את שפת הסוכנים — וכל אחד מהם כבר בנוי כאן. שתי האחיות: `AI_CLAUDE_GLOSSARY.md` = "מה אומר מונח **מוצר Claude**", §11 כאן = "מה אומר מונח **מערכת agentic**".
+
+---
+
 ## השורה התחתונה
 
 סוכן הוא מערכת של שמונה שכבות — מטרה, פרומפט, מודל, כלים, זיכרון, תזמור, ממשק ובדיקות. ULease בנויה מכולן (כל שורה בטבלה מצביעה על המימוש), וה-OS הזה הוא היישום של דוקטרינת הבנייה עצמה. מי שמבין את זה — לא בוחר מודל; הוא בונה מערכת.
@@ -81,9 +117,10 @@
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | יצירת המודול — בלופרינט 8 השלבים (Purpose→Testing) כשכבת ניווט מעל משפחת `AI_*` + §9 טבלת ה-Ecosystem + §10 כללי העבודה (דוקטרינת Karpathy) כמקור קנוני שאליו מפנה `leasing-api`. מבוסס אינפוגרפיקת *"How to Build an AI Agent"* (D-056) | 2026-06-04 |
+| 1.1.0 | §11 חדש (D-063): **12 מונחי ה-Agentic** ב-4 קבוצות (Foundations · Reasoning/Execution · Safety/Reliability · Coordination/Scale) כאינדקס מונח→בית-קנוני→ULease — אחות ל-`AI_CLAUDE_GLOSSARY` (מונחי מוצר Claude). הכרעת ספרנות: העשרה תחת הקפאת המודולים, לא מודול חדש (תקדים D-051/D-055/D-058). מבוסס *"12 Must-Know Agentic AI Terms"* (AI Matt) | 2026-06-07 |
 
-**Attribution.** מבנה 8 השלבים וטבלת האקו-סיסטם: האינפוגרפיקה *"How to Build an AI Agent"* (code231). דוקטרינת Karpathy (§10): פוסט התובנות של Andrej Karpathy. המיפוי ל-ULease ולמשפחת ה-`AI_*` — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** מבנה 8 השלבים וטבלת האקו-סיסטם: האינפוגרפיקה *"How to Build an AI Agent"* (code231). דוקטרינת Karpathy (§10): פוסט התובנות של Andrej Karpathy. 12 מונחי ה-Agentic (§11): *"12 Must-Know Agentic AI Terms"* (AI Matt · Next Step Agents). המיפוי ל-ULease ולמשפחת ה-`AI_*` — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
 **Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of AGENT_BLUEPRINT.md v1.0.0 —*
+— *End of AGENT_BLUEPRINT.md v1.1.0 —*
