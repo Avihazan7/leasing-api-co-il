@@ -1,10 +1,10 @@
 # מודיעין תהליכים ובקרת הטמעת AI — Process Intelligence & Human-in-the-Loop
 
 **Module:** `AI_PROCESS_INTELLIGENCE.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Knowledge layer (§3 שורה 24). מודול ההטמעה — סוגר את השאלה *איפה* AI נכנס לתהליך, *איך* מחווטים אותו, ובאיזו *בקרה*.
-**Source:** אינפוגרפיקת *GenIQ — AI Process Intelligence for Software Development* (HatchWorks AI × Bloomfilter) + hatchworks.com/technology · דפוס *Meeting Availability Agent* (n8n Tools Agent + Human-in-the-Loop).
+**Source:** אינפוגרפיקת *GenIQ — AI Process Intelligence for Software Development* (HatchWorks AI × Bloomfilter) + hatchworks.com/technology · דפוס *Meeting Availability Agent* (n8n Tools Agent + Human-in-the-Loop) · אינפוגרפיקת *How to Build AI Automations with n8n* (AI Workflow Builder — בנייה מ-Plain English).
 **Integrates with:** `CASES/ULEASE_AUTOMATION_MAP.md`, `CASES/ULEASE_OUTBOUND_ENGINE.md`, `CASES/ULEASE_SPEC.md` (§7.2), `CASES/ULEASE_TECH_ONBOARDING.md`, `CASES/ULEASE_HIRING.md`, `AI_CLAUDE_STACK_2026.md` (§5.5–§5.6), `COWORK_SETUP.md` (§9), `AI_SKILL_MAP.md`, `AI_TYPES.md`
 
 ---
@@ -168,14 +168,73 @@ Tools Agent ────┼── Tool: Calendar availability (הידיים — 
 
 ---
 
+## 6. ה-AI Workflow Builder — מ-Plain English לפרוטוטייפ, מהגנרטור ל-Production
+
+> **הרעיון בשורה אחת:** את ה-workflow לא חייבים לחווט צומת-צומת — מתארים אותו ב**אנגלית פשוטה** וה-Builder מייצר טיוטה. אבל הטיוטה היא **פרוטוטייפ**, לא מקור-אמת: מקשיחים אותה ומקבעים בגנרטור (D-023).
+
+המקור: אינפוגרפיקת *How to Build AI Automations with n8n* — ה-**AI Workflow Builder** ("Add with AI"): מתארים את האוטומציה בשפה טבעית, וה-AI **יוצר · מחדד · מנפה** workflow על 400+ אינטגרציות. זה משלים את §3 (אנטומיית הסוכן) בשאלה שלא נגענו בה עד כה — **איך מחווטים** את הצמתים מלכתחילה.
+
+### 6.1 עשרת השלבים (מהמקור) → הדוקטרינה שכבר כתובה אצלנו
+
+המקור מונה 10 שלבים. שלושה הם ה-prompt; השאר הם **בדיוק** מה שכבר מוגדר אצלנו — ה-Builder לא ממציא תהליך חדש, הוא מאיץ את הניסוח:
+
+| שלב במקור | מה הוא | הבית הקנוני אצלנו |
+|-----------|--------|--------------------|
+| 4–5 · Describe + Trigger/Apps/Action | ה-prompt: טריגר, אפליקציות, פעולה סופית — בבירור | ה-**spec** של ה-workflow (מילים, לא קוד) |
+| 6–7 · Review + Check each node | סקירת כל צומת והחיווט | אנטומיית הסוכן (§3.1): Model · Memory · Tool · Parser |
+| 8 · Add credentials | מפתחות/Credentials | `OUTBOUND_ENGINE` §7: `ANTHROPIC_API_KEY` ב-ENV, לא hard-coded |
+| 9 · Test with sample data | הרצת בדיקה | eval-set זהב (`ULEASE_SPEC.md` §7.2) — grounding לפני אוטונומיה |
+| 10 · Activate | הדלקה | **לא לפני שער הבגרות** (§3.3) — כתיבה דרך `sendAndWait` |
+
+> ה-"Test → Activate" של המקור הוא **בדיוק** ה-gate שלנו — לא קיצור דרך סביבו.
+
+### 6.2 המתח עם "הגנרטור = מקור-אמת" (D-023)
+
+| | AI Workflow Builder | הגנרטור Python (D-023) |
+|---|----------------------|------------------------|
+| קלט | טקסט חופשי (prose) | קוד דטרמיניסטי |
+| פלט | **לא-דטרמיניסטי** — אותו prompt → workflow אחר | **bit-exact** — משוחזר ומאומת ב-CI |
+| חוזק | טיוטה מהירה · מוריד מחסום כניסה ל-n8n | מקור-אמת · auditable · ניתן ל-`diff` ול-PR |
+| חולשה | לא reproducible · לא נשמר ל-git כמקור | איטי לטיוטה ראשונה |
+
+שניהם נכונים — **בשלבים שונים**. ה-Builder אינו מחליף את הגנרטור; הוא **קודם** לו.
+
+### 6.3 הגייט: Prompt-to-Prototype, Generator-to-Production
+
+```
+Plain-English prompt → [AI Workflow Builder] → טיוטת v0 (פרוטוטייפ)
+        ↓ הקשחה (חובה — לא אופציונלי)
+   Claude במקום OpenAI (D-022) · HITL על כתיבות (§3.3) ·
+   grounding 100% לעובדות כספיות (SPEC §7.2) · retry+fallback
+        ↓ קיבוע
+   גנרטור Python = מקור-אמת (D-023) → ‎*.n8n.json (bit-exact) → git/PR
+```
+
+| שלב | הכלי | התוצר | מקור-אמת? |
+|------|------|--------|-----------|
+| פרוטוטייפ | AI Workflow Builder (prompt) | טיוטת workflow ב-n8n | ❌ חד-פעמי, לא נשמר ל-git |
+| הקשחה | יד + הדוקטרינה | Claude · HITL · grounding · retry | ❌ שלב מעבר |
+| Production | גנרטור Python | ‎`*.n8n.json` משוחזר ב-CI | ✅ D-023 |
+
+### 6.4 המיפוי ל-ULease
+
+- **מסלול הלמידה (אברהם, Stage 2):** ה-Builder מוריד את מחסום הכניסה — מתארים "ליד נכנס → ניקוד Haiku → nurture Sonnet → פגישה" ומקבלים שלד לעבוד עליו, במקום לחווט מאפס. תואם `AI_PROGRESSION_PLAN` (בונים תוך כדי לימוד).
+- **שני המנועים:** זו דרך-העבודה לטיוטה הראשונה של `ULEASE_OUTBOUND_ENGINE` ו-`ULEASE_DEMAND_ENGINE` — ששניהם **כבר עברו הקשחה** (Claude לא OpenAI · HITL · grounding) ו**כבר מקובעים בגנרטור**. `DEMAND_ENGINE` §9.2 ("11 השיפורים") הוא בדיוק צד-ההקשחה של ה-gate: המקור/Builder נותן as-is, אנחנו מתקנים ומקבעים.
+- **שער אנטי-over-engineering:** פרוטוטייפ חד-פעמי או PoC ש**לא** עולה ל-production — מותר לעצור ב-Builder בלי גנרטור. הגנרטור חובה רק כשה-workflow נכנס לריפו כמקור-אמת.
+
+> **השורה התחתונה:** ה-Builder הוא **איך** מנסחים את הטיוטה מהר; הגנרטור הוא **מה** מתחייב כמקור-אמת. *Prompt-to-prototype, generator-to-production* — שני קצוות של אותו צינור, לא תחליפים.
+
+---
+
 ## Document Control
 
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | מודול ראשוני — מודיעין תהליכים (GenIQ: איפה להחיל Gen AI + מדידת ROI), אנטומיית סוכן n8n + דפוס Human-in-the-Loop (sendAndWait), שער בגרות, ומיפוי ל-ULease: שקיפות SDLC למייסד, שכבת מדידה למפת האוטומציות, HITL לאוטומציות כותבות, ודגם HatchWorks לתוכנית המגירה | 2026-06-02 |
+| 1.1.0 | §6 חדש (D-065): ה-**AI Workflow Builder** (n8n, בנייה מ-Plain English / "Add with AI") — עשרת השלבים של המקור ממופים לדוקטרינת ההקשחה הקיימת (Claude לא OpenAI · HITL · grounding · retry), המתח מול "הגנרטור = מקור-אמת" (D-023) וההכרעה **Prompt-to-Prototype, Generator-to-Production** + שער אנטי-over-engineering (פרוטוטייפ חד-פעמי פטור מגנרטור) | 2026-06-08 |
 
-**Attribution.** המסגרות: *GenIQ — AI Process Intelligence* (HatchWorks AI × Bloomfilter) · דפוס n8n Tools Agent. הזיקוק, המיפוי וההתאמה ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** המסגרות: *GenIQ — AI Process Intelligence* (HatchWorks AI × Bloomfilter) · דפוס n8n Tools Agent · אינפוגרפיקת *How to Build AI Automations with n8n* (AI Workflow Builder). הזיקוק, המיפוי וההתאמה ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
 **Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of AI_PROCESS_INTELLIGENCE.md v1.0.0 —*
+— *End of AI_PROCESS_INTELLIGENCE.md v1.1.0 —*

@@ -1,7 +1,7 @@
 # ULease 🎯 — Demand Engine (בלופרינט n8n: אוטופיילוט צד-הביקוש)
 
 **Module:** `CASES/ULEASE_DEMAND_ENGINE.md`
-**Version:** 1.2.0
+**Version:** 1.2.1
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — בלופרינט אוטומציה צד-ביקוש (Stage 2–3). המקבילה של `ULEASE_OUTBOUND_ENGINE.md` לצד הקונים.
 **Source:** n8n workflow *"One AI Agent for Local Business — Full Autopilot Customer Acquisition"* (18 צמתים, 3 פאזות + לופ אורגני) — מותאם לציות הישראלי ולמספרי ULease.
@@ -189,6 +189,8 @@
 
 > זה השלד; הזרם המלא של מנוע הביקוש (פאזות 1–3, §1) נבנה מעליו ב-V1 (Tech Lead).
 
+> **מאיפה הגיעה טיוטת השלד?** ה-n8n **AI Workflow Builder** (Plain English) מייצר v0 מהר — אך כאן הטיוטה כבר **מוקשחת ומקובעת בגנרטור** (Claude לא OpenAI · HITL · grounding). §9.2 ("11 השיפורים") הוא בדיוק צד-ההקשחה של ה-gate; הדוקטרינה המלאה: `AI_PROCESS_INTELLIGENCE.md` §6 — *Prompt-to-Prototype, Generator-to-Production*.
+
 ---
 
 ## Document Control
@@ -198,9 +200,10 @@
 | 1.0.0 | בלופרינט מנוע צד-ביקוש — 18 צמתים ב-3 פאזות + לופ אורגני, מותאם לציות ישראלי (inbound בלבד, תוכן אנונימי, שערי בגרות D-040), ממופה למספרי ה-playbook (146 לידים, ROI ×4.9, נתח אורגני ≥25%) | 2026-06-02 |
 | 1.1.0 | §8 חדש (D-047): צ'קליסט design review למייסד — 6 בדיקות לפני אישור מימוש הלופ (לולאה סגורה · אנונימיזציה · grounding · HITL · ציות inbound · מדידה) — הדלתא שנשמרה מיישוב הכפילות של ה-sessions המקבילים | 2026-06-03 |
 | 1.2.0 | §9 חדש (D-059): תת-זרם ה-AI Receptionist (WhatsApp) — מיפוי בוט n8n אמיתי (טקסט+קול, FAQ/INVENTORY/order) לצומת 16 + 11 שיפורים מול הדוקטרינה (HITL/grounding/Claude) + ארטיפקט `ULEASE_DEMAND_ENGINE.n8n.json` וגנרטור — מתוקן ל-Claude+HITL, לא OpenAI as-is | 2026-06-04 |
+| 1.2.1 | הצלבה ל-`AI_PROCESS_INTELLIGENCE.md` §6 (D-065): §9.2/§9.3 = צד-ההקשחה של ה-AI Workflow Builder — ה-Builder מייצר את טיוטת ה-v0 מ-Plain English, הגנרטור נשאר מקור-האמת (*Prompt-to-Prototype, Generator-to-Production*) | 2026-06-08 |
 
 **Attribution.** המקור: n8n workflow *"One AI Agent for Local Business — Full Autopilot Customer Acquisition"*. ההתאמה, שכבת הציות והמיפוי ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
 **Confidentiality.** מסמך תפעולי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_DEMAND_ENGINE.md v1.2.0 —*
+— *End of CASES/ULEASE_DEMAND_ENGINE.md v1.2.1 —*

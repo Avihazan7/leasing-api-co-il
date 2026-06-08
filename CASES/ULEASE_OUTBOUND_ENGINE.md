@@ -1,7 +1,7 @@
 # ULease 🎯 — Outbound Engine (בלופרינט n8n + Claude)
 
 **Module:** `CASES/ULEASE_OUTBOUND_ENGINE.md`
-**Version:** 1.2.0
+**Version:** 1.2.1
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — בלופרינט אוטומציה (Stage 2–3).
 **Integrates with:** `CASES/ULEASE_OUTREACH_SCRIPTS.md`, `CASES/ULEASE_IMPORTER_PLAYBOOK.md`, `CASES/ULEASE_LEASING_PLAYBOOK.md`, `CASES/ULEASE_SPEC.md`, `AI_PROGRESSION_PLAN.md`, `AI_PROCESS_INTELLIGENCE.md`
@@ -110,6 +110,8 @@ Sourcing → Quality Gate → Intelligence(score) → Personalization(A/B) → S
 
 > השלד מייבא as-is; חבר את ה-APIs האמיתיים שכבה-שכבה והעבר מ-assist לאוטומציה מלאה.
 
+> **איך מייצרים את הטיוטה הראשונה מהר?** ה-n8n **AI Workflow Builder** (בנייה מ-Plain English) מייצר את השלד מתיאור באנגלית פשוטה — אך הטיוטה עוברת הקשחה (Claude · HITL · grounding) ומתקבעת **בגנרטור הזה** כמקור-אמת. הדוקטרינה המלאה: `AI_PROCESS_INTELLIGENCE.md` §6 — *Prompt-to-Prototype, Generator-to-Production*.
+
 ---
 
 ## Document Control
@@ -119,7 +121,8 @@ Sourcing → Quality Gate → Intelligence(score) → Personalization(A/B) → S
 | 1.0.0 | בלופרינט מנוע outbound — 8 שכבות, מודלי Claude, חיבור לסקריפטים, KPIs | 2026-05-31 |
 | 1.1.0 | גל 3 של הביקורת: יישור 4 הסגמנטים לסקריפטים (W6), היחס ל-Ultra·Master·Max (W13), מצב השלד 07–08 (W14), ספירת צמתים (W18), retry/ENV למודלים (I4·I5) | 2026-06-01 |
 | 1.2.0 | §6.1 חדש (D-040): שער הבגרות — שלושת שלבי HITL (`sendAndWait`) עם קריטריוני מעבר מדידים + דרישת דיוק 100% לסיווג הסרה | 2026-06-02 |
+| 1.2.1 | הצלבה ל-`AI_PROCESS_INTELLIGENCE.md` §6 (D-065): ה-AI Workflow Builder מייצר את טיוטת השלד מ-Plain English; הגנרטור (§7) נשאר מקור-האמת — *Prompt-to-Prototype, Generator-to-Production* | 2026-06-08 |
 
 **Confidentiality.** מסמך תפעולי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_OUTBOUND_ENGINE.md v1.2.0 —*
+— *End of CASES/ULEASE_OUTBOUND_ENGINE.md v1.2.1 —*
