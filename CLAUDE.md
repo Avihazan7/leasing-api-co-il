@@ -5,7 +5,7 @@
 ## Active Modules
 - `OPERATING_SYSTEM.md` v1.16.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.1.0 — שכבת זיכרון: schema, כרטיס זהות **מלא**, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
-- `DECISION_LOG.md` v1.53.0 — יומן החלטות append-only: 66 החלטות (OS + ULease), רציונל וסטטוס.
+- `DECISION_LOG.md` v1.54.0 — יומן החלטות append-only: 67 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.2.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר, אינטגרציה עם ה-OS + ראש המטה (5 תפקידים מתוזמנים) — מיושם בפועל ב-`COWORK/`.
 - `PROJECTS_SETUP.md` v1.0.0 — Claude Projects: 3 פרויקטים (השקה 🎯 · גיוס ₪150K · Claude OS) — תוצר אחד לכל פרויקט, הוראות drop-in, רשימות העלאה ובדיקות קבלה.
 - `COMMAND_API.md` v1.3.0 — 89 slash commands, composition operators, prompting-frameworks library (כולל Opus 4.8 deltas §7.7), 32 קיצורי פתיחה ניידים (§6.3 Prompt Prefixes), drop-in system prompt loaded.
@@ -19,7 +19,7 @@
 - `AI_TYPES.md` v1.1.0 — טקסונומיית סוגי AI (Traditional·Generative·Agentic, 3×9 יכולות) + מיפוי מלא ל-ULease ולמפת המיומנויות + ההסבר הפשוט (צ'אטבוט מול סוכן).
 - `AI_CLAUDE_TOOL_SELECTOR.md` v1.3.0 — "איזה Claude לבחור?": עץ החלטה ל-15 כלי Claude (Chat · Code · Cowork · Skills · Excel · Artifacts…), יכולות רוחב (§2.5: Vision · Voice · 1M · Research), מדד 12 הדרכים (§3.5: הציון 10✅+1🟡/12), מודלים מומלצים + מנוף Effort, ומיפוי למשימות ה-OS ו-ULease.
 - `AI_CLAUDE_STACK_2026.md` v1.8.0 — Claude Stack 2026: 4 עמודי ה-cheat sheet (Cowork · Projects · Skills · Code), כלל הזהב, מיפוי ה-build התפעולי בריפו, סולם 7 הרמות (אתה ברמה 6/7) + ארבע רמות המשתמש (§10: Beginner→Architect, הציון 4/4), Agent Teams כמסלול prototype ל-Ultra·Master·Max, ה-Agent Extension Stack (Skills·MCP·Subagents·Hooks·Plugins) עם הפירוט הקנוני של §5.5 (5 ה-Hook events · subagents ללא רקורסיה · אנטומיית Plugin · Global/Project CLAUDE.md · Connectors מול Plugins), סיכוני סוכנים (Prompt Injection → Guardian) + דוקטרינת Karpathy (§5.7: מערכות סביב הסוכן, success criteria + loop, 7 כשלי הייצור) וקטלוג פקודות Claude Code (§5.8, 6 קטגוריות).
-- `AI_CLAUDE_GLOSSARY.md` v1.0.0 — מילון Claude: 30 מונחים בחמש קבוצות + מיפוי "איפה אצלך" (21/30 כבר מיושמים ב-OS) — האחות השלישית של Selector ו-Stack.
+- `AI_CLAUDE_GLOSSARY.md` v1.1.0 — מילון Claude: 30 מונחים בחמש קבוצות + 3 מונחי 2026 (Compaction · PowerPoint · Marketplace, קבוצה ו') + מיפוי "איפה אצלך" (21/30 כבר מיושמים ב-OS) — האחות השלישית של Selector ו-Stack.
 - `AI_RAG_DESIGN.md` v1.0.0 — תכנון RAG: 15 הטעויות ששוברות מערכות RAG ב-Retrieval + פתרונות, ב-4 שכבות, ממופות לרכיבי ULease (Deal Score, Q&A Bot) עם צ'קליסט design review ל-Tech Lead — משלים את שכבת ה-RAG באיפיון (§7.1).
 - `AI_PROJECT_STRUCTURE.md` v1.1.0 — מבנה פרויקט AI: תקן 4 התיקיות (prompts · data · agents · evals) + מבנה ה-Enterprise (§3: 10 תיקיות — orchestrator·specialists·tools·orchestration·api·governance·evals·tests·docs) עם מפת צמיחה MVP→Enterprise ושער מעבר + מיפוי מלא לרכיבי האיפיון (Ultra=orchestrator · Masters=specialists · Guardian=governance) — השלד שריפו הפלטפורמה של ULease יקום עליו ביום 1 של ה-Tech Lead וגדל איתו עד V2.
 - `AI_ROLES_2026.md` v1.0.0 — תפקידי ה-AI של 2026: 21 תפקידים ממופים — המייסד (3), ה-Tech Lead (5 בכובע אחד), Guardian (2) — מאמת את הגדרת התפקיד ב-ULEASE_HIRING והופך אותה להצעת ערך לגיוס.
@@ -52,7 +52,7 @@
 - `CASES/ULEASE_TECH_ONBOARDING.md` v1.2.0 — Onboarding ל-Tech Lead: יום 0/1, רשימת קריאה ב-OS, תוכנית 30·60·90 + שקיפות SDLC (Jira/GitHub מיום 0, דוח תהליך שבועי, cycle time).
 - `CASES/ULEASE_LAUNCH_CHECKLIST.md` v1.3.0 — צ'קליסט השקה (שבועיים): דומיין, משפטי, MVP, תוכן, outreach, GEO, QA ולוח שבועי.
 - `CASES/ULEASE_DASHBOARD.html` v1.2.0 — דשבורד מנהלים אינטראקטיבי (RTL): KPIs, גרפים (הכנסה/מזומן/עסקאות/הוצאות/רווחיות), תמהילי הכנסה והוצאה, וצ'קליסט השקה חי; נוצר ע"י `CASES/ULEASE_DASHBOARD.py`.
-- `CASES/ULEASE_AUTOMATION_MAP.md` v1.4.0 — מפת אוטומציות AI לפי 10 פונקציות עסקיות: 42 אוטומציות מסוננות ל-ULease (כולל Deal-to-Content Generator ו-Rank Monitor מהלופ האורגני), סטטוס (18 כבר בנויות), עדיפות MVP/V1/V2 + שתי חבילות ה-Skills המוכנות של Anthropic כשכבת מימוש מדף (§11: 31 לעסקים-קטנים · §11.1: 10 מקצועיים ל-authoring, ממופים לעבודות ההשקה) + שכבת המדידה (§12): baseline, ROI וכלל 90 הימים.
+- `CASES/ULEASE_AUTOMATION_MAP.md` v1.5.0 — מפת אוטומציות AI לפי 10 פונקציות עסקיות: 42 אוטומציות מסוננות ל-ULease (כולל Deal-to-Content Generator ו-Rank Monitor מהלופ האורגני), סטטוס (18 כבר בנויות), עדיפות MVP/V1/V2 + שלוש חבילות ה-Skills המוכנות של Anthropic כשכבת מימוש מדף (§11: 31 לעסקים-קטנים · §11.1: 10 מקצועיים · §11.2: אשכול Ops תפעולי, ממופים לעבודות ההשקה) + שכבת המדידה (§12): baseline, ROI וכלל 90 הימים.
 - `CASES/ULEASE_AUDIT.md` v1.4.0 — דוח ביקורת מקצה-לקצה (1.6.2026): 4 סוכני ביקורת מקבילים, 41 ממצאים (9🔴/21🟡/11🔵) — **כולם נסגרו** ב-3 גלי תיקון + מחירון/SLA.
 
 ## Module Load Order
