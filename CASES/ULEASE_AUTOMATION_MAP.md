@@ -1,10 +1,10 @@
 # ULease 🎯 — מפת אוטומציות AI לפי פונקציה עסקית
 
 **Module:** `CASES/ULEASE_AUTOMATION_MAP.md`
-**Version:** 1.4.0
+**Version:** 1.5.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — Backlog אוטומציות מתועדף (Business layer, תחת CASES).
-**Source:** מבוסס על מסגרת *"546 AI Automation Ideas"* (AI Matt · Next Step Agents) + *"31 Claude Skills For Small Businesses"* (Anthropic plugin pack) + *"10 Claude Skills Every Professional Needs"* (Hamza Khalid) — מסונן ומותאם ל-ULease.
+**Source:** מבוסס על מסגרת *"546 AI Automation Ideas"* (AI Matt · Next Step Agents) + *"31 Claude Skills For Small Businesses"* (Anthropic plugin pack) + *"10 Claude Skills Every Professional Needs"* (Hamza Khalid) + *"Claude Skills That Replace a Full Operations Team"* (25 ops skills) — מסונן ומותאם ל-ULease.
 **Integrates with:** `CASES/ULEASE_SPEC.md`, `CASES/ULEASE_OUTBOUND_ENGINE.md`, `AI_TYPES.md`, `AI_PROCESS_INTELLIGENCE.md`, `CASES/ULEASE_DASHBOARD.html`
 
 > **הפילוסופיה:** רוב האנשים עוצרים בפרומפטים. מעטים בונים את **המערכת שמריצה את העסק**. Build systems · Own value · **Owned, not rented** — זה בדיוק מה ש-ULease בונה.
@@ -164,6 +164,31 @@ Anthropic שחררה חבילת **31 Claude Skills לעסקים קטנים** ש�
 
 > ⚠️ **אותה הסתייגות, רובד אישי:** החבילה הזו פותרת **פרודוקטיביות מקצועית** (כתיבה, סיכום, ניתוח) — משלימה את חבילת התפעול, לא מחליפה את המוצר. שים לב לכפילות מכוונת: `weekly-report` ו-`cold-outreach` חופפים ל-skills/scripts קיימים (`investor-update`, `OUTREACH_SCRIPTS`) — הם **מגשרים** עד שהגרסה המותאמת שלנו בשלה.
 
+### 11.2 חבילה שלישית: אשכול ה-Ops התפעולי ("25 skills שמריצות ops בלי לגייס")
+
+מקור: אינפוגרפיקת *Claude Skills That Replace a Full Operations Team* (25 skills · 6 קטגוריות: COMMS · DOCS · DATA · PLANNING · QUALITY · SYSTEMS). המקבילה התפעולית ל-§11/§11.1 — נופלת בדיוק על המציאות של ULease: **סולו/דואו עד ה-Tech Lead** (אברהם + שירי).
+
+**~14/25 כבר מכוסים** (לא ממפים מחדש): inbox-triage→`/lead-triage`+ראש המטה "Inbox" · slack-digest/pipeline-report→`/sales-brief` · client-update→`weekly-report` · meeting-recap→`meeting-notes`+"Meetings" · escalation-draft→`/handle-complaint` · kpi-snapshot→`/business-pulse` · expense-scan→`/month-end-prep` · friday-wrap→`/friday-brief` · week-plan/morning-brief→`/monday-brief`+"Briefer" · onboard-checklist→Onboarding Coach (§2).
+
+**הדלתא — האשכול התפעולי החדש (אימות grep: 0 בריפו):**
+
+| Skill חדש | מה הוא עושה ל-ULease | בעלים | מתי |
+|-----------|----------------------|:-----:|:---:|
+| `/time-audit` | סורק יומן 30 יום → איפה השעות באמת הלכו מול התכנון; חושף את דליפת-הזמן הגדולה | אברהם | עכשיו |
+| `/capacity-check` | משימות מול שעות פנויות → דגל over-commit לפני Deadline שנשבר | אברהם | עכשיו |
+| `/sprint-scope` | מפרק את ההשקה ל-milestones שבועיים + שעות לכל אבן-דרך | אברהם | עכשיו |
+| `/risk-flag` | סורק פרויקטים פעילים לאיתותי-סיכון (deadline · scope gap · מייל ללא מענה) → מרשם סיכונים | אברהם | עכשיו (שער Go-Live) |
+| `/deliverable-check` | QA לתוצר לפני שיוצא ללקוח/משקיע (פורמט · מותג · טון) → pass/fail | שירי | השקה+ |
+| `/process-audit` | SOP מול ה-workflow בפועל → צעדים מיושנים/חסרים/לא-מבוצעים | שירי | V1 |
+| `/vendor-compare` | 3 הצעות ספק/כלי → השוואת מחיר/היקף/תנאים + המלצה בשורה | אברהם | עכשיו |
+| `/access-audit` | כל כלי/login/מנוי → חשבונות לא-בשימוש + חידושים מתקרבים | שירי | חודשי (עלויות) |
+| `/file-cleanup` | סורק תיקיות → כפילויות, קבצים מיושנים, שמות חסרי-משמעות → צ'קליסט | שירי | לפי צורך |
+| `/sop-draft` · `/policy-writer` · `/changelog` | תהליך חוזר → SOP ממוספר · מדיניות פנימית · יומן שינויים | שירי | V1 (לפני הרחבת צוות) |
+
+**אותם 3 עקרונות (§11/§11.1):** skill אחד-job אחד (combo, לא ניפוח) · כפילות מכוונת = גשר (תפעול-העסק, לא המוצר) · **שער המדידה §12** — time-audit/capacity-check הם ה-baseline עצמו.
+
+> **למה זה מחזק את הארכיטקטורה:** עד ה-Tech Lead הצוואר הוא **זמן המייסד**. אשכול ה-DATA+PLANNING+QUALITY (time-audit · capacity-check · risk-flag · deliverable-check) הוא שכבת ה-chief-of-staff התפעולית **on-demand** שמגנה על המשאב הזה — משלים את 5 התפקידים המתוזמנים של `COWORK_SETUP` §9 בכלים נקודתיים.
+
 ---
 
 ## 12. 📏 שכבת המדידה — ROI לכל אוטומציה (D-040)
@@ -213,7 +238,8 @@ Anthropic שחררה חבילת **31 Claude Skills לעסקים קטנים** ש�
 | 1.2.0 | §12 חדש (D-040): שכבת המדידה — baseline חובה, עלות-מול-תשואה, כלל 90 הימים, ואומדן ROI כתוב כתנאי לבניית ההזדמנויות הבאות | 2026-06-02 |
 | 1.3.0 | שתי אוטומציות מהלופ האורגני (D-047): Deal-to-Content Generator + SEO/GEO Rank Monitor (§1, V1) + סימון ה-Q&A Bot כ-AI Receptionist (§3) — סה"כ 40→42 | 2026-06-03 |
 | 1.4.0 | §11.1 חדש (D-051): חבילה שנייה — 10 ה-Skills המקצועיים (authoring) ממופים לעבודות ההשקה (cold-outreach→היצע · weekly-report→משקיעים · brand→מותג) + 4 stacks + עקרון "skill אחד, job אחד" | 2026-06-03 |
+| 1.5.0 | §11.2 חדש (D-067): חבילה שלישית — אשכול ה-Ops התפעולי ("25 skills שמריצות ops בלי לגייס"); ~14/25 כבר מכוסים, הדלתא = 10 יכולות חדשות (time-audit · capacity-check · process-audit · risk-flag · access-audit · file-cleanup · vendor-compare · sprint-scope · deliverable-check · sop/policy/changelog) ממופות למי-עושה-מה (אברהם/שירי) + שער המדידה §12 | 2026-06-08 |
 
-**Attribution.** המסגרות: *546 AI Automation Ideas* (AI Matt · Next Step Agents) · *31 Claude Skills For Small Businesses* (Anthropic) · *10 Claude Skills Every Professional Needs* (Hamza Khalid). הסינון, המיפוי והתעדוף ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** המסגרות: *546 AI Automation Ideas* (AI Matt · Next Step Agents) · *31 Claude Skills For Small Businesses* (Anthropic) · *10 Claude Skills Every Professional Needs* (Hamza Khalid) · *Claude Skills That Replace a Full Operations Team* (25 ops skills). הסינון, המיפוי והתעדוף ל-ULease — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of CASES/ULEASE_AUTOMATION_MAP.md v1.4.0 —*
+— *End of CASES/ULEASE_AUTOMATION_MAP.md v1.5.0 —*
