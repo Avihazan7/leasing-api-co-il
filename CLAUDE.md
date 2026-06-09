@@ -5,7 +5,7 @@
 ## Active Modules
 - `OPERATING_SYSTEM.md` v1.16.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
 - `MEMORY.md` v1.1.0 — שכבת זיכרון: schema, כרטיס זהות **מלא**, Active Focus/Projects, העדפות ופרוטוקול קריאה/כתיבה.
-- `DECISION_LOG.md` v1.55.0 — יומן החלטות append-only: 68 החלטות (OS + ULease), רציונל וסטטוס.
+- `DECISION_LOG.md` v1.56.0 — יומן החלטות append-only: 69 החלטות (OS + ULease), רציונל וסטטוס.
 - `COWORK_SETUP.md` v1.2.0 — מדריך אונבורדינג ל-Cowork: 7 שלבי הגדרה, Global Instructions, מפת קבצי הקשר, אינטגרציה עם ה-OS + ראש המטה (5 תפקידים מתוזמנים) — מיושם בפועל ב-`COWORK/`.
 - `PROJECTS_SETUP.md` v1.0.0 — Claude Projects: 3 פרויקטים (השקה 🎯 · גיוס ₪150K · Claude OS) — תוצר אחד לכל פרויקט, הוראות drop-in, רשימות העלאה ובדיקות קבלה.
 - `COMMAND_API.md` v1.3.0 — 89 slash commands, composition operators, prompting-frameworks library (כולל Opus 4.8 deltas §7.7), 32 קיצורי פתיחה ניידים (§6.3 Prompt Prefixes), drop-in system prompt loaded.
@@ -39,7 +39,7 @@
 - `CASES/ULEASE_SPEC.md` v1.5.0 — איפיון מוצר ומערכת מקצה-לקצה: שחקנים, ארכיטקטורה, Multi-agent (Ultra·Master·Max), שכבת ידע RAG (§7.1), Guardrails & Evals (§7.2), מודל נתונים, אינטגרציות ו-roadmap.
 - `CASES/ULEASE_DECK.md` v1.2.0 — מצגת פיץ' (13 שקפים): Marp + HTML אינטראקטיבי (הקשה/החלקה/חיצים), נוצר ע"י `CASES/ULEASE_DECK.py`.
 - `CASES/ULEASE_METHODOLOGY.md` v1.1.0 — מתודולוגיה: Big Five (OCEAN) להתאמת קונה-רכב, העשרה אינסטרומנטלית, תורת המשחקים, ומו"מ מבוסס-אינטרסים.
-- `CASES/ULEASE_HIRING.md` v1.0.0 — ערכת גיוס: מנהל מערכות טכנולוגיה (תיאור תפקיד, מודעת דרושים, שאלות ראיון, תהליך).
+- `CASES/ULEASE_HIRING.md` v1.1.0 — ערכת גיוס Founding Tech Lead **מוכנה-להרצה**: תיאור תפקיד, מודעה, שאלות ראיון ותהליך + תגמול נעול (היברידי — שכר מופחת + אקוויטי, D-069), תוכנית Sourcing, מסר פנייה למועמדים, Scorecard ראיון ותבנית הצעה. מבצעת את שער ה-Tech Lead (D-012).
 - `CASES/ULEASE_IMPORTER_PLAYBOOK.md` v1.1.0 — Playbook מו"מ מול יבואני רכב: כאב, יתרונות, "שירות שלא היה כמותו", סקריפט, התנגדויות ופיילוט.
 - `CASES/ULEASE_LEASING_PLAYBOOK.md` v1.1.0 — Playbook מו"מ ליבואנים מקבילים (reach/מט"ח/אמון) וחברות ליסינג (disposal דו-כיווני + sourcing במכרז מחיר-שני).
 - `CASES/ULEASE_DEMAND_PLAYBOOK.md` v1.2.0 — Playbook צד-הביקוש: יחידת כלכלה (CPL ₪103, ROI ×4.9), 3 פרסונות Big Five, 7 ערוצי רכישה (כולל GEO — ציטוט בתשובות AI), משפך, ציות ו-KPIs — סוגר את ממצא C4; מנוע הביצוע: `ULEASE_DEMAND_ENGINE.md`.
