@@ -1,10 +1,10 @@
 # קוברנטיס 101 — Kubernetes (K8s) Orchestration Foundations
 
 **Module:** `KUBERNETES_101.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — מודול ידע/יסודות תשתית (Knowledge layer, §3 שורה 29).
-**Source:** מבוסס על האינפוגרפיקה *"Kubernetes 101"* (Lawal Abdullateef A. · CloudNimbus — DevOps · System Design · Infrastructure).
+**Source:** מבוסס על האינפוגרפיקה *"Kubernetes 101"* (Lawal Abdullateef A. · CloudNimbus — DevOps · System Design · Infrastructure) + אינפוגרפיקת *"Docker Architecture"* (Client · DOCKER_HOST · Registry) — §2.5.
 **Integrates with:** `CLOUD_ARCHITECT_SKILLS.md` (שכבה 4 — Cloud-Native), `AI_SYSTEM_DESIGN.md`, `AI_PROJECT_STRUCTURE.md`, `AI_CLAUDE_STACK_2026.md`, `CASES/ULEASE_SPEC.md`, `CASES/ULEASE_HIRING.md`, `CASES/ULEASE_TECH_ONBOARDING.md`
 
 ---
@@ -42,6 +42,44 @@
 | **Container** | חבילת תוכנה קלה ועצמאית | האפליקציה עצמה (Node/Python service, `AI_PROJECT_STRUCTURE.md`) |
 
 > ה-Pod, לא ה-container, הוא יחידת התזמון. כמה containers ב-Pod אחד = sidecar pattern (לוג-שיפר, proxy) — אבל ברירת-המחדל הבריאה: **container אחד ל-Pod**.
+
+---
+
+## §2.5 — Docker: הרובד שמתחת (מאיפה מגיע ה-Container)
+
+§2 הציג את ה-**Container** כמושג — אבל מאיפה הוא מגיע, ואיך הוא נארז ומופץ? זה **Docker**, הרובד שמתחת ל-K8s: Docker **בונה ומריץ container אחד**; K8s **מתזמר רבים**. בלי הרובד הזה אין מה לתזמר — ולכן זה הסעיף שקודם לכל השאר.
+
+### האנטומיה — שלושה חלקים (Client → DOCKER_HOST → Registry)
+
+| חלק | מה זה עושה | המקבילה ב-OS |
+|------|-------------|---------------|
+| **Client** (CLI / Remote API) | מנפיק פקודות מחזור-חיים: `build` · `run` · `pull` · `push` | "דלת אחת" לתשתית (תאום ל-API Server, §3) |
+| **Docker Daemon** (Engine, ב-DOCKER_HOST) | מנהל images, containers, רשתות ו-storage | ה-Controller שמחזיק desired state (תאום ל-§3) |
+| **Registry** | מאחסן ומפיץ images בין סביבות (Docker Hub · ECR · GHCR) | מקור-אמת אחד לארטיפקט ה-deploy |
+
+### Image מול Container — ההבחנה הקריטית
+
+| | **Image** | **Container** |
+|---|-----------|---------------|
+| מה זה | תבנית לקריאה-בלבד: קוד + תלויות, מגורסת (`app:1.4`) | מופע **רץ** של image — יחידת ה-workload המבודדת |
+| אנלוגיה | class | object (instance) |
+| ב-ULease | ארטיפקט ה-deploy של שירות (Ultra/API), נבנה מ-Dockerfile | המופע שרץ ב-**Pod** (§2) |
+
+### מחזור החיים — build → push/pull → run
+
+```
+Dockerfile → [docker build] → Image → [docker push] → Registry
+                                 │                          │
+                            [docker run]              [docker pull] (סביבה אחרת)
+                                 ↓
+                            Container רץ
+```
+
+- **build** — Dockerfile (מקור-אמת מגורס) → image. תאום מושלם לדוקטרינת **"הגנרטור = מקור-אמת"** (D-023/D-065): מתארים את הסביבה כ**קוד**, לא "מתקינים ידנית בשרת".
+- **push/pull** — אותו image בדיוק רץ ב-dev · staging · prod. סוף ל-"עובד אצלי" (עקביות סביבה, אחות ל-`AI_DATA_VALIDATION.md`).
+- **run** — image → container מבודד.
+
+> 🎯 **ההכרעה ל-ULease (משלימה את §11):** ל-**MVP** — Docker + **Docker Compose** (כמה containers מקומית: API + Postgres + n8n) הוא **מנגנון ה-deploy בפועל**; ה-managed platform (Cloud Run / App Service) מושך את ה-image מ-Registry ומריץ אותו — **בלי K8s**. כלומר Docker הוא **כן** דרישת MVP (אתה מכיל ומפיץ), בעוד K8s (תזמור רבים) הוא V1+. השורה התחתונה של §11 מתחדדת: *containerize עם Docker מהיום הראשון · orchestrate עם K8s רק כשהבעיות של §1 אמיתיות.*
 
 ---
 
@@ -167,9 +205,10 @@ Kubernetes הוא **אמצעי** (reliability, scale, self-healing) — לא מ�
 | גרסה | שינוי | תאריך |
 |------|--------|--------|
 | 1.0.0 | יצירת המודול — 10 אבני-הבניין של Kubernetes (בעיה · מושגי ליבה · Control/Data Plane · Workloads · Networking · Config/Secrets · Scaling · Observability · Security · DevOps) + §11 הכרעת design-review MVP/V1/V2 ושער אנטי-over-engineering + §12 השורה התחתונה. ממופה ל-ULease ולדוקטרינת "שכבות לא כלים". מבוסס אינפוגרפיקת *"Kubernetes 101"* (Lawal Abdullateef A. · CloudNimbus) — D-061 | 2026-06-04 |
+| 1.1.0 | §2.5 חדש (D-068): **Docker — הרובד שמתחת** (Client · Daemon · Registry · image מול container · build-run-pull-push); סוגר את רובד מנוע-הקונטיינר שציר התשתית דילג עליו. ההכרעה: Docker = **כן** דרישת MVP (containerize+Compose → managed platform), K8s = V1+ (תזמור). build=מקור-אמת תאום ל-D-023. מבוסס אינפוגרפיקת *"Docker Architecture"* | 2026-06-08 |
 
-**Attribution.** מבנה 10 הסעיפים והמושגים: האינפוגרפיקה *"Kubernetes 101"* (Lawal Abdullateef A. · CloudNimbus — DevOps · System Design · Infrastructure). המיפוי ל-ULease, הכרעת ה-design-review ושער האנטי-over-engineering — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** מבנה 10 הסעיפים והמושגים: האינפוגרפיקה *"Kubernetes 101"* (Lawal Abdullateef A. · CloudNimbus — DevOps · System Design · Infrastructure). אנטומיית Docker (§2.5): אינפוגרפיקת *"Docker Architecture"*. המיפוי ל-ULease, הכרעת ה-design-review ושער האנטי-over-engineering — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
 **Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of KUBERNETES_101.md v1.0.0 —*
+— *End of KUBERNETES_101.md v1.1.0 —*

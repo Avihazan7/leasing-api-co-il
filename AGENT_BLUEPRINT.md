@@ -1,10 +1,10 @@
 # בלופרינט סוכן AI — How to Build an AI Agent
 
 **Module:** `AGENT_BLUEPRINT.md`
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — מודול ידע/בלופרינט (Knowledge layer).
-**Source:** מבוסס על האינפוגרפיקה *"How to Build an AI Agent — A step-by-step blueprint to design, build and scale intelligent agents"* + הפוסט הנלווה (code231) + *"12 Must-Know Agentic AI Terms"* (AI Matt · Next Step Agents) — §11.
+**Source:** מבוסס על האינפוגרפיקה *"How to Build an AI Agent — A step-by-step blueprint to design, build and scale intelligent agents"* + הפוסט הנלווה (code231) + *"12 Must-Know Agentic AI Terms"* (AI Matt · Next Step Agents) — §11 + *"10 Best Practices For Building Reliable AI Agents in 2026"* (Alok Sharan) — §12.
 **Integrates with:** `OPERATING_SYSTEM.md` §4, `COMMAND_API.md` §8, `AI_CLAUDE_TOOL_SELECTOR.md`, `AI_SYSTEM_DESIGN.md`, `AI_RAG_DESIGN.md`, `AI_PROJECT_STRUCTURE.md`, `AI_CLAUDE_STACK_2026.md` §5.7, `CASES/ULEASE_SPEC.md` §7.1–§7.2 — ו-`leasing-api/CLAUDE.md` (צורך את §10 ככללי עבודה מחייבים).
 
 ---
@@ -106,6 +106,27 @@
 
 ---
 
+## §12 — עשר פרקטיקות לסוכן אמין (Reliable-Agent Practices → הבית הקנוני)
+
+> אם §9 הוא **אבני הבניין**, §10 **כללי העבודה** ו-§11 **אוצר המילים** — §12 הוא **צ'קליסט האמינות**: 10 הפרקטיקות שמפרידות בין סוכן-הדגמה לסוכן-production (Alok Sharan, 2026). אותו עיקרון של §11: לא דוקטרינה חדשה — **אינדקס** שסוגר פיזור. כל פרקטיקה כבר חיה ב-OS; הטבלה מוכיחה שדוקטרינת האמינות **שלמה**, ונותנת ל-Tech Lead צ'קליסט אחד לפני production.
+
+| # | הפרקטיקה | התמצית | 📍 הבית הקנוני | 🎯 ב-ULease |
+|---|-----------|---------|----------------|-------------|
+| 1 | **Fail-Safe Design** | מטרות צרות · fallback · scale slowly | שלב 1 (Purpose/Scope) · §10 #3 SIMPLE · `AI_MICROSERVICES.md` (Circuit Breaker) | retry+fallback במנועי n8n (`OUTBOUND` §7, I4); סוכן צר לכל Master |
+| 2 | **Context Configuration** | index · search · knowledge · retrieval | שלב 5 (Memory) · `AI_RAG_DESIGN.md` · `SPEC` §7.1 | pgvector: מלאי·מחירונים·רגולציה; 15 טעויות ה-Retrieval |
+| 3 | **Tool-Based Capabilities** | כל פעולה = כלי מבוקר (schema · validate · nulls) | שלב 4 (Tools) · §11 #5 Tool Use · `AI_DATA_VALIDATION.md` | Max דרך APIs; ולידציית פלט (Type/Range/Format) |
+| 4 | **Product-Spec Prompts** | פרומפט = דרישת מוצר (role·context·goal·format·constraints·steps) | שלב 2 (System Prompt) · `COMMAND_API.md` §7 (RTF·RACE·RISE·CO-STAR) | מסגרות הפרומפט; Skills מוגדרים צר |
+| 5 | **Cost & Performance** | model routing · caching · tokens · batch | שלב 3 (Choose LLM) · `AI_CLAUDE_TOOL_SELECTOR.md` · Effort §7.7 (D-024) · `AUTOMATION_MAP` §12 | Haiku ניקוד/ניתוב · Sonnet כתיבה; כלל 90 הימים |
+| 6 | **Versioning & Release Gates** | גרסה לכל prompt/tool/dataset/eval · gate release | **D-023** (CI חוסם-merge · eval חוסם-deploy) · `AI_PROCESS_INTELLIGENCE.md` §6 (generator=מקור-אמת) · `AI_PROJECT_STRUCTURE.md` (`prompts/registry.yaml`) | bit-exact CI; D-065 (prompt-to-prototype) |
+| 7 | **Safety & Governance** | permissions · PII · audit · guardrails · escalate | §11 #8 Guardrails · Guardian-as-Hook (D-037/8) · `SPEC` §7.2 · `STACK` §5.6 (Prompt Injection) | Guardian דטרמיניסטי מול המחירון; ציות (תיקון 40, PII) |
+| 8 | **Trustworthy Conversations** | הצג מגבלות · פעולות · escalation · שקיפות | §11 #9 HITL · `AI_PROCESS_INTELLIGENCE.md` (`sendAndWait`) · שלב 7 (Interface) · `SPEC` §7.2 ("לא יודע→אדם") | Q&A Bot מסנן ומסלים; grounding 100% לעובדות כספיות |
+| 9 | **Real-World Evaluation** | dataset · edge cases · simulate tools · traces · fix gaps | שלב 8 (Testing) · `SPEC` §7.2 (golden 50 · red-team 0) · `AI_RAG_DESIGN.md` | eval suite חוסם-deploy; דגימת 10% (D-040) |
+| 10 | **Continuous Improvement** | traces · feedback · retest · update memory · expand scope | שלב 8 · `AI_PROCESS_INTELLIGENCE.md` (מדידה · שער בגרות) · §10 #5 GOAL-DRIVEN (loop) | שער בגרות 3-שלבי (assist→אוטונומיה); Feedback Loop (`OUTBOUND` שכבה 08) |
+
+> **השורה התחתונה של §12: 10/10 כבר מיושמות — מפוזרות על 8 השלבים · §10 · §11 · SPEC §7.2 · D-023 · D-040.** המקור (Sharan) מציג כל פרקטיקה כ-"flow" של sub-steps; הזיקוק שלנו ממפה אותה לבית שבו היא **כבר בנויה** (רף D-049/D-054/D-063: אינדקס, לא שכפול). זהו **צ'קליסט ה-go-live של ה-Tech Lead**: לפני שסוכן עולה ל-production, עוברים 10 השורות — כל אחת מצביעה על המנגנון הקיים שמספק אותה. שלוש האחיות סוגרות מעגל: §11 = *שפת* הסוכנים · §10 = *כללי* הבנייה · §12 = *פרקטיקות* האמינות.
+
+---
+
 ## השורה התחתונה
 
 סוכן הוא מערכת של שמונה שכבות — מטרה, פרומפט, מודל, כלים, זיכרון, תזמור, ממשק ובדיקות. ULease בנויה מכולן (כל שורה בטבלה מצביעה על המימוש), וה-OS הזה הוא היישום של דוקטרינת הבנייה עצמה. מי שמבין את זה — לא בוחר מודל; הוא בונה מערכת.
@@ -118,9 +139,10 @@
 |------|--------|--------|
 | 1.0.0 | יצירת המודול — בלופרינט 8 השלבים (Purpose→Testing) כשכבת ניווט מעל משפחת `AI_*` + §9 טבלת ה-Ecosystem + §10 כללי העבודה (דוקטרינת Karpathy) כמקור קנוני שאליו מפנה `leasing-api`. מבוסס אינפוגרפיקת *"How to Build an AI Agent"* (D-056) | 2026-06-04 |
 | 1.1.0 | §11 חדש (D-063): **12 מונחי ה-Agentic** ב-4 קבוצות (Foundations · Reasoning/Execution · Safety/Reliability · Coordination/Scale) כאינדקס מונח→בית-קנוני→ULease — אחות ל-`AI_CLAUDE_GLOSSARY` (מונחי מוצר Claude). הכרעת ספרנות: העשרה תחת הקפאת המודולים, לא מודול חדש (תקדים D-051/D-055/D-058). מבוסס *"12 Must-Know Agentic AI Terms"* (AI Matt) | 2026-06-07 |
+| 1.2.0 | §12 חדש (D-068): **עשר פרקטיקות לסוכן אמין** (Reliable-Agent Practices) כאינדקס פרקטיקה→בית-קנוני→ULease — 10/10 כבר מיושמות אך מפוזרות (8 השלבים · §10 · §11 · SPEC §7.2 · D-023 · D-040) → צ'קליסט go-live ל-Tech Lead, אחות שלישית ל-§10/§11. הכרעת ספרנות: אינדקס, לא שכפול (תקדים D-063). מבוסס *"10 Best Practices For Building Reliable AI Agents in 2026"* (Alok Sharan) | 2026-06-08 |
 
-**Attribution.** מבנה 8 השלבים וטבלת האקו-סיסטם: האינפוגרפיקה *"How to Build an AI Agent"* (code231). דוקטרינת Karpathy (§10): פוסט התובנות של Andrej Karpathy. 12 מונחי ה-Agentic (§11): *"12 Must-Know Agentic AI Terms"* (AI Matt · Next Step Agents). המיפוי ל-ULease ולמשפחת ה-`AI_*` — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+**Attribution.** מבנה 8 השלבים וטבלת האקו-סיסטם: האינפוגרפיקה *"How to Build an AI Agent"* (code231). דוקטרינת Karpathy (§10): פוסט התובנות של Andrej Karpathy. 12 מונחי ה-Agentic (§11): *"12 Must-Know Agentic AI Terms"* (AI Matt · Next Step Agents). 10 פרקטיקות האמינות (§12): *"10 Best Practices For Building Reliable AI Agents in 2026"* (Alok Sharan). המיפוי ל-ULease ולמשפחת ה-`AI_*` — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
 **Confidentiality.** קובץ זה הוא חלק מה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of AGENT_BLUEPRINT.md v1.1.0 —*
+— *End of AGENT_BLUEPRINT.md v1.2.0 —*
