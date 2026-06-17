@@ -757,7 +757,7 @@ macros:
 זה הבלוק שדורש העתקה ל-`userPreferences` או ל-`CLAUDE.md` ראשי. **זה מה שגורם לכל המסמך הזה לעבוד.**
 
 ```
-COMMAND API ENABLED — v1.0
+COMMAND API ENABLED — v1.1
 
 When the user begins a message with /command syntax, parse and execute
 according to COMMAND_API.md (loaded in OS context).
@@ -818,7 +818,7 @@ Claude OS Root/
 
 ```markdown
 ## Active Modules
-- COMMAND_API.md v1.0 — 89 slash commands, composition, system prompt loaded
+- COMMAND_API.md v1.1.0 — 89 slash commands, composition, system prompt loaded
 - (other modules…)
 
 ## Module Load Order
@@ -996,4 +996,4 @@ interface CommandContract {
 
 **Confidentiality.** This file is part of the personal Claude Operating System of Avraham Bar Yochai Chazan. Commands referencing internal IP (Deal Score, Match API, legal automation) inherit the confidentiality of those sub-systems.
 
-— *End of COMMAND_API.md v1.0 —*
+— *End of COMMAND_API.md v1.1.0 —*

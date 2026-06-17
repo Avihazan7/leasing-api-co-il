@@ -1,0 +1,82 @@
+<!doctype html><html lang='he' dir='rtl'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>ULease 🎯 — Pitch Deck</title><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#2a2622;font-family:Arial,'Helvetica Neue',sans-serif}
+.slide{direction:rtl;text-align:right;width:100%;max-width:1000px;min-height:100vh;
+  margin:0 auto;padding:8vh 9vw;display:flex;flex-direction:column;justify-content:center;
+  background:#f5f1e8;color:#2a2622;border-bottom:1px solid #ddd;position:relative}
+.kicker{color:#c0532b;font-weight:700;letter-spacing:.15em;font-size:.85rem;margin-bottom:1.2rem}
+.slide h2{color:#c0532b;font-size:2.5rem;line-height:1.15;margin-bottom:.4rem}
+.slide h3{color:#2a2622;font-size:1.6rem;font-weight:400;margin-bottom:.8rem;opacity:.75}
+.lead{font-size:1.5rem;font-weight:700;margin:.6rem 0 1.2rem}
+ul{list-style:none}
+li{font-size:1.25rem;line-height:1.85;padding-right:1.4rem;position:relative}
+li::before{content:'';position:absolute;right:0;top:.8em;width:.5rem;height:.5rem;background:#c0532b;border-radius:50%}
+strong{color:#c0532b}
+table{border-collapse:collapse;margin-top:.8rem;font-size:1.2rem;width:100%}
+th,td{padding:.55rem 1rem;border-bottom:1px solid #ccc;text-align:right}
+th{color:#c0532b;border-bottom:2px solid #c0532b}
+.note{margin-top:1.8rem;font-style:italic;font-size:1.1rem;opacity:.8;border-right:3px solid #c0532b;padding-right:1rem}
+.hint{margin-top:1.6rem;color:#c0532b;font-weight:700;font-size:1rem}
+.page{position:absolute;bottom:3vh;left:9vw;color:#c0532b;font-weight:700;font-size:.9rem}
+.title-slide h2{font-size:3.6rem}
+/* --- ניווט (מצב JS) --- */
+.deck-nav,.progress,.hint{display:none}
+.deck-nav{position:fixed;bottom:0;left:0;right:0;z-index:10;align-items:center;
+  justify-content:space-between;padding:.55rem 1rem;background:rgba(42,38,34,.92);direction:rtl}
+.deck-nav button{background:#c0532b;color:#fff;border:none;border-radius:8px;
+  padding:.65rem 1.3rem;font-size:1.05rem;font-weight:700;cursor:pointer}
+.deck-nav .counter{color:#fff;font-weight:700;font-size:1rem}
+.progress{position:fixed;top:0;right:0;height:4px;background:#c0532b;z-index:11;width:0;transition:width .25s}
+.js .deck-nav{display:flex}
+.js .progress{display:block}
+.js .hint{display:block}
+.js .page{display:none}
+.js .slide{position:fixed;inset:0;max-width:none;min-height:0;opacity:0;pointer-events:none;
+  transition:opacity .25s ease;overflow:auto;justify-content:safe center;padding-bottom:12vh}
+.js .slide.active{opacity:1;pointer-events:auto;z-index:1}
+@media print{
+  html,body{background:#fff}
+  .deck-nav,.progress,.hint{display:none!important}
+  .slide,.js .slide{position:static;opacity:1;pointer-events:auto;min-height:auto;
+    height:100vh;page-break-after:always;border:none;max-width:none}
+}
+</style></head><body><section class="slide title-slide"><div class="kicker">01 / 13</div><h2>ULease 🎯</h2><h3>Leasing.co.il</h3><div class="lead">עסקת רכב חדש — דיגיטלית, מקצה-לקצה</div><ul><li>Marketplace תלת-צדדי · תורת המשחקים · Multi-agent</li></ul><div class="note">מצגת השקעה · 2026</div><div class="hint">הקש · החלק · או מקשי ←/→ למעבר בין שקפים</div><div class="page">ULease 🎯 · 1</div></section><section class="slide"><div class="kicker">02 / 13</div><h2>הבעיה 🔥</h2><ul><li>שוק רכב חדש בכאוס תמחורי — מלאי <strong>0 ק&quot;מ</strong> תקוע מאמצע 2025</li><li>עשרות אלפי <strong>גיולים</strong> ב-2026 + דגמים חדשים נכנסים</li><li>שקל מתחזק → מרווחי יבואנים גדלים, מחירים נלחצים</li><li>עסקאות איטיות, אופליין, חוסר מקצועיות ושקיפות</li></ul><div class="note">המלאי קיים. הביקוש קיים. אין מי שמחבר אותם דיגיטלית.</div><div class="page">ULease 🎯 · 2</div></section><section class="slide"><div class="kicker">03 / 13</div><h2>הפתרון ✅</h2><div class="lead">ULease מחברת את שלושת הצדדים בפלטפורמה אחת:</div><ul><li><strong>היצע:</strong> יבואנים · ליסינג · מימון → API</li><li><strong>ביקוש:</strong> לקוחות פרטיים · B2B2C</li><li><strong>מפיצים:</strong> דילרים/ליסינג קטנים (מנויים)</li></ul><div class="note">→ חתימת עסקה דיגיטלית מקצה-לקצה.</div><div class="page">ULease 🎯 · 3</div></section><section class="slide"><div class="kicker">04 / 13</div><h2>איך זה עובד</h2><ul><li>① ספק מזרים מלאי (API / CSV)</li><li>② הלקוח מחפש → רואה <strong>Deal Score</strong></li><li>③ חדר-עסקה: מימון/ליסינג → מקדמה → <strong>חתימה דיגיטלית</strong></li><li>④ התחשבנות ישירה + עמלה</li></ul><div class="note">ליד שלא נסגר → נמכר לספק (₪150). שום דבר לא מתבזבז.</div><div class="page">ULease 🎯 · 4</div></section><section class="slide"><div class="kicker">05 / 13</div><h2>השוק 📊</h2><ul><li>רכב חדש בישראל — שוק של מיליארדים בשנה</li><li>גל <strong>0 ק&quot;מ + גיולים</strong> ב-2026 = היצע עודף שמחפש ערוץ</li><li>שקל חזק = רוח גבית למרווחים וליבוא</li></ul><div class="note">חלון הזדמנות נדיר — ULease ממקסמת אותו.</div><div class="page">ULease 🎯 · 5</div></section><section class="slide"><div class="kicker">06 / 13</div><h2>המודל העסקי 💰</h2><table><thead><tr><th>מנוע הכנסה</th><th>תמחור</th></tr></thead><tbody><tr><td>עמלת עסקה B2B (מהספק)</td><td>1.1%–2.2%</td></tr><tr><td>עמלת עסקה B2B2C (עסקי)</td><td>1.1%–3.33%</td></tr><tr><td>עמלת עסקה B2C (פרטי)</td><td>3.33%–7.77%</td></tr><tr><td>מכירת ליד</td><td>₪150</td></tr><tr><td>מנוי Ultra / Max (B2B)</td><td>₪4,500 / ₪7,700</td></tr><tr><td>עמלת מימון (מחברת המימון)</td><td>1% מערך העסקה</td></tr><tr><td>פרסום</td><td>מימון · ביטוח · דרך</td></tr></tbody></table><div class="note">עמלות מדורגות לפי סוג עסקה — גם ההיצע וגם הביקוש משלמים.</div><div class="page">ULease 🎯 · 6</div></section><section class="slide"><div class="kicker">07 / 13</div><h2>הארכיטקטורה המתודולוגית 🧠</h2><ul><li><strong>תורת המשחקים</strong> — מכרז <strong>מחיר-שני (Second-Price)</strong>: המציע הגבוה זוכה ומשלם את הצעת המקום השני</li><li><strong>העשרה אינסטרומנטלית (Feuerstein)</strong> — שכבת החלטה/UX שמכוונת</li><li><strong>Big Five</strong> — פרופיל לקוח להתאמה מדויקת</li><li><strong>משא-ומתן מבוסס-אינטרסים</strong> — BATNA שקוף + Win-Win</li><li><strong>Multi-agent: Ultra · Master · Max</strong> — תזמור → מומחיות → ביצוע</li><li><strong>Deal Score</strong> — ציון כדאיות לכל עסקה (IP)</li></ul><div class="note">זה לא עוד אתר רכב. זו מערכת קבלת-החלטות.</div><div class="page">ULease 🎯 · 7</div></section><section class="slide"><div class="kicker">08 / 13</div><h2>השקה 🚀</h2><ul><li>הקמת חברה — השבוע · דומיין <strong>ULease.co.il</strong> — בתהליך רכישה</li><li>אתר לאוויר — תוך שבועיים</li><li><strong>בסיס יוני 2026:</strong> 26 עסקאות · 130 לידים · 15 מנויים · 7 ספקים</li></ul><div class="note">עולים לאוויר עם עסקאות אמיתיות — לא הדגמה.</div><div class="page">ULease 🎯 · 8</div></section><section class="slide"><div class="kicker">09 / 13</div><h2>תחזית פיננסית 📈</h2><table><thead><tr><th></th><th>2026 (יוני–דצמ&#x27;)</th><th>2027</th></tr></thead><tbody><tr><td>עסקאות</td><td>314</td><td>1,737</td></tr><tr><td>GMV</td><td>₪47.1M</td><td>₪260.5M</td></tr><tr><td>הכנסה</td><td>₪2.29M</td><td>₪12.98M</td></tr><tr><td>נטו (תפעולי)</td><td>₪1.74M</td><td>₪10.89M</td></tr></tbody></table><div class="note">Base Case v1.4 (עמלות מדורגות) · Run-rate דצמבר 2027: ₪17.4M / שנה · נטו לפני מס.</div><div class="page">ULease 🎯 · 9</div></section><section class="slide"><div class="kicker">10 / 13</div><h2>Unit Economics 💎</h2><ul><li>₪3,001 הכנסה משוקללת לעסקה (עמלות מדורגות 1.1%–7.77%)</li><li>עמלת מימון: 1% מערך העסקה מחברת המימון</li><li>מנויים חוזרים Ultra/Max ₪4,500–7,700 / חודש</li><li>צוות רזה (שלב 1: ₪30K / חודש)</li><li>→ <strong>תזרים חיובי כבר מחודש ההשקה</strong></li></ul><div class="note">הגיוס = הון צמיחה, לא runway להישרדות.</div><div class="page">ULease 🎯 · 10</div></section><section class="slide"><div class="kicker">11 / 13</div><h2>הצוות 👥</h2><ul><li><strong>שירי הלפישטיין</strong> — Super COO · פיקוח, ריכוז, מחזיקת מניות</li><li><strong>אברהם בר יוחאי חזן</strong> — מו&quot;פ ושיווק · 21 שנות ענף, Leasing.co.il</li><li><strong>מגייסים:</strong> מנהל מערכות טכנולוגיה</li></ul><div class="note">ידע ענף עמוק + ביצוע + מתודולוגיה.</div><div class="page">ULease 🎯 · 11</div></section><section class="slide"><div class="kicker">12 / 13</div><h2>הגיוס 🤝</h2><div class="lead">₪150,000</div><ul><li>40% — טכנולוגיה והקמת פלטפורמה</li><li>35% — שיווק דיגיטלי</li><li>15% — הקמה משפטית / תשתית</li><li>10% — כרית ביטחון</li></ul><div class="note">להאיץ צמיחה ולקצר time-to-scale.</div><div class="page">ULease 🎯 · 12</div></section><section class="slide"><div class="kicker">13 / 13</div><h2>החזון 🎯</h2><div class="lead">ULease 🎯 Leasing.co.il</div><ul><li>התשתית הדיגיטלית של עסקת הרכב החדש בישראל.</li><li>מקצה-לקצה. ברמת קצה.</li></ul><div class="note">בואו נבנה את זה יחד · avihazan112@gmail.com</div><div class="page">ULease 🎯 · 13</div></section><div class="progress"></div><div class="deck-nav"><button id="btnPrev">›&nbsp;הקודם</button><span class="counter">1 / 13</span><button id="btnNext">הבא&nbsp;‹</button></div>
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var n=slides.length,i=0;
+  document.body.classList.add('js');
+  var counter=document.querySelector('.counter'), bar=document.querySelector('.progress');
+  function show(k){
+    i = k<0?0:(k>n-1?n-1:k);
+    for(var j=0;j<n;j++) slides[j].classList.toggle('active', j===i);
+    if(counter) counter.textContent=(i+1)+' / '+n;
+    if(bar) bar.style.width=((i+1)/n*100)+'%';
+    if(slides[i]) slides[i].scrollTop=0;
+  }
+  function next(){show(i+1);} function prev(){show(i-1);}
+  document.addEventListener('keydown',function(e){
+    var k=e.key;
+    if(k==='ArrowLeft'||k==='ArrowDown'||k==='PageDown'||k===' '||k==='Spacebar'){next();e.preventDefault();}
+    else if(k==='ArrowRight'||k==='ArrowUp'||k==='PageUp'){prev();e.preventDefault();}
+    else if(k==='Home'){show(0);} else if(k==='End'){show(n-1);}
+  });
+  document.addEventListener('click',function(e){
+    if(e.target.closest && e.target.closest('.deck-nav')) return;
+    next();
+  });
+  var x0=null,y0=null;
+  document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY;},{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(x0===null) return;
+    var dx=e.changedTouches[0].clientX-x0, dy=e.changedTouches[0].clientY-y0;
+    if(Math.abs(dx)>40 && Math.abs(dx)>Math.abs(dy)){ if(dx<0) next(); else prev(); }
+    x0=null; y0=null;
+  },{passive:true});
+  var bn=document.getElementById('btnNext'), bp=document.getElementById('btnPrev');
+  if(bn) bn.addEventListener('click',function(e){e.stopPropagation();next();});
+  if(bp) bp.addEventListener('click',function(e){e.stopPropagation();prev();});
+  show(0);
+})();
+</script>
+</body></html>

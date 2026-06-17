@@ -1,0 +1,304 @@
+# ULease 🎯 Leasing.co.il — איפיון מוצר ומערכת (End-to-End Spec)
+
+**Module:** `CASES/ULEASE_SPEC.md`
+**Version:** 1.5.0
+**Author:** Avraham Bar Yochai Chazan — Claude Operating System
+**Status:** Active — איפיון (Product & System Spec), נספח ל-`CASES/ULEASE.md`.
+**Integrates with:** `CASES/ULEASE.md`, `CASES/ULEASE_METHODOLOGY.md`, `CASES/ULEASE_AUTOMATION_MAP.md`, `INVESTOR_RELATIONS.md`, `OPERATING_SYSTEM.md`, `MEMORY.md`
+**Confidentiality:** מנגנוני **Deal Score**, **Match** ו**תמחור** הם IP ליבה (§6). מסומן בהתאם.
+
+---
+
+## תוכן עניינים
+1. [חזון והיקף](#1-חזון-והיקף)
+2. [שחקנים ופרסונות](#2-שחקנים-ופרסונות)
+3. [ארכיטקטורת-על](#3-ארכיטקטורת-על)
+4. [מסעות משתמש מקצה-לקצה](#4-מסעות-משתמש-מקצה-לקצה)
+5. [מודולים פונקציונליים](#5-מודולים-פונקציונליים)
+6. [מנוע Match · Deal Score · מכרז מחיר-שני (IP)](#6-מנוע-match--deal-score--מכרז-מחיר-שני-ip)
+7. [מנוע Multi-agent: Ultra · Master · Max](#7-מנוע-multi-agent-ultra--master--max)
+8. [מודל נתונים](#8-מודל-נתונים)
+9. [אינטגרציות](#9-אינטגרציות)
+10. [דרישות לא-פונקציונליות (NFR)](#10-דרישות-לא-פונקציונליות-nfr)
+11. [מסכים עיקריים](#11-מסכים-עיקריים)
+12. [שלבי פיתוח (Roadmap)](#12-שלבי-פיתוח-roadmap)
+13. [KPIs](#13-kpis)
+14. [Document Control](#document-control)
+
+---
+
+## 1. חזון והיקף
+
+**חזון:** לבצע עסקת רכב חדש **דיגיטלית, מקצה-לקצה**, בין יבואן/ליסינג/מימון לבין לקוח — תוך דקות במקום שבועות, עם תמחור יעיל מבוסס תורת-המשחקים.
+
+**היקף (In-Scope):** ingestion מלאי מהספקים → הצגה לביקוש (פרטי/B2B) ולמפיצים → התאמה (Match) ודירוג (Deal Score) → הצעה/מכרז → חדר-עסקה דיגיטלי (חתימה + מקדמה + מימון) → התחשבנות → דאטה ומנויים.
+
+**מחוץ להיקף (כרגע):** רכב יד-שנייה C2C, ייבוא אישי פרטי, ביטוח עצמאי (רק כשותף פרסום/עמלה).
+
+---
+
+## 2. שחקנים ופרסונות
+
+| שחקן | תיאור | מה רוצה |
+|------|--------|----------|
+| **ספק** (יבואן / ליסינג / מימון) | מזרים מלאי ל-APIs | לפנות מלאי 0 ק"מ/גיולים במהירות ובמרווח מיטבי |
+| **לקוח פרטי / B2B2C** | רוכש רכב | רכב נכון, מחיר הוגן, עסקה מהירה ודיגיטלית |
+| **מפיץ/דילר (מנוי B2B)** | רוכש כמויות און-ליין | זרם עסקאות, דאטה, יתרון במכרז |
+| **Ops/Admin (ULease)** | תפעול, KYC, מחלוקות, חיוב | שליטה, אכיפת מדיניות, אנליטיקה |
+| **AI Agents** | Ultra/Master/Max (§7) | להריץ את כל הצינור אוטומטית |
+
+---
+
+## 3. ארכיטקטורת-על
+
+```
+            ┌─────────────────────────────────────────────┐
+SUPPLY  →   │  INGESTION APIs  (יבואן · ליסינג · מימון)    │
+            └───────────────┬─────────────────────────────┘
+                            ▼
+            ┌─────────────────────────────────────────────┐
+            │  CORE  ·  Catalog ▸ Match/Deal Score ▸ Auction │  ← IP (§6)
+            │        ·  Deal Room ▸ Financing ▸ Settlement  │
+            └───────────────┬─────────────────────────────┘
+                 ▲          ▼            ▲
+   DEMAND ───────┘   ┌────────────┐     └────── DISTRIBUTORS (מנויים)
+   (web/app)         │ Multi-agent │
+                     │ Ultra·Master│ (§7)
+                     │ ·Max        │
+                     └────────────┘
+            ┌─────────────────────────────────────────────┐
+            │  PLATFORM  ·  Auth/KYC · Billing · Data/BI · │
+            │              Notifications · Audit/Compliance │
+            └─────────────────────────────────────────────┘
+```
+
+**עקרון:** כל אירוע (ליד, בקשת עסקה, מכרז) הוא **event** שעובר ב-Core ומתוזמר ע"י שכבת ה-Multi-agent.
+
+---
+
+## 4. מסעות משתמש מקצה-לקצה
+
+**4.1 ספק (היצע):** התחברות → חיבור API / העלאת מלאי (CSV fallback) → קביעת מחיר-רצפה ומרווח → המלאי עולה לקטלוג → קבלת לידים/עסקאות → התחשבנות אוטומטית (עמלה מדורגת 1.1%–2.2% + מקדמה).
+
+**4.2 לקוח פרטי / B2B2C:** חיפוש/סינון → דף רכב עם **Deal Score** → "קבל הצעה" → KYC קצר → **חדר עסקה**: בחירת מימון/ליסינג → אישור מקדמה → **חתימה דיגיטלית** → אישור עסקה → מסירה. *(ליד שלא נחתם → נמכר לספק ב-₪150.)*
+
+**4.3 מפיץ/דילר (מנוי):** מנוי Ultra/Max → בקשת כמות/דגם → השתתפות ב**מכרז מחיר-שני** → זכייה → חדר עסקה מרוכז → דאטה ותובנות בלוח הבקרה.
+
+**4.4 Admin/Ops:** ניטור pipeline עסקאות → אישורי KYC → טיפול במחלוקות → חיוב מנויים → ניהול תוכן וקמפיינים → אנליטיקה.
+
+---
+
+## 5. מודולים פונקציונליים
+
+| # | מודול | תיאור | שלב |
+|---|--------|--------|-----|
+| M1 | **Catalog & Inventory** | קליטת מלאי (API/CSV), נורמליזציה, תמונות, זמינות | MVP |
+| M2 | **Search & Match** | חיפוש, סינון, התאמת רכב-לקוח (§6) | MVP |
+| M3 | **Deal Score** | דירוג כדאיות עסקה ללקוח/לפלטפורמה (§6, IP) | MVP→V1 |
+| M4 | **Leads Marketplace** | לכידת ליד, תמחור, מכירה לספקים (₪150) | MVP |
+| M5 | **Deal Room** | חתימה דיגיטלית, מקדמה, סטטוס עסקה | MVP |
+| M6 | **Financing/Leasing** | חיבור למימון/ליסינג, הגשת בקשה, אישור | MVP→V1 |
+| M7 | **Auction (Second-Price)** | מכרז כמויות למפיצים (§6) | V1 |
+| M8 | **Subscriptions & Billing** | Ultra ₪4,500 / Max ₪7,700, חיוב חוזר | MVP |
+| M9 | **Data & Insights** | לוחות בקרה, דאטה למנויים, BI פנימי | V1 |
+| M10 | **Advertising** | קידום מחברות מימון/ביטוח/שירותי דרך | V1 |
+| M11 | **Admin/Ops Console** | pipeline, KYC, מחלוקות, תוכן | MVP |
+| M12 | **Settlement** | התחשבנות ישירה בין צדדים + עמלות | MVP→V1 |
+
+---
+
+## 6. מנוע Match · Deal Score · מכרז מחיר-שני (IP)
+
+> 🔒 **חסוי — IP ליבה.** מתואר ברמה פונקציונלית; פרמטרים ומשקלים פנימיים אינם מתועדים כאן.
+
+- **Match:** מתאים רכב ↔ לקוח לפי צרכים, תקציב, מימון, זמינות והעדפות (מודל Big Five + העשרה אינסטרומנטלית כשכבת UX/החלטה).
+- **Deal Score:** ציון 0–100 לכל זיווג עסקה — משקלל מרווח לספק, התאמה ללקוח, סבירות סגירה וזמן-לעסקה. מניע ranking והמלצות.
+- **מכרז מחיר-שני (Second-Price / Vickrey):** במכרזי כמויות למפיצים — **המציע הגבוה זוכה ומשלם את הצעת המקום השני**. יוצר חשיפת-אמת ותמחור יעיל (תורת המשחקים). מונע over-bidding ושומר על שוק בריא.
+
+---
+
+## 7. מנוע Multi-agent: Ultra · Master · Max
+
+ארכיטקטורת סוכנים בארבע שכבות — "**Ultra Master Max**" + Guardian:
+
+| שכבה | תפקיד | סוכנים לדוגמה |
+|------|--------|----------------|
+| **🛰️ Ultra** | **Orchestrator** — מקבל event, מנהל state של העסקה מקצה-לקצה, מנתב למומחים | Deal Orchestrator, Routing |
+| **🧠 Master** | **Domain Masters** — מומחי-תחום שמחליטים | Pricing/Margin, Match, **Negotiation**, Financing, Compliance, Content/Marketing |
+| **⚙️ Max** | **Execution** — מבצעים פעולות בעולם | Offer-Builder, Contract/e-Sign, Financing-Submit, Inventory-Sync, Billing |
+| **🛡️ Guardian** | **Safety/IP** — אכיפת מדיניות, חיסיון IP, audit | Compliance Guard |
+
+**זרימה:** event → **Ultra** מתזמר → **Master** מחליט (תמחור/Match/מימון) → **Max** מבצע (הצעה→חוזה→מימון→חיוב) → **Guardian** מאמת ציות ורושם audit.
+
+> שלב MVP: Ultra + 2 Masters (Match, Pricing) במצב **assist** (אדם מאשר) + **Guardian מינימלי** (audit-log · ניהול הסכמות · opt-out · grounding checks · eval suite — §7.2) — שער Go-Live. אוטומציה מלאה מתרחבת ב-V1/V2.
+
+### 7.1 שכבת הידע — RAG (Context Engineering) — D-022
+
+הסוכנים (§7) חכמים בדיוק כמו הידע שמוזרם להם. שכבת ה-RAG היא הצינור שמזין אותם — **בלי לאמן מודל** (ראו מדיניות D-022 למטה).
+
+**הצינור:**
+```
+מקורות ידע → Chunking → Embedding → Vector DB → Retrieval (top-k) → הזרקה לפרומפט הסוכן
+```
+
+**הקורפוס (מה נכנס ל-Vector DB):**
+
+| מקור | תוכן | קצב עדכון | משרת |
+|------|------|-----------|-------|
+| **קטלוג ומלאי** | מפרטים, רמות גימור, אבזור, זמינות | Real-time (event-driven מ-ingestion) | Match, Q&A Bot |
+| **מחירונים ושוק** | לוי יצחק, נתוני משרד התחבורה, מחירי עסקאות | יומי | Deal Score (comparables), Pricing Master |
+| **רגולציה וציות** | תיקון 40, הגנת הצרכן, רישוי תיווך, מדיניות ביטולים | בשינוי | Compliance Master, Guardian |
+| **Playbooks פנימיים** | סקריפטים, טיפול בהתנגדויות, SLA, מחירון | בשינוי | Negotiation Master, Content |
+| **היסטוריית עסקאות** | עסקאות סגורות, זמן-לסגירה, התאמות מוצלחות | יומי (batch, מצטבר מההשקה) | Deal Score, Match (שיפור מתמשך) |
+
+**בחירת תשתית:**
+
+| שלב | פתרון | רציונל |
+|------|--------|---------|
+| **MVP (Phase 0)** | **pgvector** — extension של PostgreSQL | אותו DB של מודל הנתונים (§8), אפס תשתית נוספת, חינם |
+| **V1 (Phase 1)** | pgvector מורחב או managed (Pinecone/Weaviate) | רק אם הביצועים דורשים — החלטת Tech Lead מבוססת מדידה |
+
+**כללי שליפה (token efficiency):** top-k = 5 צ'אנקים · ~2K tokens מקסימום להזרקה · סדר ופורמט נשמרים (metadata: מקור + תאריך) · cache לשאילתות חוזרות.
+
+**מי צורך את השכבה:**
+- **Master agents** (Match · Pricing · Negotiation · Compliance) — שולפים הקשר רלוונטי לפני כל החלטה.
+- **Knowledge-base Q&A Bot** — שאלות לקוחות על רכבים/תהליך/מימון (ראו `ULEASE_AUTOMATION_MAP.md`, V1).
+- **Deal Score** — שליפת עסקאות-השוואה (comparables) לדירוג.
+
+**🔒 מדיניות D-022 — RAG ולא Fine-Tuning:**
+
+| שיקול | המסקנה |
+|--------|---------|
+| מלאי ומחירים משתנים **יומית** | Fine-tuning מתיישן ביום ההשקה; RAG תמיד עדכני |
+| אין עדיין דאטה קניינית מתויגת (0 עסקאות) | אין על מה לאמן; הקורפוס נבנה מההשקה |
+| ה-stack מבוסס Claude | האופטימיזציה: Skills + RAG + הקשר (לא כוונון משקולות) |
+| **נקודת בחינה מחדש** | אחרי **~1,000 עסקאות סגורות** (צפי 2027) — מודל התאמה קנייני מאומן על דאטת העסקאות = חפיר תחרותי |
+
+### 7.2 Guardrails & Evals — LLMOps (D-023)
+
+ה-Guardian (§7) אוכף **ציות ו-IP**. השכבה הזו משלימה אותו עם **בקרת איכות לפלטי ה-LLM** — כי מרקטפלייס שבו סוכן ממציא מחיר, מפרט או זמינות הוא חשיפה משפטית וכספית ישירה.
+
+**לפני Deploy — חבילת Evals (תנאי לעליית כל גרסת סוכן):**
+
+| בדיקה | מה נבדק | סף מעבר |
+|--------|----------|----------|
+| **Grounding** | כל טענה עובדתית (מחיר, מפרט, זמינות, תנאי מימון) חייבת מקור ב-RAG (§7.1) | **100%** לעובדות כספיות · ≥95% כללי |
+| **Golden Set** | 50 תרחישי בדיקה עם תשובות ידועות: Match, Deal Score, ניסוח הצעה, ניתוב מימון | ≥90% התאמה |
+| **Red Team** | ניסיונות לחלץ IP (משקלי Deal Score), לעקוף את המחירון, לחרוג מהסמכה | **0** הצלחות |
+| **שפה ומותג** | עברית תקינה, טון, ללא ביטויים אסורים (`COWORK/ABOUT-ME/anti-ai-style.md`) | 100% |
+
+**ב-Production — ניטור רציף:**
+
+| מדד | יעד | פעולה בחריגה |
+|------|-----|----------------|
+| **שיעור הזיות** (טענות ללא גיבוי RAG) | < 1% | > 3% → השבתת auto-mode, חזרה ל-assist |
+| **Latency סוכנים** | Ultra ניתוב < 2s · Master החלטה < 10s · Max ביצוע < 30s | חריגה מתמשכת מסכנת SLA ליד ≤ 1h → התראת Ops |
+| **משוב אנושי** (במצב assist) | אישור ≥ 80% מהמלצות הסוכן | < 60% → עצירה וכיול מחדש |
+| **Drift** | הרצת ה-eval suite שבועית על סוכני production | ירידה > 5% מציון הבסיס → חקירה לפני המשך |
+
+**חיבור לשערים ולשלבים:**
+- **שער Go-Live (D-016) מורחב:** Guardian מינימלי = audit-log + הסכמות + opt-out **+ grounding checks + eval suite עובר**.
+- **Phase 0 (MVP):** grounding + golden set + אישור אנושי (מצב assist הוא בעצמו guardrail).
+- **Phase 1:** ניטור אוטומטי, דשבורד הזיות/latency, משוב לקוח מובנה.
+- **Phase 2:** deploy מותנה-evals — אף סוכן לא עולה אוטומטית בלי לעבור את החבילה.
+
+
+---
+
+## 8. מודל נתונים
+
+| ישות | שדות-מפתח | קשרים |
+|------|-----------|--------|
+| **Supplier** | id, type(importer/leasing/finance), terms, fee% | →Vehicles, →Settlements |
+| **Vehicle** | id, supplierId, make/model/trim, km(0), price_floor, status | →Listing |
+| **Listing** | id, vehicleId, public_price, score, availability | →Deal/Lead |
+| **Customer** | id, type(private/B2B2C), KYC, profile(Big5) | →Lead, →Deal |
+| **Distributor** | id, subscriptionTier, dataAccess | →Bid, →Deal |
+| **Lead** | id, customerId, vehicleId, status, price(₪150) | →Sold-to-Supplier |
+| **Inquiry** | id, customerId, source(channel), ts | →Lead / →Deal (פנייה = ראש המשפך; ליד = פנייה שלא הבשילה לעסקה ונמכרת) |
+| **Deal** | id, parties, amount(~150K), take(מדורג 1.1%–7.77% לפי סוג), advance, status | →Contract, →Settlement |
+| **Auction/Bid** | id, lot, bids[], winner, clearing_price(uniform 2nd-price)¹ | →Deal |
+| **FinancingApp** | id, dealId, provider, amount, decision | →Deal |
+| **Subscription** | id, distributorId, tier, price, cycle | →Invoice |
+| **Invoice/Payment** | id, amount, method, status | — |
+
+> ¹ **וריאנט המכרז (לפני מימוש M7):** במכרז רב-יחידתי clearing-price = ההצעה הגבוהה ביותר שלא זכתה (uniform price). וריאנט VCG מלא — החלטת Phase 1.
+| **AuditLog** | id, actor(agent/user), action, ts | (כל הישויות) |
+| **Event** | id, type(lead/deal/auction/…), payload, ts, status | →AgentRun (מה שמניע את Ultra) |
+| **AgentRun** | id, eventId, agent(Ultra/Master/Max/Guardian), input, output, decision, ts | →AuditLog (state של כל ריצת סוכן) |
+| **Consent** | id, customerId, type(דיוור/שיתוף-ליד/נתוני-אשראי), granted_at, revoked_at | →Customer, →Lead (בסיס ה-opt-out של Guardian) |
+| **KnowledgeChunk** | id, source(catalog/pricing/regulation/playbook/deal-history), content, embedding(vector), updated_at | →AgentRun (שליפות RAG, §7.1) |
+
+---
+
+## 9. אינטגרציות
+
+| קטגוריה | אינטגרציה | שלב |
+|----------|-----------|-----|
+| **Supply** | APIs יבואנים/ליסינג/מימון (מלאי, מחיר, זמינות) | MVP (CSV fallback) |
+| **Identity/KYC** | אימות ת"ז/חברה ישראלי | MVP |
+| **Vehicle data** | מחירון (לוי יצחק), נתוני משרד התחבורה | V1 |
+| **e-Signature** | חתימה דיגיטלית על חוזה | MVP |
+| **Payments/Escrow** | כרטיס אשראי, העברה, מקדמה | MVP |
+| **Financing/Leasing** | handoff לחברות מימון/ליסינג | MVP→V1 |
+| **Insurance / Road** | שותפי פרסום/עמלה | V1 |
+| **Comms** | SMS, Email | MVP · WhatsApp Business — **V1** (דורש אישור WABA + עמידה בתיקון 40) |
+| **Knowledge/RAG** | pgvector (PostgreSQL) — embedding מלאי/מחירונים/רגולציה/playbooks (§7.1) | MVP (בסיסי) → V1 (Q&A Bot + comparables) |
+
+---
+
+## 10. דרישות לא-פונקציונליות (NFR)
+
+- **אבטחה:** הצפנה in-transit/at-rest, PCI-DSS לתשלומים, הרשאות מבוססות-תפקיד (RBAC).
+- **פרטיות:** עמידה בחוק הגנת הפרטיות (ישראל) + GDPR ללקוחות רלוונטיים; מינימיזציית מידע.
+- **זמינות/ביצועים:** יעד 99.9% uptime; חיפוש < 500ms; חדר-עסקה responsive.
+- **קנה-מידה:** תמיכה בעשרות-אלפי פריטי מלאי ובמכרזים מקבילים.
+- **Audit:** כל פעולת סוכן/משתמש נרשמת (מי, מה, מתי) — לצורכי ציות ומחלוקות.
+- **סביבות (C8):** הפרדה מלאה **dev / staging / production**; בדיקות תשלום ב-sandbox של הסולק בלבד — לעולם לא על לקוח אמיתי.
+- **בדיקות (C8):** בדיקות אוטומטיות לזרימות הקריטיות (חיפוש→ליד→עסקה→תשלום) + smoke test בכל deploy; הרצה לפני כל עלייה ל-production.
+- **גיבוי / DR (C8):** גיבוי DB יומי אוטומטי · **RPO ≤ 24h** · **RTO ≤ 4h** · מנגנון rollback לגרסה קודמת · תרגול שחזור אחת לרבעון.
+- **⚠️ רגולציה (לבדיקה משפטית):** תיווך מימון/ביטוח עשוי לדרוש רישוי; הגנת הצרכן בעסקאות און-ליין. **מומלץ ייעוץ משפטי לפני השקה.**
+
+---
+
+## 11. מסכים עיקריים
+
+| פורטל | מסכים |
+|--------|--------|
+| **לקוח (web/app)** | חיפוש · דף רכב + Deal Score · חדר-עסקה · מימון · חתימה · סטטוס |
+| **ספק** | סטטוס API/מלאי · לידים/עסקאות · התחשבנות |
+| **מפיץ/דילר** | בקשת כמות · מכרז · לוח דאטה/תובנות · מנוי |
+| **Admin/Ops** | pipeline עסקאות · KYC · מחלוקות · חיוב · תוכן · אנליטיקה |
+
+---
+
+## 12. שלבי פיתוח (Roadmap)
+
+| שלב | יעד | תוכן | מיפוי לתחזית |
+|------|-----|------|--------------|
+| **Phase 0 — MVP** | ≤ שבועיים · חצי שני יוני 26 | M1·M2·M4·M5·M8·M11 + Ultra+2 Masters (assist) + **Guardian מינימלי** + CSV/API ingestion + e-sign + מקדמה | בסיס יוני: 26 עסקאות |
+| **Phase 1 — Scale** | Q3–Q4 2026 | מכרז מחיר-שני (M7), מנוי Max, Financing מלא (M6), Data/Insights (M9), Advertising (M10), הרחבת agents + שכבת RAG מלאה (§7.1: Q&A Bot, comparables) | ראמפ H2-2026 |
+| **Phase 2 — Automate** | 2027 | אוטומציה מלאה Multi-agent, Deal Score מתקדם, אינטגרציות נוספות, scale | צמיחת 2027 |
+
+---
+
+## 13. KPIs
+
+GMV · עסקאות/חודש · take-rate בפועל · **המרת פנייה→עסקה** (יעד ≥10%; ראו `ULEASE_DEMAND_PLAYBOOK.md` §5) · ARPU מנויים · CAC · churn · time-to-deal · דיוק Match · Deal Score → סגירה.
+
+---
+
+## Document Control
+
+| גרסה | שינוי | תאריך |
+|------|--------|--------|
+| 1.0.0 | איפיון מוצר ומערכת ראשוני — מקצה-לקצה, Ultra·Master·Max, MVP→V2 | 2026-05-30 |
+| 1.1.0 | יישום D-015: מנויי **Ultra/Max** (M8), עמלות מדורגות 1.1%–7.77% במודל הנתונים ובזרימת הספק | 2026-06-01 |
+| 1.2.0 | גל 2 של הביקורת: **Guardian מינימלי** ב-Phase 0 (C5) — audit-log, הסכמות, opt-out; "ארבע שכבות" (W12) | 2026-06-01 |
+| 1.3.0 | גל 3 (C8): ישויות Event/AgentRun/Consent/Inquiry, סביבות dev/staging/prod, בדיקות אוטומטיות, גיבוי/DR (RPO/RTO); הבהרת וריאנט המכרז (I3); KPI פנייה→עסקה (W16); WhatsApp נדחה ל-V1 (W17) | 2026-06-01 |
+| 1.4.0 | יישום D-022: שכבת ידע RAG (§7.1) — קורפוס, pgvector, כללי שליפה, צרכנים ומדיניות "RAG ולא Fine-Tuning"; ישות KnowledgeChunk (§8); שורת Knowledge/RAG באינטגרציות (§9) וב-roadmap (§12) | 2026-06-02 |
+| 1.5.0 | יישום D-023: Guardrails & Evals (§7.2) — eval suite לפני deploy (grounding, golden set, red team), ניטור production (הזיות, latency, drift), והרחבת שער ה-Go-Live (Guardian מינימלי כולל evals) | 2026-06-02 |
+
+**Confidentiality.** מסמך זה וכל מנגנוני הליבה (Deal Score, Match, Pricing, Auction) הם IP חסוי של ULease 🎯 — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
+
+— *End of CASES/ULEASE_SPEC.md v1.5.0 —*
