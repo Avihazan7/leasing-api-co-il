@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  /* Waterfall semantic tokens */
+  --color-anchor: var(--anchor);
+  --color-depreciation: var(--depreciation);
+  --color-interest: var(--interest);
+  --color-tco: var(--tco);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 1rem;
+
+  /* Ultra Pure — cool silver white */
+  --background: oklch(0.985 0.004 240);
+  --foreground: oklch(0.27 0.02 250);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.27 0.02 250);
+
+  --muted: oklch(0.955 0.006 240);
+  --muted-foreground: oklch(0.55 0.015 250);
+
+  --border: oklch(0.91 0.008 245);
+
+  /* Calm steel blue */
+  --primary: oklch(0.52 0.06 248);
+  --primary-foreground: oklch(0.99 0.002 240);
+
+  --accent: oklch(0.93 0.02 245);
+  --accent-foreground: oklch(0.35 0.03 250);
+
+  /* Waterfall palette — restrained, cool, deterministic */
+  --anchor: oklch(0.78 0.012 245);        /* faded silver-grey */
+  --depreciation: oklch(0.7 0.04 240);    /* subtle muted blue */
+  --interest: oklch(0.62 0.05 245);       /* slightly deeper blue */
+  --tco: oklch(0.42 0.06 250);            /* solid grounded steel */
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* Calming mesh gradient for the score hero */
+.mesh-calm {
+  background-color: oklch(0.97 0.01 240);
+  background-image:
+    radial-gradient(at 18% 22%, oklch(0.9 0.05 245 / 0.9) 0px, transparent 55%),
+    radial-gradient(at 82% 18%, oklch(0.92 0.03 220 / 0.8) 0px, transparent 50%),
+    radial-gradient(at 70% 88%, oklch(0.88 0.045 250 / 0.7) 0px, transparent 55%),
+    radial-gradient(at 25% 80%, oklch(0.95 0.02 235 / 0.6) 0px, transparent 50%);
+}
+
+@keyframes rise {
+  from { transform: scaleY(0); opacity: 0; }
+  to { transform: scaleY(1); opacity: 1; }
+}
