@@ -65,3 +65,56 @@
 ## Activation
 כדי להפעיל את ה-Command API, טען את בלוק ה-System Prompt מסעיף 7 ב-[`COMMAND_API.md`](./COMMAND_API.md)
 אל ההקשר (`userPreferences` / system prompt / טעינת OS). זה מה שגורם ל-Claude לזהות תחביר `/command`.
+
+## Imported OS Modules
+מודולים שיובאו מענף ה-OS (אוחדו ל-main; ראו DECISION_LOG). מצוטטים כאן לעקביות-אינדקס:
+
+- `AI_7_SKILLS.md` v1.0.0 — 7 מיומנויות לשליטה ב-AI ב-2026
+- `AI_CLAUDE_ENGINEER_ROADMAP.md` v1.0.0 — Claude AI Engineer Roadmap — 15 שלבים, ואיפה אתה עליהם
+- `AI_CLAUDE_GLOSSARY.md` v1.1.0 — מילון Claude — 30 מונחים שחייבים להכיר
+- `AI_CLAUDE_STACK_2026.md` v1.8.0 — Claude Stack 2026 — How to use Claude in 2026
+- `AI_CLAUDE_TOOL_SELECTOR.md` v1.3.0 — איזה Claude לבחור? — Which Claude Should You Use?
+- `AI_DATA_BI.md` v1.5.0 — יסודות BI ומידול נתונים — Power BI כמקרה לימוד
+- `AI_DATA_VALIDATION.md` v1.0.0 — ולידציית נתונים — Data Validation Techniques (שער האיכות של האנליסט)
+- `AI_LEARNING_RESOURCES.md` v1.0.0 — משאבי למידה — קוריקולום AI לפי המפה
+- `AI_LINEAR_ALGEBRA.md` v1.0.0 — יסודות אלגברה לינארית — Linear Algebra Foundations (Cheat Sheet)
+- `AI_MICROSERVICES.md` v1.0.0 — Microservices — איך שירות אחד מתחבר לאחר
+- `AI_PROCESS_INTELLIGENCE.md` v1.1.0 — מודיעין תהליכים ובקרת הטמעת AI — Process Intelligence & Human-in-the-Loop
+- `AI_PROFICIENCIES_2026.md` v1.0.0 — מיומנויות ה-AI החיוניות ל-2026 — Essential AI Proficiencies for the 2026 Landscape
+- `AI_PROGRESSION_PLAN.md` v1.0.0 — תוכנית התקדמות אישית — מ-AI Tools ל-Automation Architect
+- `AI_PROJECT_STRUCTURE.md` v1.1.0 — מבנה פרויקט AI — ארבע תיקיות, אפס בלגן
+- `AI_RAG_DESIGN.md` v1.0.0 — תכנון RAG — 15 הטעויות ששוברות Retrieval
+- `AI_ROLES_2026.md` v1.0.0 — תפקידי ה-AI החמים ב-2026 — ומי מכסה אותם ב-ULease
+- `AI_SKILLS_ACQUISITION.md` v1.0.0 — תוכנית רכישת מיומנויות — Build to Learn
+- `AI_SKILL_MAP.md` v1.0.0 — מפת מיומנויות ה-AI — The AI Skill Map
+- `AI_SYSTEM_DESIGN.md` v1.3.0 — יסודות System Design — ארכיטקטורת הפלטפורמה
+- `AI_TYPES.md` v1.1.0 — סוגי AI — Traditional · Generative · Agentic
+- `BRANCH_KNOWLEDGE.md` v1.0.0 — BRANCH_KNOWLEDGE.md — תשתית הידע לסניפים
+- `CASES/ULEASE.md` v1.5.0 — ULease 🎯 Leasing.co.il — Business Case & Forecast
+- `CASES/ULEASE_AUDIT.md` v1.4.0 — ביקורת מקצה-לקצה — תיק ULease 🎯 Leasing.co.il
+- `CASES/ULEASE_AUTOMATION_MAP.md` v1.5.0 — ULease 🎯 — מפת אוטומציות AI לפי פונקציה עסקית
+- `CASES/ULEASE_DECK.md` v1.2.0 — ULEASE_DECK.md
+- `CASES/ULEASE_DEMAND_ENGINE.md` v1.2.1 — ULease 🎯 — Demand Engine (בלופרינט n8n: אוטופיילוט צד-הביקוש)
+- `CASES/ULEASE_DEMAND_PLAYBOOK.md` v1.2.0 — ULease 🎯 — Playbook צד-הביקוש (Demand Generation)
+- `CASES/ULEASE_FINANCE_INSURANCE.md` v1.1.0 — ULease 🎯 — מימון, ביטוח וחיתום דיגיטלי
+- `CASES/ULEASE_HIRING.md` v1.1.0 — ULease 🎯 — ערכת גיוס (Hiring Kit)
+- `CASES/ULEASE_IMPORTER_PLAYBOOK.md` v1.1.0 — ULease 🎯 — Playbook מו"מ מול יבואני רכב
+- `CASES/ULEASE_LAUNCH_CHECKLIST.md` v1.3.0 — ULease 🎯 — צ'קליסט השקה (שבועיים)
+- `CASES/ULEASE_LEASING_PLAYBOOK.md` v1.1.0 — ULease 🎯 — Playbook מו"מ: יבואנים מקבילים וחברות ליסינג
+- `CASES/ULEASE_LEGAL_BRIEF.md` v1.0.0 — ULease 🎯 — תדריך משפטי לעו"ד (Legal Brief)
+- `CASES/ULEASE_METHODOLOGY.md` v1.1.0 — ULease 🎯 — הארכיטקטורה המתודולוגית
+- `CASES/ULEASE_OUTBOUND_ENGINE.md` v1.2.1 — ULease 🎯 — Outbound Engine (בלופרינט n8n + Claude)
+- `CASES/ULEASE_OUTREACH_SCRIPTS.md` v1.3.0 — ULease 🎯 — סקריפטים לפנייה (שיחה · מייל · וואטסאפ)
+- `CASES/ULEASE_PRICING_SLA.md` v1.1.0 — ULease 🎯 — מחירון רשמי + SLA ספקים
+- `CASES/ULEASE_SPEC.md` v1.5.0 — ULease 🎯 Leasing.co.il — איפיון מוצר ומערכת (End-to-End Spec)
+- `CASES/ULEASE_TECH_ONBOARDING.md` v1.2.0 — ULease 🎯 — Onboarding למנהל מערכות הטכנולוגיה
+- `CLOUD_ARCHITECT_SKILLS.md` v1.0.0 — כישורי ארכיטקט ענן — The Key Cloud Architect Skills
+- `COMMAND_API_TASKS.md` v1.1.0 — ספריית פקודות משימה — Task Commands & Spreadsheet Prompts
+- `COWORK/TEMPLATES/os-module-header.md` v1.0.0 — תבנית: Header למודול OS חדש
+- `COWORK_SETUP.md` v1.2.0 — CLAUDE COWORK — מדריך הגדרה ואונבורדינג
+- `DECISION_LOG.md` v1.56.0 — DECISION_LOG.md — יומן החלטות
+- `INVESTOR_RELATIONS.md` v1.2.0 — CLAUDE INVESTOR RELATIONS — ULease 🎯
+- `KUBERNETES_101.md` v1.1.0 — קוברנטיס 101 — Kubernetes (K8s) Orchestration Foundations
+- `MEMORY.md` v1.1.0 — CLAUDE MEMORY — Persistent Memory Layer
+- `OPERATING_SYSTEM.md` v1.16.0 — CLAUDE OPERATING SYSTEM — Kernel
+- `PROJECTS_SETUP.md` v1.0.0 — CLAUDE PROJECTS — הגדרת פרויקטים

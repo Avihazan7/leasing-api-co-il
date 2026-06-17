@@ -1,7 +1,7 @@
 # DEV_ENVIRONMENTS.md — סביבות פיתוח של Claude, מקצה לקצה
 
 **Module:** `DEV_ENVIRONMENTS.md`
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Production-ready. Developer-facing companion to `WINDOWS_DEPLOYMENT.md`.
 **Integrates with:** `CLAUDE.md`, `COMMAND_API.md`, `MEMORY.md`, `WINDOWS_DEPLOYMENT.md`
