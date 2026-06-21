@@ -5,9 +5,17 @@ deal-scoring engine — no LLM in the pricing path, no hardcoded business variab
 All weights, defaults and thresholds live in the `system_config` table and are read
 live by the database pipeline.
 
-> **Staging note.** These files live here for review. They are meant for the
-> Next.js **`leasing-api`** repository — copy them to the matching paths there
-> (or I can push them straight into that repo once it's added to the session).
+> ⚠️ **SUPERSEDED — historical prototype, do NOT copy into `leasing-api`.**
+> This was the *Phase-1 in-database* approach (scoring as a PL/pgSQL trigger
+> pipeline over `deal_proposals`/`deal_intelligence`). The `leasing-api` repo has
+> since adopted a **different, canonical architecture**: the Deal Brain runs in
+> **TypeScript** — `src/engines/orchestrator.ts` + 9 deterministic engines
+> (`economic`, `trust`, `risk`, `urgency`, `market`, `bigfive`, `gametheory`,
+> `decision`) — reading live `users`/`offers`/`suppliers` from Supabase and wired
+> to `/api/deal-score` and `/api/match-agent`. Importing this migration would add a
+> second, unwired, competing engine. Kept here only as a methodology record of the
+> in-DB CQRS design (the original "copy these files there" instruction no longer
+> applies).
 
 ## Architecture — Event-driven CQRS
 
