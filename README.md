@@ -76,5 +76,5 @@
 - [`INVESTOR_RELATIONS.md`](./INVESTOR_RELATIONS.md) v1.2.0 — CLAUDE INVESTOR RELATIONS — ULease 🎯
 - [`KUBERNETES_101.md`](./KUBERNETES_101.md) v1.1.0 — קוברנטיס 101 — Kubernetes (K8s) Orchestration Foundations
 - [`MEMORY.md`](./MEMORY.md) v1.1.0 — CLAUDE MEMORY — Persistent Memory Layer
-- [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.17.0 — CLAUDE OPERATING SYSTEM — Kernel
+- [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.18.0 — CLAUDE OPERATING SYSTEM — Kernel
 - [`PROJECTS_SETUP.md`](./PROJECTS_SETUP.md) v1.0.0 — CLAUDE PROJECTS — הגדרת פרויקטים
