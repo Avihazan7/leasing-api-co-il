@@ -157,7 +157,8 @@
 | 1.54.0 | הוספת D-067 — גל ארכיטקטוני (טריאז' 4 אינפוגרפיות): `AUTOMATION_MAP` v1.5.0 (§11.2 אשכול ה-Ops התפעולי) + `AI_CLAUDE_GLOSSARY` v1.1.0 (+3 מונחי 2026: Compaction · PowerPoint · Marketplace) + סינון "100 Finance Shortcuts" ו-"30-Day Social Content" | 2026-06-08 |
 | 1.55.0 | הוספת D-068 — טריאז' 2 אינפוגרפיות (תבנית D-063): `AGENT_BLUEPRINT` v1.2.0 (§12 — 10 פרקטיקות לסוכן אמין, אינדקס→בית-קנוני) + `KUBERNETES_101` v1.1.0 (§2.5 — Docker, הרובד שמתחת) | 2026-06-08 |
 | 1.56.0 | הוספת D-069 — נעילת מסלול+תגמול ה-Tech Lead (מבצע D-012, נועל D-016/8.6): Founding Tech Lead מלא · תגמול היברידי; `ULEASE_HIRING` v1.1.0 (מולא §ד/§ז + נוספו §ח–§יא: Sourcing · מסר פנייה · Scorecard · תבנית הצעה). עדכון סטטוס D-012 → בביצוע | 2026-06-09 |
+| 1.57.0 | הוספת D-070 — רישום `AI_AGENTIC_WORKFLOWS` (שורה 32): 100 Agentic Claude Workflows ממופים ל-ULease (יישום + תעדוף לכל אחד, cross-ref ל-`ULEASE_AUTOMATION_MAP`, סינתזת 12 מובילים). דגל drift קיים `CLAUDE.md`↔`OPERATING_SYSTEM §3` | 2026-06-30 |
 
 **Confidentiality.** מסמך פנימי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of DECISION_LOG.md v1.56.0 —*
+— *End of DECISION_LOG.md v1.57.0 —*

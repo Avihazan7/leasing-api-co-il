@@ -72,9 +72,9 @@
 - [`COMMAND_API_TASKS.md`](./COMMAND_API_TASKS.md) v1.1.0 — ספריית פקודות משימה — Task Commands & Spreadsheet Prompts
 - [`COWORK/TEMPLATES/os-module-header.md`](./COWORK/TEMPLATES/os-module-header.md) v1.0.0 — תבנית: Header למודול OS חדש
 - [`COWORK_SETUP.md`](./COWORK_SETUP.md) v1.2.0 — CLAUDE COWORK — מדריך הגדרה ואונבורדינג
-- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.56.0 — DECISION_LOG.md — יומן החלטות
+- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.57.0 — DECISION_LOG.md — יומן החלטות
 - [`INVESTOR_RELATIONS.md`](./INVESTOR_RELATIONS.md) v1.2.0 — CLAUDE INVESTOR RELATIONS — ULease 🎯
 - [`KUBERNETES_101.md`](./KUBERNETES_101.md) v1.1.0 — קוברנטיס 101 — Kubernetes (K8s) Orchestration Foundations
 - [`MEMORY.md`](./MEMORY.md) v1.1.0 — CLAUDE MEMORY — Persistent Memory Layer
-- [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.16.0 — CLAUDE OPERATING SYSTEM — Kernel
+- [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.17.0 — CLAUDE OPERATING SYSTEM — Kernel
 - [`PROJECTS_SETUP.md`](./PROJECTS_SETUP.md) v1.0.0 — CLAUDE PROJECTS — הגדרת פרויקטים

@@ -3,7 +3,7 @@
 **Module:** `AI_AGENTIC_WORKFLOWS.md`
 **Version:** 1.0.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
-**Status:** Active — Knowledge (on-demand).
+**Status:** Active — Knowledge (on-demand, §3 שורה 32).
 **Integrates with:** `CASES/ULEASE_AUTOMATION_MAP.md` (מנוע הביצוע), `AI_TYPES.md`, `AGENT_BLUEPRINT.md`, `CASES/ULEASE_DEMAND_ENGINE.md`, `CASES/ULEASE_OUTBOUND_ENGINE.md`, `leasing-api/ENGINEERING_EXCELLENCE.md` (שכבת ההנדסה)
 
 ---

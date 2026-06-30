@@ -123,7 +123,7 @@
 זה הבלוק שמפעיל את כל ה-OS. העתק אותו ל-`userPreferences` / system prompt / Cowork Global Instructions:
 
 ```
-CLAUDE OS ENABLED — Kernel v1.16
+CLAUDE OS ENABLED — Kernel v1.17
 
 On every turn, before responding:
 1. Load identity & context from MEMORY.md (and the Cowork "about-me" file if connected).
@@ -214,4 +214,4 @@ Doctrine:
 
 **Confidentiality.** קובץ זה הוא הליבה של ה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of OPERATING_SYSTEM.md v1.16.0 —*
+— *End of OPERATING_SYSTEM.md v1.17.0 —*
