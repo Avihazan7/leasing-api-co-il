@@ -29,6 +29,7 @@
 מודולים שיובאו מענף ה-OS (אוחדו ל-main):
 
 - [`AI_7_SKILLS.md`](./AI_7_SKILLS.md) v1.0.0 — 7 מיומנויות לשליטה ב-AI ב-2026
+- [`AI_AGENTIC_WORKFLOWS.md`](./AI_AGENTIC_WORKFLOWS.md) v1.0.0 — 100 Agentic Claude Workflows mapped to ULease (application + priority per workflow, cross-ref to AUTOMATION_MAP)
 - [`AI_CLAUDE_ENGINEER_ROADMAP.md`](./AI_CLAUDE_ENGINEER_ROADMAP.md) v1.0.0 — Claude AI Engineer Roadmap — 15 שלבים, ואיפה אתה עליהם
 - [`AI_CLAUDE_GLOSSARY.md`](./AI_CLAUDE_GLOSSARY.md) v1.1.0 — מילון Claude — 30 מונחים שחייבים להכיר
 - [`AI_CLAUDE_STACK_2026.md`](./AI_CLAUDE_STACK_2026.md) v1.8.0 — Claude Stack 2026 — How to use Claude in 2026
@@ -71,9 +72,9 @@
 - [`COMMAND_API_TASKS.md`](./COMMAND_API_TASKS.md) v1.1.0 — ספריית פקודות משימה — Task Commands & Spreadsheet Prompts
 - [`COWORK/TEMPLATES/os-module-header.md`](./COWORK/TEMPLATES/os-module-header.md) v1.0.0 — תבנית: Header למודול OS חדש
 - [`COWORK_SETUP.md`](./COWORK_SETUP.md) v1.2.0 — CLAUDE COWORK — מדריך הגדרה ואונבורדינג
-- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.56.0 — DECISION_LOG.md — יומן החלטות
+- [`DECISION_LOG.md`](./DECISION_LOG.md) v1.57.0 — DECISION_LOG.md — יומן החלטות
 - [`INVESTOR_RELATIONS.md`](./INVESTOR_RELATIONS.md) v1.2.0 — CLAUDE INVESTOR RELATIONS — ULease 🎯
 - [`KUBERNETES_101.md`](./KUBERNETES_101.md) v1.1.0 — קוברנטיס 101 — Kubernetes (K8s) Orchestration Foundations
 - [`MEMORY.md`](./MEMORY.md) v1.1.0 — CLAUDE MEMORY — Persistent Memory Layer
-- [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.16.0 — CLAUDE OPERATING SYSTEM — Kernel
+- [`OPERATING_SYSTEM.md`](./OPERATING_SYSTEM.md) v1.17.0 — CLAUDE OPERATING SYSTEM — Kernel
 - [`PROJECTS_SETUP.md`](./PROJECTS_SETUP.md) v1.0.0 — CLAUDE PROJECTS — הגדרת פרויקטים

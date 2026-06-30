@@ -1,7 +1,7 @@
 # DECISION_LOG.md — יומן החלטות
 
 **Module:** `DECISION_LOG.md`
-**Version:** 1.56.0
+**Version:** 1.57.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Active — יומן append-only (Memory layer).
 **Integrates with:** `OPERATING_SYSTEM.md` §7, `MEMORY.md`, `CASES/ULEASE*.md`
@@ -83,6 +83,7 @@
 | D-067 | 2026-06-08 | **גל ארכיטקטוני — טריאז' 4 אינפוגרפיות Claude (1 חיזוק · 1 רענון · 2 סינון)** מסקירת ה-OS מקצה-לקצה: (א) `AUTOMATION_MAP` v1.5.0 — **§11.2 אשכול ה-Ops התפעולי** ("25 skills שמריצות ops בלי לגייס"): ~14/25 כבר מכוסים, הדלתא = ~10 יכולות חדשות (time-audit · capacity-check · sprint-scope · risk-flag · deliverable-check · process-audit · vendor-compare · access-audit · file-cleanup · sop/policy/changelog) ממופות למי-עושה-מה (אברהם/שירי, pre-Tech-Lead) + שער המדידה §12 (ב) `AI_CLAUDE_GLOSSARY` v1.1.0 — קבוצה ו' (+3 מונחי 2026): Compaction · Claude in PowerPoint · Claude Marketplace (ג) **סינון "100 Finance Shortcuts"** (מכוסה: `COMMAND_API` 89 + `COMMAND_API_TASKS` 98 + `AI_DATA_BI` §4.1 + 30 פרומפטי גיליונות; התמונה garbled) (ד) **סינון "30-Day Social Content"** (off-core: ULease = לופ אורגני/inbound, לא influencer-posting — `AI_PROFICIENCIES` §5/#9) | הסקירה הראתה מערכת חזקה — רוב ה-4 חיזוק/סינון של שכבות קיימות; הערך האמיתי באשכול ה-Ops כי הצוואר עד ה-Tech Lead = זמן המייסד (DATA+PLANNING+QUALITY = chief-of-staff on-demand, משלים את COWORK §9); אימות grep: 10 ה-skills החדשים = 0 בריפו; תקדים D-035/D-051 (חבילות Skills) ל-§11.2 · D-060/D-066 לסינון | ✅ פעיל |
 | D-068 | 2026-06-08 | **טריאז' 2 אינפוגרפיות — שתי העשרות, אפס מודולים חדשים** (תבנית D-063): (א) `AGENT_BLUEPRINT` v1.2.0 — **§12 עשר פרקטיקות לסוכן אמין** (Reliable-Agent Practices, Alok Sharan) כאינדקס פרקטיקה→בית-קנוני→ULease: 10/10 כבר מיושמות אך מפוזרות (8 השלבים · §10 · §11 · SPEC §7.2 · D-023 · D-040) → צ'קליסט go-live ל-Tech Lead, אחות שלישית ל-§10/§11 (ב) `KUBERNETES_101` v1.1.0 — **§2.5 Docker: הרובד שמתחת** (Client·Daemon·Registry · image מול container · build-run-pull-push) — סוגר את רובד מנוע-הקונטיינר שציר התשתית דילג עליו (CLOUD_ARCHITECT מזכיר Docker, לא מסביר); ההכרעה: Docker = **כן** דרישת MVP (containerize+Compose), K8s = V1+ (תזמור) | שני התחומים שה-OS חזק בהם — סוכנים (מכוסה-אך-מפוזר → אינדקס) ותשתית (רובד חסר → השלמה); אימות: 10/10 הפרקטיקות מופו לבית קיים · Docker לא הוסבר באף מודול (grep); build=מקור-אמת תאום ל-D-023/D-065; תקדים D-063 (אינדקס) ו-D-061 (KUBERNETES) | ✅ פעיל |
 | D-069 | 2026-06-09 | **נעילת מסלול ותגמול ה-Tech Lead + ערכת גיוס מוכנה-להרצה** (מבצע את D-012, נועל את הכרעת המסלול של D-016/8.6) — הכרעת מייסד: (א) **מסלול = Founding Tech Lead במשרה מלאה** (בעלות מלאה על stack הסוכנים Ultra·Master·Max = ה-IP, לא ניתן ל-outsource לטווח ארוך) (ב) **תגמול = היברידי** — שכר מופחת ~₪20K–28K + אקוויטי/profit-share של מייסד-מוקדם (טווח מוצע 3%–6%, vesting 4y/cliff 1y — לסגירה מול רו"ח+עו"ד, D-003 + `ULEASE_LEGAL_BRIEF`). `ULEASE_HIRING` v1.1.0: מולאו §ד+§ז ונוספו §ח Sourcing · §ט מסר פנייה · §י Scorecard ראיון · §יא תבנית הצעה (pipeline ~15→6→3→הצעה, יעד 2–3 שבועות) | הפער מס' 1 בכל המסמכים (תחזית·איפיון·מפה·תוכנית) קיבל הכרעה ובעלים; משרה מלאה כי ה-Agentic stack הוא הליבה; היברידי כי ₪150K raise + מודל רזה לא נושאים שכר שוק מלא — אקוויטי מיישר אינטרסים (D-003); הכרעת ה-8.6 (D-016/D-020) נסגרת באיחור יום. **נותר לאייש** — הראיון+החתימה הם פעולת המייסד | ✅ פעיל |
+| D-070 | 2026-06-30 | **רישום `AI_AGENTIC_WORKFLOWS` — 100 Agentic Claude Workflows ממופים ל-ULease** (תבנית D-063/D-064): מודול ידע חדש (שורה 32) שלוקח את 100 ה-workflows מהאינפוגרפיקה (5 קטגוריות) וממפה כל אחד ל**יישום ב-ULease + תעדוף** (✅/🔜/V1/V2/⚙️/—), cross-ref ל-`CASES/ULEASE_AUTOMATION_MAP`, סינתזת 12 מובילים, וחיבור לשכבת ההנדסה (`leasing-api/ENGINEERING_EXCELLENCE`) | המשך לדוקטרינת "תגדיל ראש" — הפיכת אינפוגרפיקה למפה אקטיבית; רובם כבר ממופים למנוע קיים (n8n/Deal Score/forecast) או לשערי ה-Guardian; התג = המלצת טריאז' להכרעת מייסד. תקדים D-063. **דגל:** התגלה drift קיים בין `CLAUDE.md` (שוחזר/שוכתב) ל-`OPERATING_SYSTEM §3` — תועד, לא תוקן כאן | ✅ פעיל |
 
 ---
 
@@ -156,7 +157,8 @@
 | 1.54.0 | הוספת D-067 — גל ארכיטקטוני (טריאז' 4 אינפוגרפיות): `AUTOMATION_MAP` v1.5.0 (§11.2 אשכול ה-Ops התפעולי) + `AI_CLAUDE_GLOSSARY` v1.1.0 (+3 מונחי 2026: Compaction · PowerPoint · Marketplace) + סינון "100 Finance Shortcuts" ו-"30-Day Social Content" | 2026-06-08 |
 | 1.55.0 | הוספת D-068 — טריאז' 2 אינפוגרפיות (תבנית D-063): `AGENT_BLUEPRINT` v1.2.0 (§12 — 10 פרקטיקות לסוכן אמין, אינדקס→בית-קנוני) + `KUBERNETES_101` v1.1.0 (§2.5 — Docker, הרובד שמתחת) | 2026-06-08 |
 | 1.56.0 | הוספת D-069 — נעילת מסלול+תגמול ה-Tech Lead (מבצע D-012, נועל D-016/8.6): Founding Tech Lead מלא · תגמול היברידי; `ULEASE_HIRING` v1.1.0 (מולא §ד/§ז + נוספו §ח–§יא: Sourcing · מסר פנייה · Scorecard · תבנית הצעה). עדכון סטטוס D-012 → בביצוע | 2026-06-09 |
+| 1.57.0 | הוספת D-070 — רישום `AI_AGENTIC_WORKFLOWS` (שורה 32): 100 Agentic Claude Workflows ממופים ל-ULease (יישום + תעדוף לכל אחד, cross-ref ל-`ULEASE_AUTOMATION_MAP`, סינתזת 12 מובילים). דגל drift קיים `CLAUDE.md`↔`OPERATING_SYSTEM §3` | 2026-06-30 |
 
 **Confidentiality.** מסמך פנימי חסוי — חלק מה-Claude OS של Avraham Bar Yochai Chazan.
 
-— *End of DECISION_LOG.md v1.56.0 —*
+— *End of DECISION_LOG.md v1.57.0 —*
