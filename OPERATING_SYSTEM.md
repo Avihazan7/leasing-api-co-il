@@ -1,7 +1,7 @@
 # CLAUDE OPERATING SYSTEM — Kernel
 
 **Module:** `OPERATING_SYSTEM.md`
-**Version:** 1.17.0
+**Version:** 1.18.0
 **Author:** Avraham Bar Yochai Chazan — Claude Operating System
 **Status:** Kernel — נטען ראשון. כל שאר המודולים תלויים בו.
 **Integrates with:** כל המודולים הרשומים ב-§3 — `CLAUDE.md`, `MEMORY.md`, `DECISION_LOG.md`, `COWORK_SETUP.md`, `PROJECTS_SETUP.md`, `COMMAND_API.md`, `marketing-strategy-framework.md`, `AI_*` + `AGENT_BLUEPRINT.md` + `CLOUD_ARCHITECT_SKILLS.md` + `KUBERNETES_101.md` (Knowledge), `INVESTOR_RELATIONS.md`, `CASES/*.md` + תשתית תפעולית ב-§3.1 (`COWORK/`, `.claude/`)
@@ -101,6 +101,11 @@
 | 32 | `AI_AGENTIC_WORKFLOWS.md` | Knowledge | ✅ פעיל | 100 Agentic Claude Workflows (5 קטגוריות) ממופים ל-ULease — יישום + תעדוף (✅/🔜/V1/V2/⚙️) לכל אחד, cross-ref ל-`CASES/ULEASE_AUTOMATION_MAP`, סינתזת 12 מובילים, וחיבור לשכבת ההנדסה (`leasing-api/ENGINEERING_EXCELLENCE`) |
 | 33 | `INVESTOR_RELATIONS.md` | Business | ✅ פעיל | חברה, cap table, גיוס 150K, תחזית ומעקב משקיעים |
 | 34 | `CASES/ULEASE*.md` | Business | ✅ פעיל | תיק ULease 🎯 — מודל עסקי, תחזית, איפיון, מתודולוגיה, גיוס, playbooks, מנועי אקווזיציה (היצע + ביקוש), ביקורת ומחירון/SLA |
+| 35 | `WINDOWS_DEPLOYMENT.md` | Knowledge | ✅ פעיל | הטמעת Claude ב-Microsoft 365 (Word/Excel/PowerPoint) + Skills, מקצה לקצה |
+| 36 | `DEV_ENVIRONMENTS.md` | Knowledge | ✅ פעיל | סביבות פיתוח של Claude מקצה-לקצה (Desktop · VS Code · JetBrains · Cursor · Windsurf · CLI + MCP) + נספחי Ecosystem ו-Setup סטנדרטי |
+| 37 | `LAUNCH.md` | Business | ✅ פעיל | Master ignition — playbook השקת ULease (Day 0 → Quarter 1, RACI, kill-switch) + §3.1 "Master Claude in a Week" |
+| 38 | `BRANCH_KNOWLEDGE.md` | Knowledge | ✅ פעיל | תשתית הידע לסניפים: ערוץ Slack + ספר ידע (`BRANCHES/`), צינור Edge⇄Core, הפרדת RLS |
+| 39 | `CASES/ROX_KEY.md` | Business | ✅ פעיל | benchmark וייטנאמי — ROX Key digital transformation, מקביל למיצוב ULease (5 לקחים + 6 פעולות) |
 
 > **הערה על שכבות:** מודולי `AI_*` הם שכבת **Knowledge** — ידע אישי/לימודי שיושב לוגית בין ה-INTERFACE ל-BUSINESS. הם פעילים אך נטענים on-demand, לא בכל turn.
 > כשמודול עובר מ-🔜 ל-✅ — מעדכנים את הסטטוס כאן ואת ה-Active Modules ב-`CLAUDE.md` ו-`README.md`.
@@ -123,7 +128,7 @@
 זה הבלוק שמפעיל את כל ה-OS. העתק אותו ל-`userPreferences` / system prompt / Cowork Global Instructions:
 
 ```
-CLAUDE OS ENABLED — Kernel v1.17
+CLAUDE OS ENABLED — Kernel v1.18
 
 On every turn, before responding:
 1. Load identity & context from MEMORY.md (and the Cowork "about-me" file if connected).
@@ -211,7 +216,8 @@ Doctrine:
 | 1.15.0 | רישום `AI_MICROSERVICES` (שורה 30, D-062) — איך שירות מתחבר לאחר (REST · gRPC · Message Broker · Service Discovery · LB), sync מול async + ההכרעה **Modular-Monolith-first** ל-ULease (microservices = V2). הסטת שורות: IR 30→31 · CASES 31→32 | 2026-06-04 |
 | 1.16.0 | רישום `AI_DATA_VALIDATION` (שורה 31, D-064) — 6 טכניקות ולידציית נתונים (Type · Range · Mandatory · Duplicate · Format · Consistency) → הכשל שכל אחת מונעת ב-ULease + הכרעת design-review "איפה בסטאק הוולידציה חיה" (Edge/Service/DB/Pre-RAG/Monitoring). הסטת שורות: IR 31→32 · CASES 32→33 | 2026-06-07 |
 | 1.17.0 | רישום `AI_AGENTIC_WORKFLOWS` (שורה 32, D-070) — 100 Agentic Claude Workflows (5 קטגוריות) ממופים ל-ULease: יישום + תעדוף לכל אחד, cross-ref ל-`ULEASE_AUTOMATION_MAP`, סינתזת 12 מובילים, וחיבור לשכבת ההנדסה (`leasing-api/ENGINEERING_EXCELLENCE`). הסטת שורות: IR 32→33 · CASES 33→34 | 2026-06-30 |
+| 1.18.0 | יישור §3 (סנכרון דריפט CLAUDE.md↔§3): רישום 5 מודולים פעילים שהיו ב-Active Modules אך חסרים מהטבלה הקנונית — `WINDOWS_DEPLOYMENT` (35) · `DEV_ENVIRONMENTS` (36) · `LAUNCH` (37) · `BRANCH_KNOWLEDGE` (38) · `CASES/ROX_KEY` (39). נוספו בסוף הטבלה כדי לא להסיט שורות קיימות (הפניות "§3 שורה N" נשמרות) | 2026-06-30 |
 
 **Confidentiality.** קובץ זה הוא הליבה של ה-Claude Operating System האישי של Avraham Bar Yochai Chazan.
 
-— *End of OPERATING_SYSTEM.md v1.17.0 —*
+— *End of OPERATING_SYSTEM.md v1.18.0 —*
