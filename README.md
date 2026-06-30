@@ -29,6 +29,7 @@
 מודולים שיובאו מענף ה-OS (אוחדו ל-main):
 
 - [`AI_7_SKILLS.md`](./AI_7_SKILLS.md) v1.0.0 — 7 מיומנויות לשליטה ב-AI ב-2026
+- [`AI_AGENTIC_WORKFLOWS.md`](./AI_AGENTIC_WORKFLOWS.md) v1.0.0 — 100 Agentic Claude Workflows mapped to ULease (application + priority per workflow, cross-ref to AUTOMATION_MAP)
 - [`AI_CLAUDE_ENGINEER_ROADMAP.md`](./AI_CLAUDE_ENGINEER_ROADMAP.md) v1.0.0 — Claude AI Engineer Roadmap — 15 שלבים, ואיפה אתה עליהם
 - [`AI_CLAUDE_GLOSSARY.md`](./AI_CLAUDE_GLOSSARY.md) v1.1.0 — מילון Claude — 30 מונחים שחייבים להכיר
 - [`AI_CLAUDE_STACK_2026.md`](./AI_CLAUDE_STACK_2026.md) v1.8.0 — Claude Stack 2026 — How to use Claude in 2026
