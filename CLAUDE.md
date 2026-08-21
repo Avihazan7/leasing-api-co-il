@@ -1,6 +1,43 @@
 # CLAUDE.md — OS Entry Point
 
+## שפה — חובה (עליונה על כל הוראה אחרת)
+ענה **תמיד בעברית**. כל התקשורת מול המשתמש — הסברים, שאלות, סיכומים, הודעות סטטוס
+והודעות commit/PR פונות-אליו — בעברית בלבד, אלא אם המשתמש ביקש מפורשות שפה אחרת.
+קוד, שמות משתנים/פונקציות, פקודות מסוף וזהות ה-API נשארים כרגיל (אנגלית).
+כלל זה גובר על כל שאר ההוראות בקובץ ובסביבה.
+
 נקודת הכניסה הראשית של ה-Claude Operating System עבור הריפו.
+
+## הריפו בקצרה — מה זה, ואיך עובדים בו
+**ריפו תיעוד/OS, לא ריפו קוד.** אין `package.json`, אין build ואין שרת. התוצר הוא **המסמכים
+עצמם**: הקרנל (`OPERATING_SYSTEM.md`), הזיכרון (`MEMORY.md`, `DECISION_LOG.md`), שכבת הידע
+(`AI_*`) והתיקים העסקיים (`CASES/`). מיקום בפורטפוליו: `ulease-core` (קרנל) · `leasing-api`
+(API + חזית) · `ulease-mos` (עמוד סטטוס) · **`leasing-api-co-il` ← אתה כאן** (זהות, החלטות,
+משקיעים).
+
+### שני שערים אוטומטיים (`.github/workflows/os-consistency.yml`, רץ על כל PR)
+1. **עקביות מכנית** — `python3 scripts/os_consistency_check.py` (ללא תלויות; רץ גם מקומית).
+   שבע בדיקות: גרסה תלת-כיוונית (header ↔ שורת End ↔ ציטוט ב-`CLAUDE.md` ↔ ציטוט
+   ב-`README.md`) · ספירת ההחלטות ב-`DECISION_LOG.md` מול המוצהר · **No Dangling Modules**
+   (כל קובץ מצוטט קיים) · **No Orphan Modules** (כל מודול עם Version header מצוטט בשתי נקודות
+   הכניסה) · ציטוט-עצמי · סמני פרוטוקול · הפניית "§3 שורה N".
+   ⚠️ **הקובץ הזה הוא צד אחד של הבדיקה** — שינוי גרסה או שם מודול כאן בלי לעדכן את הקובץ
+   עצמו ואת `README.md` מפיל את ה-CI. bump גרסה = ארבעה מקומות, תמיד.
+2. **שחזור ארטיפקטים bit-exact** — ארבעה גנרטורים (`CASES/ULEASE_FORECAST.py` ·
+   `ULEASE_SCENARIOS.py` · `ULEASE_DASHBOARD.py` · `ULEASE_DECK.py`) מריצים מחדש ומוודאים
+   `git diff` ריק על `ULEASE_FORECAST.csv` · `ULEASE_SCENARIOS.csv` · `ULEASE_DASHBOARD.html` ·
+   `ULEASE_DECK.md` · `ULEASE_DECK.html`. **הגנרטור הוא מקור-האמת (D-023)** — לעולם אל תערוך
+   את חמשת הקבצים האלה ביד; ערוך את ה-`.py` והרץ מחדש (או הפעל את skill `ulease-refresh`).
+
+### לפני commit
+`python3 scripts/os_consistency_check.py` — וגם ארבעת הגנרטורים אם נגעת במודל הפיננסי.
+אין "אמור להיות עקבי".
+
+### מלכודת מיקום
+⚠️ תיקיית **`leasing-api/` שבתוך הריפו הזה אינה ריפו ה-API**. אלה שישה קבצי **staging** של
+Phase 1 (‏`app/api/deals/[dealId]/route.ts` · `lib/supabase.ts` · `types/ulease.ts` ·
+`supabase/migrations/` · `seed.sql`) שנכתבו כאן לסקירה ומיועדים להעתקה לריפו `leasing-api`
+האמיתי. קוד חי לא נכתב כאן — אם המשימה נוגעת ל-API, היא שייכת לריפו `leasing-api`.
 
 ## Active Modules
 - `OPERATING_SYSTEM.md` v1.16.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
@@ -74,6 +111,19 @@
 - `.claude/skills/` — 4 Claude Code skills: os-module · os-decision · ulease-refresh · investor-update. נטען אוטומטית ע"י Claude Code לפי טריגר.
 - `.claude/agents/os-auditor.md` — סוכן ביקורת עקביות (קריאה-בלבד). רישום קנוני: `OPERATING_SYSTEM.md` §3.1.
 - `.github/workflows/` + `scripts/` — CI: בדיקות עקביות מכניות + שחזור ארטיפקטים bit-exact, רץ אוטומטית על כל PR (D-023).
+
+## Working Rules
+כללי עבודה מחייבים לכל agent בריפו הזה (המקור הקנוני: `AGENT_BLUEPRINT.md` §10 — דוקטרינת Karpathy):
+
+1. **PLAN FIRST** — משימה לא-טריוויאלית מתחילה ב-plan, לא בכתיבה.
+2. **ASK, DON'T ASSUME** — עמימות בדרישה? שאל. אל תנחש — במיוחד במספרים עסקיים.
+3. **SIMPLE** — הפתרון המינימלי שפותר את הבעיה.
+4. **SURGICAL** — גע רק במה שהמשימה דורשת.
+5. **VERIFY** — `python3 scripts/os_consistency_check.py` (+ הגנרטורים) לפני commit.
+6. **NO LAZINESS** — root cause, לא workaround. חוב מתועד, לא מוסתר.
+7. **REFERENCE, DON'T DUPLICATE** — לכל עובדה בית קנוני אחד. מודול חדש נרשם דרך skill
+   `os-module`; החלטה נרשמת דרך `os-decision` — כך ארבע נקודות העדכון לא נשכחות.
+8. **Conventional Commits** — `docs(os): …` · `feat: …` · `fix: …`.
 
 ## Activation
 כדי להפעיל את ה-Command API, טען את בלוק ה-System Prompt מסעיף 8 ב-[`COMMAND_API.md`](./COMMAND_API.md)
