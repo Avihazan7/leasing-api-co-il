@@ -31,13 +31,63 @@
 
 ### לפני commit
 `python3 scripts/os_consistency_check.py` — וגם ארבעת הגנרטורים אם נגעת במודל הפיננסי.
-אין "אמור להיות עקבי".
+אין "אמור להיות עקבי". מדוד בעץ 23.08.26: 51 מודולים · 222 בדיקות · ירוק.
+
+### זרימת המערכת — הנדסית, טכנולוגית ותפעולית
+אין כאן runtime, ולכן "זרימת המערכת" כאן היא **זרימת התוצר**: מהחלטה → למסמך → לארטיפקט →
+לשער. ארבע הזרימות שמכסות כמעט כל משימה בריפו:
+
+**1 · זרימת המודול (ידע חדש נכנס ל-OS)**
+```
+תוכן/אינפוגרפיקה ──skill os-module──▶ FILE.md עם **Version:** header
+        └─▶ OPERATING_SYSTEM.md §3 (טבלה)  └─▶ CLAUDE.md  └─▶ README.md  └─▶ DECISION_LOG.md
+```
+ארבע נקודות עדכון, תמיד. הבודק אוכף שלוש מהן מכניסטית (No Orphan / No Dangling / גרסה
+תלת-כיוונית), ולכן קובץ שנוצר "רק כדי לקרוא אותו" יפיל את ה-CI. **ה-skill קיים בדיוק כדי
+שארבע הנקודות לא יישכחו** — אל תרשום מודול ביד.
+
+**2 · זרימת ההחלטה**
+`skill os-decision` → שורה חדשה `| D-XXX |` ב-`DECISION_LOG.md` (append-only) + bump גרסה.
+הבודק סופר את השורות ומשווה למספר המוצהר ב-`CLAUDE.md` וב-`README.md` — שלושה מקומות, ספירה אחת.
+
+**3 · זרימת המספר הפיננסי (D-023: הגנרטור הוא מקור-האמת)**
+```
+CASES/*.py ──python3──▶ CSV/HTML/MD  ──git diff --exit-code──▶ שער "bit-exact" ב-CI
+```
+`ULEASE_FORECAST.py` · `ULEASE_SCENARIOS.py` · `ULEASE_DASHBOARD.py` · `ULEASE_DECK.py`
+מייצרים `ULEASE_FORECAST.csv` · `ULEASE_SCENARIOS.csv` · `ULEASE_DASHBOARD.html` ·
+`ULEASE_DECK.md` · `ULEASE_DECK.html`. **לעולם אל תערוך את חמשת התוצרים ביד** — ערוך `.py`
+והרץ מחדש (או `skill ulease-refresh`, שגם מאמת שהמספרים בקבצי ה-md תואמים ל-CSV).
+⚠️ בעץ יש **שישה** גנרטורים, ורק ארבעה בשער: `ULEASE_DEMAND_ENGINE_n8n.py` ו-
+`ULEASE_OUTBOUND_ENGINE_n8n.py` (→ קבצי `*.n8n.json`) **אינם** נבדקים ל-bit-exact.
+הרץ אותם ביד אחרי שינוי, או שהתוצר יסטה בשקט.
+
+**4 · זרימת האימות (מקומי → CI)**
+`python3 scripts/os_consistency_check.py` (ללא תלויות, שניות) → PR → שני ה-jobs.
+⚠️ **מלכודת שמות (נמדד 23.08.26): לריפו הזה אין ענף `main`.** ענף ברירת המחדל הוא
+`claude/marketing-strategy-framework-Is1dZ` — שם של ענף פיצ'ר שהפך לגזע, וזה גם מה שרשום
+בטריגר `push:` של `.github/workflows/os-consistency.yml` (ולכן השער **כן** רץ על ברירת המחדל).
+המסקנה המעשית: **אל תפתח PR מול `main` ואל תניח שהוא קיים** — `git remote show origin`
+הוא התשובה, לא ההרגל. שאר הענפים ברימוט הם עשרות ענפי `claude/*` היסטוריים.
+
+### זרימה חוצת-ריפו — למה הריפו הזה נטען אצל אחרים
+`leasing-api/CLAUDE.md` מפנה לכאן בשלוש נקודות, וכל אחת היא תלות חיה:
+`AGENT_BLUEPRINT.md` §10 (כללי העבודה הקנוניים — דוקטרינת Karpathy) · `MEMORY.md` ·
+`INVESTOR_RELATIONS.md` + `CASES/*.md` (נטענים דרך Cowork, מסומנים שם 🔗). שינוי שם קובץ
+או מחיקת סעיף כאן **שובר הפניה בריפו אחר** בלי ששום CI יתפוס — הבודק המכני רואה רק את הריפו הזה.
+
+**כלל ניתוב למשימה שהגיעה לכאן בטעות:** קוד, קטלוג, Deal Score, מרקטפלייס, SEO/GEO/AEO ושלושת
+הדומיינים (`Leasing.co.il` · `ULease.co.il` · `ezEro.co.il`) — **כולם חיים ב-`leasing-api`**, על
+שעריהם ואינווריאנטותיהם. כאן חיים רק המסמכים העסקיים שמסביבם (`CASES/ULEASE_DEMAND_PLAYBOOK.md`
+לערוץ GEO · `CASES/ULEASE_SPEC.md` לאיפיון · `CASES/ULEASE_VEHICLE_CENTRIC_ARCH.md` לפסק-הדין
+הארכיטקטוני). מסמך כאן **מתאר ולא שולט** — האמת המבצעית היא הקוד והשער שם.
 
 ### מלכודת מיקום
 ⚠️ תיקיית **`leasing-api/` שבתוך הריפו הזה אינה ריפו ה-API**. אלה שישה קבצי **staging** של
-Phase 1 (‏`app/api/deals/[dealId]/route.ts` · `lib/supabase.ts` · `types/ulease.ts` ·
-`supabase/migrations/` · `seed.sql`) שנכתבו כאן לסקירה ומיועדים להעתקה לריפו `leasing-api`
-האמיתי. קוד חי לא נכתב כאן — אם המשימה נוגעת ל-API, היא שייכת לריפו `leasing-api`.
+Phase 1 — `app/api/deals/[dealId]/route.ts` · `lib/supabase.ts` · `types/ulease.ts` ·
+`supabase/migrations/0001_ulease_brain_engine.sql` · `supabase/seed.sql` · `README.md` —
+שנכתבו כאן לסקירה ומיועדים להעתקה לריפו `leasing-api` האמיתי. הם לא נבנים, לא נבדקים ואף
+CI לא נוגע בהם. קוד חי לא נכתב כאן — אם המשימה נוגעת ל-API, היא שייכת לריפו `leasing-api`.
 
 ## Active Modules
 - `OPERATING_SYSTEM.md` v1.16.0 — Kernel: עקרונות יסוד, ארכיטקטורת שכבות, רישום מודולים (§3 + §3.1 תשתית תפעולית), Boot Block והיררכיית הכרעה.
