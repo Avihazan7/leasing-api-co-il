@@ -64,10 +64,11 @@ CASES/*.py ──python3──▶ CSV/HTML/MD  ──git diff --exit-code──�
 
 **4 · זרימת האימות (מקומי → CI)**
 `python3 scripts/os_consistency_check.py` (ללא תלויות, שניות) → PR → שני ה-jobs.
-⚠️ **מלכודת נמדדת (23.08.26):** ב-`.github/workflows/os-consistency.yml` הטריגר `push:`
-מצביע על ענף פיצ'ר ישן (`claude/marketing-strategy-framework-Is1dZ`) ו**לא** על `main`.
-כלומר: commit ישיר ל-`main` **אינו** מריץ את השערים — רק PR מריץ. אל תסתמך על "ה-CI ירוק
-ב-main"; הרץ מקומית לפני push.
+⚠️ **מלכודת שמות (נמדד 23.08.26): לריפו הזה אין ענף `main`.** ענף ברירת המחדל הוא
+`claude/marketing-strategy-framework-Is1dZ` — שם של ענף פיצ'ר שהפך לגזע, וזה גם מה שרשום
+בטריגר `push:` של `.github/workflows/os-consistency.yml` (ולכן השער **כן** רץ על ברירת המחדל).
+המסקנה המעשית: **אל תפתח PR מול `main` ואל תניח שהוא קיים** — `git remote show origin`
+הוא התשובה, לא ההרגל. שאר הענפים ברימוט הם עשרות ענפי `claude/*` היסטוריים.
 
 ### זרימה חוצת-ריפו — למה הריפו הזה נטען אצל אחרים
 `leasing-api/CLAUDE.md` מפנה לכאן בשלוש נקודות, וכל אחת היא תלות חיה:
